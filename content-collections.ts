@@ -4,7 +4,7 @@ import { compileMDX } from "@content-collections/mdx";
 // 1. BLOG (Colocated in app/blog/content)
 const posts = defineCollection({
   name: "posts",
-  directory: "src/app/blog/content",
+  directory: "src/app/(web)/blog/content",
   include: "**/*.mdx",
   schema: (z) => ({
     title: z.string(),
@@ -27,7 +27,7 @@ const posts = defineCollection({
 // 2. PROJECTS (Colocated in app/projects/content)
 const projects = defineCollection({
   name: "projects",
-  directory: "src/app/projects/content",
+  directory: "src/app/(web)/projects/content",
   include: "**/*.mdx",
   schema: (z) => ({
     title: z.string(),
@@ -51,7 +51,7 @@ const projects = defineCollection({
 // 3. CERTIFICATIONS (Colocated in app/certifications/content)
 const certifications = defineCollection({
   name: "certifications",
-  directory: "src/app/certifications/content",
+  directory: "src/app/(web)/certifications/content",
   include: "**/*.mdx",
   schema: (z) => ({
     name: z.string(),
