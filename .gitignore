@@ -114,3 +114,5 @@ _bmad-output/
 .claude/
 .cursor/
 .agent/
+CODE/
+.content-collections/
