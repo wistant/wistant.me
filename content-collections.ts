@@ -1,5 +1,4 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
-import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
 
 const posts = defineCollection({
@@ -8,19 +7,29 @@ const posts = defineCollection({
   include: "**/*.mdx",
   schema: z.object({
     title: z.string(),
-    summary: z.string(),
-    date: z.string(),
+    summary: z.string().optional(),
+    description: z.string().optional(),
+    date: z.string().optional(),
+    publishedAt: z.string().optional(),
+    updatedAt: z.string().optional(),
     author: z.string().optional(),
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
+    thumbnail: z.string().optional(),
     published: z.boolean().default(true),
+    content: z.string().optional(),
   }),
-  transform: async (document, context) => {
-    const mdx = await compileMDX(context, document);
+  transform: (document) => {
+    const date = document.date || document.publishedAt || new Date().toISOString();
+    const summary = document.summary || document.description || "";
+    const image = document.image || document.thumbnail;
+
     return {
       ...document,
-      mdx,
       slug: document._meta.path,
+      date,
+      summary,
+      image,
     };
   },
 });
@@ -38,17 +47,16 @@ const projects = defineCollection({
     repo: z.string().url().optional(),
     thumbnail: z.string().optional(),
     featured: z.boolean().default(false),
+    content: z.string().optional(),
   }),
-  transform: async (document, context) => {
-    const mdx = await compileMDX(context, document);
+  transform: (document) => {
     return {
       ...document,
-      mdx,
       slug: document._meta.path,
     };
   },
 });
 
 export default defineConfig({
-  collections: [posts, projects],
+  content: [posts, projects],
 });
