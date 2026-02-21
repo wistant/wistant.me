@@ -1,5 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
+import type { MDXComponents } from "mdx/types";
 import {
   Accordion,
   AccordionContent,
@@ -8,7 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { ImageViewer, VideoViewer } from "@/components/mdx/media-viewer";
 
-// Universal fallback: renders unknown MDX components as a styled div
+// Universal fallback: renders unknown MDX components as a neutral div
 // so a missing component never crashes the build
 function UnknownComponent({
   children,
@@ -21,7 +22,7 @@ function UnknownComponent({
  * All custom JSX components available inside MDX posts via next-mdx-remote.
  * Add any new component used in content files here.
  */
-export const mdxComponents: Record<string, React.ComponentType<any>> = {
+export const mdxComponents: MDXComponents = {
   // Shadcn UI
   Accordion,
   AccordionContent,
@@ -31,11 +32,11 @@ export const mdxComponents: Record<string, React.ComponentType<any>> = {
   ImageViewer,
   VideoViewer,
   // Aliases used in some posts
-  MediaContainer: ImageViewer,  // used in typescript-best-practices.mdx
+  MediaContainer: ImageViewer, // used in typescript-best-practices.mdx
   // Next.js Image (for <Image /> in MDX)
   Image,
-  // Fallback for any other unknown component
-  ...new Proxy({} as Record<string, React.ComponentType<any>>, {
+  // Fallback for unknown components
+  ...new Proxy({} as MDXComponents, {
     get: (_target, prop) => {
       if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
         return UnknownComponent;
