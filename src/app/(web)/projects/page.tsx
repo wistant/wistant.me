@@ -7,6 +7,26 @@ import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 export const metadata: Metadata = {
   title: "Projects | Dillion Verma",
   description: "A collection of my projects and creations.",
+  openGraph: {
+    title: "Projects | Dillion Verma",
+    description: "A collection of my projects and creations.",
+    type: "website",
+    url: `${DATA.url}/projects`,
+    images: [
+      {
+        url: "/projects/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Projects | Dillion Verma",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects | Dillion Verma",
+    description: "A collection of my projects and creations.",
+    images: ["/projects/opengraph-image"],
+  },
 };
 
 interface Project {
