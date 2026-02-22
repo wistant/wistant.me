@@ -82,9 +82,21 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
               </div>
             </header>
 
+import { remarkCodeMeta } from "@/lib/remark-code-meta";
+
+// ... (in return)
+
             {/* MDX Body rendered via next-mdx-remote */}
             <div className="prose prose-neutral dark:prose-invert max-w-none">
-              <MDXRemote source={post.content ?? ""} components={mdxComponents} />
+              <MDXRemote 
+                source={post.content ?? ""} 
+                components={mdxComponents} 
+                options={{
+                  mdxOptions: {
+                    remarkPlugins: [remarkCodeMeta],
+                  },
+                }}
+              />
             </div>
           </article>
 
