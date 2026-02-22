@@ -37,7 +37,7 @@ export default function ProjectsPage() {
       {/* Projects Grid */}
       <div className="max-w-7xl mx-auto w-full px-6 lg:px-0 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-          {DATA.projects.map((project: any, id: number) => (
+          {(DATA.projects as unknown as Project[]).map((project, id) => (
             <BlurFade
               key={project.title}
               delay={BLUR_FADE_DELAY * 12 + id * 0.05}
