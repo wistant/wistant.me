@@ -8,62 +8,153 @@ export const size = {
   width: 1200,
   height: 630,
 };
-
 export const contentType = "image/png";
 
+const getFontData = async () => {
+  try {
+    const [cabinetGrotesk, clashDisplay] = await Promise.all([
+      fetch(
+        new URL("../../public/fonts/CabinetGrotesk-Medium.ttf", import.meta.url)
+      ).then((res) => res.arrayBuffer()),
+      fetch(
+        new URL("../../public/fonts/ClashDisplay-Semibold.ttf", import.meta.url)
+      ).then((res) => res.arrayBuffer()),
+    ]);
+    return { cabinetGrotesk, clashDisplay };
+  } catch (error) {
+    console.error("Failed to load fonts:", error);
+    return null;
+  }
+};
+
+const styles = {
+  outerWrapper: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#ffffff",
+    position: "relative",
+  },
+  middleWrapper: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#ffffff",
+    position: "relative",
+    padding: "40px",
+  },
+  wrapper: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#fafafa",
+    position: "relative",
+    padding: "40px",
+    border: "1px solid #e5e5e5",
+    borderRadius: "12px",
+  },
+  imageSection: {
+    position: "absolute",
+    top: "40px",
+    left: "40px",
+    display: "flex",
+    alignItems: "center",
+    zIndex: "2",
+  },
+  mainContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-end",
+    height: "100%",
+    width: "100%",
+    position: "relative",
+    zIndex: "1",
+  },
+  image: {
+    width: "140px",
+    height: "140px",
+    borderRadius: "24px",
+    border: "4px solid #e5e5e5",
+    objectFit: "cover",
+  },
+  title: {
+    fontFamily: "Clash Display",
+    fontSize: "64px",
+    fontWeight: "600",
+    lineHeight: "1.1",
+    textAlign: "left",
+    color: "#000000",
+    marginBottom: "16px",
+    letterSpacing: "-0.02em",
+    maxWidth: "900px",
+  },
+  description: {
+    fontFamily: "Cabinet Grotesk",
+    fontSize: "24px",
+    fontWeight: "400",
+    lineHeight: "1.5",
+    textAlign: "left",
+    maxWidth: "800px",
+    color: "#404040",
+    marginBottom: "32px",
+    textWrap: "balance",
+  },
+} as const;
+
 export default async function Image() {
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          background: "white",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "sans-serif",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "black",
-            padding: "40px 80px",
-            borderRadius: "24px",
-            color: "white",
-            boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "80px",
-              fontWeight: "bold",
-              letterSpacing: "-0.05em",
-              margin: 0,
-            }}
-          >
-            {DATA.name.split(" ")[0]}
-          </h1>
-          <p
-            style={{
-              fontSize: "30px",
-              marginTop: "10px",
-              opacity: 0.7,
-              margin: 0,
-            }}
-          >
-            {DATA.description}
-          </p>
+  try {
+    const fontData = await getFontData();
+    const imageUrl = `${DATA.url}${DATA.avatarUrl}`; // Absolute URL needed for OG
+
+    return new ImageResponse(
+      (
+        <div style={styles.outerWrapper}>
+          <div style={styles.middleWrapper}>
+            <div style={styles.wrapper}>
+              <div style={styles.imageSection}>
+                <img src={imageUrl} alt={DATA.name} style={styles.image as any} />
+              </div>
+              <div style={styles.mainContainer}>
+                <div style={styles.title}>{DATA.name}</div>
+                {DATA.description && (
+                  <div style={styles.description}>{DATA.description}</div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    ),
-    {
-      ...size,
-    }
-  );
+      ),
+      {
+        ...size,
+        fonts: fontData
+          ? [
+              {
+                name: "Cabinet Grotesk",
+                data: fontData.cabinetGrotesk,
+                weight: 400,
+                style: "normal",
+              },
+              {
+                name: "Clash Display",
+                data: fontData.clashDisplay,
+                weight: 600,
+                style: "normal",
+              },
+            ]
+          : undefined,
+      }
+    );
+  } catch (error) {
+    console.error("Error generating OpenGraph image:", error);
+    return new Response(
+      `Failed to generate image: ${error instanceof Error ? error.message : "Unknown error"}`,
+      {
+        status: 500,
+      }
+    );
+  }
 }
