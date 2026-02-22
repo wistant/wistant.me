@@ -1,7 +1,28 @@
+import { Metadata } from "next";
 import { DATA } from "@/data/resume";
 import { ProjectCard } from "@/components/portfolio/project-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+
+export const metadata: Metadata = {
+  title: "Projects | Dillion Verma",
+  description: "A collection of my projects and creations.",
+};
+
+interface Project {
+  title: string;
+  href?: string;
+  dates: string;
+  technologies: readonly string[];
+  description: string;
+  image?: string;
+  video?: string;
+  links?: readonly {
+    type: string;
+    href: string;
+    icon: React.ReactNode;
+  }[];
+}
 
 export default function ProjectsPage() {
   const BLUR_FADE_DELAY = 0.04;
@@ -24,7 +45,7 @@ export default function ProjectsPage() {
       <div className="pt-32 pb-10 px-6 border-b border-border flex flex-col gap-6 justify-center relative z-10">
         <div className="max-w-7xl mx-auto w-full">
           <div className="flex flex-col gap-4">
-            <h1 className="font-bold text-4xl md:text-5xl tracking-tighter">
+            <h1 className="font-bold text-4xl md:text-5xl tracking-tighter font-cal">
               Projects & Creations
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl">
