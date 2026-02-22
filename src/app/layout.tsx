@@ -1,15 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const calFont = localFont({
+  src: "../../public/fonts/cal.ttf",
+  variable: "--font-cal",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const clashFont = localFont({
+  src: "../../public/fonts/ClashDisplay-Semibold.ttf",
+  variable: "--font-clash",
+});
+
+const cabinetFont = localFont({
+  src: "../../public/fonts/CabinetGrotesk-Medium.ttf",
+  variable: "--font-cabinet",
+});
+
+const interFont = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Inter-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Inter-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+  ],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans`}
       >
         {children}
       </body>
