@@ -6,6 +6,7 @@ import { AuthorCard } from "@/components/blog/author-card";
 import { HashScrollHandler } from "@/components/blog/hash-scroll-handler";
 import { getAuthor, isValidAuthor } from "@/lib/authors";
 import { mdxComponents } from "@/components/mdx/mdx-components";
+import { remarkCodeMeta } from "@/lib/remark-code-meta";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string }>;
@@ -82,15 +83,11 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
               </div>
             </header>
 
-import { remarkCodeMeta } from "@/lib/remark-code-meta";
-
-// ... (in return)
-
             {/* MDX Body rendered via next-mdx-remote */}
             <div className="prose prose-neutral dark:prose-invert max-w-none">
-              <MDXRemote 
-                source={post.content ?? ""} 
-                components={mdxComponents} 
+              <MDXRemote
+                source={post.content ?? ""}
+                components={mdxComponents}
                 options={{
                   mdxOptions: {
                     remarkPlugins: [remarkCodeMeta],
