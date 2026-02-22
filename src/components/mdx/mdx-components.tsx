@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ImageViewer, VideoViewer } from "@/components/mdx/media-viewer";
+import { CodeBlock } from "@/components/mdx/code-block";
 
 // Universal fallback: renders unknown MDX components as a neutral div
 // so a missing component never crashes the build
@@ -23,6 +24,8 @@ function UnknownComponent({
  * Add any new component used in content files here.
  */
 export const mdxComponents: MDXComponents = {
+  // HTML elements mapping
+  pre: (props) => <CodeBlock {...props} />,
   // Shadcn UI
   Accordion,
   AccordionContent,
