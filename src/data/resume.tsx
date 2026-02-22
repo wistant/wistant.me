@@ -22,7 +22,7 @@ export const DATA = {
     "Software Engineer turned Entrepreneur. I love building things and helping people. Very active on Twitter.",
   summary:
     "At the end of 2022, I quit my job as a software engineer to go fulltime into building and scaling my own SaaS businesses. In the past, [I pursued a double degree in computer science and business](/#education), [interned at big tech companies in Silicon Valley](https://www.youtube.com/watch?v=d-LJ2e5qKdE), and [competed in over 21 hackathons for fun](/#hackathons). I also had the pleasure of being a part of the first ever in-person cohort of buildspace called [buildspace sf1](https://buildspace.so/sf1).",
-  avatarUrl: "/me.png",
+  avatarUrl: "/me/me.png",
   skills: [
     { name: "React", icon: ReactLight },
     { name: "Next.js", icon: NextjsIconDark },
@@ -89,7 +89,7 @@ export const DATA = {
       badges: [],
       location: "Remote",
       title: "Bitcoin Protocol Engineer",
-      logoUrl: "/atomic.png",
+      logoUrl: "/logos/atomic.png",
       start: "May 2021",
       end: "Oct 2022",
       description:
@@ -101,7 +101,7 @@ export const DATA = {
       href: "https://shopify.com",
       location: "Remote",
       title: "Software Engineer",
-      logoUrl: "/shopify.svg",
+      logoUrl: "/logos/shopify.svg",
       start: "January 2021",
       end: "April 2021",
       description:
@@ -113,7 +113,7 @@ export const DATA = {
       badges: [],
       location: "Santa Clara, CA",
       title: "Software Engineer",
-      logoUrl: "/nvidia.png",
+      logoUrl: "/logos/nvidia.png",
       start: "January 2020",
       end: "April 2020",
       description:
@@ -125,7 +125,7 @@ export const DATA = {
       badges: [],
       location: "San Jose, CA",
       title: "Software Engineer",
-      logoUrl: "/splunk.svg",
+      logoUrl: "/logos/splunk.svg",
       start: "January 2019",
       end: "April 2019",
       description:
@@ -137,7 +137,7 @@ export const DATA = {
       badges: [],
       location: "San Francisco, CA",
       title: "Software Engineer",
-      logoUrl: "/lime.svg",
+      logoUrl: "/logos/lime.svg",
       start: "January 2018",
       end: "April 2018",
       description:
@@ -149,7 +149,7 @@ export const DATA = {
       badges: [],
       location: "Toronto, ON",
       title: "Software Engineer",
-      logoUrl: "/mitremedia.png",
+      logoUrl: "/logos/mitremedia.png",
       start: "May 2017",
       end: "August 2017",
       description:
@@ -161,7 +161,7 @@ export const DATA = {
       school: "Buildspace",
       href: "https://buildspace.so",
       degree: "s3, s4, sf1, s5",
-      logoUrl: "/buildspace.jpg",
+      logoUrl: "/logos/buildspace.jpg",
       start: "2023",
       end: "2024",
     },
@@ -169,7 +169,7 @@ export const DATA = {
       school: "University of Waterloo",
       href: "https://uwaterloo.ca",
       degree: "Bachelor's Degree of Computer Science (BCS)",
-      logoUrl: "/waterloo.png",
+      logoUrl: "/logos/waterloo.png",
       start: "2016",
       end: "2021",
     },
@@ -177,7 +177,7 @@ export const DATA = {
       school: "Wilfrid Laurier University",
       href: "https://wlu.ca",
       degree: "Bachelor's Degree of Business Administration (BBA)",
-      logoUrl: "/laurier.png",
+      logoUrl: "/logos/laurier.png",
       start: "2016",
       end: "2021",
     },
@@ -185,7 +185,7 @@ export const DATA = {
       school: "International Baccalaureate",
       href: "https://ibo.org",
       degree: "IB Diploma",
-      logoUrl: "/ib.png",
+      logoUrl: "/logos/ib.png",
       start: "2012",
       end: "2016",
     },
