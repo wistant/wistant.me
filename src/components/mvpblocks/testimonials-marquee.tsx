@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import { Marquee } from '@/components/ui/marquee';
@@ -65,13 +66,15 @@ export function TestimonialCard({
       </div>
 
       <div className="flex w-full items-center justify-start gap-5 select-none">
-        <img
-          width={40}
-          height={40}
-          src={img || ''}
-          alt={name}
-          className="size-10 rounded-full ring-1 ring-blue-500/20 ring-offset-2"
-        />
+        <div className="relative size-10 flex-none">
+          <Image
+            width={40}
+            height={40}
+            src={img || ''}
+            alt={name}
+            className="rounded-full ring-1 ring-blue-500/20 ring-offset-2 object-cover"
+          />
+        </div>
 
         <div>
           <p className="text-foreground font-medium">{name}</p>

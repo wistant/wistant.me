@@ -1,6 +1,5 @@
-'use client';
-
 import { FloatingDock } from '@/components/mvpblocks/floating-dock';
+import Image from 'next/image';
 import {
   Github,
   Home,
@@ -36,13 +35,14 @@ export default function FloatingDockDemo() {
     {
       title: 'MVPBlocks',
       icon: (
-        <img
-          src="https://i.postimg.cc/j5dW4vFd/Mvpblocks.webp"
-          width={20}
-          height={20}
-          alt="MVPBlocks Logo"
-          className="rounded-full"
-        />
+        <div className="relative h-5 w-5">
+          <Image
+            src="https://i.postimg.cc/j5dW4vFd/Mvpblocks.webp"
+            fill
+            alt="MVPBlocks Logo"
+            className="rounded-full object-cover"
+          />
+        </div>
       ),
       href: '#',
     },

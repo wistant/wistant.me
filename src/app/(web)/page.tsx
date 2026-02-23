@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import BlurFade from "@/components/magicui/blur-fade";
 import { TextReveal } from "@/components/magicui/text-reveal";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
+import Image from "next/image";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/portfolio/section/contact-section";
 import HackathonsSection from "@/components/portfolio/section/hackathons-section";
@@ -48,10 +48,15 @@ export default function Home() {
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2 flex-none">
               <Avatar
-                  // className="size-32 md:size-48 border border-border shadow-xl ring-4 ring-primary/5"
-                  className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted"
+                  className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted relative overflow-hidden"
               >
-                <AvatarImage src={DATA.avatarUrl} alt={DATA.name} className="object-cover" />
+                <Image 
+                  src={DATA.avatarUrl} 
+                  alt={DATA.name} 
+                  fill
+                  priority
+                  className="object-cover" 
+                />
                 <AvatarFallback className="text-2xl font-bold font-cal">{DATA.initials}</AvatarFallback>
               </Avatar>
             </BlurFade>
@@ -118,11 +123,14 @@ export default function Home() {
                 >
                   <div className="flex items-center gap-x-3 flex-1 min-w-0">
                     {education.logoUrl ? (
-                      <img
-                        src={education.logoUrl}
-                        alt={education.school}
-                        className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain flex-none"
-                      />
+                      <div className="relative size-8 md:size-10 flex-none border rounded-full shadow ring-2 ring-border overflow-hidden">
+                        <Image
+                          src={education.logoUrl}
+                          alt={education.school}
+                          fill
+                          className="object-contain p-1"
+                        />
+                      </div>
                     ) : (
                       <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none" />
                     )}

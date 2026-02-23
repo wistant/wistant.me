@@ -3,6 +3,7 @@
 import { VerifiedIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface ReplyProps {
   authorName: string;
@@ -14,12 +15,12 @@ interface ReplyProps {
 }
 
 interface TweetCardProps {
-  authorName: string;
-  authorHandle: string;
-  authorImage: string;
-  content: string[];
+  authorName?: string;
+  authorHandle?: string;
+  authorImage?: string;
+  content?: string[];
   isVerified?: boolean;
-  timestamp: string;
+  timestamp?: string;
   reply?: ReplyProps;
 }
 
@@ -56,33 +57,34 @@ export default function TweetCard({
         className={cn(
           'relative isolate my-auto w-full max-w-xl min-w-[400px] overflow-hidden rounded-2xl p-1.5 md:min-w-[500px]',
           'bg-white/5 dark:bg-black/90',
-          'bg-linear-to-br from-black/5 to-black/[0.02] dark:from-white/5 dark:to-white/[0.02]',
-          'backdrop-blur-xl backdrop-saturate-[180%]',
+          'bg-linear-to-br from-black/5 to-black/2 dark:from-white/5 dark:to-white/2',
+          'backdrop-blur-xl backdrop-saturate-180',
           'border border-black/10 dark:border-white/10',
-          'shadow-[0_8px_16px_rgb(0_0_0_/_0.15)] dark:shadow-[0_8px_16px_rgb(0_0_0_/_0.25)]',
+          'shadow-[0_8px_16px_rgb(0_0_0/0.15)] dark:shadow-[0_8px_16px_rgb(0_0_0/0.25)]',
           'translate-z-0 will-change-transform',
         )}
       >
         <div
           className={cn(
             'relative w-full rounded-xl p-5',
-            'bg-linear-to-br from-black/[0.05] to-transparent dark:from-white/[0.08] dark:to-transparent',
+            'bg-linear-to-br from-black/5 to-transparent dark:from-white/8 dark:to-transparent',
             'backdrop-blur-md backdrop-saturate-150',
-            'border border-black/[0.05] dark:border-white/[0.08]',
+            'border border-black/5 dark:border-white/8',
             'text-black/90 dark:text-white',
             'shadow-xs',
             'translate-z-0 will-change-transform',
-            'before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-br before:from-black/[0.02] before:to-black/[0.01] before:opacity-0 before:transition-opacity dark:before:from-white/[0.03] dark:before:to-white/[0.01]',
+            'before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-br before:from-black/2 before:to-black/1 before:opacity-0 before:transition-opacity dark:before:from-white/3 dark:before:to-white/1',
             'hover:before:opacity-100',
           )}
         >
           <div className="flex gap-3">
             <div className="shrink-0">
-              <div className="h-10 w-10 overflow-hidden rounded-full">
-                <img
+              <div className="relative h-10 w-10 overflow-hidden rounded-full border border-border">
+                <Image
                   src={authorImage}
                   alt={authorName}
-                  className="h-full w-full object-cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -140,14 +142,15 @@ export default function TweetCard({
           </div>
 
           {reply && (
-            <div className="mt-4 border-t border-black/[0.08] pt-4 dark:border-white/[0.08]">
+            <div className="mt-4 border-t border-black/8 pt-4 dark:border-white/8">
               <div className="flex gap-3">
                 <div className="shrink-0">
-                  <div className="h-10 w-10 overflow-hidden rounded-full">
-                    <img
+                  <div className="relative h-10 w-10 overflow-hidden rounded-full border border-border">
+                    <Image
                       src={reply.authorImage}
                       alt={reply.authorName}
-                      className="h-full w-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 </div>
