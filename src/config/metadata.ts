@@ -40,7 +40,12 @@ export const DEFAULT_METADATA = {
     title: SITE_CONFIG.title,
     description: SITE_CONFIG.description,
     images: [SITE_CONFIG.ogImage],
-    creator: "@dillionverma",
+    creator: "@wistantkode",
+  },
+  icons: {
+    icon: "/me/me.png",
+    shortcut: "/me/me.png",
+    apple: "/me/me.png",
   },
   robots: {
     index: true,
