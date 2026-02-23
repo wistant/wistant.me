@@ -5,7 +5,7 @@ import "./globals.css";
 import { TargetCursor } from "@/components/magicui/target-cursor";
 
 import { DATA } from "@/data/resume";
-import { FloatingDock } from "@/components/ui/floating-dock";
+import { FloatingDock } from "@/components/mvpblocks/floating-dock";
 import { Github, Linkedin, Twitter } from "lucide-react";
 
 const calFont = localFont({

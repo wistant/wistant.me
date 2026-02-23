@@ -2,7 +2,7 @@ import { DATA } from "@/data/resume";
 
 export const SITE_CONFIG = {
   name: DATA.name,
-  title: `${DATA.name} | Senior Software Engineer & Next.js Expert`,
+  title: `${DATA.name} | Senior Software Engineer , DevOps Practicer, Cloud Solutions Architect & Open-source Advocate`,
   description: "Senior Software Engineer specializing in Next.js, React, and Full-stack Architecture. Building high-performance, scalable web systems with a focus on Cyber-Premium design.",
   url: DATA.url,
   ogImage: `${DATA.url}/og.png`,

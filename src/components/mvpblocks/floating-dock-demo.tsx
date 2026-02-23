@@ -1,6 +1,6 @@
 'use client';
 
-import { FloatingDock } from '@/components/ui/floating-dock';
+import { FloatingDock } from '@/components/mvpblocks/floating-dock';
 import {
   Github,
   Home,

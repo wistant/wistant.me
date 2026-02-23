@@ -12,7 +12,6 @@ import ProjectsSection from "@/components/portfolio/section/projects-section";
 import WorkSection from "@/components/portfolio/section/work-section";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
-import Testimonials from "@/components/mvpblocks/testimonials-marquee";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -24,10 +23,11 @@ export default function Home() {
           squareSize={4}
           gridGap={6}
           color="#6B7280"
-          maxOpacity={0.15}
-          flickerChance={0.2}
+          maxOpacity={0.4}
+          flickerChance={0.05}
         />
       </div>
+
 
 
       <section id="hero">
