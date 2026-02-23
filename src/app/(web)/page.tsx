@@ -1,46 +1,71 @@
-/* eslint-disable @next/next/no-img-element */
 import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { TextReveal } from "@/components/magicui/text-reveal";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
+import Image from "next/image";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/portfolio/section/contact-section";
 import HackathonsSection from "@/components/portfolio/section/hackathons-section";
 import ProjectsSection from "@/components/portfolio/section/projects-section";
 import WorkSection from "@/components/portfolio/section/work-section";
 import { ArrowUpRight } from "lucide-react";
+import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Home() {
   return (
     <main className="min-h-dvh flex flex-col gap-24 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
+      <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
+        <FlickeringGrid
+          squareSize={4}
+          gridGap={6}
+          color="#6B7280"
+          maxOpacity={0.35}
+          flickerChance={0.05}
+        />
+      </div>
+
+
+
       <section id="hero">
         <div className="mx-auto w-full space-y-8">
-          <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between">
-            <div className="gap-2 flex flex-col order-2 md:order-1 flex-1">
-              <BlurFadeText
-                delay={BLUR_FADE_DELAY}
-                className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl font-cal"
-                yOffset={8}
-                text={`Hi, I'm ${DATA.name.split(" ")[0]}`}
-              />
-              <BlurFadeText
-                className="text-muted-foreground max-w-[600px] md:text-lg"
-                delay={BLUR_FADE_DELAY}
-                text={DATA.description}
-              />
+          <div className="gap-6 flex flex-col md:flex-row items-center justify-between">
+            <div className="gap-4 flex flex-col order-2 md:order-1 flex-1">
+              <TextReveal
+                delay={0.1}
+                className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-5xl font-cal leading-tight"
+              >
+                {`Hi, I'm ${DATA.name}`}
+              </TextReveal>
+              <div className="flex items-center gap-2">
+                <AnimatedShinyText className="text-muted-foreground max-w-[600px] md:text-xl font-medium">
+                  {DATA.description}
+                </AnimatedShinyText>
+              </div>
             </div>
-            <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
-              <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
+            <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2 flex-none">
+              <Avatar
+                  className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted relative overflow-hidden"
+              >
+                <Image 
+                  src={DATA.avatarUrl} 
+                  alt={DATA.name} 
+                  fill
+                  priority
+                  className="object-cover" 
+                />
+                <AvatarFallback className="text-2xl font-bold font-cal">{DATA.initials}</AvatarFallback>
               </Avatar>
             </BlurFade>
           </div>
         </div>
       </section>
+
+
+
 
       <section id="about">
         <div className="flex min-h-0 flex-col gap-y-4">
@@ -50,12 +75,15 @@ export default function Home() {
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
               <Markdown>
-                {DATA.summary}
+                {DATA.about}
               </Markdown>
             </div>
           </BlurFade>
         </div>
       </section>
+
+
+
 
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-6">
@@ -67,6 +95,14 @@ export default function Home() {
           </BlurFade>
         </div>
       </section>
+
+
+
+      {/*<section id="testimonials">*/}
+      {/*  <Testimonials />*/}
+      {/*</section>*/}
+
+
 
       <section id="education">
         <div className="flex min-h-0 flex-col gap-y-6">
@@ -87,11 +123,14 @@ export default function Home() {
                 >
                   <div className="flex items-center gap-x-3 flex-1 min-w-0">
                     {education.logoUrl ? (
-                      <img
-                        src={education.logoUrl}
-                        alt={education.school}
-                        className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain flex-none"
-                      />
+                      <div className="relative size-8 md:size-10 flex-none border rounded-full shadow ring-2 ring-border overflow-hidden">
+                        <Image
+                          src={education.logoUrl}
+                          alt={education.school}
+                          fill
+                          className="object-contain p-1"
+                        />
+                      </div>
                     ) : (
                       <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none" />
                     )}
@@ -117,6 +156,8 @@ export default function Home() {
         </div>
       </section>
 
+
+
       <section id="skills">
         <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
@@ -135,6 +176,8 @@ export default function Home() {
         </div>
       </section>
 
+
+
       <section id="projects">
         <BlurFade delay={BLUR_FADE_DELAY * 11}>
           <ProjectsSection />
@@ -146,11 +189,15 @@ export default function Home() {
         </div>
       </section>
 
+
+
       <section id="hackathons">
         <BlurFade delay={BLUR_FADE_DELAY * 13}>
           <HackathonsSection />
         </BlurFade>
       </section>
+
+
 
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>

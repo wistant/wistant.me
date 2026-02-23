@@ -3,29 +3,30 @@ import { DATA } from "@/data/resume";
 import { ProjectCard } from "@/components/portfolio/project-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import React from "react";
 
 export const metadata: Metadata = {
-  title: "Projects | Dillion Verma",
+  title: "Projects | Wistant Kode",
   description: "A collection of my projects and creations.",
   openGraph: {
-    title: "Projects | Dillion Verma",
+    title: "Projects | Wistant Kode",
     description: "A collection of my projects and creations.",
     type: "website",
     url: `${DATA.url}/projects`,
     images: [
       {
-        url: "/projects/opengraph-image",
+        url: "/og-images/projects-og-img.png",
         width: 1200,
         height: 630,
-        alt: "Projects | Dillion Verma",
+        alt: "Projects | Wistant Kode",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects | Dillion Verma",
+    title: "Projects |  Wistant Kode",
     description: "A collection of my projects and creations.",
-    images: ["/projects/opengraph-image"],
+    images: ["/og-images/projects-og-img.png"],
   },
 };
 

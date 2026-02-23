@@ -3,6 +3,33 @@ import { allPosts } from "content-collections";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { BlogCard } from "@/components/blog/blog-card";
 import { TagFilter } from "@/components/blog/tag-filter";
+import { Metadata } from "next";
+import { DATA } from "@/data/resume";
+
+export const metadata: Metadata = {
+  title: "Blog | Wistant Kode",
+  description: "Insights on software engineering, architecture, and technology.",
+  openGraph: {
+    title: "Blog | Wistant Kode",
+    description: "Insights on software engineering, architecture, and technology.",
+    type: "website",
+    url: `${DATA.url}/blog`,
+    images: [
+      {
+        url: "/og-images/blog-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Blog | Wistant Kode",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Wistant Kode",
+    description: "Insights on software engineering, architecture, and technology.",
+    images: ["/og-images/blog-og.png"],
+  },
+};
 
 const formatDate = (date: string | Date): string => {
   return new Date(date).toLocaleDateString("en-US", {

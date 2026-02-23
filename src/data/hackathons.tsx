@@ -22,7 +22,7 @@ export const hackathonsData: readonly Hackathon[] = [
     dates: "March 15th - 17th, 2025",
     location: "Remote",
     description: "Developed an autonomous agent that translates complex legal documents into simplified plain language using LLMs and custom fine-tuned models.",
-    image: "/hackatons/aerogear.svg",
+    image: "/portfolio/hackaton-ai.png",
     links: [
       {
         title: "Source",
@@ -37,7 +37,7 @@ export const hackathonsData: readonly Hackathon[] = [
     dates: "September 20th - 22nd, 2024",
     location: "Douala, Cameroon",
     description: "Built a real-time network traffic analyzer that detects anomalous patterns and potential zero-day exploits using behavioral analysis.",
-    image: "/hackatons/android-vertical.svg",
+    image: "/portfolio/hackaton-cyber.png",
     links: [
       {
         title: "Github",
@@ -52,7 +52,7 @@ export const hackathonsData: readonly Hackathon[] = [
     dates: "November 5th - 7th, 2023",
     location: "Lagos, Nigeria",
     description: "Created a decentralized payment gateway for cross-border transactions in Africa, reducing fees by over 80% using Layer-2 solutions.",
-    image: "/hackatons/angular-icon.svg",
+    image: "/portfolio/hackaton-fintech.png",
     links: [
       {
         title: "Project",
