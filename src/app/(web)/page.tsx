@@ -36,9 +36,9 @@ export default function Home() {
             <div className="gap-4 flex flex-col order-2 md:order-1 flex-1">
               <TextReveal
                 delay={0.1}
-                className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-7xl font-cal leading-tight"
+                className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-5xl font-cal leading-tight"
               >
-                {`Hi, I'm ${DATA.name.split(" ")[0]}`}
+                {`Hi, I'm ${DATA.name}`}
               </TextReveal>
               <div className="flex items-center gap-2">
                 <AnimatedShinyText className="text-muted-foreground max-w-[600px] md:text-xl font-medium">

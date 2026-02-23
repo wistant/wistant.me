@@ -9,29 +9,29 @@ import { FloatingDock } from "@/components/mvpblocks/floating-dock";
 import { Github, Linkedin, Twitter } from "lucide-react";
 
 const calFont = localFont({
-  src: "../../public/fonts/cal.ttf",
+  src: "../../public/fonts/cal.woff2",
   variable: "--font-cal",
 });
 
 const clashFont = localFont({
-  src: "../../public/fonts/ClashDisplay-Semibold.ttf",
+  src: "../../public/fonts/ClashDisplay-Semibold.woff2",
   variable: "--font-clash",
 });
 
 const cabinetFont = localFont({
-  src: "../../public/fonts/CabinetGrotesk-Medium.ttf",
+  src: "../../public/fonts/CabinetGrotesk-Medium.woff2",
   variable: "--font-cabinet",
 });
 
 const interFont = localFont({
   src: [
     {
-      path: "../../public/fonts/Inter-Regular.ttf",
+      path: "../../public/fonts/Inter-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Inter-Medium.ttf",
+      path: "../../public/fonts/Inter-Medium.woff2",
       weight: "500",
       style: "normal",
     },
