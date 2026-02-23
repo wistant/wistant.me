@@ -70,7 +70,7 @@ export default function Home() {
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
               <Markdown>
-                {DATA.summary}
+                {DATA.about}
               </Markdown>
             </div>
           </BlurFade>

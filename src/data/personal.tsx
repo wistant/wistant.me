@@ -9,7 +9,7 @@ export const personalData = {
   locationLink: "https://www.google.com/maps/place/Douala",
   description:
     "Software Engineer focusing on high-performance web systems. Expert in Next.js, React, and modern full-stack architectures.",
-  summary:
+  about:
     "Software Engineering student dedicated to building clean, scalable, and maintainable applications. I bridge the gap between complex business logic and premium user experiences using the latest web technologies. Autonomous, curious, and driven by engineering excellence.",
   avatarUrl: "/me/me.png",
   navbar: [
