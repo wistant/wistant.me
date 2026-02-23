@@ -2,13 +2,13 @@ import { DATA } from "@/data/resume";
 
 export const SITE_CONFIG = {
   name: DATA.name,
-  title: `${DATA.name} | Software Engineer & Entrepreneur`,
-  description: DATA.description,
+  title: `${DATA.name} | Senior Software Engineer & Next.js Expert`,
+  description: "Senior Software Engineer specializing in Next.js, React, and Full-stack Architecture. Building high-performance, scalable web systems with a focus on Cyber-Premium design.",
   url: DATA.url,
-  ogImage: `${DATA.url}/og.png`, // Fallback image
+  ogImage: `${DATA.url}/og.png`,
   links: {
-    twitter: "https://twitter.com/dillionverma", // Update with real handle if in DATA
-    github: "https://github.com/dillionverma",
+    twitter: "https://twitter.com/wistantkode",
+    github: "https://github.com/wistantkode",
   },
 };
 
