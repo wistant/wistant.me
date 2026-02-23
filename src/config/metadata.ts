@@ -2,10 +2,10 @@ import { DATA } from "@/data/resume";
 
 export const SITE_CONFIG = {
   name: DATA.name,
-  title: `${DATA.name} | Senior Software Engineer & Next.js Expert`,
-  description: "Senior Software Engineer specializing in Next.js, React, and Full-stack Architecture. Building high-performance, scalable web systems with a focus on Cyber-Premium design.",
+  title: `${DATA.name} | Elite Senior Software Engineer & Architect`,
+  description: "Senior Software Engineer specializing in high-performance web systems and scalable architectures. Crafting premium digital experiences with Next.js, React and modern DevOps practices.",
   url: DATA.url,
-  ogImage: `${DATA.url}/og.png`,
+  ogImage: `${DATA.url}/og-images/home-og.png`,
   links: {
     twitter: "https://twitter.com/wistantkode",
     github: "https://github.com/wistantkode",

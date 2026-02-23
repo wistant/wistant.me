@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface MediaViewerProps {
   src: string;
@@ -38,13 +39,23 @@ export function MediaViewer({
       );
     }
 
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...mediaProps} />;
+    // eslint-disable-next-line jsx-a11y/alt-text
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className={cn("object-cover rounded-lg border", className)}
+        {...(width && height ? { width, height } : {})}
+      />
+    );
   };
 
   return (
     <div className="my-6 w-full">
-      <div className="relative w-full aspect-video">{renderMedia()}</div>
+      <div className="relative w-full aspect-video overflow-hidden">
+        {renderMedia()}
+      </div>
     </div>
   );
 }

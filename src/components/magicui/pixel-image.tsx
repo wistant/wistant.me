@@ -27,6 +27,7 @@ interface PixelImageProps {
   pixelFadeInDuration?: number // in ms
   maxAnimationDelay?: number // in ms
   colorRevealDelay?: number // in ms
+  className?: string
 }
 
 export const PixelImage = ({
@@ -37,6 +38,7 @@ export const PixelImage = ({
   maxAnimationDelay = 1200,
   colorRevealDelay = 1300,
   customGrid,
+  className,
 }: PixelImageProps) => {
   const [isVisible, setIsVisible] = useState(false)
   const [showColor, setShowColor] = useState(false)
@@ -61,15 +63,7 @@ export const PixelImage = ({
     return isValidGrid(customGrid) ? customGrid! : DEFAULT_GRIDS[grid]
   }, [customGrid, grid])
 
-  useEffect(() => {
-    setIsVisible(true)
-    const colorTimeout = setTimeout(() => {
-      setShowColor(true)
-    }, colorRevealDelay)
-    return () => clearTimeout(colorTimeout)
-  }, [colorRevealDelay])
-
-  const pieces = useMemo(() => {
+  const [pieces] = useState(() => {
     const total = rows * cols
     return Array.from({ length: total }, (_, index) => {
       const row = Math.floor(index / cols)
@@ -88,10 +82,23 @@ export const PixelImage = ({
         delay,
       }
     })
-  }, [rows, cols, maxAnimationDelay])
+  })
+
+  useEffect(() => {
+    const animationFrame = requestAnimationFrame(() => {
+      setIsVisible(true)
+    })
+    const colorTimeout = setTimeout(() => {
+      setShowColor(true)
+    }, colorRevealDelay)
+    return () => {
+      cancelAnimationFrame(animationFrame)
+      clearTimeout(colorTimeout)
+    }
+  }, [colorRevealDelay])
 
   return (
-    <div className="relative h-72 w-72 select-none md:h-96 md:w-96">
+    <div className={cn("relative select-none", !className && "h-72 w-72 md:h-96 md:w-96", className)}>
       {pieces.map((piece, index) => (
         <div
           key={index}

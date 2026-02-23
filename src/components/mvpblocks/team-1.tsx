@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { GithubIcon, LinkedinIcon, TwitterIcon } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface TeamMember {
   name: string;
@@ -108,9 +109,10 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
   return (
     <div className="group bg-card h-[420px] w-96 overflow-hidden rounded-xl opacity-100 shadow-sm transition-opacity hover:opacity-75">
       <div className="relative h-[200px] w-full overflow-hidden">
-        <img
+        <Image
           src={member.imageUrl}
           alt={member.name}
+          fill
           className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
         />
       </div>
