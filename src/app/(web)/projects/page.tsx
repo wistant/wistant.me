@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: `${DATA.url}/projects`,
     images: [
       {
-        url: "/projects/opengraph-image",
+        url: "/og-images/projects-og-img.png",
         width: 1200,
         height: 630,
         alt: "Projects | Wistant Kode",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Projects |  Wistant Kode",
     description: "A collection of my projects and creations.",
-    images: ["/projects/opengraph-image"],
+    images: ["/og-images/projects-og-img.png"],
   },
 };
 
