@@ -8,10 +8,12 @@ import { DATA } from "@/data/resume";
 
 export const metadata: Metadata = {
   title: "Blog | Wistant Kode",
-  description: "Insights on software engineering, architecture, and technology.",
+  description:
+    "Insights on software engineering, architecture, and technology.",
   openGraph: {
     title: "Blog | Wistant Kode",
-    description: "Insights on software engineering, architecture, and technology.",
+    description:
+      "Insights on software engineering, architecture, and technology.",
     type: "website",
     url: `${DATA.url}/blog`,
     images: [
@@ -26,7 +28,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Blog | Wistant Kode",
-    description: "Insights on software engineering, architecture, and technology.",
+    description:
+      "Insights on software engineering, architecture, and technology.",
     images: ["/og-images/blog-og.png"],
   },
 };
@@ -45,7 +48,7 @@ export default async function BlogPage({
   searchParams: Promise<{ tag?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  
+
   // Sort posts by date (newest first)
   const sortedPosts = allPosts.sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -55,7 +58,7 @@ export default async function BlogPage({
   const allTags = [
     "All",
     ...Array.from(
-      new Set(sortedPosts.flatMap((post) => post.tags || []))
+      new Set(sortedPosts.flatMap((post) => post.tags || [])),
     ).sort(),
   ];
 
@@ -67,21 +70,24 @@ export default async function BlogPage({
       : sortedPosts.filter((post) => post.tags?.includes(selectedTag));
 
   // Compute tag counts
-  const tagCounts = allTags.reduce((acc, tag) => {
-    if (tag === "All") {
-      acc[tag] = sortedPosts.length;
-    } else {
-      acc[tag] = sortedPosts.filter((post) =>
-        post.tags?.includes(tag)
-      ).length;
-    }
-    return acc;
-  }, {} as Record<string, number>);
+  const tagCounts = allTags.reduce(
+    (acc, tag) => {
+      if (tag === "All") {
+        acc[tag] = sortedPosts.length;
+      } else {
+        acc[tag] = sortedPosts.filter((post) =>
+          post.tags?.includes(tag),
+        ).length;
+      }
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
 
   return (
     <div className="min-h-screen bg-background relative">
       {/* Hero Background */}
-      <div className="absolute top-0 left-0 z-0 w-full h-[300px] mask-[linear-gradient(to_top,transparent_10%,black_80%)]">
+      <div className="absolute top-0 left-0 z-0 w-full h-75 mask-[linear-gradient(to_top,transparent_10%,black_80%)]">
         <FlickeringGrid
           className="absolute top-0 left-0 size-full"
           squareSize={4}
@@ -100,11 +106,13 @@ export default async function BlogPage({
               Blog & Insights
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl">
-              Explorer les dernières pensées sur le développement, l&apos;architecture logicielle et l&apos;intelligence artificielle.
+              Explorer les dernières pensées sur le développement,
+              l&apos;architecture logicielle et l&apos;intelligence
+              artificielle.
             </p>
           </div>
         </div>
-        
+
         {/* Filters */}
         {allTags.length > 0 && (
           <div className="max-w-7xl mx-auto w-full mt-4">
@@ -119,7 +127,11 @@ export default async function BlogPage({
 
       {/* Posts Grid */}
       <div className="max-w-7xl mx-auto w-full px-6 lg:px-0 py-12">
-        <Suspense fallback={<div className="text-center py-20">Loading articles...</div>}>
+        <Suspense
+          fallback={
+            <div className="text-center py-20">Loading articles...</div>
+          }
+        >
           {filteredPosts.length > 0 ? (
             <div
               className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x border-border ${

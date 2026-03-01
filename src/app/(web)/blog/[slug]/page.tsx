@@ -1,13 +1,13 @@
-import { allPosts } from "content-collections";
-import { DATA } from "@/data/resume";
-import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { TableOfContents } from "@/components/blog/table-of-contents";
 import { AuthorCard } from "@/components/blog/author-card";
 import { HashScrollHandler } from "@/components/blog/hash-scroll-handler";
-import { getAuthor, isValidAuthor } from "@/lib/authors";
+import { TableOfContents } from "@/components/blog/table-of-contents";
 import { mdxComponents } from "@/components/mdx/mdx-components";
+import { DATA } from "@/data/resume";
+import { getAuthor, isValidAuthor } from "@/lib/authors";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
+import { allPosts } from "content-collections";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { notFound } from "next/navigation";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string }>;
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: BlogSlugPageProps) {
   const { slug } = await params;
   const post = allPosts.find((p) => p.slug === slug);
   if (!post) return {};
-  
+
   return {
     title: post.title,
     description: post.summary,
@@ -58,9 +58,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   if (!post) notFound();
 
   const author =
-    post.author && isValidAuthor(post.author)
-      ? getAuthor(post.author)
-      : null;
+    post.author && isValidAuthor(post.author) ? getAuthor(post.author) : null;
 
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     year: "numeric",
