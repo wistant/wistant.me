@@ -1,4 +1,4 @@
-import { FloatingDock } from '@/components/mvpblocks/floating-dock';
+import { FloatingDock } from '@/components/ui/mvpblocks/floating-dock';
 import Image from 'next/image';
 import {
   Github,

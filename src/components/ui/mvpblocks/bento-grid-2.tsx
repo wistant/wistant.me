@@ -16,7 +16,7 @@ import {
   CardHeader,
   CardContent,
   CardFooter,
-} from '@/components/magicui/card';
+} from '@/components/ui/magicui/card';
 import { motion } from 'framer-motion';
 
 interface BentoItem {

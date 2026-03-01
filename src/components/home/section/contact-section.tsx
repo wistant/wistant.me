@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { DATA } from "@/data/resume";
 
 export default function ContactSection() {
@@ -19,6 +19,7 @@ export default function ContactSection() {
           }}
         />
       </div>
+
       <div className="relative flex flex-col items-center gap-4 text-center">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
           Get in Touch

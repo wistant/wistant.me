@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Image from "next/image";
 import { DATA } from "@/data/resume";
-import { Timeline, TimelineItem, TimelineConnectItem } from "@/components/portfolio/timeline";
+import { Timeline, TimelineItem, TimelineConnectItem } from "@/components/timeline";
 
 export default function HackathonsSection() {
   return (

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
-import { FlickeringGrid } from '@/components/magicui/flickering-grid';
+import { FlickeringGrid } from '@/components/ui/magicui/flickering-grid';
 import { socialPosts } from '@/data/social-posts';
-import TweetCard from '@/components/mvpblocks/twittercard';
+import TweetCard from '@/components/ui/mvpblocks/twittercard';
 import { Metadata } from 'next';
 import { DATA } from '@/data/resume';
 

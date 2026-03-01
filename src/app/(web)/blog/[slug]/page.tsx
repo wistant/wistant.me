@@ -1,6 +1,6 @@
-import { AuthorCard } from "@/components/blog/author-card";
-import { HashScrollHandler } from "@/components/blog/hash-scroll-handler";
-import { TableOfContents } from "@/components/blog/table-of-contents";
+import { AuthorCard } from "@/components/ui/blog/author-card";
+import { HashScrollHandler } from "@/components/ui/blog/hash-scroll-handler";
+import { TableOfContents } from "@/components/ui/blog/table-of-contents";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { DATA } from "@/data/resume";
 import { getAuthor, isValidAuthor } from "@/lib/authors";

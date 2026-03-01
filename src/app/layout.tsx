@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { DEFAULT_METADATA } from "@/config/metadata";
 import "./globals.css";
-import { TargetCursor } from "@/components/magicui/target-cursor";
+import { TargetCursor } from "@/components/ui/magicui/target-cursor";
 
 import { DATA } from "@/data/resume";
-import { FloatingDock } from "@/components/mvpblocks/floating-dock";
+import { FloatingDock } from "@/components/ui/mvpblocks/floating-dock";
 import { Github, Linkedin, Twitter } from "lucide-react";
 
 const calFont = localFont({

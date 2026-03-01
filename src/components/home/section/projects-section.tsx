@@ -1,5 +1,5 @@
-import BlurFade from "@/components/magicui/blur-fade";
-import { ProjectCard } from "@/components/portfolio/project-card";
+import BlurFade from "@/components/ui/magicui/blur-fade";
+import { ProjectCard } from "@/components/home/project-card";
 import { DATA } from "@/data/resume";
 
 const BLUR_FADE_DELAY = 0.04;

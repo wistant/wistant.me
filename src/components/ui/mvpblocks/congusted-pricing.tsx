@@ -1,8 +1,8 @@
 'use client';
 
-import { buttonVariants } from '@/components/magicui/button';
-import { Label } from '@/components/magicui/label';
-import { Switch } from '@/components/magicui/switch';
+import { buttonVariants } from '@/components/ui/magicui/button';
+import { Label } from '@/components/ui/magicui/label';
+import { Switch } from '@/components/ui/magicui/switch';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';

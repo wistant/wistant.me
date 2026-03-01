@@ -96,7 +96,7 @@ export default function Header2() {
             >
               <Link
                 prefetch={false}
-                href="/"
+                href="/public"
                 className="flex items-center space-x-3"
               >
                 <div className="relative">

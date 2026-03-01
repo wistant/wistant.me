@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { allPosts } from "content-collections";
-import { FlickeringGrid } from "@/components/magicui/flickering-grid";
-import { BlogCard } from "@/components/blog/blog-card";
-import { TagFilter } from "@/components/blog/tag-filter";
+import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
+import { BlogCard } from "@/components/ui/blog/blog-card";
+import { TagFilter } from "@/components/ui/blog/tag-filter";
 import { Metadata } from "next";
 import { DATA } from "@/data/resume";
 

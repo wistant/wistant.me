@@ -1,5 +1,5 @@
-import { GradientBars } from '@/components/magicui/gradient-bars';
-import { TextReveal } from '@/components/magicui/text-reveal';
+import { GradientBars } from '@/components/ui/magicui/gradient-bars';
+import { TextReveal } from '@/components/ui/magicui/text-reveal';
 
 export default function GradientBarsPreview() {
   return (

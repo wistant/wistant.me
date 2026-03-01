@@ -12,7 +12,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/magicui/pagination';
+} from '@/components/ui/magicui/pagination';
 
 interface BasicPaginationProps {
   totalPages: number;

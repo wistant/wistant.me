@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '@/components/magicui/button';
-import { TargetCursor } from '@/components/magicui/target-cursor';
+import { Button } from '@/components/ui/magicui/button';
+import { TargetCursor } from '@/components/ui/magicui/target-cursor';
 
 export default function TargetCursorDemo() {
   return (
