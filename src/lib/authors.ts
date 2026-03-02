@@ -8,12 +8,12 @@ export const authors: Record<string, Author> = {
   dillion: {
     name: "Dillion Verma",
     position: "Software Engineer",
-    avatar: "/authors/dillion.png",
+    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&h=200&auto=format&fit=crop&q=80",
   },
   arghya: {
     name: "Arghya Das",
     position: "Design System Engineer",
-    avatar: "/authors/arghya.png",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&auto=format&fit=crop&q=80",
   },
 } as const;
 
