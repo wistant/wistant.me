@@ -15,8 +15,10 @@ export const personalData = {
   post: "Full-Stack Architect & Product Engineer",
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/about", icon: Icons.user, label: "About" },
     { href: "/projects", icon: Icons.globe, label: "Projects" },
+    { href: "/hackathons", icon: Icons.trophy, label: "Hackathons" },
+    { href: "/blog", icon: NotebookIcon, label: "Blog" },
   ],
   contact: {
     email: "wistantkode@protonmail.com",

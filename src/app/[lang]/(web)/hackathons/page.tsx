@@ -1,0 +1,46 @@
+import BlurFade from "@/components/ui/magicui/blur-fade";
+import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
+import { TextReveal } from "@/components/ui/magicui/text-reveal";
+import HackathonsSection from "@/components/home/hackathons-section";
+import { getDictionary } from "@/lib/dictionary";
+
+const BLUR_FADE_DELAY = 0.04;
+
+export default async function HackathonsPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
+  return (
+    <main className="min-h-dvh flex flex-col gap-16 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
+      <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
+        <FlickeringGrid
+          squareSize={4}
+          gridGap={6}
+          color="#6B7280"
+          maxOpacity={0.35}
+          flickerChance={0.05}
+        />
+      </div>
+
+      <section id="header">
+        <div className="w-full space-y-4 text-left">
+          <TextReveal
+            delay={0.1}
+            className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl font-cal leading-tight"
+          >
+            {dict.hackathons.title || "Hackathons"}
+          </TextReveal>
+          <BlurFade delay={BLUR_FADE_DELAY}>
+            <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-prose">
+              I like building things and pushing boundaries in short bursts of creativity.
+            </p>
+          </BlurFade>
+        </div>
+      </section>
+
+      <BlurFade delay={BLUR_FADE_DELAY * 2}>
+        <HackathonsSection />
+      </BlurFade>
+    </main>
+  );
+}

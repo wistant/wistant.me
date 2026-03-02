@@ -1,0 +1,93 @@
+"use client";
+
+import React, { useState } from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+
+interface ShowMoreProps {
+  children: React.ReactNode;
+  initialHeight?: number;
+  className?: string;
+  buttonTextShow?: string;
+  buttonTextHide?: string;
+  href?: string; // Link to the full page
+  linkText?: string; // Text for the full page link
+  buttonClassName?: string; // Additional classes for the button container
+}
+
+export function ShowMore({
+  children,
+  initialHeight = 400,
+  className,
+  buttonTextShow = "Show More",
+  buttonTextHide = "Show Less",
+  href,
+  linkText = "View All",
+  buttonClassName,
+}: ShowMoreProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className={cn("relative w-full", className)}>
+      <motion.div
+        animate={{ height: isExpanded ? "auto" : initialHeight }}
+        initial={{ height: initialHeight }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="overflow-hidden relative"
+      >
+        {children}
+        
+        <AnimatePresence>
+          {!isExpanded && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-x-0 bottom-0 z-10 h-96 bg-linear-to-t from-background via-background/95 via-background/50 to-transparent pointer-events-none"
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      <div className={cn(
+        "relative z-20 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-500",
+        isExpanded ? "mt-12" : cn("mt-8", buttonClassName)
+      )}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="rounded-full bg-background/50 backdrop-blur-md border border-border/10 shadow-sm hover:bg-accent transition-all group px-6 h-10"
+        >
+          {isExpanded ? (
+            <>
+              {buttonTextHide}
+              <ChevronUp className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+            </>
+          ) : (
+            <>
+              {buttonTextShow}
+              <ChevronDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+            </>
+          )}
+        </Button>
+
+        {href && (
+          <Link href={href}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="rounded-full text-muted-foreground hover:text-foreground hover:bg-transparent transition-all group px-4 h-10"
+            >
+              {linkText}
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}

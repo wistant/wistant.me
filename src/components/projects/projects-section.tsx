@@ -4,7 +4,9 @@ import { DATA } from "@/data/resume";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function ProjectsSection() {
+export default function ProjectsSection({ limit }: { limit?: number }) {
+  const projects = limit ? DATA.projects.slice(0, limit) : DATA.projects;
+
   return (
     <section id="projects">
       <div className="flex min-h-0 flex-col gap-y-12">
@@ -30,7 +32,7 @@ export default function ProjectsSection() {
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-200 mx-auto auto-rows-fr">
-          {DATA.projects.map((project, id) => {
+          {projects.map((project, id) => {
             if (!project) return null;
             return (
               <BlurFade

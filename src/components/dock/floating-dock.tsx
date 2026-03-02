@@ -63,7 +63,7 @@ export const FloatingDock = ({
   return (
     <div
       className={cn(
-        'flex md:hidden items-center justify-center flex-wrap gap-2 px-4 py-3 rounded-3xl',
+        'flex md:hidden items-center justify-center flex-nowrap gap-1 px-3 py-2.5 rounded-2xl',
         'bg-card/90 dark:bg-card/95 backdrop-blur-2xl',
         'border border-border/60',
         'shadow-[0_8px_30px_rgba(0,0,0,0.12)] z-50',
@@ -78,7 +78,7 @@ export const FloatingDock = ({
               href={item.href}
               target={isExternal ? '_blank' : undefined}
               rel={isExternal ? 'noopener noreferrer' : undefined}
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80 overflow-hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80 overflow-hidden"
             >
               <div className="h-5 w-5">{item.icon}</div>
             </Link>
@@ -86,11 +86,8 @@ export const FloatingDock = ({
         );
       })}
 
-      {/* Separator */}
-      <div className="mx-1 h-5 w-px bg-border/50" />
-
       {/* Language switcher */}
-      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80">
         <LanguageSwitcher />
       </div>
 
@@ -99,7 +96,7 @@ export const FloatingDock = ({
         type="button"
         whileTap={{ scale: 0.82 }}
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
-        className="flex h-11 w-11 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80"
       >
         <div className="h-5 w-5">
           <ThemeToggleIcon />
