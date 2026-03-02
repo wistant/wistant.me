@@ -4,6 +4,9 @@ import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { BlogCard } from "@/components/ui/blog/blog-card";
 import { TagFilter } from "@/components/ui/blog/tag-filter";
 import { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { DATA } from "@/data/resume";
 
 export const metadata: Metadata = {
@@ -85,9 +88,24 @@ export default async function BlogPage({
   );
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative pt-12 md:pt-16">
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-6 mb-4 relative z-10">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          asChild
+        >
+          <Link href="/">
+            <ArrowLeft className="size-4" />
+            Retour à l'accueil
+          </Link>
+        </Button>
+      </div>
+
       {/* Hero Background */}
-      <div className="absolute top-0 left-0 z-0 w-full h-75 mask-[linear-gradient(to_top,transparent_10%,black_80%)]">
+      <div className="absolute top-0 left-0 z-0 w-full h-[250px] mask-[linear-gradient(to_top,transparent_25%,black_95%)]">
         <FlickeringGrid
           className="absolute top-0 left-0 size-full"
           squareSize={4}
@@ -99,23 +117,21 @@ export default async function BlogPage({
       </div>
 
       {/* Header Section */}
-      <div className="pt-32 pb-10 px-6 border-b border-border flex flex-col gap-6 justify-center relative z-10">
+      <div className="p-6 border-b border-border flex flex-col gap-6 min-h-[250px] justify-center relative z-10">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="flex flex-col gap-4">
-            <h1 className="font-bold text-4xl md:text-5xl tracking-tighter">
+          <div className="flex flex-col gap-2">
+            <h1 className="font-medium text-4xl md:text-5xl tracking-tighter">
               Blog & Insights
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl">
-              Explorer les dernières pensées sur le développement,
-              l&apos;architecture logicielle et l&apos;intelligence
-              artificielle.
+              Exploring engineering excellence, software architecture, and artificial intelligence.
             </p>
           </div>
         </div>
 
         {/* Filters */}
         {allTags.length > 0 && (
-          <div className="max-w-7xl mx-auto w-full mt-4">
+          <div className="max-w-7xl mx-auto w-full">
             <TagFilter
               tags={allTags}
               selectedTag={selectedTag}
@@ -126,7 +142,7 @@ export default async function BlogPage({
       </div>
 
       {/* Posts Grid */}
-      <div className="max-w-7xl mx-auto w-full px-6 lg:px-0 py-12">
+      <div className="max-w-7xl mx-auto w-full px-6 lg:px-0">
         <Suspense
           fallback={
             <div className="text-center py-20">Loading articles...</div>
@@ -146,12 +162,12 @@ export default async function BlogPage({
                   description={post.summary}
                   date={formatDate(post.date)}
                   thumbnail={post.image}
-                  showRightBorder={filteredPosts.length < 3} // Logic to refine
+                  showRightBorder={filteredPosts.length < 3}
                 />
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 text-muted-foreground">
+            <div className="text-center py-20 text-muted-foreground border-x border-b border-border">
               Aucun article trouvé pour le tag &quot;{selectedTag}&quot;.
             </div>
           )}
