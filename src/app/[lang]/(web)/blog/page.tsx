@@ -52,7 +52,7 @@ export default async function BlogPage({
 }) {
   const resolvedSearchParams = await searchParams;
 
-  // Sort posts by date (newest first)
+  // Sort blog by date (newest first)
   const sortedPosts = allPosts.sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
