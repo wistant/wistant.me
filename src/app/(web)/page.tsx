@@ -36,7 +36,7 @@ export default function Home() {
                 delay={0.1}
                 className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-5xl font-cal leading-tight"
               >
-                {`Hi, I'm ${DATA.name}`}
+                {`Hi, I'm ${DATA.name} 👋🏻`}
               </TextReveal>
               <div className="flex items-center gap-2">
                 <AnimatedShinyText className="text-muted-foreground max-w-150 md:text-xl font-medium">
