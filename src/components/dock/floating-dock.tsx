@@ -14,11 +14,11 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import React, { useRef, useState } from 'react';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// Types
 type DockItem = { title: string; icon: React.ReactNode; href: string };
 
-// ─── Theme Toggle Icon (CSS transitions, no hydration mismatch) ──────────────
-function ThemeToggleIcon() {
+//  Theme Toggle Icon (CSS transitions, no hydration mismatch)
+export function ThemeToggleIcon() {
   return (
     <span className="relative h-full w-full flex items-center justify-center">
       {/* Sun — visible in dark mode, rotates in */}
@@ -29,7 +29,7 @@ function ThemeToggleIcon() {
   );
 }
 
-// ─── Public API ───────────────────────────────────────────────────────────────
+// Public API
 export const FloatingDock = ({
   items,
   mobileItems,
@@ -50,14 +50,12 @@ export const FloatingDock = ({
   );
 };
 
-// ─── Mobile — always-visible horizontal bar ───────────────────────────────────
-const FloatingDockMobile = ({
-  items,
-  className,
-}: Readonly<{
-  items: DockItem[];
-  className?: string;
-}>) => {
+// Mobile — always-visible horizontal bar
+  const FloatingDockMobile = ({items, className,
+  }: Readonly<{
+    items: DockItem[];
+    className?: string;
+  }>) => {
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
 
@@ -138,10 +136,10 @@ const FloatingDockDesktop = ({
   );
 };
 
-// ─── Shared spring config ─────────────────────────────────────────────────────
+// Shared spring config
 const SPRING = { mass: 0.07, stiffness: 200, damping: 14 };
 
-// ─── Link icon container ──────────────────────────────────────────────────────
+// Link icon container
 function IconContainer({
   mouseX,
   title,
@@ -174,6 +172,7 @@ function IconContainer({
   const isExternal = href.startsWith('http');
 
   return (
+
     <Link
       href={href}
       target={isExternal ? '_blank' : undefined}
@@ -210,7 +209,7 @@ function IconContainer({
   );
 }
 
-// ─── Theme toggle container (magnifiable like other icons) ───────────────────
+// Theme toggle container (magnifiable like other icons)
 function ThemeToggleContainer({ mouseX }: { mouseX: MotionValue<number> }) {
   const ref = useRef<HTMLDivElement>(null);
   const { resolvedTheme, setTheme } = useTheme();

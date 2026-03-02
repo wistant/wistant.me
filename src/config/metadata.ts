@@ -2,14 +2,29 @@ import { DATA } from "@/data/resume";
 
 export const SITE_CONFIG = {
   name: DATA.name,
-  title: `${DATA.name} | Elite Senior Software Engineer & Architect`,
-  description: "Senior Software Engineer specializing in high-performance web systems and scalable architectures. Crafting premium digital experiences with Next.js, React and modern DevOps practices.",
+  title: `${DATA.name} | Senior Software Engineer & Architect`,
+  description:
+    "Senior Software Engineer specializing in high-performance web systems and scalable architectures. Crafting premium digital experiences with TypeScript, Next.js, Bun, Nodejs, NestJS React and modern DevOps practices.",
   url: DATA.url,
-  ogImage: `${DATA.url}/og-images/home-og.png`,
+  // Points to the dynamic Edge-rendered OG image (Next.js route convention)
+  ogImage: `${DATA.url}/opengraph-image`,
   links: {
     twitter: "https://twitter.com/wistantkode",
     github: "https://github.com/wistantkode",
   },
+  keywords: [
+    "Software Engineer",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Web Performance",
+    "Full-Stack Developer",
+    "System Architecture",
+    "Node.js",
+    "DevOps",
+    "Douala",
+    "Cameroon",
+  ],
 };
 
 export const DEFAULT_METADATA = {
@@ -19,6 +34,14 @@ export const DEFAULT_METADATA = {
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.description,
+  keywords: SITE_CONFIG.keywords,
+  authors: [{ name: DATA.name, url: DATA.url }],
+  creator: DATA.name,
+  publisher: DATA.name,
+  category: "technology",
+  alternates: {
+    canonical: SITE_CONFIG.url,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -32,6 +55,7 @@ export const DEFAULT_METADATA = {
         width: 1200,
         height: 630,
         alt: SITE_CONFIG.name,
+        type: "image/png",
       },
     ],
   },
@@ -41,6 +65,7 @@ export const DEFAULT_METADATA = {
     description: SITE_CONFIG.description,
     images: [SITE_CONFIG.ogImage],
     creator: "@wistantkode",
+    site: "@wistantkode",
   },
   icons: {
     icon: "/me/me.png",
