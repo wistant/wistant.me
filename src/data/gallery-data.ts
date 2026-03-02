@@ -1,56 +1,56 @@
 export const GALLERY_IMAGES = [
   {
-    src: "/gallery/IMG_3016.JPG",
+    src: "/gallery/ordi1.JPG",
     alt: "Highlight 1",
     className: "col-span-2 row-span-2", // Large square
   },
   {
-    src: "/gallery/IMG-20250705-WA0048.jpg",
+    src: "/gallery/me.jpg",
     alt: "Moment 1",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/gallery/IMG-20250705-WA0088.jpg",
+    src: "/gallery/ordi2.JPG",
     alt: "Moment 2",
     className: "col-span-1 row-span-2", // Vertical rectangle
   },
   {
-    src: "/gallery/photo_2025-05-11_00-40-57.jpg",
+    src: "/gallery/devfest1.webp",
     alt: "Sprint 1",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/gallery/IMG-20251129-WA0164.jpg",
+    src: "/gallery/me4.webp",
     alt: "Travel 1",
     className: "col-span-2 row-span-1", // Horizontal rectangle
   },
   {
-    src: "/gallery/IMG_3052.JPG",
+    src: "/gallery/me-audrey.webp",
     alt: "Highlight 2",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/gallery/photo_2025-05-11_00-45-56.jpg",
+    src: "/gallery/devfest2.webp",
     alt: "Moment 3",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/gallery/IMG_3058.JPG",
+    src: "/gallery/me3.webp",
     alt: "Highlight 3",
     className: "col-span-2 row-span-2",
   },
   {
-    src: "/gallery/IMG-20250705-WA0126.jpg",
+    src: "/gallery/ordi3.JPG",
     alt: "Moment 4",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/gallery/photo_2025-05-11_00-42-46.jpg",
+    src: "/gallery/me4.webp",
     alt: "Sprint 2",
     className: "col-span-1 row-span-1",
   },
   {
-    src: "/gallery/IMG-20251129-WA0165.jpg",
+    src: "/gallery/me-chatounet.webp",
     alt: "Travel 2",
     className: "col-span-1 row-span-1",
   },

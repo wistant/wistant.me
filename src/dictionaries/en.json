@@ -9,12 +9,12 @@
     "resume": "Curriculum"
   },
   "hero": {
-    "title": "Architecting Digital Solutions That Actually Work 👋🏻",
+    "title": "Architecting Digital Solutions That Actually Work 🏆",
     "description": "I'm Wistant, a Full-Stack Architect who understands the product, not just the code. I specialize in turning business challenges into elegant, high-performance systems that drive real growth."
   },
   "about": {
-    "title": "The Philosophy",
-    "content": "With over 5 years in the field, I've learned that software is just a tool—the solution is what matters. I approach every project with the mindset of an architect, designing robust systems that bridge the gap between complex engineering and human needs."
+    "title": "My Philosophy",
+    "content": "With over 2 years in the field, I've learned that software is just a tool—the true solution is what matters. I approach every project with the mindset of an architect, designing robust systems that bridge the gap between complex engineering and human needs."
   },
   "work": {
     "title": "Professional Experience",
@@ -25,7 +25,7 @@
     "title": "Core Foundations"
   },
   "skills": {
-    "title": "The Tech Stack",
+    "title": "My Tech Stack",
     "description": "A precision-selected arsenal of modern technologies optimized for performance and maintainability.",
     "categories": {
       "frontend": "Frontend Mastery",
