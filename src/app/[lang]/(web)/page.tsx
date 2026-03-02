@@ -24,7 +24,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const dict = await getDictionary(lang);
 
   return (
-    <main className="min-h-dvh flex flex-col gap-16 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-12 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -35,7 +35,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         />
       </div>
 
-      <section id="hero">
+      <section id="hero" className="-mb-8">
         <div className="mx-auto w-full space-y-8">
           <div className="gap-6 flex flex-col md:flex-row items-start justify-between">
             <div className="gap-4 flex flex-col flex-1 order-2 md:order-1">
@@ -84,9 +84,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <section id="gallery">
         <ShowMore 
-          initialHeight="h-[400px]" 
-          buttonTextShow={lang === 'fr' ? 'Voir plus de photos' : 'View more photos'}
-          buttonTextHide={lang === 'fr' ? 'Voir moins' : 'Show less'}
+          initialHeight={600} 
+          buttonTextShow={lang === 'fr' ? 'Voir plus' : 'See more'}
+          buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
+          href={`/${lang}/about`}
+          linkText={lang === 'fr' ? 'À propos' : 'About me'}
         >
           <Gallery />
         </ShowMore>
@@ -113,19 +115,24 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <section id="projects">
         <ShowMore
-          initialHeight="h-[800px]"
-          buttonTextShow={dict.projects.viewAll}
+          initialHeight={1450}
+          buttonTextShow={lang === 'fr' ? 'Voir plus' : 'See more'}
           buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
+          href={`/${lang}/projects`}
+          linkText={dict.projects.viewAll}
+          buttonClassName="-mt-14"
         >
-          <ProjectsSection limit={4} />
+          <ProjectsSection limit={6} />
         </ShowMore>
       </section>
 
       <section id="hackathons">
         <ShowMore
-          initialHeight="h-[600px]"
-          buttonTextShow={lang === 'fr' ? 'Voir tous les hackathons' : 'View all hackathons'}
+          initialHeight={700}
+          buttonTextShow={lang === 'fr' ? 'Voir plus' : 'See more'}
           buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
+          href={`/${lang}/hackathons`}
+          linkText={lang === 'fr' ? 'Tous les hackathons' : 'All hackathons'}
         >
           <HackathonsSection limit={4} />
         </ShowMore>

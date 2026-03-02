@@ -26,6 +26,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next)
-    "/((?!api|_next/static|_next/image|favicon.ico|me|fonts|opengraph-image|robots.txt|sitemap.xml|experiences|portfolio|education|hackatons|logos).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|me|fonts|gallery|opengraph-image|robots.txt|sitemap.xml|experiences|portfolio|education|hackatons|logos).*)",
   ],
 };

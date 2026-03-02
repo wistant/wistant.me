@@ -1,145 +1,87 @@
 "use client";
 
-import React from "react";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { GALLERY_IMAGES } from "@/data/gallery-data";
+import { cn } from "@/lib/utils";
+import { Maximize2, X } from "lucide-react";
 
 export default function Gallery() {
-  const images = [
-    "/gallery/IMG-20250705-WA0048.jpg",
-    "/gallery/IMG-20250705-WA0088.jpg",
-    "/gallery/IMG-20250705-WA0126.jpg",
-    "/gallery/IMG-20251129-WA0164.jpg",
-    "/gallery/IMG-20251129-WA0165.jpg",
-    "/gallery/IMG_3016.JPG",
-    "/gallery/IMG_3052.JPG",
-    "/gallery/IMG_3058.JPG",
-    "/gallery/photo_2025-05-11_00-40-57.jpg",
-    "/gallery/photo_2025-05-11_00-42-46.jpg",
-    "/gallery/photo_2025-05-11_00-45-56.jpg",
-  ];
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <div className="py-10 lg:py-20 w-full overflow-hidden">
-      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Main large card */}
-        <FeatureCard className="col-span-1 md:col-span-2 lg:col-span-2 bg-muted/30">
-          <FeatureTitle>Moments & Memories</FeatureTitle>
-          <FeatureDescription>
-            A glimpse into my journey, hackathons, and the people who make it all worthwhile.
-          </FeatureDescription>
-          <div className="relative h-60 md:h-80 w-full mt-8 overflow-hidden rounded-xl border border-border/50">
-             <Image
-                src={images[5]}
-                alt="Highlight"
-                fill
-                className="object-cover"
-              />
-          </div>
-        </FeatureCard>
-
-        {/* Stacked images card */}
-        <FeatureCard className="col-span-1 bg-muted/20">
-          <FeatureTitle>On the Road</FeatureTitle>
-          <FeatureDescription>Capturing bits of life between commits.</FeatureDescription>
-          <SkeletonTwo images={images.slice(0, 5)} />
-        </FeatureCard>
-
-         {/* Grid card */}
-         <FeatureCard className="col-span-1 lg:col-span-3 bg-muted/10 border-none px-0">
-           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
-             {images.slice(6).map((img, idx) => (
-               <motion.div
-                 key={idx}
-                 whileHover={{ scale: 1.05, zIndex: 10 }}
-                 className="relative aspect-square rounded-lg overflow-hidden border border-border/50 group"
-               >
-                 <Image
-                   src={img}
-                   alt={`Gallery item ${idx}`}
-                   fill
-                   className="object-cover transition-transform duration-500 group-hover:scale-110"
-                 />
-               </motion.div>
-             ))}
-           </div>
-         </FeatureCard>
-      </div>
-    </div>
-  );
-}
-
-const FeatureCard = ({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div className={cn(`relative overflow-hidden p-6 rounded-3xl border border-border/40 bg-card/50 backdrop-blur-sm`, className)}>
-      {children}
-    </div>
-  );
-};
-
-const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <h3 className="text-xl font-bold font-clash tracking-tight text-foreground">
-      {children}
-    </h3>
-  );
-};
-
-const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <p className="text-sm font-medium text-muted-foreground mt-2 max-w-xs">
-      {children}
-    </p>
-  );
-};
-
-const SkeletonTwo = ({ images }: { images: string[] }) => {
-  const imageVariants = {
-    whileHover: {
-      scale: 1.1,
-      rotate: 0,
-      zIndex: 100,
-    },
-    whileTap: {
-      scale: 1.1,
-      rotate: 0,
-      zIndex: 100,
-    },
-  };
-
-  const rotations = [-10, 5, -5, 10, -2];
-
-  return (
-    <div className="relative flex h-full flex-col items-center justify-center gap-10 overflow-hidden py-12">
-      <div className="flex flex-row flex-wrap justify-center gap-2">
-        {images.map((image, idx) => (
+    <div className="w-full py-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] gap-4">
+        {GALLERY_IMAGES.map((image, index) => (
           <motion.div
-            variants={imageVariants}
-            key={"images-stack" + idx}
-            style={{
-              rotate: rotations[idx % rotations.length],
-            }}
-            whileHover="whileHover"
-            whileTap="whileTap"
-            className="-mr-4 shrink-0 overflow-hidden rounded-xl border border-border bg-background p-1 shadow-xl"
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: (index % 4) * 0.1 }}
+            viewport={{ once: true }}
+            className={cn(
+              "group relative overflow-hidden rounded-3xl border border-border/50 bg-muted/20 shadow-sm transition-all duration-300 hover:shadow-xl hover:border-border/80",
+              image.className
+            )}
+            onClick={() => setSelectedImage(image.src)}
           >
             <Image
-              src={image}
-              alt="travels"
-              width={120}
-              height={120}
-              className="h-20 w-20 shrink-0 rounded-lg object-cover md:h-28 md:w-28"
+              src={image.src}
+              alt={image.alt}
+              fill
+              unoptimized
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              sizes="(max-width: 768px) 50vw, 25vw"
             />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer">
+              <div className="bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <Maximize2 className="w-5 h-5 text-white" />
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>
+
+      <AnimatePresence mode="wait">
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-100 flex items-center justify-center bg-background/95 p-4 md:p-8 cursor-pointer"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-auto h-auto max-w-[90vw] max-h-[90vh] flex items-center justify-center"
+            >
+              <Image
+                src={selectedImage}
+                alt="Full preview"
+                width={1000}
+                height={1000}
+                unoptimized
+                className="rounded-xl object-contain shadow-2xl"
+                priority
+              />
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImage(null);
+                }}
+                className="absolute -top-10 right-0 p-2 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
-};
+}
