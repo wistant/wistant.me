@@ -3,201 +3,260 @@ import { allPosts } from "content-collections";
 import { DATA } from "@/data/resume";
 
 export const runtime = "edge";
-
-export const size = {
-  width: 1200,
-  height: 630,
-};
+export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const getFontData = async () => {
   try {
     const [cabinetGrotesk, clashDisplay] = await Promise.all([
       fetch(
-        new URL("../../../../../public/fonts/CabinetGrotesk-Medium.ttf", import.meta.url)
-      ).then((res) => res.arrayBuffer()),
+        new URL(
+          "../../../../../public/fonts/CabinetGrotesk-Medium.ttf",
+          import.meta.url
+        )
+      ).then((r) => r.arrayBuffer()),
       fetch(
-        new URL("../../../../../public/fonts/ClashDisplay-Semibold.ttf", import.meta.url)
-      ).then((res) => res.arrayBuffer()),
+        new URL(
+          "../../../../../public/fonts/ClashDisplay-Semibold.ttf",
+          import.meta.url
+        )
+      ).then((r) => r.arrayBuffer()),
     ]);
     return { cabinetGrotesk, clashDisplay };
-  } catch (error) {
-    console.error("Failed to load fonts:", error);
+  } catch {
     return null;
   }
 };
 
-const styles = {
-  outerWrapper: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#ffffff",
-    position: "relative",
-  },
-  middleWrapper: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#ffffff",
-    position: "relative",
-    padding: "40px",
-  },
-  wrapper: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#fafafa",
-    position: "relative",
-    padding: "40px",
-    border: "1px solid #e5e5e5",
-    borderRadius: "12px",
-  },
-  headerSection: {
-    position: "absolute",
-    top: "40px",
-    left: "40px",
-    display: "flex",
-    alignItems: "center",
-    zIndex: "2",
-    gap: "12px",
-  },
-  mainContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "flex-end",
-    height: "100%",
-    width: "100%",
-    position: "relative",
-    zIndex: "1",
-  },
-  badge: {
-    backgroundColor: "#000",
-    color: "#fff",
-    padding: "4px 12px",
-    borderRadius: "100px",
-    fontSize: "14px",
-    fontWeight: "600",
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-  },
-  date: {
-    fontFamily: "Cabinet Grotesk",
-    fontSize: "16px",
-    color: "#737373",
-    fontWeight: "500",
-  },
-  title: {
-    fontFamily: "Clash Display",
-    fontSize: "56px",
-    fontWeight: "600",
-    lineHeight: "1.2",
-    textAlign: "left",
-    color: "#000000",
-    marginBottom: "16px",
-    letterSpacing: "-0.02em",
-    maxWidth: "1000px",
-  },
-  description: {
-    fontFamily: "Cabinet Grotesk",
-    fontSize: "20px",
-    fontWeight: "400",
-    lineHeight: "1.5",
-    textAlign: "left",
-    maxWidth: "850px",
-    color: "#404040",
-    marginBottom: "8px",
-    textWrap: "balance",
-  },
-  footer: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    marginTop: "24px",
-  },
-  avatar: {
-    width: "48px",
-    height: "48px",
-    borderRadius: "24px",
-    border: "2px solid #e5e5e5",
-    objectFit: "cover",
-  },
-  authorName: {
-    fontFamily: "Cabinet Grotesk",
-    fontSize: "18px",
-    fontWeight: "600",
-    color: "#000",
-  },
-} as const;
+export default async function Image({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = allPosts.find((p) => p.slug === params.slug);
+  const fontData = await getFontData();
 
-export default async function Image({ params }: { params: { slug: string } }) {
-  try {
-    const post = allPosts.find((p) => p.slug === params.slug);
-    if (!post) return new Response("Not found", { status: 404 });
+  const title = post?.title ?? "Blog Post";
+  const summary = post?.summary ?? "";
+  const date = post?.date
+    ? new Date(post.date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : "";
+  const tags = post?.tags?.slice(0, 3) ?? [];
 
-    const fontData = await getFontData();
-    const imageUrl = `${DATA.url}${DATA.avatarUrl}`;
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          backgroundColor: "#09090b",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Subtle grid */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
 
-    return new ImageResponse(
-      (
-        <div style={styles.outerWrapper}>
-          <div style={styles.middleWrapper}>
-            <div style={styles.wrapper}>
-              <div style={styles.headerSection}>
-                <div style={styles.badge}>Article</div>
-                <div style={styles.date}>
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </div>
+        {/* Top glow — blue */}
+        <div
+          style={{
+            position: "absolute",
+            top: -180,
+            right: -80,
+            width: 700,
+            height: 500,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, transparent 65%)",
+          }}
+        />
+        {/* Bottom glow — purple */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: -120,
+            left: -60,
+            width: 600,
+            height: 400,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(ellipse, rgba(139,92,246,0.10) 0%, transparent 65%)",
+          }}
+        />
+
+        {/* Content */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "56px 64px",
+            height: "100%",
+            width: "100%",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          {/* Header: site name */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "Cabinet Grotesk",
+                fontSize: 17,
+                color: "rgba(255,255,255,0.4)",
+                letterSpacing: "0.04em",
+              }}
+            >
+              wistant.dev / blog
+            </span>
+            {tags.length > 0 && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  marginLeft: 12,
+                }}
+              >
+                {tags.map((tag) => (
+                  <div
+                    key={tag}
+                    style={{
+                      padding: "3px 12px",
+                      borderRadius: 99,
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      background: "rgba(255,255,255,0.05)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "Cabinet Grotesk",
+                        fontSize: 13,
+                        color: "rgba(255,255,255,0.5)",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  </div>
+                ))}
               </div>
-              <div style={styles.mainContainer}>
-                <div style={styles.title}>{post.title}</div>
-                {post.summary && (
-                  <div style={styles.description}>{post.summary}</div>
-                )}
-                <div style={styles.footer}>
-                  <img src={imageUrl} alt={DATA.name} style={styles.avatar as any} />
-                  <span style={styles.authorName}>{DATA.name}</span>
-                </div>
-              </div>
+            )}
+          </div>
+
+          {/* Main: title + summary */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <div
+              style={{
+                fontFamily: "Clash Display",
+                fontSize: title.length > 50 ? 52 : 64,
+                fontWeight: 600,
+                lineHeight: 1.1,
+                color: "#ffffff",
+                letterSpacing: "-0.025em",
+                maxWidth: 980,
+              }}
+            >
+              {title}
             </div>
+            {summary && (
+              <div
+                style={{
+                  fontFamily: "Cabinet Grotesk",
+                  fontSize: 22,
+                  fontWeight: 400,
+                  color: "rgba(255,255,255,0.5)",
+                  lineHeight: 1.45,
+                  maxWidth: 820,
+                }}
+              >
+                {summary.length > 160 ? summary.slice(0, 157) + "…" : summary}
+              </div>
+            )}
+          </div>
+
+          {/* Footer: author + date */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <img
+                src={`${DATA.url}${DATA.avatarUrl}`}
+                alt={DATA.name}
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: "50%",
+                  border: "2px solid rgba(255,255,255,0.12)",
+                  objectFit: "cover",
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "Cabinet Grotesk",
+                  fontSize: 16,
+                  color: "rgba(255,255,255,0.6)",
+                }}
+              >
+                {DATA.name}
+              </span>
+            </div>
+            {date && (
+              <span
+                style={{
+                  fontFamily: "Cabinet Grotesk",
+                  fontSize: 15,
+                  color: "rgba(255,255,255,0.35)",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {date}
+              </span>
+            )}
           </div>
         </div>
-      ),
-      {
-        ...size,
-        fonts: fontData
-          ? [
-              {
-                name: "Cabinet Grotesk",
-                data: fontData.cabinetGrotesk,
-                weight: 400,
-                style: "normal",
-              },
-              {
-                name: "Clash Display",
-                data: fontData.clashDisplay,
-                weight: 600,
-                style: "normal",
-              },
-            ]
-          : undefined,
-      }
-    );
-  } catch (error) {
-    console.error("Error generating OpenGraph image:", error);
-    return new Response(
-      `Failed to generate image: ${error instanceof Error ? error.message : "Unknown error"}`,
-      {
-        status: 500,
-      }
-    );
-  }
+      </div>
+    ),
+    {
+      ...size,
+      fonts: fontData
+        ? [
+            {
+              name: "Cabinet Grotesk",
+              data: fontData.cabinetGrotesk,
+              weight: 400,
+              style: "normal",
+            },
+            {
+              name: "Clash Display",
+              data: fontData.clashDisplay,
+              weight: 600,
+              style: "normal",
+            },
+          ]
+        : undefined,
+    }
+  );
 }

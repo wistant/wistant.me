@@ -1,6 +1,6 @@
-import { AuthorCard } from "@/components/ui/blog/author-card";
-import { HashScrollHandler } from "@/components/ui/blog/hash-scroll-handler";
-import { TableOfContents } from "@/components/ui/blog/table-of-contents";
+import { AuthorCard } from "@/components/blog/author-card";
+import { HashScrollHandler } from "@/components/blog/hash-scroll-handler";
+import { TableOfContents } from "@/components/blog/table-of-contents";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { DATA } from "@/data/resume";
 import { getAuthor, isValidAuthor } from "@/lib/authors";
@@ -13,9 +13,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
-import { ReadMoreSection } from "@/components/ui/blog/read-more-section";
-import { PromoContent } from "@/components/ui/blog/promo-content";
-import { MobileTableOfContents } from "@/components/ui/blog/mobile-toc"
+import { ReadMoreSection } from "@/components/blog/read-more-section";
+import { PromoContent } from "@/components/blog/promo-content";
+import { MobileTableOfContents } from "@/components/blog/mobile-toc";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string }>;
@@ -33,7 +33,9 @@ export async function generateMetadata({ params }: BlogSlugPageProps) {
   if (!post) return {};
 
   const ogImageUrl = post.image
-    ? (post.image.startsWith("http") ? post.image : `${DATA.url}${post.image}`)
+    ? post.image.startsWith("http")
+      ? post.image
+      : `${DATA.url}${post.image}`
     : `${DATA.url}/blog/${slug}/opengraph-image`;
 
   return {
@@ -69,8 +71,8 @@ export async function generateMetadata({ params }: BlogSlugPageProps) {
       creator: "@wistantkode",
     },
     other: {
-      "robots": "index, follow",
-      "googlebot": "index, follow",
+      robots: "index, follow",
+      googlebot: "index, follow",
     },
   };
 }
@@ -93,9 +95,9 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   return (
     <div className="min-h-screen bg-background relative pt-16 md:pt-20">
       <HashScrollHandler />
-      
+
       {/* Background with Grid */}
-      <div className="absolute top-0 left-0 z-0 w-full h-[250px] mask-[linear-gradient(to_top,transparent_25%,black_95%)]">
+      <div className="absolute top-0 left-0 z-0 w-full h-62.5 mask-[linear-gradient(to_top,transparent_25%,black_95%)]">
         <FlickeringGrid
           className="absolute top-0 left-0 size-full"
           squareSize={4}
@@ -111,16 +113,22 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
         <div className="max-w-7xl mx-auto flex flex-col gap-6 p-6">
           <div className="flex flex-wrap items-center gap-3 gap-y-5 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <Button variant="outline" asChild className="h-8 w-8 p-0 rounded-full bg-card/50 backdrop-blur-sm border-border/40">
+              <Button
+                variant="outline"
+                asChild
+                className="h-8 w-8 p-0 rounded-full bg-card/50 backdrop-blur-sm border-border/40"
+              >
                 <Link href="/">
                   <ArrowLeft className="w-4 h-4" />
-                  <span className="sr-only">Retour à l'accueil</span>
+                  <span className="sr-only">Retour à l&apos;accueil</span>
                 </Link>
               </Button>
-              <Button variant="ghost" asChild className="h-8 px-3 text-xs rounded-full bg-card/30 backdrop-blur-sm border border-border/20 text-muted-foreground hover:text-foreground">
-                <Link href="/blog">
-                  Blog
-                </Link>
+              <Button
+                variant="ghost"
+                asChild
+                className="h-8 px-3 text-xs rounded-full bg-card/30 backdrop-blur-sm border border-border/20 text-muted-foreground hover:text-foreground"
+              >
+                <Link href="/blog">Blog</Link>
               </Button>
             </div>
             {post.tags && post.tags.length > 0 && (
@@ -156,10 +164,10 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
       <div className="flex divide-x divide-border relative max-w-7xl mx-auto px-4 md:px-0 z-10 border-b border-border">
         {/* Background visual continuity lines */}
         <div className="absolute max-w-7xl mx-auto left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] lg:w-full h-full border-x border-border p-0 pointer-events-none -z-10" />
-        
+
         <main className="w-full p-0 overflow-hidden min-h-screen">
           {post.image && (
-            <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden border-b border-border">
+            <div className="relative w-full h-75 md:h-125 overflow-hidden border-b border-border">
               <Image
                 src={post.image}
                 alt={post.title}
@@ -169,7 +177,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
               />
             </div>
           )}
-          
+
           <div className="p-6 lg:p-10">
             <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-lg transition-colors">
               <MDXRemote
@@ -183,28 +191,27 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
               />
             </div>
           </div>
-          
+
           <div className="mt-10">
-            <ReadMoreSection
-              currentSlug={post.slug}
-              currentTags={post.tags}
-            />
+            <ReadMoreSection currentSlug={post.slug} currentTags={post.tags} />
           </div>
         </main>
 
-        <aside className="hidden lg:block w-[350px] shrink-0 p-6 lg:p-10 bg-muted/20 dark:bg-muted/10 border-r border-border backdrop-blur-sm">
+        <aside className="hidden lg:block w-87.5 shrink-0 p-6 lg:p-10 bg-muted/20 dark:bg-muted/10 border-r border-border backdrop-blur-sm">
           <div className="sticky top-24 space-y-8">
             {author && (
-                <div className="border border-border/60 rounded-xl p-6 bg-card/60 backdrop-blur-md shadow-sm">
-                   <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Auteur</h4>
-                   <AuthorCard author={author} />
-                </div>
+              <div className="border border-border/60 rounded-xl p-6 bg-card/60 backdrop-blur-md shadow-sm">
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+                  Auteur
+                </h4>
+                <AuthorCard author={author} />
+              </div>
             )}
-            
+
             <div className="border border-border/60 rounded-xl p-6 bg-card/60 backdrop-blur-md shadow-sm">
               <TableOfContents />
             </div>
-            
+
             <PromoContent variant="desktop" />
           </div>
         </aside>
