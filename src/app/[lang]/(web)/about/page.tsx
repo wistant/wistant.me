@@ -24,10 +24,10 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
       </div>
 
       <section id="header">
-        <div className="mx-auto w-full space-y-4">
+        <div className="w-full space-y-4 text-left">
           <TextReveal
             delay={0.1}
-            className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-6xl font-cal leading-tight"
+            className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl font-cal leading-tight"
           >
             {dict.about.title}
           </TextReveal>

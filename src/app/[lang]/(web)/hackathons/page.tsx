@@ -23,15 +23,15 @@ export default async function HackathonsPage({ params }: { params: Promise<{ lan
       </div>
 
       <section id="header">
-        <div className="mx-auto w-full space-y-4">
+        <div className="w-full space-y-4 text-left">
           <TextReveal
             delay={0.1}
-            className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-6xl font-cal leading-tight"
+            className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl font-cal leading-tight"
           >
             {dict.hackathons.title || "Hackathons"}
           </TextReveal>
           <BlurFade delay={BLUR_FADE_DELAY}>
-            <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-prose text-center">
+            <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-prose">
               I like building things and pushing boundaries in short bursts of creativity.
             </p>
           </BlurFade>
