@@ -3,6 +3,8 @@
     "home": "Accueil",
     "blog": "Réflexions",
     "projects": "Réalisations",
+    "about": "À Propos",
+    "hackathons": "Hackathons",
     "contact": "Contact",
     "resume": "Curriculum"
   },
@@ -43,6 +45,9 @@
     "description": "Que vous ayez besoin d'un regard d'expert sur votre architecture, d'une solution web sur mesure ou d'un pivot stratégique, je suis là pour transformer vos défis en succès technologiques.",
     "button": "Lancer la conversation",
     "social": "Suivez mon parcours"
+  },
+  "hackathons": {
+    "title": "Sprints d'Innovation"
   },
   "og": {
     "headline": "Ingénierie de Systèmes Web Premium",

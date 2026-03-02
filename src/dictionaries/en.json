@@ -3,6 +3,8 @@
     "home": "Home",
     "blog": "Insights",
     "projects": "Showcase",
+    "about": "About",
+    "hackathons": "Hackathons",
     "contact": "Contact",
     "resume": "Curriculum"
   },
@@ -43,6 +45,9 @@
     "description": "Whether you're looking for architectural oversight, high-performance web engineering, or strategic technical consulting, I'm here to build the future with you.",
     "button": "Send Message",
     "social": "Connect via Social Channels"
+  },
+  "hackathons": {
+    "title": "Innovation Sprints"
   },
   "og": {
     "headline": "Engineering Premium Web Systems",
