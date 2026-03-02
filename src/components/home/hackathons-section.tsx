@@ -4,7 +4,9 @@ import Image from "next/image";
 import { DATA } from "@/data/resume";
 import { Timeline, TimelineItem, TimelineConnectItem } from "@/components/timeline";
 
-export default function HackathonsSection() {
+export default function HackathonsSection({ limit }: { limit?: number }) {
+  const hackathons = limit ? DATA.hackathons.slice(0, limit) : DATA.hackathons;
+
   return (
     <section id="hackathons" className="overflow-hidden">
       <div className="flex min-h-0 flex-col gap-y-8 w-full">
@@ -26,7 +28,7 @@ export default function HackathonsSection() {
           </div>
         </div>
         <Timeline>
-          {DATA.hackathons.map((hackathon) => (
+          {hackathons.map((hackathon) => (
             <TimelineItem key={hackathon.title + hackathon.dates} className="w-full flex items-start justify-between gap-10">
               <TimelineConnectItem className="flex items-start justify-center">
                 {hackathon.image ? (
