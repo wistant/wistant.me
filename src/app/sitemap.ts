@@ -1,26 +1,23 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
+import { SITE_CONFIG } from "@/config/metadata";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://wistant.dev'
+  const baseUrl = SITE_CONFIG.url;
+  const locales = ["en", "fr"];
+  const routes = ["", "/blog", "/projects", "/posts"];
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/projects`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ]
+  const entries: MetadataRoute.Sitemap = [];
+
+  locales.forEach((lang) => {
+    routes.forEach((route) => {
+      entries.push({
+        url: `${baseUrl}/${lang}${route}`,
+        lastModified: new Date(),
+        changeFrequency: route === "/blog" || route === "/posts" ? "weekly" : "monthly",
+        priority: route === "" ? 1.0 : 0.8,
+      });
+    });
+  });
+
+  return entries;
 }

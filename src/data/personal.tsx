@@ -8,11 +8,11 @@ export const personalData = {
   location: "Douala, 🇨🇲",
   locationLink: "https://www.google.com/maps/place/Douala",
   description:
-    "Software Engineer focusing on high-performance web systems. Expert in Next.js, React, and modern full-stack architectures.",
+    "Full-Stack Architect & Product Engineer. I design digital solutions that bridge the gap between robust engineering and user-centric products.",
   about:
-    "Software Engineering dedicated to building clean, scalable, and maintainable applications. I bridge the gap between complex business logic and premium user experiences using the appropriate web technologies. Autonomous, curious, and driven by engineering excellence.",
+    "I'm an architect who codes. I don't just build software; I solve problems with precise, scalable systems. With 5+ years of experience, I focus on creating high-impact digital solutions that understand the business as much as the tech.",
   avatarUrl: "/me/me.png",
-  post: "Software Engineer",
+  post: "Full-Stack Architect & Product Engineer",
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },

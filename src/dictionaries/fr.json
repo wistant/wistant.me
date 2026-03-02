@@ -1,0 +1,58 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "blog": "Réflexions",
+    "projects": "Réalisations",
+    "contact": "Contact",
+    "resume": "Curriculum"
+  },
+  "hero": {
+    "title": "Architecture de Systèmes Digitaux de Haute Précision 👋🏻",
+    "description": "Je suis Wistant, Ingénieur Logiciel Senior expert en infrastructures web haute performance. Je transforme vos défis technologiques complexes en solutions élégantes et scalables grâce à Next.js, TypeScript et les architectures Cloud-Native."
+  },
+  "about": {
+    "title": "Philosophie de l'Ingénierie",
+    "content": "Fort de plus de 5 ans d'expérience, je ne me contente pas d'écrire du code : je conçois des systèmes. Mon approche allie rigueur architecturale et focus utilisateur, garantissant que chaque ligne de code apporte une valeur métier concrète et une excellence technique."
+  },
+  "work": {
+    "title": "Parcours Professionnel",
+    "viewMore": "Lire l'étude de cas",
+    "present": "Présent"
+  },
+  "education": {
+    "title": "Fondations Académiques"
+  },
+  "skills": {
+    "title": "Arsenal Technique",
+    "description": "Un stack technologique de pointe sélectionné pour la performance et la maintenabilité.",
+    "categories": {
+      "frontend": "Maitrise Frontend",
+      "backend": "Systèmes Distribués",
+      "devops": "Automatisation & Cloud"
+    }
+  },
+  "projects": {
+    "title": "Projets à Haut Impact",
+    "viewAll": "Explorer tout le Portfolio",
+    "cta": "Plongée Technique",
+    "stack": "Stack Utilisé"
+  },
+  "contact": {
+    "title": "Parlons de Votre Prochain Projet",
+    "subtitle": "Concevons ensemble des solutions qui durent.",
+    "description": "Que vous ayez besoin d'un regard d'expert sur votre architecture, d'une solution web sur mesure ou d'un pivot stratégique, je suis là pour transformer vos défis en succès technologiques.",
+    "button": "Lancer la conversation",
+    "social": "Suivez mon parcours"
+  },
+  "og": {
+    "headline": "Ingénierie de Systèmes Web Premium",
+    "description": "Ingénieur Logiciel Senior & Architecte",
+    "cta": "Découvrir"
+  },
+  "meta": {
+    "keywords": "Ingénieur Logiciel Senior, Architecte Système, Expert Next.js, Développeur TypeScript, Web Haute Performance Douala, Expert Bun Cameroun"
+  },
+  "localSeo": {
+    "keywords": "Développeur Cameroun, Expert Next.js Douala, Freelance Web Cameroun, Architecte logiciel, Ingénieur informatique Douala, Consultant Cloud Cameroun, Expert React Cameroun"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "navigation": {
+    "home": "Home",
+    "blog": "Insights",
+    "projects": "Showcase",
+    "contact": "Contact",
+    "resume": "Curriculum"
+  },
+  "hero": {
+    "title": "Architecting Digital Solutions That Actually Work 👋🏻",
+    "description": "I'm Wistant, a Full-Stack Architect who understands the product, not just the code. I specialize in turning business challenges into elegant, high-performance systems that drive real growth."
+  },
+  "about": {
+    "title": "The Philosophy",
+    "content": "With over 5 years in the field, I've learned that software is just a tool—the solution is what matters. I approach every project with the mindset of an architect, designing robust systems that bridge the gap between complex engineering and human needs."
+  },
+  "work": {
+    "title": "Professional Experience",
+    "viewMore": "Read Full Case Study",
+    "present": "Present"
+  },
+  "education": {
+    "title": "Core Foundations"
+  },
+  "skills": {
+    "title": "The Tech Stack",
+    "description": "A precision-selected arsenal of modern technologies optimized for performance and maintainability.",
+    "categories": {
+      "frontend": "Frontend Mastery",
+      "backend": "Distributed Systems",
+      "devops": "Automation & Infrastructure"
+    }
+  },
+  "projects": {
+    "title": "Impact-Driven Projects",
+    "viewAll": "Explore Complete Portfolio",
+    "cta": "Technical Deep Dive",
+    "stack": "Stack Used"
+  },
+  "contact": {
+    "title": "Initiate Collaboration",
+    "subtitle": "Elevate your technical infrastructure to the next level.",
+    "description": "Whether you're looking for architectural oversight, high-performance web engineering, or strategic technical consulting, I'm here to build the future with you.",
+    "button": "Send Message",
+    "social": "Connect via Social Channels"
+  },
+  "og": {
+    "headline": "Engineering Premium Web Systems",
+    "description": "Senior Software Engineer & Architect",
+    "cta": "Explore Portfolio"
+  },
+  "meta": {
+    "keywords": "Senior Software Engineer, System Architect, Next.js Expert, TypeScript Developer, High-Performance Web"
+  }
+}
