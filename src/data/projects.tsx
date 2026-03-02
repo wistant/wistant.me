@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/ui/icons";
 import React from "react";
 
 export const projectsData = [
@@ -67,7 +67,7 @@ export const projectsData = [
         icon: React.createElement(Icons.github, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/nestjs-auth.png",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
     video: "",
   },
   {
@@ -159,7 +159,7 @@ export const projectsData = [
         icon: React.createElement(Icons.github, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/structo.png",
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?w=800&q=80",
     video: "",
   },
   {
@@ -223,7 +223,7 @@ export const projectsData = [
         icon: React.createElement(Icons.github, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/portfolio-img.png",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
     video: "",
   },
   {
@@ -248,7 +248,7 @@ export const projectsData = [
         icon: React.createElement(Icons.github, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/shopdo.png",
+    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80",
     video: "",
   },
 ];
