@@ -116,3 +116,5 @@ _bmad-output/
 .agent/
 CODE/
 .content-collections/
+.vercel
+.env*.local
