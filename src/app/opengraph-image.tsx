@@ -27,102 +27,168 @@ const getFontData = async () => {
   }
 };
 
-const styles = {
-  outerWrapper: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#ffffff",
-    position: "relative",
-  },
-  middleWrapper: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#ffffff",
-    position: "relative",
-    padding: "40px",
-  },
-  wrapper: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#fafafa",
-    position: "relative",
-    padding: "40px",
-    border: "1px solid #e5e5e5",
-    borderRadius: "12px",
-  },
-  imageSection: {
-    position: "absolute",
-    top: "40px",
-    left: "40px",
-    display: "flex",
-    alignItems: "center",
-    zIndex: "2",
-  },
-  mainContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "flex-end",
-    height: "100%",
-    width: "100%",
-    position: "relative",
-    zIndex: "1",
-  },
-  image: {
-    width: "140px",
-    height: "140px",
-    borderRadius: "24px",
-    border: "4px solid #e5e5e5",
-    objectFit: "cover",
-  },
-  title: {
-    fontFamily: "Clash Display",
-    fontSize: "64px",
-    fontWeight: "600",
-    lineHeight: "1.1",
-    textAlign: "left",
-    color: "#000000",
-    marginBottom: "16px",
-    letterSpacing: "-0.02em",
-    maxWidth: "900px",
-  },
-  description: {
-    fontFamily: "Cabinet Grotesk",
-    fontSize: "24px",
-    fontWeight: "400",
-    lineHeight: "1.5",
-    textAlign: "left",
-    maxWidth: "800px",
-    color: "#404040",
-    marginBottom: "32px",
-    textWrap: "balance",
-  },
-} as const;
-
 export default async function Image() {
   try {
     const fontData = await getFontData();
-    const imageUrl = `${DATA.url}${DATA.avatarUrl}`; // Absolute URL needed for OG
+    const imageUrl = `${DATA.url}${DATA.avatarUrl}`;
 
     return new ImageResponse(
       (
-        <div style={styles.outerWrapper}>
-          <div style={styles.middleWrapper}>
-            <div style={styles.wrapper}>
-              <div style={styles.imageSection}>
-                <img src={imageUrl} alt={DATA.name} style={styles.image as any} />
-              </div>
-              <div style={styles.mainContainer}>
-                <div style={styles.title}>{DATA.name}</div>
-                {DATA.description && (
-                  <div style={styles.description}>{DATA.description}</div>
-                )}
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            backgroundColor: "#09090b",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* Grid background pattern */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+              backgroundSize: "60px 60px",
+            }}
+          />
+
+          {/* Glow top-left */}
+          <div
+            style={{
+              position: "absolute",
+              top: -120,
+              left: -80,
+              width: 600,
+              height: 400,
+              borderRadius: "50%",
+              background:
+                "radial-gradient(ellipse, rgba(59,130,246,0.15) 0%, transparent 70%)",
+            }}
+          />
+          {/* Glow bottom-right */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: -100,
+              right: -60,
+              width: 500,
+              height: 350,
+              borderRadius: "50%",
+              background:
+                "radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, transparent 70%)",
+            }}
+          />
+
+          {/* Content */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              padding: "60px 64px",
+              height: "100%",
+              width: "100%",
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            {/* Avatar + domain row (top) */}
+            <div
+              style={{
+                position: "absolute",
+                top: 52,
+                left: 64,
+                display: "flex",
+                alignItems: "center",
+                gap: 16,
+              }}
+            >
+              <img
+                src={imageUrl}
+                alt={DATA.name}
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: "50%",
+                  border: "2px solid rgba(255,255,255,0.15)",
+                  objectFit: "cover",
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "Cabinet Grotesk",
+                  fontSize: 18,
+                  fontWeight: 400,
+                  color: "rgba(255,255,255,0.5)",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                wistant.dev
+              </span>
+            </div>
+
+            {/* Main title */}
+            <div
+              style={{
+                fontFamily: "Clash Display",
+                fontSize: 76,
+                fontWeight: 600,
+                lineHeight: 1.05,
+                color: "#ffffff",
+                letterSpacing: "-0.03em",
+                marginBottom: 20,
+                maxWidth: 900,
+              }}
+            >
+              {DATA.name}
+            </div>
+
+            {/* Description */}
+            <div
+              style={{
+                fontFamily: "Cabinet Grotesk",
+                fontSize: 22,
+                fontWeight: 400,
+                color: "rgba(255,255,255,0.55)",
+                lineHeight: 1.4,
+                maxWidth: 720,
+                marginBottom: 40,
+              }}
+            >
+              {DATA.description}
+            </div>
+
+            {/* Bottom tag pill */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "6px 16px",
+                  borderRadius: 99,
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  background: "rgba(255,255,255,0.06)",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "Cabinet Grotesk",
+                    fontSize: 14,
+                    color: "rgba(255,255,255,0.6)",
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  Next.js · TypeScript · React
+                </span>
               </div>
             </div>
           </div>
@@ -152,9 +218,7 @@ export default async function Image() {
     console.error("Error generating OpenGraph image:", error);
     return new Response(
       `Failed to generate image: ${error instanceof Error ? error.message : "Unknown error"}`,
-      {
-        status: 500,
-      }
+      { status: 500 }
     );
   }
 }

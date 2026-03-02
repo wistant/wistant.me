@@ -1,9 +1,12 @@
 import { Suspense } from 'react';
-import { FlickeringGrid } from '@/components/magicui/flickering-grid';
+import { FlickeringGrid } from '@/components/ui/magicui/flickering-grid';
 import { socialPosts } from '@/data/social-posts';
-import TweetCard from '@/components/mvpblocks/twittercard';
-import { Metadata } from 'next';
+import TweetCard from '@/components/ui/mvpblocks/twittercard';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 import { DATA } from '@/data/resume';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Posts | Wistant Kode',
@@ -18,7 +21,21 @@ export const metadata: Metadata = {
 
 export default function PostsPage() {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-background relative overflow-hidden pt-12 md:pt-16">
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-6 mb-4 relative z-10">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          asChild
+        >
+          <Link href="/">
+            <ArrowLeft className="size-4" />
+            Retour à l'accueil
+          </Link>
+        </Button>
+      </div>
       {/* Hero Background */}
       <div className="absolute top-0 left-0 z-0 w-full h-[400px] mask-[linear-gradient(to_top,transparent_10%,black_80%)]">
         <FlickeringGrid

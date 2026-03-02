@@ -1,8 +1,8 @@
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/ui/icons";
 import { HomeIcon, NotebookIcon } from "lucide-react";
 
 export const personalData = {
-  name: "Wistant 👋🏻",
+  name: "Wistant Kode",
   initials: "WK",
   url: "https://wistant.dev",
   location: "Douala, 🇨🇲",
@@ -10,8 +10,9 @@ export const personalData = {
   description:
     "Software Engineer focusing on high-performance web systems. Expert in Next.js, React, and modern full-stack architectures.",
   about:
-    "Software Engineering student dedicated to building clean, scalable, and maintainable applications. I bridge the gap between complex business logic and premium user experiences using the latest web technologies. Autonomous, curious, and driven by engineering excellence.",
+    "Software Engineering dedicated to building clean, scalable, and maintainable applications. I bridge the gap between complex business logic and premium user experiences using the appropriate web technologies. Autonomous, curious, and driven by engineering excellence.",
   avatarUrl: "/me/me.png",
+  post: "Software Engineer",
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },

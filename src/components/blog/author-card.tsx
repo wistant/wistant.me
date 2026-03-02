@@ -1,3 +1,4 @@
+import { personalData } from "@/data/personal";
 import { type Author } from "@/lib/authors";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -7,23 +8,23 @@ interface AuthorCardProps {
   className?: string;
 }
 
-export function AuthorCard({ author, className }: AuthorCardProps) {
+export function AuthorCard({ className }: AuthorCardProps) {
   return (
     <div className={cn("flex items-start gap-2", className)}>
       <div className="relative size-8 flex-none border border-border rounded-full overflow-hidden">
         <Image
-          src={author.avatar}
-          alt={author.name}
+          src={personalData.avatarUrl}
+          alt={personalData.name}
           fill
           className="object-cover"
         />
       </div>
       <div className="flex-1">
         <h3 className="text-sm tracking-tight text-balance font-semibold">
-          {author.name}
+          {personalData.name}
         </h3>
         <p className="text-xs text-muted-foreground text-balance">
-          {author.position}
+          {personalData.post}
         </p>
       </div>
     </div>
