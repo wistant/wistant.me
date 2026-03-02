@@ -6,13 +6,16 @@ import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
+import Gallery from "@/components/home/gallery";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
-import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { getDictionary } from "@/lib/dictionary";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import { ShowMore } from "@/components/ui/show-more";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -79,119 +82,53 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
+      <section id="gallery">
+        <ShowMore 
+          initialHeight="h-[400px]" 
+          buttonTextShow={lang === 'fr' ? 'Voir plus de photos' : 'View more photos'}
+          buttonTextHide={lang === 'fr' ? 'Voir moins' : 'Show less'}
+        >
+          <Gallery />
+        </ShowMore>
+      </section>
+
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-6">
-          <BlurFade delay={BLUR_FADE_DELAY * 5}>
+          <BlurFade delay={BLUR_FADE_DELAY * 6}>
             <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
           </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 6}>
+          <BlurFade delay={BLUR_FADE_DELAY * 7}>
             <WorkSection />
           </BlurFade>
-        </div>
-      </section>
-
-      {/*<section id="testimonials">*/}
-      {/*  <Testimonials />*/}
-      {/*</section>*/}
-
-      <section id="education">
-        <div className="flex min-h-0 flex-col gap-y-6">
-          <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-xl font-bold font-clash">{dict.education.title}</h2>
-          </BlurFade>
-          <div className="flex flex-col gap-8">
-            {DATA.education.map((education, index) => (
-              <BlurFade
-                key={education.school}
-                delay={BLUR_FADE_DELAY * 8 + index * 0.05}
-              >
-                <Link
-                  href={education.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-x-3 justify-between group"
-                >
-                  <div className="flex items-center gap-x-3 flex-1 min-w-0">
-                    {education.logoUrl ? (
-                      <div className="relative size-8 md:size-10 flex-none border rounded-full shadow ring-2 ring-border overflow-hidden">
-                        <Image
-                          src={education.logoUrl}
-                          alt={education.school}
-                          fill
-                          className="object-contain p-1"
-                        />
-                      </div>
-                    ) : (
-                      <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none" />
-                    )}
-                    <div className="flex-1 min-w-0 flex flex-col gap-0.5">
-                      <div className="font-semibold leading-none flex items-center gap-2">
-                        {education.school}
-                        <ArrowUpRight
-                          className="h-3.5 w-3.5 text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
-                          aria-hidden
-                        />
-                      </div>
-                      <div className="font-sans text-sm text-muted-foreground">
-                        {education.degree}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
-                    <span>
-                      {education.start} - {education.end}
-                    </span>
-                  </div>
-                </Link>
-              </BlurFade>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="skills">
-        <div className="flex min-h-0 flex-col gap-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <h2 className="text-xl font-bold font-clash">{dict.skills.title}</h2>
-          </BlurFade>
-          <div className="flex flex-wrap gap-2">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade
-                key={skill.name}
-                delay={BLUR_FADE_DELAY * 10 + id * 0.05}
-              >
-                <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
-                  {skill.icon && (
-                    <skill.icon className="size-4 rounded overflow-hidden object-contain" />
-                  )}
-                  <span className="text-foreground text-sm font-medium">
-                    {skill.name}
-                  </span>
-                </div>
-              </BlurFade>
-            ))}
+          <div className="flex justify-center mt-4">
+            <Link href={`/${lang}/about`}>
+              <Button variant="ghost" className="group text-muted-foreground hover:text-foreground">
+                {lang === 'fr' ? 'Voir mon parcours complet' : 'View full journey'}
+                <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
       <section id="projects">
-        <BlurFade delay={BLUR_FADE_DELAY * 11}>
-          <ProjectsSection />
-        </BlurFade>
-        <div className="flex justify-center mt-8">
-          <Link
-            href={`/${lang}/projects`}
-            className="text-muted-foreground hover:text-foreground transition-all hover:underline underline-offset-4 text-sm font-medium"
-          >
-            {dict.projects.viewAll}
-          </Link>
-        </div>
+        <ShowMore
+          initialHeight="h-[800px]"
+          buttonTextShow={dict.projects.viewAll}
+          buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
+        >
+          <ProjectsSection limit={6} />
+        </ShowMore>
       </section>
 
       <section id="hackathons">
-        <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <HackathonsSection />
-        </BlurFade>
+        <ShowMore
+          initialHeight="h-[600px]"
+          buttonTextShow={lang === 'fr' ? 'Voir tous les hackathons' : 'View all hackathons'}
+          buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
+        >
+          <HackathonsSection limit={6} />
+        </ShowMore>
       </section>
 
       <section id="contact">
