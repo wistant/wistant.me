@@ -34,7 +34,7 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
     const nextClassName = codeEl.className || "";
 
     void codeToHtml(codeText, {
-      lang: lang as any,
+      lang: lang as unknown as string,
       themes: {
         light: "github-light",
         dark: "github-dark",
@@ -68,42 +68,45 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
   };
 
   return (
-    <div className="group relative rounded-xl overflow-hidden border border-border">
-      <pre
-        ref={preRef}
-        {...props}
-        className={cn("p-0! m-0! overflow-x-auto", props.className)}
-      >
-        {title && (
-          <div className="p-3 text-xs font-medium border-b border-border rounded-t-xl bg-muted/50 text-foreground">
-            {title}
-          </div>
-        )}
-
+    <div className="group relative rounded-xl overflow-hidden border border-border my-6">
+      {title && (
+        <div className="px-4 py-2 text-xs font-medium border-b border-border bg-muted/30 text-muted-foreground flex items-center justify-between">
+          <span>{title}</span>
+          <span className="opacity-50 uppercase">{className.replace('language-', '')}</span>
+        </div>
+      )}
+      <div className="relative">
         <Button
           onClick={handleCopy}
           variant="outline"
           size="icon"
-          className={cn("absolute size-8 text-primary cursor-pointer right-3 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity rounded-md border border-border shadow-none", title ? "top-13" : "top-3", props.className)}
+          className={cn(
+            "absolute size-8 text-muted-foreground cursor-pointer z-10 right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity bg-background/50 backdrop-blur-sm border-border",
+            copied && "text-green-500"
+          )}
           aria-label="Copy code"
         >
           {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
         </Button>
-        {html && (
-          <div className="p-3">
+        <pre
+          ref={preRef}
+          {...props}
+          className={cn("p-4! m-0! overflow-x-auto text-sm leading-relaxed", props.className)}
+        >
+          {html && (
             <code
-              className={`shiki ${className}`}
+              className={`shiki ${className} block`}
               dangerouslySetInnerHTML={{ __html: html }}
             />
-          </div>
-        )}
+          )}
 
-        {!html && (
-          <div className="p-4">
-            {children}
-          </div>
-        )}
-      </pre >
+          {!html && (
+            <code className={className}>
+              {children}
+            </code>
+          )}
+        </pre >
+      </div>
     </div >
   );
 }
