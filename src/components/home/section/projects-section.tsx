@@ -25,9 +25,11 @@ export default function ProjectsSection() {
                 </div>
                 
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
-                    {DATA.projects.map((project, id) => (
-                        <BlurFade
-                            key={project.title}
+                    {DATA.projects.map((project, id) => {
+                        if (!project) return null;
+                        return (
+                            <BlurFade
+                                key={project.title}
                             delay={BLUR_FADE_DELAY * 12 + id * 0.05}
                             className="h-full"
                         >
@@ -43,7 +45,8 @@ export default function ProjectsSection() {
                                 links={project.links}
                             />
                         </BlurFade>
-                    ))}
+                    );
+                })}
                 </div>
             </div>
         </section>
