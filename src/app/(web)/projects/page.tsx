@@ -1,32 +1,26 @@
 import { Metadata } from "next";
 import { DATA } from "@/data/resume";
-import { ProjectCard } from "@/components/home/project-card";
+import { ProjectCard } from "@/components/projects/project-card";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Projects | Wistant Kode",
+  title: "Projects",
   description: "A collection of my projects and creations.",
   openGraph: {
     title: "Projects | Wistant Kode",
     description: "A collection of my projects and creations.",
     type: "website",
     url: `${DATA.url}/projects`,
-    images: [
-      {
-        url: "/og-images/projects-og-img.png",
-        width: 1200,
-        height: 630,
-        alt: "Projects | Wistant Kode",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects |  Wistant Kode",
+    title: "Projects | Wistant Kode",
     description: "A collection of my projects and creations.",
-    images: ["/og-images/projects-og-img.png"],
   },
 };
 
@@ -49,7 +43,21 @@ export default function ProjectsPage() {
   const BLUR_FADE_DELAY = 0.04;
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative pt-12 md:pt-16">
+      {/* Back Button */}
+      {/* <div className="max-w-7xl mx-auto px-6 mb-4 relative z-10">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          asChild
+        >
+          <Link href="/">
+            <ArrowLeft className="size-4" />
+            Retour à l&apos;accueil
+          </Link>
+        </Button>
+      </div>
       {/* Hero Background */}
       <div className="absolute top-0 left-0 z-0 w-full h-[300px] mask-[linear-gradient(to_top,transparent_10%,black_80%)]">
         <FlickeringGrid
@@ -70,7 +78,8 @@ export default function ProjectsPage() {
               Projects & Creations
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl">
-              A collection of projects I&apos;ve built, ranging from simple tools to complex web applications and platforms.
+              A collection of projects I&apos;ve built, ranging from simple
+              tools to complex web applications and platforms.
             </p>
           </div>
         </div>
