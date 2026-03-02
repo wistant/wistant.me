@@ -2,10 +2,10 @@ import { AnimatedShinyText } from "@/components/ui/magicui/animated-shiny-text";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { TextReveal } from "@/components/ui/magicui/text-reveal";
-import ContactSection from "@/components/home/section/contact-section";
-import HackathonsSection from "@/components/home/section/hackathons-section";
-import ProjectsSection from "@/components/home/section/projects-section";
-import WorkSection from "@/components/home/section/work-section";
+import ContactSection from "@/components/home/contact-section";
+import HackathonsSection from "@/components/home/hackathons-section";
+import ProjectsSection from "@/components/projects/projects-section";
+import WorkSection from "@/components/home/work-section";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
 import { ArrowUpRight } from "lucide-react";
@@ -44,10 +44,7 @@ export default function Home() {
                 </AnimatedShinyText>
               </div>
             </div>
-            <BlurFade
-              delay={BLUR_FADE_DELAY}
-              className="flex-none"
-            >
+            <BlurFade delay={BLUR_FADE_DELAY} className="flex-none">
               <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted relative overflow-hidden">
                 <Image
                   src={DATA.avatarUrl}
