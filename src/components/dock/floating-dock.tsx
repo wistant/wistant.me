@@ -13,6 +13,7 @@ import {
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import React, { useRef, useState } from 'react';
+import { LanguageSwitcher } from './language-switcher';
 
 // Types
 type DockItem = { title: string; icon: React.ReactNode; href: string };
@@ -62,7 +63,7 @@ export const FloatingDock = ({
   return (
     <div
       className={cn(
-        'flex md:hidden items-center justify-center flex-wrap gap-1.5 px-3 py-2 rounded-2xl',
+        'flex md:hidden items-center justify-center flex-wrap gap-2 px-4 py-3 rounded-3xl',
         'bg-card/90 dark:bg-card/95 backdrop-blur-2xl',
         'border border-border/60',
         'shadow-[0_8px_30px_rgba(0,0,0,0.12)] z-50',
@@ -77,25 +78,30 @@ export const FloatingDock = ({
               href={item.href}
               target={isExternal ? '_blank' : undefined}
               rel={isExternal ? 'noopener noreferrer' : undefined}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80 overflow-hidden"
             >
-              <div className="h-4 w-4">{item.icon}</div>
+              <div className="h-5 w-5">{item.icon}</div>
             </Link>
           </motion.div>
         );
       })}
 
       {/* Separator */}
-      <div className="mx-0.5 h-4 w-px bg-border/50" />
+      <div className="mx-1 h-5 w-px bg-border/50" />
+
+      {/* Language switcher */}
+      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80">
+        <LanguageSwitcher />
+      </div>
 
       {/* Theme toggle */}
       <motion.button
         type="button"
         whileTap={{ scale: 0.82 }}
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80"
       >
-        <div className="h-4 w-4">
+        <div className="h-5 w-5">
           <ThemeToggleIcon />
         </div>
       </motion.button>
@@ -130,6 +136,8 @@ const FloatingDockDesktop = ({
       ))}
       {/* Separator */}
       <div className="mx-1 h-7 w-px bg-border/50 self-center" />
+      {/* Language switcher */}
+      <LanguageToggleContainer mouseX={mouseX} />
       {/* Theme toggle */}
       <ThemeToggleContainer mouseX={mouseX} />
     </motion.div>
@@ -262,6 +270,36 @@ function ThemeToggleContainer({ mouseX }: { mouseX: MotionValue<number> }) {
       >
         <ThemeToggleIcon />
       </motion.div>
+    </motion.div>
+  );
+}
+
+// Language toggle container
+function LanguageToggleContainer({ mouseX }: { mouseX: MotionValue<number> }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+
+  const distance = useTransform(mouseX, (val) => {
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+    return val - bounds.x - bounds.width / 2;
+  });
+
+  const widthTransform = useTransform(distance, [-180, 0, 180], [52, 96, 52]);
+  const heightTransform = useTransform(distance, [-180, 0, 180], [52, 96, 52]);
+
+  const width = useSpring(widthTransform, SPRING);
+  const height = useSpring(heightTransform, SPRING);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ width, height }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative flex aspect-square items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 hover:bg-muted transition-colors duration-150"
+    >
+      {/* Tooltip removed as per user request */}
+      <LanguageSwitcher />
     </motion.div>
   );
 }
