@@ -42,7 +42,7 @@ export function ShowMore({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-x-0 bottom-0 z-10 h-40 bg-linear-to-t from-background via-background/80 to-transparent pointer-events-none"
+            className="absolute inset-x-0 bottom-0 z-10 h-56 bg-linear-to-t from-background via-background/70 to-transparent pointer-events-none"
           />
         )}
       </AnimatePresence>
