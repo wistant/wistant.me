@@ -3,9 +3,10 @@ import localFont from "next/font/local";
 import { DEFAULT_METADATA } from "@/config/metadata";
 import "./globals.css";
 import { TargetCursor } from "@/components/ui/magicui/target-cursor";
+import { ThemeProvider } from "@/app/ThemeProvider";
 
 import { DATA } from "@/data/resume";
-import { FloatingDock } from "@/components/ui/mvpblocks/floating-dock";
+import { FloatingDock } from "@/components/dock/floating-dock";
 import { Github, Linkedin, Twitter } from "lucide-react";
 
 const calFont = localFont({
@@ -47,39 +48,60 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative`}
+        className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
       >
-        <TargetCursor targetSelector="a, button, .cursor-target" />
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-          <FloatingDock
-            items={[
-              ...DATA.navbar.map((item) => ({
-                title: item.label,
-                icon: <item.icon className="h-full w-full" />,
-                href: item.href,
-              })),
-              {
-                title: "GitHub",
-                icon: <Github className="h-full w-full" />,
-                href: DATA.contact.social.GitHub.url,
-              },
-              {
-                title: "LinkedIn",
-                icon: <Linkedin className="h-full w-full" />,
-                href: DATA.contact.social.LinkedIn.url,
-              },
-              {
-                title: "Twitter",
-                icon: <Twitter className="h-full w-full" />,
-                href: DATA.contact.social.X.url,
-              },
-            ]}
-          />
-        </div>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          <TargetCursor targetSelector="a, button, .cursor-target" />
+          <div className="fixed inset-x-0 bottom-8 md:bottom-6 z-999 flex justify-center pointer-events-none px-4">
+            <div className="pointer-events-auto w-fit max-w-full">
+              <FloatingDock
+                items={[
+                  ...DATA.navbar.map((item) => ({
+                    title: item.label,
+                    icon: <item.icon className="h-full w-full" />,
+                    href: item.href,
+                  })),
+                  {
+                    title: "GitHub",
+                    icon: <Github className="h-full w-full" />,
+                    href: DATA.contact.social.GitHub.url,
+                  },
+                  {
+                    title: "LinkedIn",
+                    icon: <Linkedin className="h-full w-full" />,
+                    href: DATA.contact.social.LinkedIn.url,
+                  },
+                  {
+                    title: "Twitter",
+                    icon: <Twitter className="h-full w-full" />,
+                    href: DATA.contact.social.X.url,
+                  },
+                ]}
+                mobileItems={[
+                  ...DATA.navbar.map((item) => ({
+                    title: item.label,
+                    icon: <item.icon className="h-full w-full" />,
+                    href: item.href,
+                  })),
+                  {
+                    title: "GitHub",
+                    icon: <Github className="h-full w-full" />,
+                    href: DATA.contact.social.GitHub.url,
+                  },
+                ]}
+              />
+            </div>
+          </div>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
