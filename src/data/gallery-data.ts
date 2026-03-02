@@ -5,7 +5,7 @@ export const GALLERY_IMAGES = [
     className: "col-span-2 row-span-2", // Large square
   },
   {
-    src: "/gallery/me2.webp",
+    src: "/gallery/me.jpg",
     alt: "Moment 1",
     className: "col-span-1 row-span-1",
   },

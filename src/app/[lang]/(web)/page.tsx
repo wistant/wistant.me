@@ -19,7 +19,11 @@ import { ShowMore } from "@/components/ui/show-more";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
@@ -51,7 +55,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 </AnimatedShinyText>
               </div>
             </div>
-            <BlurFade delay={BLUR_FADE_DELAY} className="flex-none order-1 md:order-2">
+            <BlurFade
+              delay={BLUR_FADE_DELAY}
+              className="flex-none order-1 md:order-2"
+            >
               <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted relative overflow-hidden">
                 <Image
                   src={DATA.avatarUrl}
@@ -83,12 +90,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       <section id="gallery">
-        <ShowMore 
-          initialHeight={600} 
-          buttonTextShow={lang === 'fr' ? 'Voir plus' : 'See more'}
-          buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
+        <ShowMore
+          initialHeight={600}
+          buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
+          buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
           href={`/${lang}/about`}
-          linkText={lang === 'fr' ? 'À propos' : 'About me'}
+          linkText={lang === "fr" ? "À propos" : "About me"}
         >
           <Gallery />
         </ShowMore>
@@ -104,8 +111,13 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </BlurFade>
           <div className="flex justify-center mt-4">
             <Link href={`/${lang}/about`}>
-              <Button variant="ghost" className="group text-muted-foreground hover:text-foreground">
-                {lang === 'fr' ? 'Voir mon parcours complet' : 'View full journey'}
+              <Button
+                variant="ghost"
+                className="group text-muted-foreground hover:text-foreground"
+              >
+                {lang === "fr"
+                  ? "Voir mon parcours complet"
+                  : "View full journey"}
                 <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
@@ -116,8 +128,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <section id="projects">
         <ShowMore
           initialHeight={1450}
-          buttonTextShow={lang === 'fr' ? 'Voir plus' : 'See more'}
-          buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
+          buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
+          buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
           href={`/${lang}/projects`}
           linkText={dict.projects.viewAll}
           buttonClassName="-mt-14"
@@ -129,10 +141,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <section id="hackathons">
         <ShowMore
           initialHeight={700}
-          buttonTextShow={lang === 'fr' ? 'Voir plus' : 'See more'}
-          buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
+          buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
+          buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
           href={`/${lang}/hackathons`}
-          linkText={lang === 'fr' ? 'Tous les hackathons' : 'All hackathons'}
+          linkText={lang === "fr" ? "Tous les hackathons" : "All hackathons"}
         >
           <HackathonsSection limit={4} />
         </ShowMore>
