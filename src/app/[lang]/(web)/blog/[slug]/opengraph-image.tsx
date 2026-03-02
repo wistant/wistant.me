@@ -2,25 +2,18 @@ import { ImageResponse } from "next/og";
 import { allPosts } from "content-collections";
 import { DATA } from "@/data/resume";
 
-export const runtime = "edge";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
+export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const getFontData = async () => {
   try {
     const [cabinetGrotesk, clashDisplay] = await Promise.all([
-      fetch(
-        new URL(
-          "../../../../../public/fonts/CabinetGrotesk-Medium.ttf",
-          import.meta.url
-        )
-      ).then((r) => r.arrayBuffer()),
-      fetch(
-        new URL(
-          "../../../../../public/fonts/ClashDisplay-Semibold.ttf",
-          import.meta.url
-        )
-      ).then((r) => r.arrayBuffer()),
+      readFile(join(process.cwd(), "src/fonts/CabinetGrotesk-Medium.ttf")),
+      readFile(join(process.cwd(), "src/fonts/ClashDisplay-Semibold.ttf")),
     ]);
     return { cabinetGrotesk, clashDisplay };
   } catch {

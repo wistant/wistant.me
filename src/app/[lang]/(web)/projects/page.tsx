@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { DATA } from "@/data/resume";
 import { ProjectCard } from "@/components/projects/project-card";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
+// import { Button } from "@/components/ui/button";
+// import { ArrowLeft } from "lucide-react";
+// import Link from "next/link";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import React from "react";

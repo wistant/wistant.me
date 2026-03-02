@@ -12,10 +12,14 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import { getDictionary } from "@/lib/dictionary";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
   return (
     <main className="min-h-dvh flex flex-col gap-16 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
@@ -36,11 +40,11 @@ export default function Home() {
                 delay={0.1}
                 className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-5xl font-cal leading-tight"
               >
-                {`Hi, I'm ${DATA.name} 👋🏻`}
+                {dict.hero.title}
               </TextReveal>
               <div className="flex items-center gap-2">
                 <AnimatedShinyText className="text-muted-foreground max-w-150 md:text-xl font-medium">
-                  {DATA.description}
+                  {dict.hero.description}
                 </AnimatedShinyText>
               </div>
             </div>
@@ -65,11 +69,11 @@ export default function Home() {
       <section id="about">
         <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <h2 className="text-xl font-bold font-clash">About</h2>
+            <h2 className="text-xl font-bold font-clash">{dict.about.title}</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-              <Markdown>{DATA.about}</Markdown>
+              <Markdown>{dict.about.content}</Markdown>
             </div>
           </BlurFade>
         </div>
@@ -78,7 +82,7 @@ export default function Home() {
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-6">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold font-clash">Work Experience</h2>
+            <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 6}>
             <WorkSection />
@@ -93,7 +97,7 @@ export default function Home() {
       <section id="education">
         <div className="flex min-h-0 flex-col gap-y-6">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-xl font-bold font-clash">Education</h2>
+            <h2 className="text-xl font-bold font-clash">{dict.education.title}</h2>
           </BlurFade>
           <div className="flex flex-col gap-8">
             {DATA.education.map((education, index) => (
@@ -148,7 +152,7 @@ export default function Home() {
       <section id="skills">
         <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <h2 className="text-xl font-bold font-clash">Skills</h2>
+            <h2 className="text-xl font-bold font-clash">{dict.skills.title}</h2>
           </BlurFade>
           <div className="flex flex-wrap gap-2">
             {DATA.skills.map((skill, id) => (
@@ -176,10 +180,10 @@ export default function Home() {
         </BlurFade>
         <div className="flex justify-center mt-8">
           <Link
-            href="/projects"
+            href={`/${lang}/projects`}
             className="text-muted-foreground hover:text-foreground transition-all hover:underline underline-offset-4 text-sm font-medium"
           >
-            View all projects
+            {dict.projects.viewAll}
           </Link>
         </div>
       </section>

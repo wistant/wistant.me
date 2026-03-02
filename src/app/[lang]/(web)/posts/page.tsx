@@ -32,7 +32,7 @@ export default function PostsPage() {
         >
           <Link href="/">
             <ArrowLeft className="size-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
         </Button>
       </div>
@@ -51,7 +51,7 @@ export default function PostsPage() {
       {/* Header Section */}
       <div className="pt-32 pb-16 px-6 relative z-10 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="font-bold text-4xl md:text-6xl tracking-tighter mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <h1 className="font-bold text-4xl md:text-6xl tracking-tighter mb-6 bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
             Social Wall
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">

@@ -1,39 +1,40 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { DEFAULT_METADATA } from "@/config/metadata";
+import { getMetadata } from "@/config/metadata";
 import "./globals.css";
 import { TargetCursor } from "@/components/ui/magicui/target-cursor";
-import { ThemeProvider } from "@/app/ThemeProvider";
+import { ThemeProvider } from "./ThemeProvider";
 
 import { DATA } from "@/data/resume";
 import { FloatingDock } from "@/components/dock/floating-dock";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import { Analytics } from "@vercel/analytics/next";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const calFont = localFont({
-  src: "../../public/fonts/cal.woff2",
+  src: "../../fonts/cal.woff2",
   variable: "--font-cal",
 });
 
 const clashFont = localFont({
-  src: "../../public/fonts/ClashDisplay-Semibold.woff2",
+  src: "../../fonts/ClashDisplay-Semibold.woff2",
   variable: "--font-clash",
 });
 
 const cabinetFont = localFont({
-  src: "../../public/fonts/CabinetGrotesk-Medium.woff2",
+  src: "../../fonts/CabinetGrotesk-Medium.woff2",
   variable: "--font-cabinet",
 });
 
 const interFont = localFont({
   src: [
     {
-      path: "../../public/fonts/Inter-Regular.woff2",
+      path: "../../fonts/Inter-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Inter-Medium.woff2",
+      path: "../../fonts/Inter-Medium.woff2",
       weight: "500",
       style: "normal",
     },
@@ -41,15 +42,26 @@ const interFont = localFont({
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = DEFAULT_METADATA;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  return getMetadata(lang as "en" | "fr");
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }>) {
+  const { lang } = await params;
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <body
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
       >
@@ -81,11 +93,23 @@ export default function RootLayout({
                   },
                 ]}
                 mobileItems={[
-                  ...DATA.navbar.map((item) => ({
-                    title: item.label,
-                    icon: <item.icon className="h-full w-full" />,
-                    href: item.href,
-                  })),
+                  {
+                    title: "Home",
+                    icon: (
+                      <Avatar className="h-full w-full border border-border/50">
+                        <AvatarImage src={DATA.avatarUrl} alt={DATA.name} />
+                        <AvatarFallback>{DATA.initials}</AvatarFallback>
+                      </Avatar>
+                    ),
+                    href: "/",
+                  },
+                  ...DATA.navbar
+                    .filter((item) => item.href !== "/")
+                    .map((item) => ({
+                      title: item.label,
+                      icon: <item.icon className="h-full w-full" />,
+                      href: item.href,
+                    })),
                   {
                     title: "GitHub",
                     icon: <Github className="h-full w-full" />,

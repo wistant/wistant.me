@@ -1,7 +1,9 @@
 import { ImageResponse } from "next/og";
 import { DATA } from "@/data/resume";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
-export const runtime = "edge";
+export const runtime = "nodejs"; // Switched to nodejs for fs support
 
 export const alt = DATA.name;
 export const size = {
@@ -12,17 +14,15 @@ export const contentType = "image/png";
 
 const getFontData = async () => {
   try {
-    const [cabinetGrotesk, clashDisplay] = await Promise.all([
-      fetch(
-        new URL("../../public/fonts/CabinetGrotesk-Medium.ttf", import.meta.url)
-      ).then((res) => res.arrayBuffer()),
-      fetch(
-        new URL("../../public/fonts/ClashDisplay-Semibold.ttf", import.meta.url)
-      ).then((res) => res.arrayBuffer()),
-    ]);
+    const cabinetGrotesk = await readFile(
+      join(process.cwd(), "src/fonts/CabinetGrotesk-Medium.ttf")
+    );
+    const clashDisplay = await readFile(
+      join(process.cwd(), "src/fonts/ClashDisplay-Semibold.ttf")
+    );
     return { cabinetGrotesk, clashDisplay };
   } catch (error) {
-    console.error("Failed to load fonts:", error);
+    console.error("Failed to load fonts from filesystem:", error);
     return null;
   }
 };
@@ -87,108 +87,142 @@ export default async function Image() {
             style={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "flex-end",
-              padding: "60px 64px",
+              justifyContent: "center",
+              padding: "60px 80px",
               height: "100%",
               width: "100%",
               position: "relative",
               zIndex: 1,
             }}
           >
-            {/* Avatar + domain row (top) */}
+            {/* Top row: Avatar + Domain */}
             <div
               style={{
-                position: "absolute",
-                top: 52,
-                left: 64,
                 display: "flex",
                 alignItems: "center",
-                gap: 16,
+                gap: 20,
+                marginBottom: 40,
               }}
             >
               <img
                 src={imageUrl}
                 alt={DATA.name}
                 style={{
-                  width: 52,
-                  height: 52,
+                  width: 64,
+                  height: 64,
                   borderRadius: "50%",
-                  border: "2px solid rgba(255,255,255,0.15)",
+                  border: "2px solid rgba(255,255,255,0.2)",
                   objectFit: "cover",
                 }}
               />
-              <span
+              <div
                 style={{
-                  fontFamily: "Cabinet Grotesk",
-                  fontSize: 18,
-                  fontWeight: 400,
-                  color: "rgba(255,255,255,0.5)",
-                  letterSpacing: "0.02em",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                wistant.dev
-              </span>
+                <span
+                  style={{
+                    fontFamily: "Clash Display",
+                    fontSize: 24,
+                    fontWeight: 600,
+                    color: "#ffffff",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {DATA.name}
+                </span>
+                <span
+                  style={{
+                    fontFamily: "Cabinet Grotesk",
+                    fontSize: 16,
+                    color: "rgba(255,255,255,0.4)",
+                  }}
+                >
+                  wistant.dev
+                </span>
+              </div>
             </div>
 
-            {/* Main title */}
+            {/* Headline */}
             <div
               style={{
                 fontFamily: "Clash Display",
-                fontSize: 76,
+                fontSize: 84,
                 fontWeight: 600,
-                lineHeight: 1.05,
+                lineHeight: 1,
                 color: "#ffffff",
-                letterSpacing: "-0.03em",
-                marginBottom: 20,
+                letterSpacing: "-0.04em",
+                marginBottom: 24,
                 maxWidth: 900,
               }}
             >
-              {DATA.name}
+              Engineering Premium Web Systems.
             </div>
 
-            {/* Description */}
+            {/* Sub-headline / Description (shorter for impact) */}
             <div
               style={{
                 fontFamily: "Cabinet Grotesk",
-                fontSize: 22,
+                fontSize: 24,
                 fontWeight: 400,
-                color: "rgba(255,255,255,0.55)",
+                color: "rgba(255,255,255,0.6)",
                 lineHeight: 1.4,
-                maxWidth: 720,
-                marginBottom: 40,
+                maxWidth: 800,
+                marginBottom: 48,
               }}
             >
-              {DATA.description}
+              Building high-performance architectures & scalable digital experiences.
             </div>
 
-            {/* Bottom tag pill */}
+            {/* Bottom Row: Tech Stack + CTA */}
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 8,
+                justifyContent: "space-between",
+                width: "100%",
               }}
             >
               <div
                 style={{
                   display: "flex",
-                  alignItems: "center",
-                  padding: "6px 16px",
-                  borderRadius: 99,
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  background: "rgba(255,255,255,0.06)",
+                  gap: 12,
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "Cabinet Grotesk",
-                    fontSize: 14,
-                    color: "rgba(255,255,255,0.6)",
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  Next.js · TypeScript · React
-                </span>
+                {["Next.js", "TypeScript", "Architect"].map((tech) => (
+                  <div
+                    key={tech}
+                    style={{
+                      padding: "6px 16px",
+                      borderRadius: 99,
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      background: "rgba(255,255,255,0.05)",
+                      fontFamily: "Cabinet Grotesk",
+                      fontSize: 14,
+                      color: "rgba(255,255,255,0.5)",
+                    }}
+                  >
+                    {tech}
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              <div
+                style={{
+                  display: "flex",
+                  padding: "12px 28px",
+                  borderRadius: 12,
+                  background: "#ffffff",
+                  fontFamily: "Clash Display",
+                  fontSize: 18,
+                  fontWeight: 600,
+                  color: "#000000",
+                  boxShadow: "0 10px 25px rgba(255,255,255,0.15)",
+                }}
+              >
+                Hire Me / Explore
               </div>
             </div>
           </div>
