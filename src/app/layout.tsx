@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/app/ThemeProvider";
 import { DATA } from "@/data/resume";
 import { FloatingDock } from "@/components/dock/floating-dock";
 import { Github, Linkedin, Twitter } from "lucide-react";
+import { Analytics } from "@vercel/analytics/next";
 
 const calFont = localFont({
   src: "../../public/fonts/cal.woff2",
@@ -52,11 +53,7 @@ export default function RootLayout({
       <body
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TargetCursor targetSelector="a, button, .cursor-target" />
           <div className="fixed inset-x-0 bottom-8 md:bottom-6 z-999 flex justify-center pointer-events-none px-4">
             <div className="pointer-events-auto w-fit max-w-full">
@@ -99,9 +96,9 @@ export default function RootLayout({
             </div>
           </div>
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
   );
 }
-
