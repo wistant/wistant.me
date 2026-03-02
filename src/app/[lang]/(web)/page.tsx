@@ -117,7 +117,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           buttonTextShow={dict.projects.viewAll}
           buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
         >
-          <ProjectsSection limit={6} />
+          <ProjectsSection limit={4} />
         </ShowMore>
       </section>
 
@@ -127,7 +127,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           buttonTextShow={lang === 'fr' ? 'Voir tous les hackathons' : 'View all hackathons'}
           buttonTextHide={lang === 'fr' ? 'Réduire' : 'Show less'}
         >
-          <HackathonsSection limit={6} />
+          <HackathonsSection limit={4} />
         </ShowMore>
       </section>
 
