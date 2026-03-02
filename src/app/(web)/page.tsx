@@ -17,7 +17,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function Home() {
   return (
-    <main className="min-h-dvh flex flex-col gap-24 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-16 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -30,8 +30,8 @@ export default function Home() {
 
       <section id="hero">
         <div className="mx-auto w-full space-y-8">
-          <div className="gap-6 flex flex-col md:flex-row items-center justify-between">
-            <div className="gap-4 flex flex-col order-2 md:order-1 flex-1">
+          <div className="gap-6 flex flex-col md:flex-row items-start justify-between">
+            <div className="gap-4 flex flex-col flex-1">
               <TextReveal
                 delay={0.1}
                 className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-5xl font-cal leading-tight"
@@ -46,7 +46,7 @@ export default function Home() {
             </div>
             <BlurFade
               delay={BLUR_FADE_DELAY}
-              className="order-1 md:order-2 flex-none"
+              className="flex-none"
             >
               <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted relative overflow-hidden">
                 <Image
