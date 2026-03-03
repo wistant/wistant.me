@@ -41,25 +41,32 @@ export function LanguageSwitcher() {
       <DropdownMenuContent
         align="center"
         side="top"
-        className="min-w-[160px] bg-background/90 backdrop-blur-2xl border-border/40 shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl p-1.5"
+        className="min-w-40 bg-background/90 backdrop-blur-2xl border-border/40 shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl p-1.5"
         sideOffset={12}
       >
         <DropdownMenuRadioGroup
           value={currentLocale}
           onValueChange={handleLanguageChange}
         >
+          {/*English */}
           <DropdownMenuRadioItem
             value="en"
             className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
           >
             <div className="flex items-center gap-3 w-full">
-              <span className="text-xl">🇺🇸</span>
-              <div className="flex flex-col gap-0">
-                <span className="font-bold text-sm tracking-tight">English</span>
-                <span className="text-[10px] text-muted-foreground/70 font-medium">Global Version</span>
+              <span className="text-xl">🇬🇧</span>
+              <div className="flex flex-col gap-1">
+                <span className="font-bold text-sm tracking-tight">
+                  English
+                </span>
+                <span className="text-[10px] text-muted-foreground/70 font-medium">
+                  Global Version
+                </span>
               </div>
             </div>
           </DropdownMenuRadioItem>
+
+          {/*French*/}
           <DropdownMenuRadioItem
             value="fr"
             className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
@@ -67,8 +74,12 @@ export function LanguageSwitcher() {
             <div className="flex items-center gap-3 w-full">
               <span className="text-xl">🇫🇷</span>
               <div className="flex flex-col gap-0">
-                <span className="font-bold text-sm tracking-tight text-white">Français</span>
-                <span className="text-[10px] text-muted-foreground/70 font-medium">Version locale</span>
+                <span className="font-bold text-sm tracking-tight">
+                  Français
+                </span>
+                <span className="text-[10px] text-muted-foreground/70 font-medium">
+                  Version locale
+                </span>
               </div>
             </div>
           </DropdownMenuRadioItem>

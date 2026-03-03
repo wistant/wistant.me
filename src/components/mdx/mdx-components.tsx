@@ -20,7 +20,7 @@ function UnknownComponent({
 }
 
 /**
- * All custom JSX components available inside MDX posts via next-mdx-remote.
+ * All custom JSX components available inside MDX blog via next-mdx-remote.
  * Add any new component used in content files here.
  */
 export const mdxComponents: MDXComponents = {
@@ -34,7 +34,7 @@ export const mdxComponents: MDXComponents = {
   // Media viewers (used directly in MDX)
   ImageViewer,
   VideoViewer,
-  // Aliases used in some posts
+  // Aliases used in some blog
   MediaContainer: ImageViewer, // used in typescript-best-practices.mdx
   // Next.js Image (for <Image /> in MDX)
   Image,

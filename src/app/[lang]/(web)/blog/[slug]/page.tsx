@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: BlogSlugPageProps) {
     ? post.image.startsWith("http")
       ? post.image
       : `${DATA.url}${post.image}`
-    : `${DATA.url}/blog/${slug}/opengraph-image`;
+    : `${DATA.url}/blog/${slug}/opengraph`;
 
   return {
     title: post.title,
