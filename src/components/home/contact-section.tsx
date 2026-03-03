@@ -32,13 +32,11 @@ export default function ContactSection() {
             rel="noopener noreferrer"
             className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
           >
-            with a direct question on twitter
-          </Link>{" "}
-          and I&apos;ll respond whenever I can. I will ignore all
-          soliciting.
+            with a direct question on WhatsApp
+          </Link>
+          and I&apos;ll respond whenever I can. I will ignore all soliciting.
         </p>
       </div>
     </div>
   );
 }
-
