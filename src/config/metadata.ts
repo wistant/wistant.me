@@ -4,27 +4,46 @@ export const SITE_CONFIG = {
   name: DATA.name,
   url: DATA.url,
   links: {
-    twitter: "https://twitter.com/wistantkode",
+    X: "https://x.com/wistantkode",
     github: "https://github.com/wistantkode",
+    LinkedIn: "https://linkedin.com/in/wistantkode",
   },
   locales: {
     en: {
-      title: `${DATA.name} | Senior Software Engineer & Architect`,
-      description: "Senior Software Engineer specializing in high-performance web systems and scalable architectures. Crafting premium digital experiences with TypeScript, Next.js, and Node.js.",
-      keywords: ["Software Engineer", "Next.js", "React", "TypeScript", "System Architecture"],
+      title: `${DATA.name} | Senior Software Engineer & Cloud Architect`,
+      description:
+        "Senior Software Engineer specializing in high-performance web systems and scalable architectures. Crafting premium digital experiences with TypeScript, Next.js, and Node.js.",
+      keywords: [
+        "Software Engineer",
+        "Cloud",
+        "Tech",
+        "DevOps",
+        "JavaScript Cameroon",
+        "JavaScript Africa",
+        "Next.js",
+        "React",
+        "TypeScript",
+        "System Architecture",
+      ],
     },
     fr: {
-      title: `${DATA.name} | Ingénieur Logiciel Senior & Architecte`,
-      description: "Ingénieur Logiciel Senior spécialisé en systèmes web haute performance au Cameroun (Douala). Expert Next.js, TypeScript et architectures cloud premium.",
-      keywords: ["Développeur Cameroun", "Expert Next.js Douala", "Freelance Web Cameroun", "Architecte logiciel"],
-    }
+      title: `${DATA.name} | Ingénieur Logiciel Senior & ArchitecteCloud `,
+      description:
+        "Ingénieur Logiciel Senior spécialisé en systèmes web haute performance au Cameroun (Douala). Expert Next.js, TypeScript et architectures cloud premium.",
+      keywords: [
+        "Développeur Cameroun",
+        "Expert Next.js Douala",
+        "Freelance Web Cameroun",
+        "Architecte logiciel",
+      ],
+    },
   },
-  ogImage: `${DATA.url}/opengraph-image`,
+  ogImage: `${DATA.url}/opengraph`,
 };
 
 export const getMetadata = (lang: "en" | "fr" = "en") => {
   const config = SITE_CONFIG.locales[lang] || SITE_CONFIG.locales.en;
-  
+
   return {
     metadataBase: new URL(SITE_CONFIG.url),
     title: {
@@ -90,23 +109,23 @@ export const getMetadata = (lang: "en" | "fr" = "en") => {
       "application/ld+json": JSON.stringify({
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        "name": DATA.name,
-        "image": `${SITE_CONFIG.url}${DATA.avatarUrl}`,
-        "url": SITE_CONFIG.url,
-        "address": {
+        name: DATA.name,
+        image: `${SITE_CONFIG.url}${DATA.avatarUrl}`,
+        url: SITE_CONFIG.url,
+        address: {
           "@type": "PostalAddress",
-          "addressLocality": "Douala",
-          "addressCountry": "CM"
+          addressLocality: "Douala",
+          addressCountry: "CM",
         },
-        "sameAs": [
+        sameAs: [
           SITE_CONFIG.links.github,
-          SITE_CONFIG.links.twitter,
-          "https://linkedin.com/in/wistantkode"
+          SITE_CONFIG.links.X,
+          SITE_CONFIG.links.LinkedIn,
         ],
-        "jobTitle": "Senior Software Engineer",
-        "priceRange": "$$$"
-      })
-    }
+        jobTitle: "Senior Software Engineer",
+        priceRange: "$$$",
+      }),
+    },
   };
 };
 
