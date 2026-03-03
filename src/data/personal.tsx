@@ -36,6 +36,12 @@ export const personalData = {
         icon: Icons.linkedin,
         navbar: true,
       },
+      WhatsApp: {
+        name: "WhatsApp",
+        url: "https://wa.me/+237697135341",
+        icon: Icons.whatsapp,
+        navbar: true,
+      },
       X: {
         name: "X",
         url: "https://x.com/wistantkode",
@@ -46,7 +52,7 @@ export const personalData = {
         name: "Send Email",
         url: "mailto:wistantkode@protonmail.com",
         icon: Icons.email,
-        navbar: false,
+        navbar: true,
       },
     },
   },
