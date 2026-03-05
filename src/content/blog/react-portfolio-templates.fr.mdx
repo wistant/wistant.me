@@ -1,0 +1,146 @@
+---
+title: "Créer un Portfolio Développeur Performant (Templates React & Next.js)"
+description: "Découvrez les architectures et les meilleures pratiques pour construire un portfolio de développeur professionnel avec React et Next.js."
+date: "2024-11-18"
+lang: "fr"
+tags: ["Architecture", "React", "Portfolio"]
+seoKeywords: "portfolio developpeur react, template nextjs portfolio, architecture frontend, cv en ligne developpeur, trouver des clients freelance"
+featured: true
+readTime: "16 min de lecture"
+author: "Wistant"
+thumbnail: "/blog/thumbnails/react-portfolio-templates.jpg"
+---
+
+Votre portfolio est votre carte de visite numérique, votre CV et votre vitrine, le tout en un. Dans un marché ultra compétitif, posséder un portfolio React qui se démarque de la masse peut faire toute la différence pour décrocher votre job de rêve ou vos premiers clients en freelance.
+
+<ImageViewer
+  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&auto=format&fit=crop&q=60"
+  alt="Portfolio Développeur"
+  caption="Développeur professionnel présentant son portfolio React"
+/>
+
+## Qu'est-ce qui fait un excellent Portfolio React ?
+
+Un portfolio React convaincant doit démontrer vos compétences techniques tout en offrant une expérience utilisateur fluide et irréprochable.
+
+### Éléments Clés
+
+- **Design Épuré & Architecturé** : Une esthétique professionnelle qui ne distrait pas l'œil du contenu (vos projets).
+- **Layout Responsif** : Un affichage parfait sur PC, Tablettes et Mobiles.
+- **Performances Optimisées** : Des temps de chargement ultra-rapides et des interactions sans latence (idéal avec Next.js et Turbopack).
+- **Navigation Transparente** : Des informations faciles d'accès.
+- **Call-to-Actions (CTA)** : Des chemins évidents pour permettre aux recruteurs ou CTOs de vous contacter instantanément.
+
+## Sections Indispensables du Portfolio
+
+### La Section Hero
+
+Votre section Hero ("Héros") doit communiquer immédiatement *qui vous êtes* et *ce que vous accomplissez pour le business*.
+
+```tsx
+import { useState, useEffect } from "react";
+
+export default function Hero() {
+  const [displayText, setDisplayText] = useState("");
+  const roles = ["Software Architect", "Expert TypeScript", "Ingénieur Backend"];
+
+  useEffect(() => {
+    let currentRoleIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+
+    const typeWriter = () => {
+      const currentRole = roles[currentRoleIndex];
+
+      if (!isDeleting && currentCharIndex <= currentRole.length) {
+        setDisplayText(currentRole.slice(0, currentCharIndex));
+        currentCharIndex++;
+      } else if (isDeleting && currentCharIndex >= 0) {
+        setDisplayText(currentRole.slice(0, currentCharIndex));
+        currentCharIndex--;
+      }
+
+      if (currentCharIndex === currentRole.length) {
+        isDeleting = true;
+        setTimeout(typeWriter, 2000);
+      } else if (isDeleting && currentCharIndex === 0) {
+        isDeleting = false;
+        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+        setTimeout(typeWriter, 500);
+      } else {
+        setTimeout(typeWriter, isDeleting ? 100 : 150);
+      }
+    };
+
+    typeWriter();
+  }, []);
+
+  return (
+    <section className="min-h-screen flex items-center justify-center bg-background">
+      <div className="text-center px-4">
+        <h1 className="text-5xl md:text-7xl font-bold mb-4">
+          Bonjour, je suis <span className="text-blue-500">Wistant</span>
+        </h1>
+        <div className="text-2xl md:text-3xl mb-8 h-10">
+          Je suis un{" "}
+          <span className="text-blue-400 border-r-2 border-primary">
+            {displayText}
+          </span>
+        </div>
+        <p className="text-xl mb-12 max-w-2xl mx-auto text-muted-foreground">
+          Je conçois des architectures backend scalables et des interfaces fluides 
+          pour transformer des défis complexes en logiciels performants.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button className="bg-primary hover:bg-primary/90 px-8 py-4 rounded-full text-lg font-semibold transition-all">
+            Explorer mes Projets
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+### Mise en avant des Projets (Showcase)
+
+Affichez fièrement votre travail avec des études de cas détaillées abordant les retours sur investissement (ROI) technique.
+
+```tsx
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+}
+
+// Composant d'affichage filtrable des projets...
+```
+
+## Optimisation & SEO (Le Moteur)
+
+### Gestion Native du SEO avec Next.js 15
+
+Pour maximiser votre découvrabilité par les recruteurs, fuyez les "Create React App" classiques et passez absolument sur l'App Router de Next.js pour le rendu serveur (SSR) et l'injection dynamique d'Open Graph :
+
+```tsx
+import type { Metadata } from 'next';
+
+export function generateMetadata(): Metadata {
+  return {
+    title: "Wistant | Software Architect",
+    description: "Ingénieur logiciel spécialisé dans l'écosystème TypeScript...",
+    openGraph: {
+      images: ['/api/og?img=hero'],
+    }
+  }
+}
+```
+
+## Conclusion
+
+Un portfolio React finement ciselé est bien plus qu'une simple exposition : c'est un testament de votre rigueur, de votre code et de votre compréhension des enjeux métiers. Concentrez-vous sur la création d'un système qui fournit une vraie valeur (stabilité, rapidité) plutôt que sur des animations gadgets.
+
+**Le mot d'ordre : Restez fiable.**
