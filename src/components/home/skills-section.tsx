@@ -1,5 +1,6 @@
 "use client";
 
+import { ReactElement } from "react";
 import { motion } from "framer-motion";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { skillsData } from "@/data/skills";
@@ -7,7 +8,7 @@ import { IconProps } from "@/components/ui/icons";
 
 type SkillCardProps = {
   name: string;
-  icon: (props: IconProps) => JSX.Element;
+  icon: (props: IconProps) => ReactElement;
   index: number;
 };
 

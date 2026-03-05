@@ -112,8 +112,8 @@ export default async function Home({
       <section id="gallery">
         <ShowMore
           initialHeight={600}
-          buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
-          buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
+          buttonTextShow={dict.ui.seeMore}
+          buttonTextHide={dict.ui.showLess}
           href={`/${lang}/about`}
           linkText={dict.navigation.about || "About me"}
         >
@@ -146,8 +146,8 @@ export default async function Home({
       <section id="projects">
         <ShowMore
           initialHeight={1650}
-          buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
-          buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
+          buttonTextShow={dict.ui.seeMore}
+          buttonTextHide={dict.ui.showLess}
           href={`/${lang}/projects`}
           linkText={dict.projects.viewAll}
         >
@@ -158,8 +158,8 @@ export default async function Home({
       <section id="hackathons">
         <ShowMore
           initialHeight={450}
-          buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
-          buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
+          buttonTextShow={dict.ui.seeMore}
+          buttonTextHide={dict.ui.showLess}
           href={`/${lang}/hackathons`}
           linkText={dict.navigation.hackathons || "All hackathons"}
         >

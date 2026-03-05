@@ -86,6 +86,15 @@
     "description": "Engineering high-end digital solutions for Web, Mobile, and Desktop.",
     "cta": "View Portfolio"
   },
+  "ui": {
+    "backToHome": "Back to Home",
+    "seeMore": "See more",
+    "showLess": "Show less",
+    "loadingArticles": "Loading articles...",
+    "noArticlesFound": "No articles found for this tag.",
+    "dateLocale": "en-US",
+    "allFilter": "All"
+  },
   "global": {
     "seo": {
       "title": "Wistant | Software Engineer",

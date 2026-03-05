@@ -86,6 +86,15 @@
     "description": "Conception de solutions numériques haut de gamme (Web, Mobile, Desktop).",
     "cta": "Voir le Portfolio"
   },
+  "ui": {
+    "backToHome": "Retour à l'accueil",
+    "seeMore": "Voir plus",
+    "showLess": "Réduire",
+    "loadingArticles": "Chargement des articles...",
+    "noArticlesFound": "Aucun article trouvé pour ce tag.",
+    "dateLocale": "fr-FR",
+    "allFilter": "Tous"
+  },
   "global": {
     "seo": {
       "title": "Wistant | Ingénieur Logiciel",
