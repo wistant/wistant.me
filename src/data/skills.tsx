@@ -9,4 +9,6 @@ export const skillsData = [
   { name: "PostgreSQL", icon: Icons.postgresql },
   { name: "Prisma", icon: Icons.prisma },
   { name: "Redis", icon: Icons.redis },
+  { name: "Vercel", icon: Icons.vercel },
+  { name: "Linux", icon: Icons.linux },
 ];
