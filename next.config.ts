@@ -12,6 +12,40 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "i.postimg.cc" },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/github",
+        destination: "https://github.com/wistantkode",
+        permanent: true,
+      },
+      {
+        source: "/linkedin",
+        destination: "https://linkedin.com/in/wistantkode",
+        permanent: true,
+      },
+      {
+        source: "/x",
+        destination: "https://x.com/wistantkode",
+        permanent: true,
+      },
+      {
+        source: "/twitter",
+        destination: "https://x.com/wistantkode",
+        permanent: true,
+      },
+      {
+        source: "/whatsapp",
+        destination: "https://wa.me/+237697135341",
+        permanent: true,
+      },
+      {
+        source: "/email",
+        destination: "mailto:wistantkode@protonmail.com",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withContentCollections(nextConfig);

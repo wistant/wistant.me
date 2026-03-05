@@ -17,8 +17,9 @@ export const personalData = {
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/about", icon: Icons.user, label: "About" },
     { href: "/projects", icon: Icons.globe, label: "Projects" },
-    // { href: "/hackathons", icon: Icons.trophy, label: "Hackathons" },
+    { href: "/hackathons", icon: Icons.trophy, label: "Hackathons" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/contact", icon: Icons.email, label: "Contact" },
   ],
   contact: {
     email: "wistantkode@protonmail.com",

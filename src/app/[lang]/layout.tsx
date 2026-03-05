@@ -10,6 +10,7 @@ import { FloatingDock } from "@/components/dock/floating-dock";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import { Analytics } from "@vercel/analytics/next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Icons } from "@/components/ui/icons";
 
 const calFont = localFont({
   src: "../../fonts/cal.woff2",
@@ -89,9 +90,19 @@ export default async function RootLayout({
                     href: DATA.contact.social.LinkedIn.url,
                   },
                   {
-                    title: "Twitter",
+                    title: "X (Twitter)",
                     icon: <Twitter className="h-full w-full" />,
                     href: DATA.contact.social.X.url,
+                  },
+                  {
+                    title: "WhatsApp",
+                    icon: <Icons.whatsapp className="h-full w-full" />,
+                    href: DATA.contact.social.WhatsApp.url,
+                  },
+                  {
+                    title: "Email",
+                    icon: <Icons.email className="h-full w-full" />,
+                    href: DATA.contact.social.email.url,
                   },
                 ]}
                 mobileItems={[
@@ -106,7 +117,7 @@ export default async function RootLayout({
                     href: `/${lang}`,
                   },
                   ...DATA.navbar
-                    .filter((item) => item.href !== "/")
+                    .filter((item) => ["/about", "/projects", "/blog", "/contact"].includes(item.href))
                     .map((item) => ({
                       title: item.label,
                       icon: <item.icon className="h-full w-full" />,
