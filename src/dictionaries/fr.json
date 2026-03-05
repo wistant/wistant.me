@@ -9,8 +9,8 @@
     "resume": "Curriculum"
   },
   "hero": {
-    "title": "Architecture de Systèmes Digitaux de Haute Précision 👋🏻",
-    "description": "Je suis Wistant, Ingénieur Logiciel Senior expert de l'écosystème TypeScript. Je me spécialise dans les architectures Full-Stack 100% TS (NestJS, Next.js) propulsées par Prisma, Redis et PostgreSQL/MariaDB. Je transforme vos défis en systèmes scalables."
+    "title": "Ingénierie Logicielle & Architecture Backend 🚀",
+    "description": "Je suis Wistant, Senior Software Engineer & Architecte Logiciel. Je conçois et déploie des plateformes web scalables sur l'écosystème TypeScript (NestJS, Next.js, Prisma, PostgreSQL, Redis)."
   },
   "about": {
     "title": "Philosophie de l'Ingénierie",
@@ -44,9 +44,9 @@
     "cta": "Plongée Technique",
     "stack": "Stack Utilisé",
     "seo": {
-      "title": "Portfolio & Réalisations | Applications Full-Stack TypeScript",
-      "description": "Explorez une sélection de projets très techniques : APIs backend robustes sous NestJS/Prisma, interfaces ultra-rapides sous Vite/Next.js, et architectures scalables.",
-      "keywords": "Portfolio développeur TypeScript, Études de cas NestJS, Architectures Next.js, Projets Prisma PostgreSQL, Applications Full-Stack, Dashboard Vite"
+      "title": "Portfolio & Réalisations | Plateformes Web TypeScript",
+      "description": "Explorez une sélection de systèmes complexes : APIs backend ultra-résilientes sous NestJS/Prisma, architectures de bases de données distribuées, et Frontends Next.js à haute performance.",
+      "keywords": "Portfolio Architecte TypeScript, Études de cas NestJS, Architectures Next.js Backend, Projets Prisma PostgreSQL, Déploiement Cloud, Développement SaaS"
     }
   },
   "blog": {

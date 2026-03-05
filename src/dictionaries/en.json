@@ -9,8 +9,8 @@
     "resume": "Curriculum"
   },
   "hero": {
-    "title": "Architecting Digital Solutions That Actually Work 🏆",
-    "description": "I'm Wistant, a Senior Software Engineer specializing in the 100% TypeScript ecosystem. From robust APIs with NestJS & Prisma, to high-performance frontends with Next.js & Vite, I build scalable systems."
+    "title": "Software Engineering & Backend Architecture 🚀",
+    "description": "I'm Wistant, a Senior Software Engineer & Software Architect. I design and deploy highly scalable web platforms across the TypeScript ecosystem (NestJS, Next.js, Prisma, PostgreSQL, Redis)."
   },
   "about": {
     "title": "My Philosophy",
@@ -44,9 +44,9 @@
     "cta": "Technical Deep Dive",
     "stack": "Stack Used",
     "seo": {
-      "title": "Portfolio & Showcase | TypeScript Full-Stack Applications",
-      "description": "Explore a selection of complex technical projects: highly scalable backend APIs with NestJS/Prisma, robust database architectures, and Next.js/Vite frontends.",
-      "keywords": "TypeScript developer portfolio, NestJS case studies, Next.js architecture, Prisma PostgreSQL projects, Full-Stack applications, Vite dashboard"
+      "title": "Portfolio & Showcase | TypeScript Web Platforms",
+      "description": "Explore a selection of complex software systems: highly resilient backend APIs with NestJS/Prisma, distributed database architectures, and high-performance Next.js Frontends.",
+      "keywords": "TypeScript Architect Portfolio, NestJS case studies, Next.js Backend Architecture, Prisma PostgreSQL Projects, Cloud Deployment, SaaS Development"
     }
   },
   "blog": {
