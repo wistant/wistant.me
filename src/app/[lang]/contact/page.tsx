@@ -1,5 +1,5 @@
 import { getDictionary } from "@/lib/dictionary";
-import ContactSection from "@/components/home/contact-section";
+import { DATA } from "@/data/resume";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 
 type Language = "en" | "fr";
@@ -25,7 +25,27 @@ export default async function ContactPage({
                 {dict.contact?.subtitle || "Let's work together."}
               </p>
             </div>
-            <ContactSection />
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl mx-auto">
+              {Object.entries(DATA.contact.social).map(([key, social]) => (
+                <a
+                  key={key}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 rounded-2xl border border-border/50 bg-card hover:bg-muted/50 transition-all duration-300 group"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-background border border-border/50 text-foreground group-hover:scale-110 transition-transform duration-300">
+                    <social.icon className="h-5 w-5" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold">{social.name}</span>
+                    <span className="text-sm text-muted-foreground line-clamp-1">{social.url.replace("mailto:", "").replace("https://", "")}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+
           </BlurFade>
         </div>
       </section>

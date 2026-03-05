@@ -85,24 +85,9 @@ export default async function RootLayout({
                     href: DATA.contact.social.GitHub.url,
                   },
                   {
-                    title: "LinkedIn",
-                    icon: <Linkedin className="h-full w-full" />,
-                    href: DATA.contact.social.LinkedIn.url,
-                  },
-                  {
-                    title: "X (Twitter)",
-                    icon: <Twitter className="h-full w-full" />,
-                    href: DATA.contact.social.X.url,
-                  },
-                  {
                     title: "WhatsApp",
                     icon: <Icons.whatsapp className="h-full w-full" />,
                     href: DATA.contact.social.WhatsApp.url,
-                  },
-                  {
-                    title: "Email",
-                    icon: <Icons.email className="h-full w-full" />,
-                    href: DATA.contact.social.email.url,
                   },
                 ]}
                 mobileItems={[
@@ -117,7 +102,7 @@ export default async function RootLayout({
                     href: `/${lang}`,
                   },
                   ...DATA.navbar
-                    .filter((item) => ["/about", "/projects", "/blog", "/contact"].includes(item.href))
+                    .filter((item) => ["/about", "/projects", "/blog"].includes(item.href))
                     .map((item) => ({
                       title: item.label,
                       icon: <item.icon className="h-full w-full" />,
