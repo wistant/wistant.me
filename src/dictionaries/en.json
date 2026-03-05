@@ -1,93 +1,94 @@
 {
   "navigation": {
     "home": "Home",
-    "blog": "Insights",
-    "projects": "Showcase",
+    "blog": "Notes",
+    "projects": "Work",
     "about": "About",
     "hackathons": "Hackathons",
     "contact": "Contact",
-    "resume": "Curriculum"
+    "resume": "Resume",
+    "backToHome": "Back to Home"
   },
   "hero": {
-    "title": "Software Engineering & Backend Architecture 🚀",
-    "description": "I'm Wistant, a Senior Software Engineer & Software Architect. I design and deploy highly scalable web platforms across the TypeScript ecosystem (NestJS, Next.js, Prisma, PostgreSQL, Redis)."
+    "title": "Engineering high-impact digital solutions.",
+    "description": "I'm Wistant, an aspiring Software Engineer. I design and build highly scalable platforms across all interfaces—Web, Mobile, and Desktop."
   },
   "about": {
-    "title": "My Philosophy",
-    "content": "With over 2 years in the field, I've learned that software is just a tool—the true solution is what matters. I approach every project with the mindset of an architect, designing robust systems that bridge the gap between complex engineering and human needs.",
+    "title": "My Approach",
+    "content": "I don't just write code; I build robust software systems focused on user experience and performance. My goal is to transform complex problems into simple, crisp, and fast multi-platform solutions.",
     "seo": {
-      "title": "About Wistant | TypeScript Architect & Full-Stack Engineer",
-      "description": "Discover Wistant's engineering journey. Deep expertise in the TypeScript ecosystem (NestJS, Next.js), database optimization (Prisma, PostgreSQL/MariaDB), and performance (Redis).",
-      "keywords": "TypeScript Architect, Full-Stack Engineer Cameroon, NestJS Expert Douala, Next.js Developer, Prisma ORM, Redis Integration, Senior Backend Engineer"
+      "title": "About Wistant | Software Engineer",
+      "description": "Learn more about Wistant, a Software Engineer specializing in scalable digital solutions (Web, Mobile, Desktop).",
+      "keywords": "Software Engineer, Full-Stack Developer, Mobile Development, Desktop Applications, TypeScript, Next.js, NestJS"
     }
   },
   "work": {
-    "title": "Professional Experience",
-    "viewMore": "Read Full Case Study",
+    "title": "Experience",
+    "viewMore": "View full journey",
     "present": "Present"
   },
   "education": {
-    "title": "My EDU core"
+    "title": "Education"
   },
   "skills": {
-    "title": "My Tech Stack",
-    "description": "A precision-selected arsenal of modern technologies optimized for performance and maintainability.",
+    "title": "My Stack",
+    "description": "The technologies I use daily to build and ship reliable products.",
     "categories": {
-      "frontend": "Frontend Mastery",
-      "backend": "Distributed Systems",
-      "devops": "Automation & Infrastructure"
+      "frontend": "Frontend",
+      "backend": "Backend & Database",
+      "devops": "Infrastructure"
     }
   },
   "projects": {
-    "title": "Impact-Driven Projects",
-    "viewAll": "Explore Complete Portfolio",
-    "cta": "Technical Deep Dive",
-    "stack": "Stack Used",
+    "title": "Selected Work",
+    "viewAll": "View all projects",
+    "cta": "View Project",
+    "stack": "Stack built with",
     "seo": {
-      "title": "Portfolio & Showcase | TypeScript Web Platforms",
-      "description": "Explore a selection of complex software systems: highly resilient backend APIs with NestJS/Prisma, distributed database architectures, and high-performance Next.js Frontends.",
-      "keywords": "TypeScript Architect Portfolio, NestJS case studies, Next.js Backend Architecture, Prisma PostgreSQL Projects, Cloud Deployment, SaaS Development"
+      "title": "Wistant | Portfolio & Selected Work",
+      "description": "Explore my latest full-stack projects built with Next.js, NestJS, and TypeScript.",
+      "keywords": "Portfolio, Projects, TypeScript, Next.js, NestJS, Web Development"
     }
   },
   "blog": {
-    "title": "Insights & Technical Notes",
-    "description": "In-depth exploration of modern web technologies, architecture tutorials, and experience feedback.",
+    "title": "Notes & Learnings",
+    "description": "Thoughts on software engineering, multi-platform development, and things I learn along the way.",
     "seo": {
-      "title": "The Tech Blog | TypeScript Ecosystem, NestJS & Next.js",
-      "description": "Technical articles on modern Full-Stack TypeScript development, NestJS API architecture, data management with Prisma/PostgreSQL, and frontend performance.",
-      "keywords": "TypeScript tech blog, NestJS tutorials, Next.js architecture, Prisma optimization, Redis caching, Vite programming, Tech watch Douala"
+      "title": "Wistant | Blog & Notes",
+      "description": "Articles and thoughts on modern software development, TypeScript, and software architecture.",
+      "keywords": "Blog, Software Development, TypeScript, Next.js, Engineering"
     }
   },
   "contact": {
-    "title": "Initiate Collaboration",
-    "subtitle": "Elevate your technical infrastructure to the next level.",
-    "description": "Whether you're looking for architectural oversight, high-performance web engineering, or strategic technical consulting, I'm here to build the future with you.",
-    "button": "Send Message",
-    "social": "Connect via Social Channels",
+    "title": "Let's work together",
+    "subtitle": "Have a project in mind or just want to chat?",
+    "description": "I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.",
+    "button": "Get in touch",
+    "social": "Connect with me",
     "seo": {
-      "title": "Contact Wistant | Senior TypeScript Engineer Douala",
-      "description": "Ready to scale your product on the TypeScript stack? Contact me to discuss NestJS/Next.js architecture, Prisma/PostgreSQL modeling, or distributed engineering.",
-      "keywords": "Hire TypeScript Developer, NestJS Expert Douala, Freelance SaaS Architect, Database Expert MariaDB, Full-Stack Scale-up"
+      "title": "Contact Wistant | Let's Talk",
+      "description": "Get in touch for freelance opportunities, consulting, or just to say hi.",
+      "keywords": "Contact, Hire Developer, Freelance, Full-Stack Engineer"
     }
   },
   "hackathons": {
-    "title": "Innovation Sprints",
+    "title": "Hackathons",
     "seo": {
-      "title": "Hackathons & Competitions | Rapid Innovation",
-      "description": "History of participation in hackathons and coding competitions. Where innovation meets time constraints.",
-      "keywords": "Hackathons, Coding competitions, Innovation, Rapid prototyping, Technical challenge"
+      "title": "Hackathons | Wistant",
+      "description": "A timeline of my hackathon participations and coding sprints.",
+      "keywords": "Hackathons, Coding Competitions, Projects"
     }
   },
   "og": {
-    "headline": "Engineering Premium TypeScript Systems",
-    "description": "NestJS, Next.js & Data Architect (Prisma/PostgreSQL)",
-    "cta": "Explore Portfolio"
+    "headline": "Software Engineer",
+    "description": "Engineering high-end digital solutions for Web, Mobile, and Desktop.",
+    "cta": "View Portfolio"
   },
   "global": {
     "seo": {
-      "title": "Wistant | Senior TypeScript Engineer (NestJS / Next.js)",
-      "description": "Technical Architect & Software Engineer based in Douala. Deep expertise in the 100% TypeScript ecosystem: NestJS, Next.js, Vite, Prisma, Redis, and PostgreSQL.",
-      "keywords": "TypeScript Software Engineer, NestJS Architect Douala, Next.js Developer Cameroon, Prisma Expert, Redis Caching, Lead Engineer, Full-Stack Developer Architecture"
+      "title": "Wistant | Software Engineer",
+      "description": "Wistant is a Software Engineer based in Cameroon, specializing in building high-quality digital solutions across web, mobile, and desktop environments.",
+      "keywords": "Wistant, Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Developer, Desktop Apps, TypeScript, Next.js, React, NestJS, Cameroon"
     }
   }
 }
