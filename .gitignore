@@ -118,3 +118,5 @@ CODE/
 .content-collections/
 .vercel
 .env*.local
+.agents/
+.agent/
