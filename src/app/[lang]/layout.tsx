@@ -1,6 +1,6 @@
 // import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { getMetadata } from "@/config/metadata";
+import { getPageMetadata } from "@/config/metadata";
 import "./globals.css";
 import { TargetCursor } from "@/components/ui/magicui/target-cursor";
 import { ThemeProvider } from "./ThemeProvider";
@@ -42,13 +42,15 @@ const interFont = localFont({
   variable: "--font-inter",
 });
 
+type Language = "en" | "fr";
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  return getMetadata(lang as "en" | "fr");
+  return getPageMetadata(lang as Language);
 }
 
 export default async function RootLayout({
@@ -74,7 +76,7 @@ export default async function RootLayout({
                   ...DATA.navbar.map((item) => ({
                     title: item.label,
                     icon: <item.icon className="h-full w-full" />,
-                    href: item.href,
+                    href: item.href === "/" ? `/${lang}` : `/${lang}${item.href}`,
                   })),
                   {
                     title: "GitHub",
@@ -101,14 +103,14 @@ export default async function RootLayout({
                         <AvatarFallback>{DATA.initials}</AvatarFallback>
                       </Avatar>
                     ),
-                    href: "/",
+                    href: `/${lang}`,
                   },
                   ...DATA.navbar
                     .filter((item) => item.href !== "/")
                     .map((item) => ({
                       title: item.label,
                       icon: <item.icon className="h-full w-full" />,
-                      href: item.href,
+                      href: `/${lang}${item.href}`,
                     })),
                   {
                     title: "GitHub",

@@ -2,7 +2,6 @@ import { AuthorCard } from "@/components/blog/author-card";
 import { HashScrollHandler } from "@/components/blog/hash-scroll-handler";
 import { TableOfContents } from "@/components/blog/table-of-contents";
 import { mdxComponents } from "@/components/mdx/mdx-components";
-import { DATA } from "@/data/resume";
 import { getAuthor, isValidAuthor } from "@/lib/authors";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 import { allPosts } from "content-collections";
@@ -16,69 +15,47 @@ import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { ReadMoreSection } from "@/components/blog/read-more-section";
 import { PromoContent } from "@/components/blog/promo-content";
 import { MobileTableOfContents } from "@/components/blog/mobile-toc";
+import { getPageMetadata, SITE_CONFIG } from "@/config/metadata";
+import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/json-ld";
+
+type Language = "en" | "fr";
 
 interface BlogSlugPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang: Language }>;
 }
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
     slug: post.slug,
+    lang: post.lang || "en",
   }));
 }
 
-export async function generateMetadata({ params }: BlogSlugPageProps) {
-  const { slug } = await params;
+export async function generateMetadata({
+  params,
+}: BlogSlugPageProps): Promise<Metadata> {
+  const { lang, slug } = await params;
   const post = allPosts.find((p) => p.slug === slug);
-  if (!post) return {};
 
-  const ogImageUrl = post.image
-    ? post.image.startsWith("http")
-      ? post.image
-      : `${DATA.url}${post.image}`
-    : `${DATA.url}/blog/${slug}/opengraph`;
+  if (!post) {
+    return getPageMetadata(lang);
+  }
 
-  return {
+  const pageSeo = {
     title: post.title,
     description: post.summary,
     keywords: post.tags ?? [],
-    authors: [{ name: DATA.name, url: DATA.url }],
-    alternates: {
-      canonical: `${DATA.url}/blog/${slug}`,
-    },
-    openGraph: {
-      title: post.title,
-      description: post.summary,
-      type: "article",
-      publishedTime: post.date,
-      url: `${DATA.url}/blog/${slug}`,
-      authors: [DATA.name],
-      tags: post.tags ?? [],
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.summary,
-      images: [ogImageUrl],
-      creator: "@wistantkode",
-    },
-    other: {
-      robots: "index, follow",
-      googlebot: "index, follow",
-    },
+    url: `/${lang}/blog/${slug}`,
+    // Fire our cool Edge Satori Architecture through the API
+    image: post.image ? `${SITE_CONFIG.url}/api/og?type=blog&img=${encodeURIComponent(post.image)}` : undefined,
   };
+
+  return getPageMetadata(lang, pageSeo);
 }
 
 export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
-  const { slug } = await params;
+  const { lang, slug } = await params;
   const post = allPosts.find((p) => p.slug === slug);
 
   if (!post) notFound();
@@ -86,14 +63,26 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   const author =
     post.author && isValidAuthor(post.author) ? getAuthor(post.author) : null;
 
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = new Date(post.date).toLocaleDateString(
+    lang === "fr" ? "fr-FR" : "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    },
+  );
 
   return (
     <div className="min-h-screen bg-background relative pt-16 md:pt-20">
+      <JsonLd
+        type="Article"
+        title={post.title}
+        description={post.summary}
+        url={`/${lang}/blog/${slug}`}
+        image={post.image}
+        publishDate={post.date}
+        authorName={author?.name}
+      />
       <HashScrollHandler />
 
       {/* Background with Grid */}
@@ -118,7 +107,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
                 asChild
                 className="h-8 w-8 p-0 rounded-full bg-card/50 backdrop-blur-sm border-border/40"
               >
-                <Link href="/">
+                <Link href={`/${lang}`}>
                   <ArrowLeft className="w-4 h-4" />
                   <span className="sr-only">Retour à l&apos;accueil</span>
                 </Link>
@@ -128,7 +117,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
                 asChild
                 className="h-8 px-3 text-xs rounded-full bg-card/30 backdrop-blur-sm border border-border/20 text-muted-foreground hover:text-foreground"
               >
-                <Link href="/blog">Blog</Link>
+                <Link href={`/${lang}/blog`}>Blog</Link>
               </Button>
             </div>
             {post.tags && post.tags.length > 0 && (

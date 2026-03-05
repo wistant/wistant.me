@@ -16,13 +16,26 @@ import { getDictionary } from "@/lib/dictionary";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { ShowMore } from "@/components/ui/show-more";
+import { Metadata } from "next";
+import { getPageMetadata } from "@/config/metadata";
 
 const BLUR_FADE_DELAY = 0.04;
+
+type Language = "en" | "fr";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  return getPageMetadata(lang);
+}
 
 export default async function Home({
   params,
 }: {
-  params: Promise<{ lang: string }>;
+  params: Promise<{ lang: Language }>;
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
@@ -134,7 +147,7 @@ export default async function Home({
           linkText={dict.projects.viewAll}
           buttonClassName="-mt-14"
         >
-          <ProjectsSection limit={6} />
+          <ProjectsSection limit={6} lang={lang} />
         </ShowMore>
       </section>
 

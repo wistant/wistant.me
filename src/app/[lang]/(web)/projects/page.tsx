@@ -1,63 +1,31 @@
-import { Metadata } from "next";
-import { DATA } from "@/data/resume";
+import { projectsData } from "@/data/projects";
 import { ProjectCard } from "@/components/projects/project-card";
-// import { Button } from "@/components/ui/button";
-// import { ArrowLeft } from "lucide-react";
-// import Link from "next/link";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import React from "react";
+import { getDictionary } from "@/lib/dictionary";
+import { Metadata } from "next";
+import { getPageMetadata } from "@/config/metadata";
 
-export const metadata: Metadata = {
-  title: "Projects",
-  description: "A collection of my projects and creations.",
-  openGraph: {
-    title: "Projects | Wistant Kode",
-    description: "A collection of my projects and creations.",
-    type: "website",
-    url: `${DATA.url}/projects`,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Projects | Wistant Kode",
-    description: "A collection of my projects and creations.",
-  },
-};
+type Language = "en" | "fr";
 
-interface Project {
-  title: string;
-  href?: string;
-  dates: string;
-  technologies: readonly string[];
-  description: string;
-  image?: string;
-  video?: string;
-  links?: readonly {
-    type: string;
-    href: string;
-    icon: React.ReactNode;
-  }[];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return getPageMetadata(lang, dict.projects.seo);
 }
 
-export default function ProjectsPage() {
+export default async function ProjectsPage({ params }: { params: Promise<{ lang: Language }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
   const BLUR_FADE_DELAY = 0.04;
 
   return (
     <div className="min-h-screen bg-background relative pt-12 md:pt-16">
-      {/* Back Button */}
-      {/* <div className="max-w-7xl mx-auto px-6 mb-4 relative z-10">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="gap-2 text-muted-foreground hover:text-foreground transition-colors"
-          asChild
-        >
-          <Link href="/">
-            <ArrowLeft className="size-4" />
-            Retour à l&apos;accueil
-          </Link>
-        </Button>
-      </div>
       {/* Hero Background */}
       <div className="absolute top-0 left-0 z-0 w-full h-[300px] mask-[linear-gradient(to_top,transparent_10%,black_80%)]">
         <FlickeringGrid
@@ -75,11 +43,10 @@ export default function ProjectsPage() {
         <div className="max-w-7xl mx-auto w-full">
           <div className="flex flex-col gap-4">
             <h1 className="font-bold text-4xl md:text-5xl tracking-tighter font-cal">
-              Projects & Creations
+              {dict.projects.title}
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl">
-              A collection of projects I&apos;ve built, ranging from simple
-              tools to complex web applications and platforms.
+              {dict.projects.seo.description}
             </p>
           </div>
         </div>
@@ -88,16 +55,16 @@ export default function ProjectsPage() {
       {/* Projects Grid */}
       <div className="max-w-7xl mx-auto w-full px-6 lg:px-0 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-          {(DATA.projects as unknown as Project[]).map((project, id) => (
+          {projectsData.map((project, id) => (
             <BlurFade
-              key={project.title}
+              key={project.slug}
               delay={BLUR_FADE_DELAY * 12 + id * 0.05}
               className="h-full"
             >
               <ProjectCard
                 href={project.href}
-                title={project.title}
-                description={project.description}
+                title={project.title[lang]}
+                description={project.description[lang]}
                 dates={project.dates}
                 tags={project.technologies}
                 image={project.image}

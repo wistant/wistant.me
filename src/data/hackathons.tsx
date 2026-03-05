@@ -39,7 +39,7 @@ export const hackathonsData: readonly Hackathon[] = [
     location: "Douala, Cameroon",
     description:
       "Created a decentralized payment gateway for cross-border transactions in Africa, reducing fees by over 80% using Layer-2 solutions.",
-    image: "/portfolio/hackaton-fintech.png",
+    image: "/me/me.png",
     links: [
       {
         title: "Project",

@@ -8,34 +8,20 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { DATA } from "@/data/resume";
+import { getDictionary } from "@/lib/dictionary";
+import { getPageMetadata } from "@/config/metadata";
 
-export const metadata: Metadata = {
-  title: "Blog | Wistant Kode",
-  description:
-    "Insights on software engineering, architecture, and technology.",
-  openGraph: {
-    title: "Blog | Wistant Kode",
-    description:
-      "Insights on software engineering, architecture, and technology.",
-    type: "website",
-    url: `${DATA.url}/blog`,
-    images: [
-      {
-        url: "/og-images/blog-og.png",
-        width: 1200,
-        height: 630,
-        alt: "Blog | Wistant Kode",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Blog | Wistant Kode",
-    description:
-      "Insights on software engineering, architecture, and technology.",
-    images: ["/og-images/blog-og.png"],
-  },
-};
+type Language = "en" | "fr";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return getPageMetadata(lang, dict.blog.seo);
+}
 
 const formatDate = (date: string | Date): string => {
   return new Date(date).toLocaleDateString("en-US", {
@@ -46,11 +32,15 @@ const formatDate = (date: string | Date): string => {
 };
 
 export default async function BlogPage({
+  params,
   searchParams,
 }: {
+  params: Promise<{ lang: Language }>;
   searchParams: Promise<{ tag?: string }>;
 }) {
+  const { lang } = await params;
   const resolvedSearchParams = await searchParams;
+  const dict = await getDictionary(lang);
 
   // Sort blog by date (newest first)
   const sortedPosts = allPosts.sort((a, b) => {
@@ -121,10 +111,10 @@ export default async function BlogPage({
         <div className="max-w-7xl mx-auto w-full">
           <div className="flex flex-col gap-2">
             <h1 className="font-medium text-4xl md:text-5xl tracking-tighter">
-              Blog & Insights
+              {dict.blog.title}
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl">
-              Exploring engineering excellence, software architecture, and artificial intelligence.
+              {dict.blog.description}
             </p>
           </div>
         </div>
@@ -157,7 +147,7 @@ export default async function BlogPage({
               {filteredPosts.map((post) => (
                 <BlogCard
                   key={post._meta.path}
-                  url={`/blog/${post.slug}`}
+                  url={`/${lang}/blog/${post.slug}`}
                   title={post.title}
                   description={post.summary}
                   date={formatDate(post.date)}

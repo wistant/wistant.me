@@ -1,63 +1,61 @@
 import { DATA } from "@/data/resume";
+import { getDictionary } from "@/lib/dictionary"; // Import getDictionary
 
 export const SITE_CONFIG = {
   name: DATA.name,
-  url: DATA.url,
+  url: process.env.NEXT_PUBLIC_SITE_URL || DATA.url,
   links: {
     X: "https://x.com/wistantkode",
     github: "https://github.com/wistantkode",
     LinkedIn: "https://linkedin.com/in/wistantkode",
   },
-  locales: {
-    en: {
-      title: `${DATA.name} | Senior Software Engineer & Cloud Architect`,
-      description:
-        "Senior Software Engineer specializing in high-performance web systems and scalable architectures. Crafting premium digital experiences with TypeScript, Next.js, and Node.js.",
-      keywords: [
-        "Software Engineer",
-        "Cloud",
-        "Tech",
-        "DevOps",
-        "JavaScript Cameroon",
-        "JavaScript Africa",
-        "Next.js",
-        "React",
-        "TypeScript",
-        "System Architecture",
-      ],
-    },
-    fr: {
-      title: `${DATA.name} | Ingénieur Logiciel Senior & ArchitecteCloud `,
-      description:
-        "Ingénieur Logiciel Senior spécialisé en systèmes web haute performance au Cameroun (Douala). Expert Next.js, TypeScript et architectures cloud premium.",
-      keywords: [
-        "Développeur Cameroun",
-        "Expert Next.js Douala",
-        "Freelance Web Cameroun",
-        "Architecte logiciel",
-      ],
-    },
-  },
-  ogImage: `${DATA.url}/opengraph`,
+  ogImage: `${process.env.NEXT_PUBLIC_SITE_URL || DATA.url}/opengraph`,
 };
 
-export const getMetadata = (lang: "en" | "fr" = "en") => {
-  const config = SITE_CONFIG.locales[lang] || SITE_CONFIG.locales.en;
+export const truncateTo160 = (text?: string): string => {
+  if (!text) return "";
+  const stripped = text.replace(/<[^>]*>?/gm, "").replace(/[#*`_]/g, ""); // Strip HTML & basic markdown
+  return stripped.length > 160 ? stripped.substring(0, 157) + "..." : stripped;
+};
+
+interface PageSeo {
+  title?: string;
+  description?: string;
+  keywords?: string | string[];
+  url?: string;
+  image?: string;
+}
+
+export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
+  const dict = await getDictionary(lang);
+  const globalSeo = dict.global.seo;
+
+  const title = pageSeo?.title || globalSeo.title;
+  // Truncate dynamically provided description, fallback to dictionary
+  const rawDescription = pageSeo?.description || globalSeo.description;
+  const description = pageSeo?.description ? truncateTo160(rawDescription) : rawDescription;
+  const keywords = pageSeo?.keywords || globalSeo.keywords;
+  const url = pageSeo?.url || "";
+  const ogImage = pageSeo?.image || SITE_CONFIG.ogImage;
+
+  // Use the env base or fallback to avoid canonical mismatch on vercel branches
+  const base = new URL(SITE_CONFIG.url);
+  const fullUrl = `${SITE_CONFIG.url}${url}`;
 
   return {
-    metadataBase: new URL(SITE_CONFIG.url),
+    metadataBase: base,
     title: {
-      default: config.title,
+      default: title,
       template: `%s | ${SITE_CONFIG.name}`,
     },
-    description: config.description,
-    keywords: config.keywords,
+    description: description,
+    keywords: keywords,
     authors: [{ name: DATA.name, url: DATA.url }],
     creator: DATA.name,
     publisher: DATA.name,
     category: "technology",
     alternates: {
-      canonical: SITE_CONFIG.url,
+      canonical: fullUrl,
       languages: {
         "en-US": `${SITE_CONFIG.url}/en`,
         "fr-FR": `${SITE_CONFIG.url}/fr`,
@@ -66,13 +64,13 @@ export const getMetadata = (lang: "en" | "fr" = "en") => {
     openGraph: {
       type: "website",
       locale: lang === "fr" ? "fr_FR" : "en_US",
-      url: SITE_CONFIG.url,
+      url: fullUrl,
       siteName: SITE_CONFIG.name,
-      title: config.title,
-      description: config.description,
+      title: title,
+      description: description,
       images: [
         {
-          url: SITE_CONFIG.ogImage,
+          url: ogImage,
           width: 1200,
           height: 630,
           alt: SITE_CONFIG.name,
@@ -82,9 +80,9 @@ export const getMetadata = (lang: "en" | "fr" = "en") => {
     },
     twitter: {
       card: "summary_large_image",
-      title: config.title,
-      description: config.description,
-      images: [SITE_CONFIG.ogImage],
+      title: title,
+      description: description,
+      images: [ogImage],
       creator: "@wistantkode",
       site: "@wistantkode",
     },
@@ -128,5 +126,3 @@ export const getMetadata = (lang: "en" | "fr" = "en") => {
     },
   };
 };
-
-export const DEFAULT_METADATA = getMetadata("en");

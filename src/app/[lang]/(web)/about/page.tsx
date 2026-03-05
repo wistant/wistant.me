@@ -4,10 +4,24 @@ import { TextReveal } from "@/components/ui/magicui/text-reveal";
 import WorkSection from "@/components/home/work-section";
 import EducationSection from "@/components/home/education-section";
 import { getDictionary } from "@/lib/dictionary";
+import { Metadata } from "next";
+import { getPageMetadata } from "@/config/metadata";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default async function AboutPage({ params }: { params: Promise<{ lang: string }> }) {
+type Language = "en" | "fr";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return getPageMetadata(lang, dict.about.seo);
+}
+
+export default async function AboutPage({ params }: { params: Promise<{ lang: Language }> }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
