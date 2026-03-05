@@ -140,12 +140,11 @@ export default async function Home({
 
       <section id="projects">
         <ShowMore
-          initialHeight={1450}
+          initialHeight={1650}
           buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
           buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
           href={`/${lang}/projects`}
           linkText={dict.projects.viewAll}
-          buttonClassName="-mt-14"
         >
           <ProjectsSection limit={6} lang={lang} />
         </ShowMore>
@@ -153,7 +152,7 @@ export default async function Home({
 
       <section id="hackathons">
         <ShowMore
-          initialHeight={700}
+          initialHeight={450}
           buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
           buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
           href={`/${lang}/hackathons`}

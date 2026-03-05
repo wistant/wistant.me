@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 interface ShowMoreProps {
@@ -39,22 +39,20 @@ export function ShowMore({
         className="overflow-hidden relative"
       >
         {children}
-        
-        <AnimatePresence>
-          {!isExpanded && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-x-0 bottom-0 z-10 h-96 bg-linear-to-t from-background via-background/95 via-background/50 to-transparent pointer-events-none"
-            />
+
+        {/* The blur overlay is now just a standard div with opacity transition, completely bypassing framer-motion exit conflicts */}
+        <div 
+          className={cn(
+            "absolute inset-x-0 bottom-0 z-10 h-72 pointer-events-none transition-opacity duration-500",
+            "bg-linear-to-t from-background via-background/80 to-transparent",
+            isExpanded ? "opacity-0" : "opacity-100"
           )}
-        </AnimatePresence>
+        />
       </motion.div>
 
       <div className={cn(
         "relative z-20 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-500",
-        isExpanded ? "mt-12" : cn("mt-8", buttonClassName)
+        isExpanded ? "mt-8" : cn("-mt-12", buttonClassName)
       )}>
         <Button
           variant="outline"
