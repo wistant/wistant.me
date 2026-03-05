@@ -108,7 +108,7 @@ export default async function Home({
           buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
           buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
           href={`/${lang}/about`}
-          linkText={lang === "fr" ? "À propos" : "About me"}
+          linkText={dict.navigation.about || "About me"}
         >
           <Gallery />
         </ShowMore>
@@ -128,9 +128,7 @@ export default async function Home({
                 variant="ghost"
                 className="group text-muted-foreground hover:text-foreground"
               >
-                {lang === "fr"
-                  ? "Voir mon parcours complet"
-                  : "View full journey"}
+                {dict.work.viewMore || "View full journey"}
                 <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
@@ -156,7 +154,7 @@ export default async function Home({
           buttonTextShow={lang === "fr" ? "Voir plus" : "See more"}
           buttonTextHide={lang === "fr" ? "Réduire" : "Show less"}
           href={`/${lang}/hackathons`}
-          linkText={lang === "fr" ? "Tous les hackathons" : "All hackathons"}
+          linkText={dict.navigation.hackathons || "All hackathons"}
         >
           <HackathonsSection limit={4} />
         </ShowMore>

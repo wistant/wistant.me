@@ -1,6 +1,7 @@
-import { getDictionary } from "@/lib/dictionary";
 import { DATA } from "@/data/resume";
 import BlurFade from "@/components/ui/magicui/blur-fade";
+import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
+import { getDictionary } from "@/lib/dictionary";
 
 type Language = "en" | "fr";
 
@@ -14,6 +15,15 @@ export default async function ContactPage({
 
   return (
     <main className="min-h-dvh flex flex-col gap-6 relative px-4 sm:px-6 lg:px-0 py-12 sm:py-24 max-w-3xl mx-auto">
+      <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
+        <FlickeringGrid
+          squareSize={4}
+          gridGap={6}
+          color="#6B7280"
+          maxOpacity={0.35}
+          flickerChance={0.05}
+        />
+      </div>
       <section className="w-full flex justify-center">
         <div className="w-full max-w-2xl p-8 sm:p-12 lg:p-16">
           <BlurFade delay={0.04}>
