@@ -25,9 +25,15 @@ const posts = defineCollection({
     const summary = document.summary || document.description || "";
     const image = document.image || document.thumbnail;
 
+    const rawPath = document._meta.path;
+    const match = rawPath.match(/^(.*?)(?:\.(en|fr))?$/);
+    const slug = match ? match[1] : rawPath;
+    const extractedLang = match && match[2] ? match[2] : "en";
+
     return {
       ...document,
-      slug: document._meta.path.replace(/\.mdx$/, ""),
+      slug,
+      lang: document.lang || extractedLang,
       date,
       summary,
       image,

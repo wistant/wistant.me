@@ -7,6 +7,23 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import Markdown from "react-markdown";
+import { Icons } from "@/components/ui/icons";
+
+const getTechIcon = (tech: string) => {
+  const norm = tech.toLowerCase();
+  if (norm.includes("next")) return <Icons.nextjs className="size-3" />;
+  if (norm.includes("react")) return <Icons.react className="size-3 text-[#61DAFB]" />;
+  if (norm.includes("typescript") || norm === "ts") return <Icons.typescript className="size-3 text-[#3178C6]" />;
+  if (norm.includes("tailwind")) return <Icons.tailwindcss className="size-3 text-[#06B6D4]" />;
+  if (norm.includes("framer")) return <Icons.framermotion className="size-3" />;
+  if (norm.includes("openai") || norm.includes("ai")) return <Icons.openai className="size-3" />;
+  if (norm.includes("github")) return <Icons.github className="size-3" />;
+  if (norm.includes("nestjs") || norm.includes("nest")) return <Icons.nestjs className="size-3" />;
+  if (norm.includes("postgres") || norm.includes("sql")) return <Icons.postgresql className="size-3" />;
+  if (norm.includes("prisma")) return <Icons.prisma className="size-3" />;
+  if (norm.includes("redis")) return <Icons.redis className="size-3" />;
+  return null;
+};
 
 function ProjectImage({ src, alt }: { src: string; alt: string }) {
   const [imageError, setImageError] = useState(false);
@@ -51,7 +68,6 @@ export function ProjectCard({
   description,
   dates,
   tags,
-  link,
   image,
   video,
   links,
@@ -60,11 +76,11 @@ export function ProjectCard({
   return (
     <div
       className={cn(
-        "flex flex-col h-full border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200",
+        "group flex flex-col h-full bg-muted/10 p-2.5 rounded-4xl border border-border/50 hover:border-border/80 hover:shadow-sm transition-all duration-300 cursor-pointer",
         className
       )}
     >
-      <div className="relative shrink-0">
+      <div className="relative shrink-0 rounded-3xl overflow-hidden border border-border/30">
         <Link
           href={href || "#"}
           target="_blank"
@@ -108,10 +124,10 @@ export function ProjectCard({
           </div>
         )}
       </div>
-      <div className="p-6 flex flex-col gap-3 flex-1">
+      <div className="p-4 flex flex-col gap-3 flex-1 bg-background/50 rounded-2xl mt-2.5 border border-transparent group-hover:bg-background/80 transition-colors">
         <div className="flex items-start justify-between gap-2">
           <div className="flex flex-col gap-1">
-            <h3 className="font-semibold">{title}</h3>
+            <h3 className="font-semibold font-cal text-lg tracking-tight">{title}</h3>
             <time className="text-xs text-muted-foreground">{dates}</time>
           </div>
           <Link
@@ -128,13 +144,14 @@ export function ProjectCard({
           <Markdown>{description}</Markdown>
         </div>
         {tags && tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-auto">
+          <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
             {tags.map((tag) => (
               <Badge
                 key={tag}
-                className="text-[11px] font-medium border border-border h-6 w-fit px-2"
+                className="text-[11px] font-medium border border-border/50 bg-background hover:bg-muted text-muted-foreground flex items-center h-6 w-fit px-2 transition-colors"
                 variant="outline"
               >
+                {getTechIcon(tag) && <span className="mr-1.5">{getTechIcon(tag)}</span>}
                 {tag}
               </Badge>
             ))}

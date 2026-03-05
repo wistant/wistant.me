@@ -10,6 +10,8 @@ import { FloatingDock } from "@/components/dock/floating-dock";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import { Analytics } from "@vercel/analytics/next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Icons } from "@/components/ui/icons";
+import { getDictionary } from "@/lib/dictionary";
 
 const calFont = localFont({
   src: "../../fonts/cal.woff2",
@@ -61,6 +63,7 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as Language);
 
   return (
     <html lang={lang} suppressHydrationWarning>
@@ -73,30 +76,29 @@ export default async function RootLayout({
             <div className="pointer-events-auto w-fit max-w-full">
               <FloatingDock
                 items={[
-                  ...DATA.navbar.map((item) => ({
-                    title: item.label,
-                    icon: <item.icon className="h-full w-full" />,
-                    href: item.href === "/" ? `/${lang}` : `/${lang}${item.href}`,
-                  })),
+                  ...DATA.navbar.map((item) => {
+                    // Match the data label (e.g. 'Home') to the dict property (e.g. dict.navigation.home)
+                    const key = item.label.toLowerCase() as keyof typeof dict.navigation;
+                    return {
+                      title: dict.navigation[key] || item.label,
+                      icon: <item.icon className="h-full w-full" />,
+                      href: item.href === "/" ? `/${lang}` : `/${lang}${item.href}`,
+                    };
+                  }),
                   {
                     title: "GitHub",
                     icon: <Github className="h-full w-full" />,
                     href: DATA.contact.social.GitHub.url,
                   },
                   {
-                    title: "LinkedIn",
-                    icon: <Linkedin className="h-full w-full" />,
-                    href: DATA.contact.social.LinkedIn.url,
-                  },
-                  {
-                    title: "Twitter",
-                    icon: <Twitter className="h-full w-full" />,
-                    href: DATA.contact.social.X.url,
+                    title: "WhatsApp",
+                    icon: <Icons.whatsapp className="h-full w-full" />,
+                    href: DATA.contact.social.WhatsApp.url,
                   },
                 ]}
                 mobileItems={[
                   {
-                    title: "Home",
+                    title: dict.navigation.home || "Home",
                     icon: (
                       <Avatar className="h-full w-full border border-border/50">
                         <AvatarImage src={DATA.avatarUrl} alt={DATA.name} />
@@ -106,12 +108,15 @@ export default async function RootLayout({
                     href: `/${lang}`,
                   },
                   ...DATA.navbar
-                    .filter((item) => item.href !== "/")
-                    .map((item) => ({
-                      title: item.label,
-                      icon: <item.icon className="h-full w-full" />,
-                      href: `/${lang}${item.href}`,
-                    })),
+                    .filter((item) => ["/about", "/projects", "/blog"].includes(item.href))
+                    .map((item) => {
+                      const key = item.label.toLowerCase() as keyof typeof dict.navigation;
+                      return {
+                        title: dict.navigation[key] || item.label,
+                        icon: <item.icon className="h-full w-full" />,
+                        href: `/${lang}${item.href}`,
+                      };
+                    }),
                   {
                     title: "GitHub",
                     icon: <Github className="h-full w-full" />,

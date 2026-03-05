@@ -1,93 +1,105 @@
 {
   "navigation": {
     "home": "Accueil",
-    "blog": "Réflexions",
-    "projects": "Réalisations",
+    "blog": "Notes",
+    "projects": "Projets",
     "about": "À Propos",
     "hackathons": "Hackathons",
     "contact": "Contact",
-    "resume": "Curriculum"
+    "resume": "CV",
+    "backToHome": "Retour à l'accueil"
   },
   "hero": {
-    "title": "Architecture de Systèmes Digitaux de Haute Précision 👋🏻",
-    "description": "Je suis Wistant, Ingénieur Logiciel Senior expert de l'écosystème TypeScript. Je me spécialise dans les architectures Full-Stack 100% TS (NestJS, Next.js) propulsées par Prisma, Redis et PostgreSQL/MariaDB. Je transforme vos défis en systèmes scalables."
+    "title": "L'Ingénierie de solutions numériques de premier plan 🏆.",
+    "description": "Je suis Wistant, futur Ingénieur Logiciel. Je conçois et développe des plateformes scalables sur toutes les interfaces (Web, Mobile, Desktop)."
   },
   "about": {
-    "title": "Philosophie de l'Ingénierie",
-    "content": "Fort de plus de 5 ans d'expérience, je ne me contente pas d'écrire du code : je conçois des systèmes. Mon approche allie rigueur architecturale et focus utilisateur, garantissant que chaque ligne de code apporte une valeur métier concrète et une excellence technique.",
+    "title": "Mon Approche",
+    "content": "Je ne me contente pas de coder ; je conçois des systèmes logiciels pensés pour l'excellence. Mon objectif : transformer des problèmes complexes en solutions multiplateformes simples, élégantes et ultra-rapides.",
     "seo": {
-      "title": "À Propos de Wistant | Architecte TypeScript & Full-Stack Engineer",
-      "description": "Découvrez le parcours d'ingénierie de Wistant. Une expertise absolue sur l'écosystème TypeScript (NestJS, Next.js), l'optimisation des bases de données (Prisma, PostgreSQL) et la fiabilité des performances (Redis, Vite).",
-      "keywords": "Architecte TypeScript, Ingénieur Full-Stack Cameroun, Expert NestJS Douala, Développeur Next.js, Prisma ORM, Intégration Redis, Ingénieur Logiciel Senior"
+      "title": "À Propos de Wistant | Ingénieur Logiciel",
+      "description": "Découvrez le profil de Wistant, développeur et futur ingénieur spécialisé dans la création de solutions numériques (Web, Mobile, Desktop).",
+      "keywords": "Ingénieur Logiciel, Développeur Full-Stack, Développement Mobile, Applications Desktop, TypeScript, Next.js, NestJS"
     }
   },
   "work": {
-    "title": "Parcours Professionnel",
-    "viewMore": "Lire l'étude de cas",
-    "present": "Présent"
+    "title": "Expérience",
+    "viewMore": "Voir mon parcours",
+    "present": "Aujourd'hui"
   },
   "education": {
-    "title": "Fondations Académiques"
+    "title": "Formation"
   },
   "skills": {
-    "title": "Arsenal Technique",
-    "description": "Un stack technologique de pointe sélectionné pour la performance et la maintenabilité.",
+    "title": "Ma Stack",
+    "description": "Les technologies que j'utilise au quotidien pour concevoir des produits fiables.",
     "categories": {
-      "frontend": "Maitrise Frontend",
-      "backend": "Systèmes Distribués",
-      "devops": "Automatisation & Cloud"
+      "frontend": "Frontend",
+      "backend": "Backend & Base de données",
+      "devops": "Infrastructure"
     }
   },
   "projects": {
-    "title": "Projets à Haut Impact",
-    "viewAll": "Explorer tout le Portfolio",
-    "cta": "Plongée Technique",
-    "stack": "Stack Utilisé",
+    "title": "Projets Sélectionnés",
+    "viewAll": "Voir tous les projets",
+    "cta": "Voir le Projet",
+    "stack": "Stack technique",
     "seo": {
-      "title": "Portfolio & Réalisations | Applications Full-Stack TypeScript",
-      "description": "Explorez une sélection de projets très techniques : APIs backend robustes sous NestJS/Prisma, interfaces ultra-rapides sous Vite/Next.js, et architectures scalables.",
-      "keywords": "Portfolio développeur TypeScript, Études de cas NestJS, Architectures Next.js, Projets Prisma PostgreSQL, Applications Full-Stack, Dashboard Vite"
+      "title": "Wistant | Portfolio & Réalisations",
+      "description": "Découvrez mes projets full-stack les plus récents construits avec Next.js, NestJS et TypeScript.",
+      "keywords": "Portfolio, Projets, TypeScript, Next.js, NestJS, Développement Web"
     }
   },
   "blog": {
-    "title": "Réflexions & Notes Techniques",
-    "description": "Exploration approfondie des technologies web modernes, tutoriels d'architecture et retours d'expérience.",
+    "title": "Notes & Apprentissages",
+    "description": "Réflexions sur l'ingénierie logicielle, le développement multiplateforme et mes découvertes du moment.",
     "seo": {
-      "title": "Le Blog Technique | Écosystème TypeScript, NestJS & Next.js",
-      "description": "Articles techniques sur le développement Full-Stack TypeScript, l'architecture d'APIs NestJS, la gestion des données avec Prisma/PostgreSQL, et la performance Frontend.",
-      "keywords": "Blog technique TypeScript, Tutoriels NestJS, Architecture Next.js, Optimisation Prisma, Caching Redis, Programmation Vite, Veille technologique Douala"
+      "title": "Wistant | Blog & Notes",
+      "description": "Articles, notes et réflexions sur le développement logiciel moderne et l'architecture système.",
+      "keywords": "Blog, Développement Logiciel, Développement Mobile, TypeScript, Ingénierie"
     }
   },
   "contact": {
-    "title": "Parlons de Votre Prochain Projet",
-    "subtitle": "Concevons ensemble des solutions qui durent.",
-    "description": "Que vous ayez besoin d'un regard d'expert sur votre architecture, d'une solution web sur mesure ou d'un pivot stratégique, je suis là pour transformer vos défis en succès technologiques.",
-    "button": "Lancer la conversation",
-    "social": "Suivez mon parcours",
+    "title": "Travaillons ensemble",
+    "subtitle": "Un projet en tête ou simplement envie d'échanger ?",
+    "description": "Je suis toujours ouvert pour discuter de nouveaux projets, d'idées créatives ou d'opportunités de collaboration.",
+    "button": "Me contacter",
+    "social": "Mes réseaux",
     "seo": {
-      "title": "Contactez Wistant | Senior TypeScript Engineer Douala",
-      "description": "Prêt à scaler votre produit sur la stack TypeScript ? Contactez-moi pour discuter d'architecture NestJS/Next.js, de modélisation Prisma/PostgreSQL ou d'ingénierie technique.",
-      "keywords": "Recruter Développeur TypeScript, Expert NestJS Douala, Architecte SaaS Freelance, Expert Base de données MariaDB"
+      "title": "Contact Wistant | Discutons",
+      "description": "Contactez-moi pour des missions freelance, du consulting ou simplement pour échanger.",
+      "keywords": "Contact, Développeur Freelance, Ingénieur Full-Stack"
     }
   },
   "hackathons": {
-    "title": "Sprints d'Innovation",
+    "title": "Hackathons",
+    "subtitle": "J'aime construire des choses",
+    "description": "Tout au long de mon parcours, j'ai participé à de multiples hackathons. C'est fascinant de voir des développeurs passionnés se réunir pour construire des projets innovants en un week-end. Ces sprints intensifs ont forgé ma capacité à livrer de la valeur rapidement et sous pression.",
     "seo": {
-      "title": "Hackathons & Compétitions | Innovation Rapide",
-      "description": "Historique des participations aux hackathons et compétitions de code. Là où l'innovation rencontre la contrainte de temps.",
-      "keywords": "Hackathons, Compétitions de code, Innovation, Prototypage rapide, Challenge technique"
+      "title": "Hackathons | Wistant",
+      "description": "Un historique de mes participations aux hackathons et sprints de code.",
+      "keywords": "Hackathons, Compétitions de code, Projets"
     }
   },
   "og": {
-    "headline": "Ingénierie Full-Stack TypeScript Premium",
-    "description": "Expert NestJS, Next.js & Architecte Data (Prisma/PostgreSQL)",
-    "cta": "Explorer le Portfolio"
+    "headline": "Ingénieur Logiciel",
+    "description": "Conception de solutions numériques haut de gamme (Web, Mobile, Desktop).",
+    "cta": "Voir le Portfolio"
+  },
+  "ui": {
+    "backToHome": "Retour à l'accueil",
+    "seeMore": "Voir plus",
+    "showLess": "Réduire",
+    "loadingArticles": "Chargement des articles...",
+    "noArticlesFound": "Aucun article trouvé pour ce tag.",
+    "dateLocale": "fr-FR",
+    "allFilter": "Tous"
   },
   "global": {
     "seo": {
-      "title": "Wistant Kode | Full-Stack TypeScript Engineer (NestJS / Next.js)",
-      "description": "Architecte Technique & Ingénieur Logiciel basé à Douala. Expertise pointue dans l'écosystème 100% TypeScript : NestJS, Next.js, Vite, Prisma, Redis et PostgreSQL.",
-      "keywords": "Ingénieur Logiciel TypeScript, Architecte NestJS Douala, Développeur Next.js Cameroun, Expert Prisma, Caching Redis, Développeur Lead, Full-Stack Architect"
+      "title": "Wistant | Ingénieur Logiciel",
+      "description": "Wistant est un futur Ingénieur Logiciel basé au Cameroun, spécialisé dans la création de solutions numériques de pointe sur Web, Mobile et Desktop.",
+      "keywords": "Wistant, Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développeur Mobile, TypeScript, Next.js, React Native, Cameroun"
     }
   }
 }

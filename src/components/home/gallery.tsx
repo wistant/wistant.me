@@ -57,15 +57,15 @@ export default function Gallery() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.3 }}
-              className="relative w-auto h-auto max-w-[90vw] max-h-[90vh] flex items-center justify-center"
+              className="relative flex items-center justify-center mb-12 md:mb-24"
             >
               <Image
                 src={selectedImage}
                 alt="Full preview"
-                width={1000}
-                height={1000}
+                width={1200}
+                height={1200}
                 unoptimized
-                className="rounded-xl object-contain shadow-2xl"
+                className="rounded-xl object-contain shadow-2xl max-w-[95vw] max-h-[75vh] md:max-w-[80vw] md:max-h-[70vh] w-auto h-auto"
                 priority
               />
               <button
@@ -73,7 +73,7 @@ export default function Gallery() {
                   e.stopPropagation();
                   setSelectedImage(null);
                 }}
-                className="absolute -top-10 right-0 p-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="fixed top-4 right-4 md:top-8 md:right-8 p-3 text-muted-foreground hover:text-foreground bg-background/50 hover:bg-background/80 rounded-full transition-colors z-50 backdrop-blur-md border border-border/50 shadow-md"
                 aria-label="Close"
               >
                 <X className="w-6 h-6" />

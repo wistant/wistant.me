@@ -7,7 +7,6 @@ import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { DATA } from "@/data/resume";
 import { getDictionary } from "@/lib/dictionary";
 import { getPageMetadata } from "@/config/metadata";
 
@@ -23,8 +22,8 @@ export async function generateMetadata({
   return getPageMetadata(lang, dict.blog.seo);
 }
 
-const formatDate = (date: string | Date): string => {
-  return new Date(date).toLocaleDateString("en-US", {
+const formatDate = (date: string | Date, locale: string): string => {
+  return new Date(date).toLocaleDateString(locale, {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -49,23 +48,23 @@ export default async function BlogPage({
 
   // Extract unique tags
   const allTags = [
-    "All",
+    dict.ui.allFilter,
     ...Array.from(
       new Set(sortedPosts.flatMap((post) => post.tags || [])),
     ).sort(),
   ];
 
   // Filter logic
-  const selectedTag = resolvedSearchParams.tag || "All";
+  const selectedTag = resolvedSearchParams.tag || dict.ui.allFilter;
   const filteredPosts =
-    selectedTag === "All"
+    selectedTag === dict.ui.allFilter
       ? sortedPosts
       : sortedPosts.filter((post) => post.tags?.includes(selectedTag));
 
   // Compute tag counts
   const tagCounts = allTags.reduce(
     (acc, tag) => {
-      if (tag === "All") {
+      if (tag === dict.ui.allFilter) {
         acc[tag] = sortedPosts.length;
       } else {
         acc[tag] = sortedPosts.filter((post) =>
@@ -82,14 +81,14 @@ export default async function BlogPage({
       {/* Back Button */}
       <div className="max-w-7xl mx-auto px-6 mb-4 relative z-10">
         <Button
-          variant="ghost"
+          variant="default"
           size="sm"
-          className="gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          className="gap-2 rounded-full shadow-sm font-medium transition-colors"
           asChild
         >
-          <Link href="/">
+          <Link href={`/${lang}`}>
             <ArrowLeft className="size-4" />
-            Retour à l&lsquo;accueil
+            {dict.ui.backToHome}
           </Link>
         </Button>
       </div>
@@ -135,7 +134,7 @@ export default async function BlogPage({
       <div className="max-w-7xl mx-auto w-full px-6 lg:px-0">
         <Suspense
           fallback={
-            <div className="text-center py-20">Loading articles...</div>
+            <div className="text-center py-20">{dict.ui.loadingArticles}</div>
           }
         >
           {filteredPosts.length > 0 ? (
@@ -150,7 +149,7 @@ export default async function BlogPage({
                   url={`/${lang}/blog/${post.slug}`}
                   title={post.title}
                   description={post.summary}
-                  date={formatDate(post.date)}
+                  date={formatDate(post.date, dict.ui.dateLocale)}
                   thumbnail={post.image}
                   showRightBorder={filteredPosts.length < 3}
                 />
@@ -158,7 +157,7 @@ export default async function BlogPage({
             </div>
           ) : (
             <div className="text-center py-20 text-muted-foreground border-x border-b border-border">
-              Aucun article trouvé pour le tag &quot;{selectedTag}&quot;.
+              {dict.ui.noArticlesFound}
             </div>
           )}
         </Suspense>

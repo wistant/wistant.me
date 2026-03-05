@@ -46,7 +46,7 @@ export default async function HackathonsPage({ params }: { params: Promise<{ lan
           </TextReveal>
           <BlurFade delay={BLUR_FADE_DELAY}>
             <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-prose">
-              {dict.hackathons.seo.description}
+              {dict.hackathons.description}
             </p>
           </BlurFade>
         </div>

@@ -1,20 +1,14 @@
-import { ReactLight } from "@/components/ui/svgs/reactLight";
-import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
-import { Typescript } from "@/components/ui/svgs/typescript";
-import { Nodejs } from "@/components/ui/svgs/nodejs";
-import { Postgresql } from "@/components/ui/svgs/postgresql";
+// Canonical skills data using real branded icons from icons.tsx
+import { Icons } from "@/components/ui/icons";
 
 export const skillsData = [
-  // Core TypeScript Architecture
-  { name: "TypeScript", icon: Typescript },
-  { name: "Next.js", icon: NextjsIconDark },
-  { name: "NestJS", icon: Nodejs },
-  { name: "React", icon: ReactLight },
-  { name: "Vite", icon: ReactLight }, // Using ReactLight as fallback pattern for frontend tooling
-
-  // Databases & Tooling
-  { name: "PostgreSQL", icon: Postgresql },
-  { name: "MariaDB", icon: Postgresql }, // Fallback icon for DB
-  { name: "Prisma", icon: Typescript }, // Fallback for TS ORM
-  { name: "Redis", icon: Nodejs }, // Fallback for datastore
+  { name: "TypeScript", icon: Icons.typescript },
+  { name: "Next.js", icon: Icons.nextjs },
+  { name: "NestJS", icon: Icons.nestjs },
+  { name: "React", icon: Icons.react },
+  { name: "PostgreSQL", icon: Icons.postgresql },
+  { name: "Prisma", icon: Icons.prisma },
+  { name: "Redis", icon: Icons.redis },
+  { name: "Vercel", icon: Icons.vercel },
+  { name: "Linux", icon: Icons.linux },
 ];
