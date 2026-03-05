@@ -1,11 +1,19 @@
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { ProjectCard } from "@/components/projects/project-card";
-import { DATA } from "@/data/resume";
+import { projectsData } from "@/data/projects";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function ProjectsSection({ limit }: { limit?: number }) {
-  const projects = limit ? DATA.projects.slice(0, limit) : DATA.projects;
+type Language = "en" | "fr";
+
+export default function ProjectsSection({
+  limit,
+  lang,
+}: {
+  limit?: number;
+  lang: Language;
+}) {
+  const projects = limit ? projectsData.slice(0, limit) : projectsData;
 
   return (
     <section id="projects">
@@ -36,15 +44,14 @@ export default function ProjectsSection({ limit }: { limit?: number }) {
             if (!project) return null;
             return (
               <BlurFade
-                key={project.title}
+                key={project.slug}
                 delay={BLUR_FADE_DELAY * 12 + id * 0.05}
                 className="h-full"
               >
                 <ProjectCard
                   href={project.href}
-                  key={project.title}
-                  title={project.title}
-                  description={project.description}
+                  title={project.title[lang]}
+                  description={project.description[lang]}
                   dates={project.dates}
                   tags={project.technologies}
                   image={project.image}
