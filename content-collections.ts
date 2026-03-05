@@ -18,6 +18,7 @@ const posts = defineCollection({
     thumbnail: z.string().optional(),
     published: z.boolean().default(true),
     content: z.string().optional(),
+    lang: z.string().optional(),
   }),
   transform: (document) => {
     const date = document.date || document.publishedAt || new Date().toISOString();
@@ -26,7 +27,7 @@ const posts = defineCollection({
 
     return {
       ...document,
-      slug: document._meta.path,
+      slug: document._meta.path.replace(/\.mdx$/, ""),
       date,
       summary,
       image,
@@ -52,7 +53,7 @@ const projects = defineCollection({
   transform: (document) => {
     return {
       ...document,
-      slug: document._meta.path,
+      slug: document._meta.path.replace(/\.mdx$/, ""),
     };
   },
 });
