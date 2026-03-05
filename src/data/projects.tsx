@@ -37,6 +37,279 @@ export const projectsData = [
     },
   },
   {
+    slug: "nestjs-auth-jwt",
+    title: {
+      en: "NESTJS AUTH JWT - Secure Authentication Microservice",
+      fr: "NESTJS AUTH JWT - Microservice d'Authentification Sécurisé",
+    },
+    href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+    dates: "2024",
+    active: true,
+    description: {
+      en: "Engineered a secure and efficient authentication microservice using NestJS, implementing JWT (JSON Web Tokens) for robust user authorization. Designed for seamless integration into larger application architectures.",
+      fr: "Conception d'un microservice d'authentification sécurisé et efficace avec NestJS, implémentant JWT (JSON Web Tokens) pour une autorisation utilisateur robuste. Conçu pour une intégration transparente dans des architectures d'applications plus vastes.",
+    },
+    technologies: ["NestJS", "TypeScript", "JWT", "Bcrypt", "Swagger"],
+    links: [
+      {
+        type: "Source",
+        href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+        icon: React.createElement(Icons.github, { className: "size-3" }),
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    video: "",
+    seo: {
+      title: {
+        en: "Secure NestJS Authentication Microservice with JWT",
+        fr: "Microservice d'Authentification NestJS Sécurisé avec JWT",
+      },
+      description: {
+        en: "Discover a robust and secure authentication microservice built with NestJS and JWT. Ideal for modern application architectures.",
+        fr: "Découvrez un microservice d'authentification robuste et sécurisé construit avec NestJS et JWT. Idéal pour les architectures d'applications modernes.",
+      },
+    },
+  },
+  {
+    slug: "nestjs-auth-jwt",
+    title: {
+      en: "NESTJS AUTH JWT - Secure Authentication Microservice",
+      fr: "NESTJS AUTH JWT - Microservice d'Authentification Sécurisé",
+    },
+    href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+    dates: "2024",
+    active: true,
+    description: {
+      en: "Engineered a secure and efficient authentication microservice using NestJS, implementing JWT (JSON Web Tokens) for robust user authorization. Designed for seamless integration into larger application architectures.",
+      fr: "Conception d'un microservice d'authentification sécurisé et efficace avec NestJS, implémentant JWT (JSON Web Tokens) pour une autorisation utilisateur robuste. Conçu pour une intégration transparente dans des architectures d'applications plus vastes.",
+    },
+    technologies: ["NestJS", "TypeScript", "JWT", "Bcrypt", "Swagger"],
+    links: [
+      {
+        type: "Source",
+        href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+        icon: React.createElement(Icons.github, { className: "size-3" }),
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    video: "",
+    seo: {
+      title: {
+        en: "Secure NestJS Authentication Microservice with JWT",
+        fr: "Microservice d'Authentification NestJS Sécurisé avec JWT",
+      },
+      description: {
+        en: "Discover a robust and secure authentication microservice built with NestJS and JWT. Ideal for modern application architectures.",
+        fr: "Découvrez un microservice d'authentification robuste et sécurisé construit avec NestJS et JWT. Idéal pour les architectures d'applications modernes.",
+      },
+    },
+  },
+  {
+    slug: "nestjs-auth-jwt",
+    title: {
+      en: "NESTJS AUTH JWT - Secure Authentication Microservice",
+      fr: "NESTJS AUTH JWT - Microservice d'Authentification Sécurisé",
+    },
+    href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+    dates: "2024",
+    active: true,
+    description: {
+      en: "Engineered a secure and efficient authentication microservice using NestJS, implementing JWT (JSON Web Tokens) for robust user authorization. Designed for seamless integration into larger application architectures.",
+      fr: "Conception d'un microservice d'authentification sécurisé et efficace avec NestJS, implémentant JWT (JSON Web Tokens) pour une autorisation utilisateur robuste. Conçu pour une intégration transparente dans des architectures d'applications plus vastes.",
+    },
+    technologies: ["NestJS", "TypeScript", "JWT", "Bcrypt", "Swagger"],
+    links: [
+      {
+        type: "Source",
+        href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+        icon: React.createElement(Icons.github, { className: "size-3" }),
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    video: "",
+    seo: {
+      title: {
+        en: "Secure NestJS Authentication Microservice with JWT",
+        fr: "Microservice d'Authentification NestJS Sécurisé avec JWT",
+      },
+      description: {
+        en: "Discover a robust and secure authentication microservice built with NestJS and JWT. Ideal for modern application architectures.",
+        fr: "Découvrez un microservice d'authentification robuste et sécurisé construit avec NestJS et JWT. Idéal pour les architectures d'applications modernes.",
+      },
+    },
+  },
+  {
+    slug: "nestjs-auth-jwt",
+    title: {
+      en: "NESTJS AUTH JWT - Secure Authentication Microservice",
+      fr: "NESTJS AUTH JWT - Microservice d'Authentification Sécurisé",
+    },
+    href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+    dates: "2024",
+    active: true,
+    description: {
+      en: "Engineered a secure and efficient authentication microservice using NestJS, implementing JWT (JSON Web Tokens) for robust user authorization. Designed for seamless integration into larger application architectures.",
+      fr: "Conception d'un microservice d'authentification sécurisé et efficace avec NestJS, implémentant JWT (JSON Web Tokens) pour une autorisation utilisateur robuste. Conçu pour une intégration transparente dans des architectures d'applications plus vastes.",
+    },
+    technologies: ["NestJS", "TypeScript", "JWT", "Bcrypt", "Swagger"],
+    links: [
+      {
+        type: "Source",
+        href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+        icon: React.createElement(Icons.github, { className: "size-3" }),
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    video: "",
+    seo: {
+      title: {
+        en: "Secure NestJS Authentication Microservice with JWT",
+        fr: "Microservice d'Authentification NestJS Sécurisé avec JWT",
+      },
+      description: {
+        en: "Discover a robust and secure authentication microservice built with NestJS and JWT. Ideal for modern application architectures.",
+        fr: "Découvrez un microservice d'authentification robuste et sécurisé construit avec NestJS et JWT. Idéal pour les architectures d'applications modernes.",
+      },
+    },
+  },
+  {
+    slug: "nestjs-auth-jwt",
+    title: {
+      en: "NESTJS AUTH JWT - Secure Authentication Microservice",
+      fr: "NESTJS AUTH JWT - Microservice d'Authentification Sécurisé",
+    },
+    href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+    dates: "2024",
+    active: true,
+    description: {
+      en: "Engineered a secure and efficient authentication microservice using NestJS, implementing JWT (JSON Web Tokens) for robust user authorization. Designed for seamless integration into larger application architectures.",
+      fr: "Conception d'un microservice d'authentification sécurisé et efficace avec NestJS, implémentant JWT (JSON Web Tokens) pour une autorisation utilisateur robuste. Conçu pour une intégration transparente dans des architectures d'applications plus vastes.",
+    },
+    technologies: ["NestJS", "TypeScript", "JWT", "Bcrypt", "Swagger"],
+    links: [
+      {
+        type: "Source",
+        href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+        icon: React.createElement(Icons.github, { className: "size-3" }),
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    video: "",
+    seo: {
+      title: {
+        en: "Secure NestJS Authentication Microservice with JWT",
+        fr: "Microservice d'Authentification NestJS Sécurisé avec JWT",
+      },
+      description: {
+        en: "Discover a robust and secure authentication microservice built with NestJS and JWT. Ideal for modern application architectures.",
+        fr: "Découvrez un microservice d'authentification robuste et sécurisé construit avec NestJS et JWT. Idéal pour les architectures d'applications modernes.",
+      },
+    },
+  },
+  {
+    slug: "nestjs-auth-jwt",
+    title: {
+      en: "NESTJS AUTH JWT - Secure Authentication Microservice",
+      fr: "NESTJS AUTH JWT - Microservice d'Authentification Sécurisé",
+    },
+    href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+    dates: "2024",
+    active: true,
+    description: {
+      en: "Engineered a secure and efficient authentication microservice using NestJS, implementing JWT (JSON Web Tokens) for robust user authorization. Designed for seamless integration into larger application architectures.",
+      fr: "Conception d'un microservice d'authentification sécurisé et efficace avec NestJS, implémentant JWT (JSON Web Tokens) pour une autorisation utilisateur robuste. Conçu pour une intégration transparente dans des architectures d'applications plus vastes.",
+    },
+    technologies: ["NestJS", "TypeScript", "JWT", "Bcrypt", "Swagger"],
+    links: [
+      {
+        type: "Source",
+        href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+        icon: React.createElement(Icons.github, { className: "size-3" }),
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    video: "",
+    seo: {
+      title: {
+        en: "Secure NestJS Authentication Microservice with JWT",
+        fr: "Microservice d'Authentification NestJS Sécurisé avec JWT",
+      },
+      description: {
+        en: "Discover a robust and secure authentication microservice built with NestJS and JWT. Ideal for modern application architectures.",
+        fr: "Découvrez un microservice d'authentification robuste et sécurisé construit avec NestJS et JWT. Idéal pour les architectures d'applications modernes.",
+      },
+    },
+  },
+  {
+    slug: "nestjs-auth-jwt",
+    title: {
+      en: "NESTJS AUTH JWT - Secure Authentication Microservice",
+      fr: "NESTJS AUTH JWT - Microservice d'Authentification Sécurisé",
+    },
+    href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+    dates: "2024",
+    active: true,
+    description: {
+      en: "Engineered a secure and efficient authentication microservice using NestJS, implementing JWT (JSON Web Tokens) for robust user authorization. Designed for seamless integration into larger application architectures.",
+      fr: "Conception d'un microservice d'authentification sécurisé et efficace avec NestJS, implémentant JWT (JSON Web Tokens) pour une autorisation utilisateur robuste. Conçu pour une intégration transparente dans des architectures d'applications plus vastes.",
+    },
+    technologies: ["NestJS", "TypeScript", "JWT", "Bcrypt", "Swagger"],
+    links: [
+      {
+        type: "Source",
+        href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+        icon: React.createElement(Icons.github, { className: "size-3" }),
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    video: "",
+    seo: {
+      title: {
+        en: "Secure NestJS Authentication Microservice with JWT",
+        fr: "Microservice d'Authentification NestJS Sécurisé avec JWT",
+      },
+      description: {
+        en: "Discover a robust and secure authentication microservice built with NestJS and JWT. Ideal for modern application architectures.",
+        fr: "Découvrez un microservice d'authentification robuste et sécurisé construit avec NestJS et JWT. Idéal pour les architectures d'applications modernes.",
+      },
+    },
+  },
+  {
+    slug: "nestjs-auth-jwt",
+    title: {
+      en: "NESTJS AUTH JWT - Secure Authentication Microservice",
+      fr: "NESTJS AUTH JWT - Microservice d'Authentification Sécurisé",
+    },
+    href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+    dates: "2024",
+    active: true,
+    description: {
+      en: "Engineered a secure and efficient authentication microservice using NestJS, implementing JWT (JSON Web Tokens) for robust user authorization. Designed for seamless integration into larger application architectures.",
+      fr: "Conception d'un microservice d'authentification sécurisé et efficace avec NestJS, implémentant JWT (JSON Web Tokens) pour une autorisation utilisateur robuste. Conçu pour une intégration transparente dans des architectures d'applications plus vastes.",
+    },
+    technologies: ["NestJS", "TypeScript", "JWT", "Bcrypt", "Swagger"],
+    links: [
+      {
+        type: "Source",
+        href: "https://github.com/WistantKode/nestjs-nextjs-authentication-side",
+        icon: React.createElement(Icons.github, { className: "size-3" }),
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    video: "",
+    seo: {
+      title: {
+        en: "Secure NestJS Authentication Microservice with JWT",
+        fr: "Microservice d'Authentification NestJS Sécurisé avec JWT",
+      },
+      description: {
+        en: "Discover a robust and secure authentication microservice built with NestJS and JWT. Ideal for modern application architectures.",
+        fr: "Découvrez un microservice d'authentification robuste et sécurisé construit avec NestJS et JWT. Idéal pour les architectures d'applications modernes.",
+      },
+    },
+  },
+  
+  {
     slug: "plantex-showcase",
     title: {
       en: "Plantex - Modern Plant Showcase Website",

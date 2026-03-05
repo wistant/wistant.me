@@ -18,7 +18,10 @@ const getTechIcon = (tech: string) => {
   if (norm.includes("framer")) return <Icons.framermotion className="size-3" />;
   if (norm.includes("openai") || norm.includes("ai")) return <Icons.openai className="size-3" />;
   if (norm.includes("github")) return <Icons.github className="size-3" />;
-  if (norm.includes("nestjs") || norm.includes("nest")) return <Icons.user className="size-3" />;
+  if (norm.includes("nestjs") || norm.includes("nest")) return <Icons.nestjs className="size-3" />;
+  if (norm.includes("postgres") || norm.includes("sql")) return <Icons.postgresql className="size-3" />;
+  if (norm.includes("prisma")) return <Icons.prisma className="size-3" />;
+  if (norm.includes("redis")) return <Icons.redis className="size-3" />;
   return null;
 };
 
