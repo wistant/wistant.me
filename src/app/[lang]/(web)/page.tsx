@@ -6,6 +6,7 @@ import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
+import SkillsSection from "@/components/home/skills-section";
 import Gallery from "@/components/home/gallery";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
@@ -102,6 +103,12 @@ export default async function Home({
         </div>
       </section>
 
+      <section id="skills">
+        <BlurFade delay={BLUR_FADE_DELAY * 5}>
+          <SkillsSection title={dict.skills.title} />
+        </BlurFade>
+      </section>
+
       <section id="gallery">
         <ShowMore
           initialHeight={600}
@@ -120,13 +127,13 @@ export default async function Home({
             <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <WorkSection />
+            <WorkSection presentLabel={dict.work.present} />
           </BlurFade>
           <div className="flex justify-center mt-4">
             <Link href={`/${lang}/about`}>
               <Button
-                variant="ghost"
-                className="group text-muted-foreground hover:text-foreground"
+                variant="default"
+                className="group rounded-full shadow-sm font-medium px-6 h-10"
               >
                 {dict.work.viewMore || "View full journey"}
                 <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -156,7 +163,12 @@ export default async function Home({
           href={`/${lang}/hackathons`}
           linkText={dict.navigation.hackathons || "All hackathons"}
         >
-          <HackathonsSection limit={4} />
+          <HackathonsSection 
+            limit={4} 
+            title={dict.hackathons.title}
+            subtitle={dict.hackathons.subtitle}
+            description={dict.hackathons.description}
+          />
         </ShowMore>
       </section>
 

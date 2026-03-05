@@ -73,6 +73,8 @@
   },
   "hackathons": {
     "title": "Hackathons",
+    "subtitle": "J'aime construire des choses",
+    "description": "Tout au long de mon parcours, j'ai participé à de multiples hackathons. C'est fascinant de voir des développeurs passionnés se réunir pour construire des projets innovants en un week-end. Ces sprints intensifs ont forgé ma capacité à livrer de la valeur rapidement et sous pression.",
     "seo": {
       "title": "Hackathons | Wistant",
       "description": "Un historique de mes participations aux hackathons et sprints de code.",

@@ -33,7 +33,7 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export default function WorkSection() {
+export default function WorkSection({ presentLabel = "Present" }: { presentLabel?: string }) {
   return (
     <Accordion type="single" collapsible className="w-full grid gap-6">
       {DATA.work.map((work) => (
@@ -74,7 +74,7 @@ export default function WorkSection() {
               </div>
               <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
                 <span>
-                  {work.start} - {work.end ?? "Present"}
+                  {work.start} - {work.end ?? presentLabel}
                 </span>
               </div>
             </div>

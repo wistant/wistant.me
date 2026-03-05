@@ -7,6 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { DATA } from '@/data/resume';
 import { Metadata } from 'next';
+import { getDictionary } from '@/lib/dictionary';
 
 export const metadata: Metadata = {
   title: 'Posts | Wistant Kode',
@@ -19,20 +20,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PostsPage() {
+type Language = "en" | "fr";
+
+export default async function PostsPage({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden pt-12 md:pt-16">
       {/* Back Button */}
       <div className="max-w-7xl mx-auto px-6 mb-4 relative z-10">
         <Button
-          variant="ghost"
+          variant="default"
           size="sm"
-          className="gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          className="gap-2 rounded-full shadow-sm font-medium transition-colors"
           asChild
         >
-          <Link href="/">
+          <Link href={`/${lang}`}>
             <ArrowLeft className="size-4" />
-            Retour à l&apos;accueil
+            {dict.navigation.backToHome || "Retour à l'accueil"}
           </Link>
         </Button>
       </div>

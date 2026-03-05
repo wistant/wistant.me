@@ -55,10 +55,10 @@ export function ShowMore({
         isExpanded ? "mt-8" : cn("-mt-12", buttonClassName)
       )}>
         <Button
-          variant="outline"
+          variant="default"
           size="sm"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="rounded-full bg-background/50 backdrop-blur-md border border-border/10 shadow-sm hover:bg-accent transition-all group px-6 h-10"
+          className="rounded-full shadow-sm transition-all group px-6 h-10 font-medium"
         >
           {isExpanded ? (
             <>
@@ -76,9 +76,9 @@ export function ShowMore({
         {href && (
           <Link href={href}>
             <Button
-              variant="ghost"
+              variant="default"
               size="sm"
-              className="rounded-full text-muted-foreground hover:text-foreground hover:bg-transparent transition-all group px-4 h-10"
+              className="rounded-full shadow-sm transition-all group px-6 h-10 font-medium ml-2"
             >
               {linkText}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

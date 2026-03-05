@@ -3,6 +3,7 @@ import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { TextReveal } from "@/components/ui/magicui/text-reveal";
 import WorkSection from "@/components/home/work-section";
 import EducationSection from "@/components/home/education-section";
+import SkillsSection from "@/components/home/skills-section";
 import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
@@ -53,13 +54,19 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: La
         </div>
       </section>
 
+      <section id="skills">
+        <div className="flex min-h-0 flex-col gap-y-6">
+          <SkillsSection title={dict.skills.title} />
+        </div>
+      </section>
+
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-6">
           <BlurFade delay={BLUR_FADE_DELAY * 2}>
             <h2 className="text-2xl font-bold font-clash">{dict.work.title}</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <WorkSection />
+            <WorkSection presentLabel={dict.work.present} />
           </BlurFade>
         </div>
       </section>
