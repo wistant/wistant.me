@@ -10,11 +10,16 @@
   },
   "hero": {
     "title": "Architecting Digital Solutions That Actually Work 🏆",
-    "description": "I'm Wistant, a Full-Stack Architect who understands the product, not just the code. I specialize in turning business challenges into elegant, high-performance systems that drive real growth."
+    "description": "I'm Wistant, a Senior Software Engineer specializing in the 100% TypeScript ecosystem. From robust APIs with NestJS & Prisma, to high-performance frontends with Next.js & Vite, I build scalable systems."
   },
   "about": {
     "title": "My Philosophy",
-    "content": "With over 2 years in the field, I've learned that software is just a tool—the true solution is what matters. I approach every project with the mindset of an architect, designing robust systems that bridge the gap between complex engineering and human needs."
+    "content": "With over 2 years in the field, I've learned that software is just a tool—the true solution is what matters. I approach every project with the mindset of an architect, designing robust systems that bridge the gap between complex engineering and human needs.",
+    "seo": {
+      "title": "About Wistant | TypeScript Architect & Full-Stack Engineer",
+      "description": "Discover Wistant's engineering journey. Deep expertise in the TypeScript ecosystem (NestJS, Next.js), database optimization (Prisma, PostgreSQL/MariaDB), and performance (Redis).",
+      "keywords": "TypeScript Architect, Full-Stack Engineer Cameroon, NestJS Expert Douala, Next.js Developer, Prisma ORM, Redis Integration, Senior Backend Engineer"
+    }
   },
   "work": {
     "title": "Professional Experience",
@@ -37,24 +42,52 @@
     "title": "Impact-Driven Projects",
     "viewAll": "Explore Complete Portfolio",
     "cta": "Technical Deep Dive",
-    "stack": "Stack Used"
+    "stack": "Stack Used",
+    "seo": {
+      "title": "Portfolio & Showcase | TypeScript Full-Stack Applications",
+      "description": "Explore a selection of complex technical projects: highly scalable backend APIs with NestJS/Prisma, robust database architectures, and Next.js/Vite frontends.",
+      "keywords": "TypeScript developer portfolio, NestJS case studies, Next.js architecture, Prisma PostgreSQL projects, Full-Stack applications, Vite dashboard"
+    }
+  },
+  "blog": {
+    "title": "Insights & Technical Notes",
+    "description": "In-depth exploration of modern web technologies, architecture tutorials, and experience feedback.",
+    "seo": {
+      "title": "The Tech Blog | TypeScript Ecosystem, NestJS & Next.js",
+      "description": "Technical articles on modern Full-Stack TypeScript development, NestJS API architecture, data management with Prisma/PostgreSQL, and frontend performance.",
+      "keywords": "TypeScript tech blog, NestJS tutorials, Next.js architecture, Prisma optimization, Redis caching, Vite programming, Tech watch Douala"
+    }
   },
   "contact": {
     "title": "Initiate Collaboration",
     "subtitle": "Elevate your technical infrastructure to the next level.",
     "description": "Whether you're looking for architectural oversight, high-performance web engineering, or strategic technical consulting, I'm here to build the future with you.",
     "button": "Send Message",
-    "social": "Connect via Social Channels"
+    "social": "Connect via Social Channels",
+    "seo": {
+      "title": "Contact Wistant | Senior TypeScript Engineer Douala",
+      "description": "Ready to scale your product on the TypeScript stack? Contact me to discuss NestJS/Next.js architecture, Prisma/PostgreSQL modeling, or distributed engineering.",
+      "keywords": "Hire TypeScript Developer, NestJS Expert Douala, Freelance SaaS Architect, Database Expert MariaDB, Full-Stack Scale-up"
+    }
   },
   "hackathons": {
-    "title": "Innovation Sprints"
+    "title": "Innovation Sprints",
+    "seo": {
+      "title": "Hackathons & Competitions | Rapid Innovation",
+      "description": "History of participation in hackathons and coding competitions. Where innovation meets time constraints.",
+      "keywords": "Hackathons, Coding competitions, Innovation, Rapid prototyping, Technical challenge"
+    }
   },
   "og": {
-    "headline": "Engineering Premium Web Systems",
-    "description": "Senior Software Engineer & Architect",
+    "headline": "Engineering Premium TypeScript Systems",
+    "description": "NestJS, Next.js & Data Architect (Prisma/PostgreSQL)",
     "cta": "Explore Portfolio"
   },
-  "meta": {
-    "keywords": "Senior Software Engineer, System Architect, Next.js Expert, TypeScript Developer, High-Performance Web"
+  "global": {
+    "seo": {
+      "title": "Wistant Kode | Full-Stack TypeScript Engineer (NestJS / Next.js)",
+      "description": "Technical Architect & Software Engineer based in Douala. Deep expertise in the 100% TypeScript ecosystem: NestJS, Next.js, Vite, Prisma, Redis, and PostgreSQL.",
+      "keywords": "TypeScript Software Engineer, NestJS Architect Douala, Next.js Developer Cameroon, Prisma Expert, Redis Caching, Lead Engineer, Full-Stack Developer Architecture"
+    }
   }
 }
