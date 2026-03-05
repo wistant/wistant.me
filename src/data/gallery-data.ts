@@ -25,11 +25,6 @@ export const GALLERY_IMAGES = [
     className: "col-span-2 row-span-1", // Horizontal rectangle
   },
   {
-    src: "/gallery/me-audrey.webp",
-    alt: "Highlight 2",
-    className: "col-span-1 row-span-1",
-  },
-  {
     src: "/gallery/devfest2.webp",
     alt: "Moment 3",
     className: "col-span-1 row-span-1",
@@ -47,11 +42,6 @@ export const GALLERY_IMAGES = [
   {
     src: "/gallery/me4.webp",
     alt: "Sprint 2",
-    className: "col-span-1 row-span-1",
-  },
-  {
-    src: "/gallery/me-chatounet.webp",
-    alt: "Travel 2",
     className: "col-span-1 row-span-1",
   },
 ];
