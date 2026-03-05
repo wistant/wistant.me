@@ -46,7 +46,7 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
     metadataBase: base,
     title: {
       default: title,
-      template: `%s | ${SITE_CONFIG.name}`,
+      template: `%s 🏆`,
     },
     description: description,
     keywords: keywords,
