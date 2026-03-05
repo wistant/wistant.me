@@ -3,10 +3,24 @@ import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { TextReveal } from "@/components/ui/magicui/text-reveal";
 import HackathonsSection from "@/components/home/hackathons-section";
 import { getDictionary } from "@/lib/dictionary";
+import { Metadata } from "next";
+import { getPageMetadata } from "@/config/metadata";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default async function HackathonsPage({ params }: { params: Promise<{ lang: string }> }) {
+type Language = "en" | "fr";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  return getPageMetadata(lang, dict.hackathons.seo);
+}
+
+export default async function HackathonsPage({ params }: { params: Promise<{ lang: Language }> }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
@@ -32,7 +46,7 @@ export default async function HackathonsPage({ params }: { params: Promise<{ lan
           </TextReveal>
           <BlurFade delay={BLUR_FADE_DELAY}>
             <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-prose">
-              I like building things and pushing boundaries in short bursts of creativity.
+              {dict.hackathons.seo.description}
             </p>
           </BlurFade>
         </div>
