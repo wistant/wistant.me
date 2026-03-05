@@ -57,7 +57,7 @@ export default function Gallery() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.3 }}
-              className="relative flex items-center justify-center"
+              className="relative flex items-center justify-center mb-12 md:mb-24"
             >
               <Image
                 src={selectedImage}
@@ -65,7 +65,7 @@ export default function Gallery() {
                 width={1200}
                 height={1200}
                 unoptimized
-                className="rounded-xl object-contain shadow-2xl max-w-[95vw] max-h-[85vh] md:max-w-[70vw] md:max-h-[85vh] w-auto h-auto"
+                className="rounded-xl object-contain shadow-2xl max-w-[95vw] max-h-[75vh] md:max-w-[80vw] md:max-h-[70vh] w-auto h-auto"
                 priority
               />
               <button
