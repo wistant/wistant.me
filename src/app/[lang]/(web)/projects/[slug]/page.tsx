@@ -12,6 +12,22 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 import { ProjectStickyHeader } from "@/components/projects/project-sticky-header";
+import { Icons } from "@/components/ui/icons";
+
+const getTechIcon = (tech: string) => {
+  const normalized = tech.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (normalized.includes("react")) return <Icons.react className="size-4" />;
+  if (normalized.includes("next")) return <Icons.nextjs className="size-4" />;
+  if (normalized.includes("tailwind")) return <Icons.tailwindcss className="size-4" />;
+  if (normalized.includes("typescript") || normalized.includes("ts")) return <Icons.typescript className="size-4" />;
+  if (normalized.includes("framer")) return <Icons.framermotion className="size-4" />;
+  if (normalized.includes("nest")) return <Icons.nestjs className="size-4" />;
+  if (normalized.includes("postgres")) return <Icons.postgresql className="size-4" />;
+  if (normalized.includes("prisma")) return <Icons.prisma className="size-4" />;
+  if (normalized.includes("linux")) return <Icons.linux className="size-4" />;
+  if (normalized.includes("vercel")) return <Icons.vercel className="size-4" />;
+  return null;
+};
 
 type Language = "en" | "fr";
 
@@ -78,7 +94,7 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
         image={project.image}
       />
       
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12">
         <div className="mb-8 md:mb-12">
           <Button
             variant="ghost"
@@ -103,12 +119,12 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
         </div>
 
         {project.image && (
-          <div className="relative w-full aspect-21/9 md:aspect-3/1 overflow-hidden rounded-3xl border border-border mb-12 shadow-sm">
+          <div className="relative w-full aspect-video bg-muted/20 overflow-hidden rounded-3xl border border-border mb-12 shadow-sm flex items-center justify-center p-4">
             <Image
               src={project.image}
               alt={project.title[lang]}
               fill
-              className="object-cover"
+              className="object-contain p-2 md:p-8 drop-shadow-2xl"
               priority
             />
           </div>
@@ -182,14 +198,15 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
                 <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
                   {lang === "fr" ? "Technologies" : "Tech Stack"}
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-col gap-2">
                   {project.technologies.map((tech) => (
-                    <span
+                    <div
                       key={tech}
-                      className="bg-background text-foreground px-3 py-1.5 rounded-lg text-sm border font-medium shadow-sm"
+                      className="flex items-center gap-3 bg-background text-foreground px-4 py-3 rounded-xl text-sm border font-medium shadow-sm transition-colors hover:bg-muted/50"
                     >
-                      {tech}
-                    </span>
+                      {getTechIcon(tech)}
+                      <span>{tech}</span>
+                    </div>
                   ))}
                 </div>
               </div>
