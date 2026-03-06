@@ -46,20 +46,21 @@ const projects = defineCollection({
   directory: "src/content/projects",
   include: "**/*.mdx",
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.string(),
-    stack: z.array(z.string()),
-    link: z.string().url().optional(),
-    repo: z.string().url().optional(),
-    thumbnail: z.string().optional(),
-    featured: z.boolean().default(false),
+    title: z.string().optional(),
+    description: z.string().optional(),
     content: z.string().optional(),
+    lang: z.string().optional(),
   }),
   transform: (document) => {
+    const rawPath = document._meta.path;
+    const match = rawPath.match(/^(.*?)(?:\.(en|fr))?$/);
+    const slug = match ? match[1] : rawPath;
+    const extractedLang = match && match[2] ? match[2] : "en";
+
     return {
       ...document,
-      slug: document._meta.path.replace(/\.mdx$/, ""),
+      slug,
+      lang: document.lang || extractedLang,
     };
   },
 });

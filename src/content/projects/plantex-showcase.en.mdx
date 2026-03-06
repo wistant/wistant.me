@@ -1,0 +1,34 @@
+---
+title: Plantex Showcase (English)
+description: A detailed dive into the Plantex Showcase architecture.
+---
+
+## Overview
+
+Plantex Showcase is the premier demonstration of integrating an ultra-modern Next.js 14 frontend with a robust NestJS backend. This project was conceived to solve the gap between beautiful aesthetics and scalable infrastructure.
+
+### The Architecture
+
+We utilized **Next.js** mapped with **TypeScript** and **Tailwind CSS** to build a responsive, Cal.com-inspired layout. 
+
+Here is a quick look at how the authentication flow is implemented securely:
+
+```typescript
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
+@UseGuards(AuthGuard('jwt'))
+@Get('profile')
+getProfile(@Request() req) {
+  return req.user;
+}
+```
+
+### Why NestJS and Prisma?
+
+- **NestJS**: Provides the structural predictability of Angular but on the backend. It's built for scale.
+- **Prisma ORM**: Type-safe database access out of the box. No more guessing SQL string queries.
+
+![Architecture Diagram](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80)
+
+This system easily handles tens of thousands of concurrent users thanks to the combination of Edge caching on Vercel and efficient connection pooling on PostgreSQL.
