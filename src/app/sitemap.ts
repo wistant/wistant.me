@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { SITE_CONFIG } from "@/config/metadata";
-import { allPosts, allProjects } from "content-collections";
+import { allPosts } from "content-collections";
+import { projectsData } from "@/data/projects";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
@@ -37,11 +38,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 3. Dynamic Projects
   locales.forEach((lang) => {
-    allProjects.forEach((project) => {
-      const lastModified = project.date ? new Date(project.date) : new Date();
+    projectsData.forEach((project) => {
       entries.push({
         url: `${baseUrl}/${lang}/projects/${project.slug}`,
-        lastModified: lastModified,
+        lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.7,
       });
