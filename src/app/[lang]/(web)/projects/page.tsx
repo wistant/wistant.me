@@ -66,7 +66,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ lang:
                 title={project.title[lang]}
                 description={project.description[lang]}
                 dates={project.dates}
-                tags={project.technologies}
+                tags={project.technologies.filter((t): t is string => Boolean(t))}
                 image={project.image}
                 video={project.video}
                 links={project.links}
