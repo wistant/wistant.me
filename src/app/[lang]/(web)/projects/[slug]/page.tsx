@@ -155,10 +155,10 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
 
           {/* Sticky Sidebar */}
           <aside className="w-full lg:w-80 shrink-0">
-            <div className="sticky top-28 flex flex-col gap-6">
+            <div className="sticky top-20 flex flex-col gap-4">
 
               {/* Navigation Card */}
-              <div className="flex flex-col gap-2 p-5 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
+              <div className="flex flex-col gap-2 p-4 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
                 <Button variant="ghost" asChild className="justify-start gap-3 w-full rounded-xl hover:bg-muted/50 transition-colors">
                   <Link href={`/${lang}`}>
                     <Home className="size-4 text-muted-foreground" />
@@ -174,8 +174,8 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
               </div>
               
               {/* Links Card */}
-              <div className="flex flex-col gap-3 p-6 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
-                <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-1">
+              <div className="flex flex-col gap-3 p-4 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
+                <h3 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-1">
                   {lang === "fr" ? "Ressources" : "Resources"}
                 </h3>
                 
@@ -205,15 +205,15 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
               </div>
 
               {/* Stack Card */}
-              <div className="flex flex-col gap-4 p-6 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
-                <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+              <div className="flex flex-col gap-3 p-4 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
+                <h3 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground">
                   {lang === "fr" ? "Technologies" : "Tech Stack"}
                 </h3>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <div
                       key={tech}
-                      className="flex items-center gap-3 bg-background/80 backdrop-blur-sm text-foreground px-4 py-3 rounded-xl text-sm border font-medium shadow-sm transition-colors hover:bg-muted/50"
+                      className="flex items-center gap-2 bg-background/80 backdrop-blur-sm text-foreground px-3 py-2 rounded-xl text-xs border font-medium shadow-sm transition-colors hover:bg-muted/50"
                     >
                       {getTechIcon(tech)}
                       <span>{tech}</span>

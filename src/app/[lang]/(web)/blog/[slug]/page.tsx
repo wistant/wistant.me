@@ -167,10 +167,10 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
           </div>
         </main>
 
-        <aside className="hidden lg:block w-87.5 shrink-0 p-6 lg:p-10 bg-muted/20 dark:bg-muted/10 border-r border-border backdrop-blur-sm">
-          <div className="sticky top-24 space-y-8">
+        <aside className="hidden lg:block w-87.5 shrink-0 p-6 lg:p-8 bg-muted/20 dark:bg-muted/10 border-r border-border backdrop-blur-sm">
+          <div className="sticky top-20 space-y-4">
             {/* Navigation Card */}
-            <div className="flex flex-col gap-2 p-5 rounded-xl border border-border/60 bg-card/60 backdrop-blur-md shadow-sm">
+            <div className="flex flex-col gap-2 p-4 rounded-xl border border-border/60 bg-card/60 backdrop-blur-md shadow-sm">
               <Button variant="ghost" asChild className="justify-start gap-3 w-full rounded-xl hover:bg-muted/50 transition-colors">
                 <Link href={`/${lang}`}>
                   <Home className="size-4 text-muted-foreground" />
@@ -186,15 +186,15 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
             </div>
 
             {author && (
-              <div className="border border-border/60 rounded-xl p-6 bg-card/60 backdrop-blur-md shadow-sm">
-                <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+              <div className="border border-border/60 rounded-xl p-4 bg-card/60 backdrop-blur-md shadow-sm">
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
                   Auteur
                 </h4>
                 <AuthorCard author={author} />
               </div>
             )}
 
-            <div className="border border-border/60 rounded-xl p-6 bg-card/60 backdrop-blur-md shadow-sm">
+            <div className="border border-border/60 rounded-xl p-4 bg-card/60 backdrop-blur-md shadow-sm">
               <TableOfContents />
             </div>
 
