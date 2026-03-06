@@ -1,5 +1,4 @@
 import * as React from "react";
-import Image from "next/image";
 import type { MDXComponents } from "mdx/types";
 import {
   Accordion,
@@ -26,6 +25,14 @@ function UnknownComponent({
 export const mdxComponents: MDXComponents = {
   // HTML elements mapping
   pre: (props) => <CodeBlock {...props} />,
+  img: (props) => (
+    <ImageViewer
+      src={props.src as string}
+      alt={props.alt}
+      width={props.width ? Number(props.width) : undefined}
+      height={props.height ? Number(props.height) : undefined}
+    />
+  ),
   // Shadcn UI
   Accordion,
   AccordionContent,
@@ -36,8 +43,8 @@ export const mdxComponents: MDXComponents = {
   VideoViewer,
   // Aliases used in some blog
   MediaContainer: ImageViewer, // used in typescript-best-practices.mdx
-  // Next.js Image (for <Image /> in MDX)
-  Image,
+  // Next.js Image wrapper mapping to our Lightbox
+  Image: (props: React.ComponentPropsWithoutRef<"img">) => <ImageViewer {...(props as any)} />,
   // Fallback for unknown components
   ...new Proxy({} as MDXComponents, {
     get: (_target, prop) => {
