@@ -11,6 +11,7 @@ import { allProjects } from "content-collections";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
+import { ProjectStickyHeader } from "@/components/projects/project-sticky-header";
 
 type Language = "en" | "fr";
 
@@ -66,8 +67,10 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
   const websiteLink = project.links?.find(l => l.type === "Website");
 
   return (
-    <div className="min-h-screen bg-background relative pt-16 md:pt-20">
-      <JsonLd
+    <>
+      <ProjectStickyHeader title={project.title[lang]} lang={lang} />
+      <div className="min-h-screen bg-background relative pt-16 md:pt-20">
+        <JsonLd
         type="SoftwareSourceCode"
         title={project.title[lang]}
         description={project.description[lang]}
@@ -207,5 +210,6 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
         </div>
       </div>
     </div>
+    </>
   );
 }
