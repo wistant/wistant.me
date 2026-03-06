@@ -23,8 +23,8 @@ export function BlogCard({
     <Link
       href={url}
       className={cn(
-        "group block relative before:absolute before:-left-0.5 before:top-0 before:z-10 before:h-screen before:w-px before:bg-border before:content-[''] after:absolute after:-top-0.5 after:left-0 after:z-0 after:h-px after:w-screen after:bg-border after:content-['']",
-        showRightBorder && "md:border-r border-border border-b-0"
+        "group block relative before:absolute before:-left-0.5 before:top-0 before:z-10 before:h-[200%] before:w-[2px] before:bg-border before:content-[''] after:absolute after:-top-0.5 after:left-0 after:z-0 after:h-[2px] after:w-[200%] after:bg-border after:content-['']",
+        showRightBorder && "md:border-r-2 border-border border-b-0"
       )}
     >
       <div className="flex flex-col">

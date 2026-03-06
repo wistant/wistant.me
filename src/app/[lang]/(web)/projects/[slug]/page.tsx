@@ -6,12 +6,11 @@ import { JsonLd } from "@/components/seo/json-ld";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, Home, LayoutGrid } from "lucide-react";
 import { allProjects } from "content-collections";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
-import { ProjectStickyHeader } from "@/components/projects/project-sticky-header";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { Icons } from "@/components/ui/icons";
 
@@ -85,7 +84,6 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
 
   return (
     <>
-      <ProjectStickyHeader title={project.title[lang]} lang={lang} />
       <div className="fixed inset-0 z-0 pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -105,19 +103,6 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
       />
       
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12">
-        <div className="mb-8 md:mb-12">
-          <Button
-            variant="ghost"
-            asChild
-            className="gap-2 text-muted-foreground hover:text-foreground transition-colors -ml-4"
-          >
-            <Link href={`/${lang}/projects`}>
-              <ArrowLeft className="size-4" />
-              {lang === "fr" ? "Retour aux projets" : "Back to Projects"}
-            </Link>
-          </Button>
-        </div>
-
         {/* Hero Section */}
         <div className="mb-12 md:mb-16">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-cal tracking-tighter mb-6 text-balance">
@@ -129,12 +114,12 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
         </div>
 
         {project.image && (
-          <div className="relative w-full aspect-video bg-muted/20 overflow-hidden rounded-3xl border border-border mb-12 shadow-sm flex items-center justify-center p-4">
+          <div className="relative w-full aspect-video overflow-hidden rounded-3xl mb-12 flex items-center justify-center">
             <Image
               src={project.image}
               alt={project.title[lang]}
               fill
-              className="object-contain p-2 md:p-8 drop-shadow-2xl"
+              className="object-contain"
               priority
             />
           </div>
@@ -146,7 +131,7 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
           {/* Main Content (MDX) */}
           <main className="flex-1 min-w-0">
             {post ? (
-              <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-cal prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-img:border prose-img:shadow-sm">
+              <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-cal prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl">
                 <MDXRemote
                   source={post.content ?? ""}
                   components={mdxComponents}
@@ -170,10 +155,26 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
 
           {/* Sticky Sidebar */}
           <aside className="w-full lg:w-80 shrink-0">
-            <div className="sticky top-28 flex flex-col gap-8">
+            <div className="sticky top-28 flex flex-col gap-6">
+
+              {/* Navigation Card */}
+              <div className="flex flex-col gap-2 p-5 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
+                <Button variant="ghost" asChild className="justify-start gap-3 w-full rounded-xl hover:bg-muted/50 transition-colors">
+                  <Link href={`/${lang}`}>
+                    <Home className="size-4 text-muted-foreground" />
+                    <span>{lang === "fr" ? "Accueil" : "Home"}</span>
+                  </Link>
+                </Button>
+                <Button variant="ghost" asChild className="justify-start gap-3 w-full rounded-xl hover:bg-muted/50 transition-colors">
+                  <Link href={`/${lang}/projects`}>
+                    <LayoutGrid className="size-4 text-muted-foreground" />
+                    <span>{lang === "fr" ? "Tous les Projets" : "All Projects"}</span>
+                  </Link>
+                </Button>
+              </div>
               
               {/* Links Card */}
-              <div className="flex flex-col gap-3 p-6 rounded-3xl bg-card border border-border shadow-sm">
+              <div className="flex flex-col gap-3 p-6 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
                 <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-1">
                   {lang === "fr" ? "Ressources" : "Resources"}
                 </h3>
@@ -204,7 +205,7 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
               </div>
 
               {/* Stack Card */}
-              <div className="flex flex-col gap-4 p-6 rounded-3xl bg-muted/30 border border-border/50">
+              <div className="flex flex-col gap-4 p-6 rounded-3xl bg-card/60 backdrop-blur-md border border-border/60 shadow-sm">
                 <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
                   {lang === "fr" ? "Technologies" : "Tech Stack"}
                 </h3>
@@ -212,7 +213,7 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
                   {project.technologies.map((tech) => (
                     <div
                       key={tech}
-                      className="flex items-center gap-3 bg-background text-foreground px-4 py-3 rounded-xl text-sm border font-medium shadow-sm transition-colors hover:bg-muted/50"
+                      className="flex items-center gap-3 bg-background/80 backdrop-blur-sm text-foreground px-4 py-3 rounded-xl text-sm border font-medium shadow-sm transition-colors hover:bg-muted/50"
                     >
                       {getTechIcon(tech)}
                       <span>{tech}</span>

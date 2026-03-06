@@ -84,14 +84,14 @@ export function ProjectCard({
       className={cn(
         "group flex flex-col h-full transition-all duration-300 cursor-pointer overflow-hidden",
         isBlogGrid
-          ? cn("border-b border-border relative before:absolute before:-left-0.5 before:top-0 before:z-10 before:h-[200%] before:w-px before:bg-border before:content-[''] after:absolute after:-top-0.5 after:left-0 after:z-0 after:h-px after:w-[200%] after:bg-border after:content-['']", showRightBorder && "md:border-r border-border border-b-0")
+          ? cn("border-b-2 border-border relative before:absolute before:-left-0.5 before:top-0 before:z-10 before:h-[200%] before:w-[2px] before:bg-border before:content-[''] after:absolute after:-top-0.5 after:left-0 after:z-0 after:h-[2px] after:w-[200%] after:bg-border after:content-['']", showRightBorder && "md:border-r-2 border-border border-b-0")
           : "bg-muted/10 p-2.5 rounded-4xl border border-border/50 hover:border-border/80 hover:shadow-sm",
         className
       )}
     >
       <div className={cn(
         "relative shrink-0 overflow-hidden",
-        isBlogGrid ? "rounded-none border-b border-border" : "rounded-3xl border border-border/30"
+        isBlogGrid ? "rounded-none border-b-2 border-border" : "rounded-3xl border border-border/30"
       )}>
         <Link
           href={href || "#"}
