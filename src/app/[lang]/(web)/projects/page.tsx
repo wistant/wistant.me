@@ -34,11 +34,15 @@ export default async function ProjectsPage({
 
   // Extract unique tags from active projects
   const activeProjects = projectsData.filter((p) => p.active);
+  const sortedProjects = [...activeProjects].sort((a, b) => {
+    if (a.order !== b.order) return (a.order || 99) - (b.order || 99);
+    return a.title[lang].localeCompare(b.title[lang]);
+  });
   const allTags = [
     dict.ui.allFilter,
     ...Array.from(
       new Set(
-        activeProjects.flatMap(
+        sortedProjects.flatMap(
           (project) => project.technologies.filter(Boolean) as string[],
         ),
       ),
@@ -49,8 +53,8 @@ export default async function ProjectsPage({
   const selectedTag = resolvedSearchParams.tag || dict.ui.allFilter;
   const filteredProjects =
     selectedTag === dict.ui.allFilter
-      ? activeProjects
-      : activeProjects.filter((project) =>
+      ? sortedProjects
+      : sortedProjects.filter((project) =>
           project.technologies.includes(selectedTag),
         );
 
@@ -58,9 +62,9 @@ export default async function ProjectsPage({
   const tagCounts = allTags.reduce(
     (acc, tag) => {
       if (tag === dict.ui.allFilter) {
-        acc[tag] = activeProjects.length;
+        acc[tag] = sortedProjects.length;
       } else {
-        acc[tag] = activeProjects.filter((project) =>
+        acc[tag] = sortedProjects.filter((project) =>
           project.technologies.includes(tag),
         ).length;
       }
@@ -118,7 +122,7 @@ export default async function ProjectsPage({
           }
         >
           {filteredProjects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x border-border ${filteredProjects.length < 4 ? "border-b" : "border-b-0"}`}>
               {filteredProjects.map((project, id) => (
                 <BlurFade
                   key={project.slug}
@@ -127,6 +131,7 @@ export default async function ProjectsPage({
                 >
                   <ProjectCard
                     href={project.href}
+                    variant="blog"
                     title={project.title[lang]}
                     description={project.description[lang]}
                     dates={project.dates}
@@ -137,6 +142,7 @@ export default async function ProjectsPage({
                     video={project.video}
                     links={project.links}
                     className="h-full"
+                    showRightBorder={filteredProjects.length < 3}
                   />
                 </BlurFade>
               ))}

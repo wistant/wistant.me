@@ -13,7 +13,12 @@ export default function ProjectsSection({
   limit?: number;
   lang: Language;
 }) {
-  const projects = limit ? projectsData.slice(0, limit) : projectsData;
+  const activeProjects = projectsData.filter((p) => p.active);
+  const sortedProjects = [...activeProjects].sort((a, b) => {
+    if (a.order !== b.order) return (a.order || 99) - (b.order || 99);
+    return a.title[lang].localeCompare(b.title[lang]);
+  });
+  const projects = limit ? sortedProjects.slice(0, limit) : sortedProjects;
 
   return (
     <section id="projects">
@@ -21,8 +26,8 @@ export default function ProjectsSection({
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">
             <div className="flex-1 h-px bg-linear-to-r from-transparent via-border to-transparent" />
-            <div className="border bg-primary z-10 rounded-xl px-4 py-1">
-              <span className="text-background text-sm font-medium uppercase tracking-widest">
+            <div className="border border-border bg-background z-10 rounded-xl px-4 py-1">
+              <span className="text-foreground text-sm font-medium uppercase tracking-widest">
                 Creations
               </span>
             </div>

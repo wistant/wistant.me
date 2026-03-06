@@ -12,6 +12,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 import { ProjectStickyHeader } from "@/components/projects/project-sticky-header";
+import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { Icons } from "@/components/ui/icons";
 
 const getTechIcon = (tech: string) => {
@@ -85,7 +86,16 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
   return (
     <>
       <ProjectStickyHeader title={project.title[lang]} lang={lang} />
-      <div className="min-h-screen bg-background relative pt-16 md:pt-20">
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-20">
+        <FlickeringGrid
+          squareSize={4}
+          gridGap={6}
+          color="#6B7280"
+          maxOpacity={0.35}
+          flickerChance={0.05}
+        />
+      </div>
+      <div className="min-h-screen bg-transparent relative pt-16 md:pt-20 z-10">
         <JsonLd
         type="SoftwareSourceCode"
         title={project.title[lang]}

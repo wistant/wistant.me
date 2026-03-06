@@ -10,6 +10,7 @@ export const projectsData = [
     },
     href: "/en/projects/chickfood",
     dates: "2024",
+    order: 1,
     active: true,
     description: {
       en: "A vibrant, appetizing frontend for a fast food restaurant. Features engaging animations, smooth transitions, and a modern UI that drives user appetite and engagement.",
@@ -44,6 +45,7 @@ export const projectsData = [
     },
     href: "/en/projects/nova",
     dates: "2024",
+    order: 2,
     active: true,
     description: {
       en: "A cutting-edge agency portfolio template crafted with precision. Nova delivers a striking brutalist-inspired aesthetic combined with ultra-smooth scroll animations.",
@@ -83,6 +85,7 @@ export const projectsData = [
     },
     href: "/en/projects/splyt",
     dates: "2024",
+    order: 3,
     active: true,
     description: {
       en: "Splyt is a high-performance financial dashboard designed to handle complex data visualizations. It offers real-time analytics in a sleek, dark-mode-first interface.",
@@ -117,6 +120,7 @@ export const projectsData = [
     },
     href: "/en/projects/shopdo",
     dates: "2024",
+    order: 4,
     active: true,
     description: {
       en: "A complete e-commerce solution with dynamic product routing, a scalable cart system, and an integrated blog for content marketing.",
@@ -151,6 +155,7 @@ export const projectsData = [
     },
     href: "/en/projects/elysian-drive",
     dates: "2023",
+    order: 5,
     active: true,
     description: {
       en: "A premium luxury car rental platform. Implements sophisticated aesthetic choices to resonate with high-end clientele seeking exclusivity.",
@@ -185,6 +190,7 @@ export const projectsData = [
     },
     href: "/en/projects/suburbia",
     dates: "2024",
+    order: 6,
     active: true,
     description: {
       en: "Interactive WebGL-powered 3D skateboard configurator and e-commerce application. A truly immersive and gamified shopping experience in the browser.",
@@ -219,6 +225,7 @@ export const projectsData = [
     },
     href: "/en/projects/plantex-showcase",
     dates: "2024",
+    order: 7,
     active: true,
     description: {
       en: "Developed a visually appealing showcase website for plants, designed to be fully responsive and easily customizable. Includes sections for products, FAQs, contact information, and social links.",
