@@ -46,7 +46,11 @@ export default async function ContactPage({
                   className="flex items-center gap-4 p-4 rounded-2xl border border-border/50 bg-card hover:bg-muted/50 transition-all duration-300 group"
                 >
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-background border border-border/50 text-foreground group-hover:scale-110 transition-transform duration-300">
-                    <social.icon className="h-5 w-5" />
+                    {typeof social.icon === "string" ? (
+                      <img src={social.icon} alt={social.name} className="h-6 w-6 object-contain dark:invert" />
+                    ) : (
+                      <social.icon className="h-5 w-5" />
+                    )}
                   </div>
                   <div className="flex flex-col">
                     <span className="font-semibold">{social.name}</span>
