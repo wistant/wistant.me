@@ -10,12 +10,12 @@
     "backToHome": "Back to Home"
   },
   "hero": {
-    "title": "Engineering of high-impact digital solutions 🏆.",
-    "description": "I'm Wistant, an aspiring Software Engineer. I design and build highly scalable platforms across all interfaces—Web, Mobile, and Desktop."
+    "title": "Engineering high-performance digital experiences ✦",
+    "description": "I'm Wistant, a Software Engineer crafting scalable, robust interfaces across Web, Mobile, and Desktop platforms. I build systems that perform."
   },
   "about": {
-    "title": "My Approach",
-    "content": "I don't just write code; I build robust software systems focused on user experience and performance. My goal is to transform complex problems into simple, crisp, and fast multi-platform solutions.",
+    "title": "Engineering Philosophy",
+    "content": "I don't just write code; I architect robust software systems focused on uncompromising user experience and performance. My drive is transforming complex logic into simple, crisp, and blazingly fast multi-platform solutions.",
     "seo": {
       "title": "About Wistant | Software Engineer",
       "description": "Learn more about Wistant, a Software Engineer specializing in scalable digital solutions (Web, Mobile, Desktop).",
@@ -40,8 +40,8 @@
     }
   },
   "projects": {
-    "title": "Selected Work",
-    "viewAll": "View all projects",
+    "title": "Featured Work",
+    "viewAll": "Explore the archive",
     "cta": "View Project",
     "stack": "Stack built with",
     "seo": {
@@ -51,7 +51,7 @@
     }
   },
   "blog": {
-    "title": "Notes & Learnings",
+    "title": "Notes & Insights",
     "description": "Thoughts on software engineering, multi-platform development, and things I learn along the way.",
     "seo": {
       "title": "Wistant | Blog & Notes",
@@ -60,7 +60,7 @@
     }
   },
   "contact": {
-    "title": "Let's work together",
+    "title": "Let's collaborate",
     "subtitle": "Have a project in mind or just want to chat?",
     "description": "I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.",
     "button": "Get in touch",
@@ -73,7 +73,7 @@
   },
   "hackathons": {
     "title": "Hackathons",
-    "subtitle": "I enjoy building things",
+    "subtitle": "Driven by the build",
     "description": "Throughout my journey, I have participated in multiple hackathons. It's fascinating to see passionate developers come together to build innovative projects over a weekend. These intensive sprints forged my ability to deliver value rapidly under pressure.",
     "seo": {
       "title": "Hackathons | Wistant",

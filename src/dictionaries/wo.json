@@ -1,0 +1,105 @@
+{
+  "navigation": {
+    "home": "Kër gi",
+    "blog": "Bind",
+    "projects": "Liggéey",
+    "about": "Ci man",
+    "hackathons": "Hackathons",
+    "contact": "Jokko",
+    "resume": "CV",
+    "backToHome": "Dellu Kër gi"
+  },
+  "hero": {
+    "title": "Xarala yu kawe ngir liggéey bu mucc ayib ✦",
+    "description": "Man Wistant laa, moom mbirum xarala (Software Engineer). Damay defar ay jumtukaay yu dëgër ci Web, Mobile ak Desktop."
+  },
+  "about": {
+    "title": "Sama Xalaat",
+    "content": "Duma bind ay code kesse; damay sàkk ay system yu dëgër ngir gaawaay ak mbaxu jëfandikukaay. Sama yéene mooy wàññi jaxaso gi joxe lu yomb, lu set te gaaw ci platform yépp.",
+    "seo": {
+      "title": "Ci man Wistant | Software Engineer",
+      "description": "Xamle ki di Wistant, Software Engineer bu mën ci liggéeyu Web, Mobile, ak Desktop.",
+      "keywords": "Software Engineer, Full-Stack Developer, Mobile, Desktop, TypeScript"
+    }
+  },
+  "work": {
+    "title": "Liggéey",
+    "viewMore": "Xool lépp",
+    "present": "Léegi"
+  },
+  "education": {
+    "title": "Njàng"
+  },
+  "skills": {
+    "title": "Jumtukaay yi",
+    "description": "Li may jëfandikoo bés bu nekk ngir liggéey lu baax.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend ak Data",
+      "devops": "Infra"
+    }
+  },
+  "projects": {
+    "title": "Liggéey yi gën a fëss",
+    "viewAll": "Xool archive bi",
+    "cta": "Xool Liggéey bi",
+    "stack": "Xarala yi",
+    "seo": {
+      "title": "Wistant | Portfolio ak Liggéey",
+      "description": "Xool sama liggéey yu mujj ak Next.js, NestJS, ak TypeScript.",
+      "keywords": "Portfolio, Projects, TypeScript, Next.js, Web Development"
+    }
+  },
+  "blog": {
+    "title": "Bind ak Njàng",
+    "description": "Xalaat ci xarala ak lu may jàng bés bu nekk.",
+    "seo": {
+      "title": "Wistant | Blog",
+      "description": "Xalaat ci liggéeyu software.",
+      "keywords": "Blog, Software Development, TypeScript"
+    }
+  },
+  "contact": {
+    "title": "Liggeeyandoo",
+    "subtitle": "Am nga xalaat walla bëgg nga waxtaan?",
+    "description": "Maa ngi fi ngir waxtaan ci yeneen mbir yu bees wala liggeeyandoo.",
+    "button": "Jokkoo ak man",
+    "social": "Sama net",
+    "seo": {
+      "title": "Jokko Wistant",
+      "description": "Jokko ngir liggéey.",
+      "keywords": "Contact, Freelance, Full-Stack"
+    }
+  },
+  "hackathons": {
+    "title": "Hackathons",
+    "subtitle": "Bëgg a sàkk",
+    "description": "Dama bokk ci ay hackathons yu bare. Dafa neex a gis ñu bëgg code dajale seen xalaat defar lu bees ci wikèn bi.",
+    "seo": {
+      "title": "Hackathons | Wistant",
+      "description": "Sama listu hackathons.",
+      "keywords": "Hackathons, Coding"
+    }
+  },
+  "og": {
+    "headline": "Software Engineer",
+    "description": "Njàngum xarala ngir Web, Mobile ak Desktop.",
+    "cta": "Xool Portfolio"
+  },
+  "ui": {
+    "backToHome": "Dellu Kër gi",
+    "seeMore": "Xool lu ëpp",
+    "showLess": "Xool lu néew",
+    "loadingArticles": "Yéy article yi...",
+    "noArticlesFound": "Gisunu article.",
+    "dateLocale": "fr-SN",
+    "allFilter": "Lépp"
+  },
+  "global": {
+    "seo": {
+      "title": "Wistant | Software Engineer",
+      "description": "Wistant, Software Engineer ci Senegal ak Cameroun.",
+      "keywords": "Software Engineer, TypeScript, Next.js"
+    }
+  }
+}

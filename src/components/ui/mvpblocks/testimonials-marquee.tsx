@@ -31,7 +31,7 @@ export interface TestimonialCardProps {
   img?: string;
   description: React.ReactNode;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function TestimonialCard({
@@ -251,7 +251,7 @@ export default function Testimonials() {
         </h2>
         <h3 className="text-muted-foreground mx-auto mb-8 max-w-lg text-center text-lg font-medium tracking-tight text-balance">
           Don&apos;t just take our word for it. Here&apos;s what{' '}
-          <span className="bg-gradient-to-r from-blue-500 to-sky-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-blue-500 to-sky-500 bg-clip-text text-transparent">
             real developers
           </span>{' '}
           are saying about{' '}
@@ -290,8 +290,8 @@ export default function Testimonials() {
               </Marquee>
             ))}
         </div>
-        <div className="from-background pointer-events-none absolute inset-x-0 bottom-0 h-1/4 w-full bg-gradient-to-t from-20%"></div>
-        <div className="from-background pointer-events-none absolute inset-x-0 top-0 h-1/4 w-full bg-gradient-to-b from-20%"></div>
+        <div className="from-background pointer-events-none absolute inset-x-0 bottom-0 h-1/4 w-full bg-linear-to-t from-20%"></div>
+        <div className="from-background pointer-events-none absolute inset-x-0 top-0 h-1/4 w-full bg-linear-to-b from-20%"></div>
       </div>
     </section>
   );

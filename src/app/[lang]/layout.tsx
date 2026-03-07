@@ -7,10 +7,8 @@ import { ThemeProvider } from "./ThemeProvider";
 
 import { DATA } from "@/data/resume";
 import { FloatingDock } from "@/components/dock/floating-dock";
-import { Github, Linkedin, Twitter } from "lucide-react";
 import { Analytics } from "@vercel/analytics/next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Icons } from "@/components/ui/icons";
 import { getDictionary } from "@/lib/dictionary";
 
 const calFont = localFont({
@@ -44,7 +42,7 @@ const interFont = localFont({
   variable: "--font-inter",
 });
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,
@@ -66,7 +64,7 @@ export default async function RootLayout({
   const dict = await getDictionary(lang as Language);
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
       <body
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
       >
@@ -81,18 +79,18 @@ export default async function RootLayout({
                     const key = item.label.toLowerCase() as keyof typeof dict.navigation;
                     return {
                       title: dict.navigation[key] || item.label,
-                      icon: <item.icon className="h-full w-full" />,
+                      icon: <img src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
                       href: item.href === "/" ? `/${lang}` : `/${lang}${item.href}`,
                     };
                   }),
                   {
                     title: "GitHub",
-                    icon: <Github className="h-full w-full" />,
+                    icon: <img src="/icons/github.svg" alt="GitHub" className="h-full w-full object-contain dark:invert" />,
                     href: DATA.contact.social.GitHub.url,
                   },
                   {
                     title: "WhatsApp",
-                    icon: <Icons.whatsapp className="h-full w-full" />,
+                    icon: <img src="/icons/whatsapp.svg" alt="WhatsApp" className="h-full w-full object-contain" />,
                     href: DATA.contact.social.WhatsApp.url,
                   },
                 ]}
@@ -113,13 +111,13 @@ export default async function RootLayout({
                       const key = item.label.toLowerCase() as keyof typeof dict.navigation;
                       return {
                         title: dict.navigation[key] || item.label,
-                        icon: <item.icon className="h-full w-full" />,
+                        icon: <img src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
                         href: `/${lang}${item.href}`,
                       };
                     }),
                   {
                     title: "GitHub",
-                    icon: <Github className="h-full w-full" />,
+                    icon: <img src="/icons/github.svg" alt="GitHub" className="h-full w-full object-contain dark:invert" />,
                     href: DATA.contact.social.GitHub.url,
                   },
                 ]}

@@ -60,6 +60,7 @@ interface Props {
     href: string;
   }[];
   className?: string;
+  variant?: "default" | "blog";
 }
 
 export function ProjectCard({
@@ -72,15 +73,26 @@ export function ProjectCard({
   video,
   links,
   className,
+  variant = "default",
 }: Props) {
+  const isBlogGrid = variant === "blog";
+
   return (
     <div
       className={cn(
-        "group flex flex-col h-full bg-muted/10 p-2.5 rounded-4xl border border-border/50 hover:border-border/80 hover:shadow-sm transition-all duration-300 cursor-pointer",
+        "group flex flex-col h-full transition-all duration-300 cursor-pointer overflow-hidden",
+        isBlogGrid
+          ? "bg-background rounded-none"
+          : "bg-muted/10 p-2.5 rounded-4xl border border-border/50 hover:border-border/80 hover:shadow-sm",
         className
       )}
     >
-      <div className="relative shrink-0 rounded-3xl overflow-hidden border border-border/30">
+      <div className={cn(
+        "relative shrink-0 overflow-hidden",
+        isBlogGrid
+          ? "flex-col border-b-2 border-border"
+          : "rounded-3xl border border-border/30"
+      )}>
         <Link
           href={href || "#"}
           target="_blank"
@@ -124,10 +136,18 @@ export function ProjectCard({
           </div>
         )}
       </div>
-      <div className="p-4 flex flex-col gap-3 flex-1 bg-background/50 rounded-2xl mt-2.5 border border-transparent group-hover:bg-background/80 transition-colors">
+      <div className={cn(
+        "flex flex-col gap-3 flex-1 transition-colors",
+        isBlogGrid 
+          ? "p-6 bg-background group-hover:bg-muted/10" 
+          : "p-4 bg-background/50 rounded-2xl mt-2.5 border border-transparent group-hover:bg-background/80"
+      )}>
         <div className="flex items-start justify-between gap-2">
           <div className="flex flex-col gap-1">
-            <h3 className="font-semibold font-cal text-lg tracking-tight">{title}</h3>
+            <h3 className={cn(
+              "font-semibold font-cal tracking-tight",
+              isBlogGrid ? "text-xl group-hover:underline underline-offset-4" : "text-lg"
+            )}>{title}</h3>
             <time className="text-xs text-muted-foreground">{dates}</time>
           </div>
           <Link
@@ -140,7 +160,7 @@ export function ProjectCard({
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
-        <div className="text-xs flex-1 prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
+        <div className="text-sm flex-1 prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
           <Markdown>{description}</Markdown>
         </div>
         {tags && tags.length > 0 && (

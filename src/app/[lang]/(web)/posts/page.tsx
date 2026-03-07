@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export default async function PostsPage({
   params,

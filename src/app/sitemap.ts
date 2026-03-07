@@ -4,7 +4,7 @@ import { allPosts, allProjects } from "content-collections";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
-  const locales = ["en", "fr"];
+  const locales = ["en", "fr", "es", "ar", "wo"];
   const staticRoutes = ["", "/blog", "/projects", "/about", "/contact", "/hackathons", "/llms.txt"];
 
   const entries: MetadataRoute.Sitemap = [];
@@ -36,15 +36,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   // 3. Dynamic Projects
-  locales.forEach((lang) => {
-    allProjects.forEach((project) => {
-      const lastModified = project.date ? new Date(project.date) : new Date();
-      entries.push({
-        url: `${baseUrl}/${lang}/projects/${project.slug}`,
-        lastModified: lastModified,
-        changeFrequency: "monthly",
-        priority: 0.7,
-      });
+  allProjects.forEach((project) => {
+    // If dates string starts with a year (e.g. "2024"), use it for lastModified
+    const yearMatch = project.dates?.match(/^20\d{2}/);
+    const lastModified = yearMatch ? new Date(`${yearMatch[0]}-01-01`) : new Date();
+    
+    entries.push({
+      url: `${baseUrl}/${project.lang}/projects/${project.slug}`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
     });
   });
 

@@ -1,18 +1,15 @@
 "use client";
 
-import { ReactElement } from "react";
 import { motion } from "framer-motion";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { skillsData } from "@/data/skills";
-import { IconProps } from "@/components/ui/icons";
-
 type SkillCardProps = {
   name: string;
-  icon: (props: IconProps) => ReactElement;
+  icon: string;
   index: number;
 };
 
-function SkillCard({ name, icon: Icon, index }: SkillCardProps) {
+function SkillCard({ name, icon, index }: SkillCardProps) {
   return (
     <BlurFade delay={0.04 * index}>
       <motion.div
@@ -22,7 +19,7 @@ function SkillCard({ name, icon: Icon, index }: SkillCardProps) {
         className="group flex flex-col items-center justify-center gap-2.5 w-[88px] h-[88px] rounded-2xl cursor-default select-none bg-background border border-border/50 hover:border-border hover:shadow-md transition-shadow duration-200"
       >
         <div className="size-9 flex items-center justify-center">
-          <Icon className="size-full" />
+          <img src={icon} alt={name} className="size-full object-contain" />
         </div>
         <span className="text-[10px] font-semibold text-muted-foreground group-hover:text-foreground transition-colors duration-150 leading-tight text-center">
           {name}

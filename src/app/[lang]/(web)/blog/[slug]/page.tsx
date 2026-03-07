@@ -5,9 +5,10 @@ import { mdxComponents } from "@/components/mdx/mdx-components";
 import { getAuthor, isValidAuthor } from "@/lib/authors";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 import { allPosts } from "content-collections";
+import { getPostBySlug } from "@/data/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { Home, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,7 +20,7 @@ import { getPageMetadata, SITE_CONFIG } from "@/config/metadata";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/json-ld";
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string; lang: Language }>;
@@ -36,7 +37,7 @@ export async function generateMetadata({
   params,
 }: BlogSlugPageProps): Promise<Metadata> {
   const { lang, slug } = await params;
-  const post = allPosts.find((p) => p.slug === slug);
+  const post = getPostBySlug(slug, lang);
 
   if (!post) {
     return getPageMetadata(lang);
@@ -56,7 +57,7 @@ export async function generateMetadata({
 
 export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   const { lang, slug } = await params;
-  const post = allPosts.find((p) => p.slug === slug);
+  const post = getPostBySlug(slug, lang);
 
   if (!post) notFound();
 
@@ -101,25 +102,6 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
       <div className="space-y-4 border-b border-border relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col gap-6 p-6">
           <div className="flex flex-wrap items-center gap-3 gap-y-5 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                asChild
-                className="h-8 w-8 p-0 rounded-full bg-card/50 backdrop-blur-sm border-border/40"
-              >
-                <Link href={`/${lang}`}>
-                  <ArrowLeft className="w-4 h-4" />
-                  <span className="sr-only">Retour à l&apos;accueil</span>
-                </Link>
-              </Button>
-              <Button
-                variant="ghost"
-                asChild
-                className="h-8 px-3 text-xs rounded-full bg-card/30 backdrop-blur-sm border border-border/20 text-muted-foreground hover:text-foreground"
-              >
-                <Link href={`/${lang}/blog`}>Blog</Link>
-              </Button>
-            </div>
             {post.tags && post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
@@ -186,18 +168,34 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
           </div>
         </main>
 
-        <aside className="hidden lg:block w-87.5 shrink-0 p-6 lg:p-10 bg-muted/20 dark:bg-muted/10 border-r border-border backdrop-blur-sm">
-          <div className="sticky top-24 space-y-8">
+        <aside className="hidden lg:block w-87.5 shrink-0 p-6 lg:p-8 bg-muted/20 dark:bg-muted/10 border-r border-border backdrop-blur-sm">
+          <div className="sticky top-20 space-y-4">
+            {/* Navigation Card */}
+            <div className="flex flex-col gap-2 p-4 rounded-xl border border-border/60 bg-card/60 backdrop-blur-md shadow-sm">
+              <Button variant="ghost" asChild className="justify-start gap-3 w-full rounded-xl hover:bg-muted/50 transition-colors">
+                <Link href={`/${lang}`}>
+                  <Home className="size-4 text-muted-foreground" />
+                  <span>{lang === "fr" ? "Accueil" : "Home"}</span>
+                </Link>
+              </Button>
+              <Button variant="ghost" asChild className="justify-start gap-3 w-full rounded-xl hover:bg-muted/50 transition-colors">
+                <Link href={`/${lang}/blog`}>
+                  <BookOpen className="size-4 text-muted-foreground" />
+                  <span>{lang === "fr" ? "Tous les Articles" : "All Articles"}</span>
+                </Link>
+              </Button>
+            </div>
+
             {author && (
-              <div className="border border-border/60 rounded-xl p-6 bg-card/60 backdrop-blur-md shadow-sm">
-                <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+              <div className="border border-border/60 rounded-xl p-4 bg-card/60 backdrop-blur-md shadow-sm">
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
                   Auteur
                 </h4>
                 <AuthorCard author={author} />
               </div>
             )}
 
-            <div className="border border-border/60 rounded-xl p-6 bg-card/60 backdrop-blur-md shadow-sm">
+            <div className="border border-border/60 rounded-xl p-4 bg-card/60 backdrop-blur-md shadow-sm">
               <TableOfContents />
             </div>
 

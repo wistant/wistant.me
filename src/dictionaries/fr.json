@@ -10,12 +10,12 @@
     "backToHome": "Retour à l'accueil"
   },
   "hero": {
-    "title": "L'Ingénierie de solutions numériques de premier plan 🏆.",
-    "description": "Je suis Wistant, futur Ingénieur Logiciel. Je conçois et développe des plateformes scalables sur toutes les interfaces (Web, Mobile, Desktop)."
+    "title": "Ingénierie d'expériences numériques d'avant-garde ✦",
+    "description": "Je suis Wistant, Ingénieur Logiciel. Je conçois des plateformes sur-mesure et ultra-performantes sur le Web, Mobile et Desktop. Je forge des systèmes évolutifs."
   },
   "about": {
-    "title": "Mon Approche",
-    "content": "Je ne me contente pas de coder ; je conçois des systèmes logiciels pensés pour l'excellence. Mon objectif : transformer des problèmes complexes en solutions multiplateformes simples, élégantes et ultra-rapides.",
+    "title": "Philosophie Technique",
+    "content": "Je ne me contente pas de coder ; j'architecte des systèmes logiciels pensés pour l'excellence et l'expérience utilisateur. Mon objectif : distiller la complexité en des solutions multiplateformes simples, élégantes et redoutables de rapidité.",
     "seo": {
       "title": "À Propos de Wistant | Ingénieur Logiciel",
       "description": "Découvrez le profil de Wistant, développeur et futur ingénieur spécialisé dans la création de solutions numériques (Web, Mobile, Desktop).",
@@ -40,10 +40,10 @@
     }
   },
   "projects": {
-    "title": "Projets Sélectionnés",
-    "viewAll": "Voir tous les projets",
+    "title": "Projets Phares",
+    "viewAll": "Explorer les archives",
     "cta": "Voir le Projet",
-    "stack": "Stack technique",
+    "stack": "Technologies",
     "seo": {
       "title": "Wistant | Portfolio & Réalisations",
       "description": "Découvrez mes projets full-stack les plus récents construits avec Next.js, NestJS et TypeScript.",
@@ -51,7 +51,7 @@
     }
   },
   "blog": {
-    "title": "Notes & Apprentissages",
+    "title": "Notes & Insights",
     "description": "Réflexions sur l'ingénierie logicielle, le développement multiplateforme et mes découvertes du moment.",
     "seo": {
       "title": "Wistant | Blog & Notes",
@@ -60,7 +60,7 @@
     }
   },
   "contact": {
-    "title": "Travaillons ensemble",
+    "title": "Collaborons",
     "subtitle": "Un projet en tête ou simplement envie d'échanger ?",
     "description": "Je suis toujours ouvert pour discuter de nouveaux projets, d'idées créatives ou d'opportunités de collaboration.",
     "button": "Me contacter",
@@ -73,7 +73,7 @@
   },
   "hackathons": {
     "title": "Hackathons",
-    "subtitle": "J'aime construire des choses",
+    "subtitle": "La passion de bâtir",
     "description": "Tout au long de mon parcours, j'ai participé à de multiples hackathons. C'est fascinant de voir des développeurs passionnés se réunir pour construire des projets innovants en un week-end. Ces sprints intensifs ont forgé ma capacité à livrer de la valeur rapidement et sous pression.",
     "seo": {
       "title": "Hackathons | Wistant",

@@ -32,7 +32,7 @@ const Kubernetes = (props: SVGProps<SVGSVGElement>) => (
         textTransform: "none",
         direction: "ltr",
         blockProgression: "tb",
-        writingMode: "lr-tb" as any,
+        writingMode: "lr-tb" as React.CSSProperties["writingMode"],
         textAnchor: "start",
         baselineShift: "baseline",
         color: "#000",

@@ -26,7 +26,7 @@ const posts = defineCollection({
     const image = document.image || document.thumbnail;
 
     const rawPath = document._meta.path;
-    const match = rawPath.match(/^(.*?)(?:\.(en|fr))?$/);
+    const match = rawPath.match(/^(.*?)(?:\.(en|fr|es|ar|wo))?$/);
     const slug = match ? match[1] : rawPath;
     const extractedLang = match && match[2] ? match[2] : "en";
 
@@ -48,18 +48,31 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.string(),
-    stack: z.array(z.string()),
-    link: z.string().url().optional(),
-    repo: z.string().url().optional(),
-    thumbnail: z.string().optional(),
-    featured: z.boolean().default(false),
+    dates: z.string().optional(),
+    order: z.number().optional().default(99),
+    active: z.boolean().optional().default(true),
+    tags: z.array(z.string()).optional(),
+    image: z.string().optional(),
+    video: z.string().optional(),
+    links: z.array(
+      z.object({
+        type: z.string(),
+        href: z.string(),
+      })
+    ).optional(),
     content: z.string().optional(),
+    lang: z.string().optional(),
   }),
   transform: (document) => {
+    const rawPath = document._meta.path;
+    const match = rawPath.match(/^(.*?)(?:\.(en|fr|es|ar|wo))?$/);
+    const slug = match ? match[1] : rawPath;
+    const extractedLang = match && match[2] ? match[2] : "en";
+
     return {
       ...document,
-      slug: document._meta.path.replace(/\.mdx$/, ""),
+      slug,
+      lang: document.lang || extractedLang,
     };
   },
 });

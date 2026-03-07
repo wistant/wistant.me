@@ -10,6 +10,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import React, { useRef, useState } from "react";
 import { LanguageSwitcher } from "./language-switcher";
@@ -52,6 +53,7 @@ export const FloatingDockMobile = ({
 }>) => {
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+  const pathname = usePathname();
 
   return (
     <div
@@ -65,15 +67,25 @@ export const FloatingDockMobile = ({
     >
       {items.map((item) => {
         const isExternal = item.href.startsWith("http");
+        const isActive = item.href === pathname || (item.href.length > 3 && pathname.startsWith(item.href));
         return (
           <motion.div key={item.title} whileTap={{ scale: 0.82 }}>
             <Link
               href={item.href}
               target={isExternal ? "_blank" : undefined}
               rel={isExternal ? "noopener noreferrer" : undefined}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 text-foreground/80 overflow-hidden"
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full border overflow-hidden",
+                isActive 
+                  ? "bg-primary/20 border-primary/50 text-primary dark:bg-primary/20 dark:text-primary" 
+                  : "bg-muted/70 dark:bg-muted/40 border-border/50 text-foreground/80 hover:bg-muted"
+              )}
             >
-              <div className="h-5 w-5">{item.icon}</div>
+              {typeof item.icon === "string" ? (
+                <img src={item.icon} alt={item.title} className={cn("size-full object-contain", item.title !== "WhatsApp" && "dark:invert")} />
+              ) : (
+                <div className="h-5 w-5">{item.icon}</div>
+              )}
             </Link>
           </motion.div>
         );
@@ -151,6 +163,8 @@ function IconContainer({
 }>) {
   const ref = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
+  const pathname = usePathname();
+  const isActive = href === pathname || (href.length > 3 && pathname.startsWith(href));
 
   const distance = useTransform(mouseX, (val) => {
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
@@ -180,7 +194,12 @@ function IconContainer({
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-muted/70 dark:bg-muted/40 border border-border/50 hover:bg-muted transition-colors duration-150"
+        className={cn(
+          "relative flex aspect-square items-center justify-center rounded-full border transition-colors duration-150",
+          isActive 
+            ? "bg-primary/20 border-primary/50 text-primary dark:bg-primary/20 dark:text-primary" 
+            : "bg-muted/70 dark:bg-muted/40 border-border/50 hover:bg-muted"
+        )}
       >
         <AnimatePresence>
           {hovered && (
@@ -197,9 +216,13 @@ function IconContainer({
         </AnimatePresence>
         <motion.div
           style={{ width: widthIcon, height: heightIcon }}
-          className="flex items-center justify-center text-foreground/75"
+          className={cn("flex items-center justify-center", isActive ? "text-primary" : "text-foreground/75")}
         >
-          {icon}
+          {typeof icon === "string" ? (
+            <img src={icon} alt={title} className={cn("size-full object-contain", title !== "WhatsApp" && "dark:invert")} />
+          ) : (
+            icon
+          )}
         </motion.div>
       </motion.div>
     </Link>

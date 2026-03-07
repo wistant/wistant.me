@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { allPosts } from "content-collections";
+import { getPostsByLang } from "@/data/blog";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { BlogCard } from "@/components/blog/blog-card";
 import { TagFilter } from "@/components/blog/tag-filter";
@@ -10,7 +10,7 @@ import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { getPageMetadata } from "@/config/metadata";
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,
@@ -41,10 +41,8 @@ export default async function BlogPage({
   const resolvedSearchParams = await searchParams;
   const dict = await getDictionary(lang);
 
-  // Sort blog by date (newest first)
-  const sortedPosts = allPosts.sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  // Get all active posts with language fallback resolution and sorted by date
+  const sortedPosts = getPostsByLang(lang);
 
   // Extract unique tags
   const allTags = [
@@ -139,9 +137,7 @@ export default async function BlogPage({
         >
           {filteredPosts.length > 0 ? (
             <div
-              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x border-border ${
-                filteredPosts.length < 4 ? "border-b" : "border-b-0"
-              }`}
+              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden bg-border gap-[2px] border-x-2 border-b-2 border-border`}
             >
               {filteredPosts.map((post) => (
                 <BlogCard
@@ -151,12 +147,11 @@ export default async function BlogPage({
                   description={post.summary}
                   date={formatDate(post.date, dict.ui.dateLocale)}
                   thumbnail={post.image}
-                  showRightBorder={filteredPosts.length < 3}
                 />
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 text-muted-foreground border-x border-b border-border">
+            <div className="text-center py-20 text-muted-foreground border-x-2 border-b-2 border-border">
               {dict.ui.noArticlesFound}
             </div>
           )}
