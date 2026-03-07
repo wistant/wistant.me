@@ -29,7 +29,7 @@ export function MediaViewer({
     src,
     alt,
     className: cn(
-      "w-full h-full object-cover rounded-lg border overflow-hidden aspect-video",
+      "w-full h-full object-contain rounded-2xl overflow-hidden",
       className
     ),
     ...(width && height ? { width, height } : {}),
@@ -50,17 +50,16 @@ export function MediaViewer({
     <>
       <div className="my-8 w-full">
         <div 
-          className="group relative w-full aspect-video overflow-hidden rounded-xl border border-border bg-muted/20 cursor-pointer shadow-sm hover:shadow-md transition-all duration-300"
+          className="group relative w-full overflow-hidden rounded-2xl cursor-pointer transition-transform duration-300 border border-border bg-muted/20"
           onClick={() => setIsOpen(true)}
         >
-          <Image
+          <img
             src={src}
             alt={alt}
-            fill
-            className={cn("object-cover transition-transform duration-700 group-hover:scale-105", className)}
-            {...(width && height ? { width, height } : {})}
+            className={cn("w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]", className)}
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
             <div className="bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
               <Maximize2 className="w-5 h-5 text-white" />
             </div>
