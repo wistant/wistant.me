@@ -46,8 +46,20 @@ const projects = defineCollection({
   directory: "src/content/projects",
   include: "**/*.mdx",
   schema: z.object({
-    title: z.string().optional(),
-    description: z.string().optional(),
+    title: z.string(),
+    description: z.string(),
+    dates: z.string().optional(),
+    order: z.number().optional().default(99),
+    active: z.boolean().optional().default(true),
+    tags: z.array(z.string()).optional(),
+    image: z.string().optional(),
+    video: z.string().optional(),
+    links: z.array(
+      z.object({
+        type: z.string(),
+        href: z.string(),
+      })
+    ).optional(),
     content: z.string().optional(),
     lang: z.string().optional(),
   }),

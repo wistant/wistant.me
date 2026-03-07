@@ -61,7 +61,6 @@ interface Props {
   }[];
   className?: string;
   variant?: "default" | "blog";
-  showRightBorder?: boolean;
 }
 
 export function ProjectCard({
@@ -75,7 +74,6 @@ export function ProjectCard({
   links,
   className,
   variant = "default",
-  showRightBorder = true,
 }: Props) {
   const isBlogGrid = variant === "blog";
 
@@ -84,12 +82,7 @@ export function ProjectCard({
       className={cn(
         "group flex flex-col h-full transition-all duration-300 cursor-pointer overflow-hidden",
         isBlogGrid
-          ? cn(
-              "border-b-2 border-border relative",
-              variant === "blog" && "before:hidden sm:before:block before:absolute before:-right-[2px] before:top-0 before:h-full before:w-[2px] before:bg-border",
-              variant === "blog" && "after:absolute after:-bottom-[2px] after:left-0 after:w-full after:h-[2px] after:bg-border sm:after:w-[calc(100%+2px)]",
-              showRightBorder && "md:border-r-2 border-border border-b-0"
-            )
+          ? "bg-background rounded-none"
           : "bg-muted/10 p-2.5 rounded-4xl border border-border/50 hover:border-border/80 hover:shadow-sm",
         className
       )}
@@ -97,10 +90,7 @@ export function ProjectCard({
       <div className={cn(
         "relative shrink-0 overflow-hidden",
         isBlogGrid
-          ? cn(
-              "flex-col border-b-2 border-border",
-              showRightBorder && "md:border-r-2 md:border-b-0"
-            )
+          ? "flex-col border-b-2 border-border"
           : "rounded-3xl border border-border/30"
       )}>
         <Link

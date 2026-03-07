@@ -1,4 +1,5 @@
-import { projectsData } from "@/data/projects";
+import { getProjectsByLang } from "@/data/projects";
+import { Icons } from "@/components/ui/icons";
 import { ProjectCard } from "@/components/projects/project-card";
 import { TagFilter } from "@/components/blog/tag-filter";
 import BlurFade from "@/components/ui/magicui/blur-fade";
@@ -33,17 +34,13 @@ export default async function ProjectsPage({
   const BLUR_FADE_DELAY = 0.04;
 
   // Extract unique tags from active projects
-  const activeProjects = projectsData.filter((p) => p.active);
-  const sortedProjects = [...activeProjects].sort((a, b) => {
-    if (a.order !== b.order) return (a.order || 99) - (b.order || 99);
-    return a.title[lang].localeCompare(b.title[lang]);
-  });
+  const sortedProjects = getProjectsByLang(lang);
   const allTags = [
     dict.ui.allFilter,
     ...Array.from(
       new Set(
         sortedProjects.flatMap(
-          (project) => project.technologies.filter(Boolean) as string[],
+          (project) => (project.tags ?? []).filter(Boolean) as string[],
         ),
       ),
     ).sort(),
@@ -55,7 +52,7 @@ export default async function ProjectsPage({
     selectedTag === dict.ui.allFilter
       ? sortedProjects
       : sortedProjects.filter((project) =>
-          project.technologies.includes(selectedTag),
+          (project.tags ?? []).includes(selectedTag),
         );
 
   // Compute tag counts
@@ -65,7 +62,7 @@ export default async function ProjectsPage({
         acc[tag] = sortedProjects.length;
       } else {
         acc[tag] = sortedProjects.filter((project) =>
-          project.technologies.includes(tag),
+          (project.tags ?? []).includes(tag),
         ).length;
       }
       return acc;
@@ -122,30 +119,41 @@ export default async function ProjectsPage({
           }
         >
           {filteredProjects.length > 0 ? (
-            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x-2 border-border ${filteredProjects.length < 4 ? "border-b-2" : "border-b-0"}`}>
-              {filteredProjects.map((project, id) => (
-                <BlurFade
-                  key={project.slug}
-                  delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-                  className="h-full"
-                >
-                  <ProjectCard
-                    href={project.href}
-                    variant="blog"
-                    title={project.title[lang]}
-                    description={project.description[lang]}
-                    dates={project.dates}
-                    tags={project.technologies.filter((t): t is string =>
-                      Boolean(t),
-                    )}
-                    image={project.image}
-                    video={project.video}
-                    links={project.links}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden bg-border gap-[2px] border-x-2 border-b-2 border-border">
+              {filteredProjects.map((project, id) => {
+                const projectLinks = project.links?.map((link) => ({
+                  ...link,
+                  icon:
+                    link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? (
+                      <Icons.github className="size-3" />
+                    ) : (
+                      <Icons.globe className="size-3" />
+                    ),
+                })) || [];
+
+                return (
+                  <BlurFade
+                    key={project.slug}
+                    delay={BLUR_FADE_DELAY * 12 + id * 0.05}
                     className="h-full"
-                    showRightBorder={filteredProjects.length < 3}
-                  />
-                </BlurFade>
-              ))}
+                  >
+                    <ProjectCard
+                      href={`/${lang}/projects/${project.slug}`}
+                      variant="blog"
+                      title={project.title || ""}
+                      description={project.description || ""}
+                      dates={project.dates || ""}
+                      tags={(project.tags ?? []).filter((t): t is string =>
+                        Boolean(t),
+                      )}
+                      image={project.image}
+                      video={project.video}
+                      links={projectLinks}
+                      className="h-full"
+                    />
+                  </BlurFade>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-20 text-muted-foreground border border-dashed rounded-xl">

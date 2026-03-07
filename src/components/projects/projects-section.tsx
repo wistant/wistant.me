@@ -1,6 +1,8 @@
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { ProjectCard } from "@/components/projects/project-card";
-import { projectsData } from "@/data/projects";
+import { getProjectsByLang } from "@/data/projects";
+import { Icons } from "@/components/ui/icons";
+import React from "react";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -13,11 +15,7 @@ export default function ProjectsSection({
   limit?: number;
   lang: Language;
 }) {
-  const activeProjects = projectsData.filter((p) => p.active);
-  const sortedProjects = [...activeProjects].sort((a, b) => {
-    if (a.order !== b.order) return (a.order || 99) - (b.order || 99);
-    return a.title[lang].localeCompare(b.title[lang]);
-  });
+  const sortedProjects = getProjectsByLang(lang);
   const projects = limit ? sortedProjects.slice(0, limit) : sortedProjects;
 
   return (
@@ -44,9 +42,20 @@ export default function ProjectsSection({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto relative overflow-hidden border-x-2 border-b-2 border-border">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto relative overflow-hidden bg-border gap-[2px] border-x-2 border-b-2 border-border">
           {projects.map((project, id) => {
             if (!project) return null;
+            
+            const projectLinks = project.links?.map((link) => ({
+              ...link,
+              icon:
+                link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? (
+                  <Icons.github className="size-3" />
+                ) : (
+                  <Icons.globe className="size-3" />
+                ),
+            })) || [];
+
             return (
               <BlurFade
                 key={project.slug}
@@ -54,14 +63,14 @@ export default function ProjectsSection({
                 className="h-full"
               >
                 <ProjectCard
-                  href={project.href}
-                  title={project.title[lang]}
-                  description={project.description[lang]}
-                  dates={project.dates}
-                  tags={project.technologies.filter((t): t is string => Boolean(t))}
+                  href={`/${lang}/projects/${project.slug}`}
+                  title={project.title || ""}
+                  description={project.description || ""}
+                  dates={project.dates || ""}
+                  tags={project.tags ?? []}
                   image={project.image}
                   video={project.video}
-                  links={project.links}
+                  links={projectLinks}
                   variant="blog"
                   className="h-full"
                 />
