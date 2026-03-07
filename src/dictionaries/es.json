@@ -1,0 +1,105 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "blog": "Notas",
+    "projects": "Proyectos",
+    "about": "Sobre Mí",
+    "hackathons": "Hackathons",
+    "contact": "Contacto",
+    "resume": "Currículum",
+    "backToHome": "Volver al Inicio"
+  },
+  "hero": {
+    "title": "Ingeniería de experiencias digitales de alto rendimiento ✦",
+    "description": "Soy Wistant, Ingeniero de Software. Construyo interfaces escalables y robustas para Web, Móvil y Escritorio. Forjo sistemas que rinden."
+  },
+  "about": {
+    "title": "Filosofía Técnica",
+    "content": "No solo escribo código; diseño sistemas de software enfocados en una experiencia de usuario y rendimiento sin concesiones. Mi objetivo es transformar la lógica compleja en soluciones multiplataforma simples, limpias y ultrarrápidas.",
+    "seo": {
+      "title": "Sobre Wistant | Ingeniero de Software",
+      "description": "Conoce a Wistant, un Ingeniero de Software especializado en soluciones digitales escalables (Web, Móvil, Escritorio).",
+      "keywords": "Ingeniero de Software, Desarrollador Full-Stack, Desarrollo Móvil, Aplicaciones de Escritorio, TypeScript"
+    }
+  },
+  "work": {
+    "title": "Experiencia",
+    "viewMore": "Ver trayectoria completa",
+    "present": "Actualidad"
+  },
+  "education": {
+    "title": "Educación"
+  },
+  "skills": {
+    "title": "Mi Stack",
+    "description": "Las tecnologías que utilizo a diario para construir productos fiables.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend y Base de datos",
+      "devops": "Infraestructura"
+    }
+  },
+  "projects": {
+    "title": "Proyectos Destacados",
+    "viewAll": "Explorar el archivo",
+    "cta": "Ver Proyecto",
+    "stack": "Tecnologías",
+    "seo": {
+      "title": "Wistant | Portfolio y Proyectos",
+      "description": "Explora mis últimos proyectos full-stack construidos con Next.js, NestJS y TypeScript.",
+      "keywords": "Portfolio, Proyectos, TypeScript, Next.js, Desarrollo Web"
+    }
+  },
+  "blog": {
+    "title": "Notas e Insights",
+    "description": "Pensamientos sobre ingeniería de software, desarrollo multiplataforma y áreas de aprendizaje.",
+    "seo": {
+      "title": "Wistant | Blog y Notas",
+      "description": "Artículos y reflexiones sobre el desarrollo de software moderno y arquitectura de sistemas.",
+      "keywords": "Blog, Desarrollo de Software, TypeScript, Ingeniería"
+    }
+  },
+  "contact": {
+    "title": "Colaboremos",
+    "subtitle": "¿Tienes un proyecto en mente o quieres charlar?",
+    "description": "Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades de colaboración.",
+    "button": "Contactar",
+    "social": "Mis redes",
+    "seo": {
+      "title": "Contacto Wistant | Hablemos",
+      "description": "Ponte en contacto para oportunidades freelance, consultoría o simplemente para saludar.",
+      "keywords": "Contacto, Desarrollador Freelance, Ingeniero Full-Stack"
+    }
+  },
+  "hackathons": {
+    "title": "Hackathons",
+    "subtitle": "Impulsado por crear",
+    "description": "A lo largo de mi trayectoria, he participado en múltiples hackathons. Es fascinante ver a desarrolladores apasionados unirse para construir proyectos innovadores en un fin de semana. Estos sprints intensivos forjaron mi capacidad para entregar valor rápidamente bajo presión.",
+    "seo": {
+      "title": "Hackathons | Wistant",
+      "description": "Un historial de mis participaciones en hackathons y sprints de programación.",
+      "keywords": "Hackathons, Competiciones de programación, Proyectos"
+    }
+  },
+  "og": {
+    "headline": "Ingeniero de Software",
+    "description": "Ingeniería de soluciones digitales de alta gama para Web, Móvil y Escritorio.",
+    "cta": "Ver Portfolio"
+  },
+  "ui": {
+    "backToHome": "Volver al Inicio",
+    "seeMore": "Ver más",
+    "showLess": "Mostrar menos",
+    "loadingArticles": "Cargando artículos...",
+    "noArticlesFound": "No se encontraron artículos para esta etiqueta.",
+    "dateLocale": "es-ES",
+    "allFilter": "Todos"
+  },
+  "global": {
+    "seo": {
+      "title": "Wistant | Ingeniero de Software",
+      "description": "Wistant es un Ingeniero de Software especializado en la creación de soluciones digitales de alta calidad en entornos web, móviles y de escritorio.",
+      "keywords": "Ingeniero de Software, Desarrollador Full-Stack, TypeScript, React, Next.js"
+    }
+  }
+}
