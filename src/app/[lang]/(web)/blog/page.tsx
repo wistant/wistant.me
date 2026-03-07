@@ -139,9 +139,7 @@ export default async function BlogPage({
         >
           {filteredPosts.length > 0 ? (
             <div
-              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x-2 border-border ${
-                filteredPosts.length < 4 ? "border-b-2" : "border-b-0"
-              }`}
+              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden bg-border gap-[2px] border-x-2 border-b-2 border-border`}
             >
               {filteredPosts.map((post) => (
                 <BlogCard
@@ -151,7 +149,6 @@ export default async function BlogPage({
                   description={post.summary}
                   date={formatDate(post.date, dict.ui.dateLocale)}
                   thumbnail={post.image}
-                  showRightBorder={filteredPosts.length < 3}
                 />
               ))}
             </div>

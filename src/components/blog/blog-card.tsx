@@ -8,7 +8,6 @@ interface BlogCardProps {
   description: string;
   date: string;
   thumbnail?: string;
-  showRightBorder?: boolean;
 }
 
 export function BlogCard({
@@ -17,15 +16,12 @@ export function BlogCard({
   description,
   date,
   thumbnail,
-  showRightBorder = true,
 }: BlogCardProps) {
   return (
     <Link
       href={url}
       className={cn(
-        "before:hidden sm:before:block before:absolute before:-right-[2px] before:top-0 before:h-full before:w-[2px] before:bg-border",
-        "after:absolute after:-bottom-[2px] after:left-0 after:w-full after:h-[2px] after:bg-border sm:after:w-[calc(100%+2px)]",
-        showRightBorder && "md:border-r-2 md:border-b-0"
+        "block h-full group bg-background",
       )}
     >
       <div className="flex flex-col">
