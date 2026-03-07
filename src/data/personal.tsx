@@ -28,25 +28,25 @@ export const personalData = {
       GitHub: {
         name: "GitHub",
         url: "https://github.com/wistantkode",
-        icon: Icons.github,
+        icon: "/icons/github.svg",
         navbar: true,
       },
       LinkedIn: {
         name: "LinkedIn",
         url: "https://linkedin.com/in/wistantkode",
-        icon: Icons.linkedin,
+        icon: "/icons/linkedin.svg",
         navbar: true,
       },
       WhatsApp: {
         name: "WhatsApp",
         url: "https://wa.me/+237697135341",
-        icon: Icons.whatsapp,
+        icon: "/icons/whatsapp.svg",
         navbar: true,
       },
       X: {
         name: "X",
         url: "https://x.com/wistantkode",
-        icon: Icons.x,
+        icon: "/icons/x.svg",
         navbar: true,
       },
       email: {
