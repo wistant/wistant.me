@@ -79,7 +79,7 @@ export default async function RootLayout({
                     const key = item.label.toLowerCase() as keyof typeof dict.navigation;
                     return {
                       title: dict.navigation[key] || item.label,
-                      icon: typeof item.icon === "string" ? <img src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" /> : <item.icon className="h-full w-full" />,
+                      icon: <img src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
                       href: item.href === "/" ? `/${lang}` : `/${lang}${item.href}`,
                     };
                   }),
@@ -111,7 +111,7 @@ export default async function RootLayout({
                       const key = item.label.toLowerCase() as keyof typeof dict.navigation;
                       return {
                         title: dict.navigation[key] || item.label,
-                        icon: typeof item.icon === "string" ? <img src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" /> : <item.icon className="h-full w-full" />,
+                        icon: <img src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
                         href: `/${lang}${item.href}`,
                       };
                     }),
