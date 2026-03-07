@@ -36,10 +36,10 @@ export const TargetCursor: React.FC<TargetCursorProps> = ({
       'ontouchstart' in window || navigator.maxTouchPoints > 0;
     const isSmallScreen = window.innerWidth <= 768;
     const userAgent =
-      navigator.userAgent || navigator.vendor || (window as any).opera;
+      navigator.userAgent || navigator.vendor || (window as Window & { opera?: string }).opera;
     const mobileRegex =
       /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-    const isMobileUserAgent = mobileRegex.test(userAgent.toLowerCase());
+    const isMobileUserAgent = userAgent ? mobileRegex.test(userAgent.toLowerCase()) : false;
     return (hasTouchScreen && isSmallScreen) || isMobileUserAgent;
   }, []);
 
@@ -307,7 +307,9 @@ export const TargetCursor: React.FC<TargetCursorProps> = ({
       document.body.style.cursor = originalCursor;
       isActiveRef.current = false;
       targetCornerPositionsRef.current = null;
-      activeStrengthRef.current.current = 0;
+      if (activeStrengthRef.current) {
+        activeStrengthRef.current.current = 0;
+      }
     };
   }, [
     targetSelector,
@@ -339,7 +341,7 @@ export const TargetCursor: React.FC<TargetCursorProps> = ({
   return (
     <div
       ref={cursorRef}
-      className="pointer-events-none fixed top-0 left-0 z-[9999] h-0 w-0"
+      className="pointer-events-none fixed top-0 left-0 z-9999 h-0 w-0"
       style={{ willChange: 'transform' }}
     >
       <div

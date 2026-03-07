@@ -15,6 +15,14 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const flags: Record<string, string> = {
+    en: "🇬🇧",
+    fr: "🇫🇷",
+    es: "🇪🇸",
+    ar: "🇸🇦",
+    wo: "🇸🇳"
+  };
+
   const handleLanguageChange = (locale: string) => {
     const segments = pathname.split("/");
     segments[1] = locale;
@@ -33,8 +41,8 @@ export function LanguageSwitcher() {
           className="size-10 rounded-full hover:bg-muted/50 transition-all duration-300 group relative border-none"
         >
           <Languages className="size-5 transition-all group-hover:scale-110 group-hover:rotate-12 text-foreground/70" />
-          <span className="absolute -bottom-1 -right-1 text-[9px] font-black uppercase text-foreground/40 bg-background/80 px-1 rounded-sm border border-border/50">
-            {currentLocale}
+          <span className="absolute -bottom-1 -right-1 text-sm bg-background/80 px-0.5 rounded-sm border border-border/50">
+            {flags[currentLocale] || currentLocale}
           </span>
         </Button>
       </DropdownMenuTrigger>

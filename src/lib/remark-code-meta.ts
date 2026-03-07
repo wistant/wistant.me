@@ -1,6 +1,6 @@
 export function remarkCodeMeta() {
-    return (tree: any) => {
-        const walk = (node: any) => {
+    return (tree: Record<string, any>) => {
+        const walk = (node: Record<string, any>) => {
             if (!node || typeof node !== "object") return;
 
             if (node.type === "code") {
