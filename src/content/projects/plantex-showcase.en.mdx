@@ -1,34 +1,30 @@
 ---
-title: Plantex Showcase (English)
-description: A detailed dive into the Plantex Showcase architecture.
 ---
 
-## Overview
+# Plants Will Make Your Life Better 🌿
 
-Plantex Showcase is the premier demonstration of integrating an ultra-modern Next.js 14 frontend with a robust NestJS backend. This project was conceived to solve the gap between beautiful aesthetics and scalable infrastructure.
+Create incredible plant designs for your offices or apartments. Add freshness to your new ideas with Plantex. 
 
-### The Architecture
+## Who We Really Are
 
-We utilized **Next.js** mapped with **TypeScript** and **Tailwind CSS** to build a responsive, Cal.com-inspired layout. 
+We have over 4000+ unbiased reviews and our customers trust our plant process and delivery service every time. 
+- We always deliver on time.
+- We give you guides to protect and care for your plants.
+- We always come over for a check-up after sale.
+- 100% money back guaranteed.
 
-Here is a quick look at how the authentication flow is implemented securely:
+![Plantex Showcase Hero Image](/portfolio/plantex/plantex.webp)
 
-```typescript
-import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+## Steps to Start Your Plants Off Right
 
-@UseGuards(AuthGuard('jwt'))
-@Get('profile')
-getProfile(@Request() req) {
-  return req.user;
-}
-```
+01. **Choose Plant**: We have several varieties of plants you can choose from.
+02. **Place an order**: Once your order is set, we move to the next step which is shipping.
+03. **Get plants delivered**: Our delivery process is easy; you receive the plant directly to your door.
 
-### Why NestJS and Prisma?
+### Premium Products
+Our showroom contains selected plants, all in excellent shape with a long lifespan:
+- Cacti Plant ($19.99)
+- Aloe Vera Plant ($7.99)
+- Succulent Plant ($5.99)
 
-- **NestJS**: Provides the structural predictability of Angular but on the backend. It's built for scale.
-- **Prisma ORM**: Type-safe database access out of the box. No more guessing SQL string queries.
-
-![Architecture Diagram](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80)
-
-This system easily handles tens of thousands of concurrent users thanks to the combination of Edge caching on Vercel and efficient connection pooling on PostgreSQL.
+Plantex provides an aesthetic, breathable UI mimicking the very nature of the products it sells. Clean spacing, organic greens, and sharp typography make purchasing plants a breeze.

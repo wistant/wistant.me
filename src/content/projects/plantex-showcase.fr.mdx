@@ -1,34 +1,30 @@
 ---
-title: Vitrine Plantex (Français)
-description: Une plongée détaillée dans l'architecture de Plantex Showcase.
 ---
 
-## Vue d'ensemble
+# Les Plantes Rendent la Vie Plus Belle 🌿
 
-Plantex Showcase est la démonstration ultime de l'intégration d'un frontend Next.js 14 ultra-moderne avec un backend NestJS robuste. Ce projet a été conçu pour combler le vide entre une esthétique magnifique et une infrastructure évolutive.
+Créez des designs végétaux incroyables pour vos bureaux ou appartements. Ajoutez de la fraîcheur à vos nouvelles idées avec Plantex.
 
-### L'Architecture
+## Qui Sommes-Nous Vraiment
 
-Nous avons utilisé **Next.js** associé à **TypeScript** et **Tailwind CSS** pour créer une interface responsive inspirée du design de Cal.com.
+Nous avons plus de 4000+ avis impartiaux et nos clients font confiance à notre processus et notre service de livraison à chaque fois.
+- Nous livrons toujours à temps.
+- Nous vous fournissons des guides pour protéger et entretenir vos plantes.
+- Nous passons toujours pour un contrôle après l'achat.
+- Satisfait ou 100% remboursé.
 
-Voici un aperçu de la manière dont le flux d'authentification est implémenté de manière sécurisée :
+![Hero Image Vitrine Plantex](/portfolio/plantex/plantex.webp)
 
-```typescript
-import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+## Étapes Pour Bien Démarrer Avec Vos Plantes
 
-@UseGuards(AuthGuard('jwt'))
-@Get('profile')
-getProfile(@Request() req) {
-  return req.user;
-}
-```
+01. **Choisissez une Plante** : Nous avons plusieurs variétés de plantes parmi lesquelles vous pouvez choisir.
+02. **Passez Commande** : Une fois votre commande établie, nous passons à l'étape suivante qui est l'expédition.
+03. **Faites-vous Livrer** : Notre processus de livraison est simple ; vous recevez la plante directement à votre porte.
 
-### Pourquoi NestJS et Prisma ?
+### Produits Premium
+Notre salle d'exposition contient des plantes sélectionnées, toutes en excellente forme et avec une longue durée de vie :
+- Plante Cacti (19.99$)
+- Aloe Vera (7.99$)
+- Succulentes (5.99$)
 
-- **NestJS** : Offre la prévisibilité structurelle d'Angular mais sur le backend. C'est conçu pour évoluer.
-- **Prisma ORM** : Accès à la base de données de manière fortement typée dès le départ.
-
-![Diagramme d'Architecture](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80)
-
-Ce système gère facilement des dizaines de milliers d'utilisateurs simultanés grâce à la combinaison du cache Edge sur Vercel et d'un pooling de connexions efficace sur PostgreSQL.
+Plantex offre une interface utilisateur esthétique et aérée qui imite la nature même des produits qu'elle vend. Un espacement épuré, des verts organiques et une typographie nette font de l'achat de plantes un jeu d'enfant.

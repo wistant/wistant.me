@@ -24,8 +24,8 @@ export const projectsData = [
         icon: React.createElement(Icons.globe, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/chickfood.webp",
-    video: "",
+    image: "/portfolio/chickfood/chickfood.webp",
+    video: "/portfolio/chickfood/chickfood.webm",
     seo: {
       title: {
         en: "Chickfood - Interactive Restaurant UI",
@@ -64,7 +64,7 @@ export const projectsData = [
         icon: React.createElement(Icons.github, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/nova.webp",
+    image: "/portfolio/nova/nova.webp",
     video: "",
     seo: {
       title: {
@@ -99,7 +99,7 @@ export const projectsData = [
         icon: React.createElement(Icons.globe, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/splyt.webp",
+    image: "/portfolio/splyt/splyt.webp",
     video: "",
     seo: {
       title: {
@@ -134,7 +134,7 @@ export const projectsData = [
         icon: React.createElement(Icons.globe, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/shopdo-store.vercel.app.webp",
+    image: "/portfolio/shopdo/shopdo-store.vercel.app.webp",
     video: "",
     seo: {
       title: {
@@ -169,8 +169,8 @@ export const projectsData = [
         icon: React.createElement(Icons.globe, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/elsyandrive-wistant.netlify.app.webp",
-    video: "",
+    image: "/portfolio/elsyandrive/elysindrive.webp",
+    video: "/portfolio/elsyandrive/driveelysian.webm",
     seo: {
       title: {
         en: "Elysian Drive Luxury Rentals",
@@ -204,7 +204,7 @@ export const projectsData = [
         icon: React.createElement(Icons.github, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/suburbia.webp",
+    image: "/portfolio/suburbia/suburbia.webp",
     video: "",
     seo: {
       title: {
@@ -244,8 +244,8 @@ export const projectsData = [
         icon: React.createElement(Icons.github, { className: "size-3" }),
       },
     ],
-    image: "/portfolio/plantex-wistant.vercel.app.webp",
-    video: "",
+    image: "/portfolio/plantex/plantex.webp",
+    video: "/portfolio/plantex/plantex.webm",
     seo: {
       title: {
         en: "Plantex - Responsive Plant Showcase Website",
@@ -254,6 +254,41 @@ export const projectsData = [
       description: {
         en: "Explore Plantex, a modern and responsive website showcasing a variety of plants. Built with HTML, Tailwind CSS, and JavaScript.",
         fr: "Explorez Plantex, un site web moderne et responsive présentant une variété de plantes. Construit avec HTML, Tailwind CSS et JavaScript.",
+      },
+    },
+  },
+  {
+    slug: "fizzi",
+    title: {
+      en: "Fizzi - High Performing Soda Landing Page",
+      fr: "Fizzi - Landing Page de Soda",
+    },
+    href: "/en/projects/fizzi",
+    dates: "2024",
+    order: 8,
+    active: true,
+    description: {
+      en: "A colorful, bouncy, and highly energetic landing page for a modern soda brand. Utilizes GSAP physics for floating elements to bring the product to life.",
+      fr: "Une landing page colorée, dynamique et pleine d'énergie pour une marque de soda moderne. Utilise les physiques GSAP pour des éléments flottants.",
+    },
+    technologies: ["Next.js", "React", "GSAP", "Tailwind CSS"],
+    links: [
+      {
+        type: "Website",
+        href: "https://fizzi-demo.vercel.app", // Generic fallback
+        icon: React.createElement(Icons.globe, { className: "size-3" }),
+      },
+    ],
+    image: "/portfolio/fizzi/fizzi1.webp",
+    video: "",
+    seo: {
+      title: {
+        en: "Fizzi Soda Experience",
+        fr: "Expérience Fizzi Soda",
+      },
+      description: {
+        en: "Experience the ultimate refreshing design built with Next.js and GSAP.",
+        fr: "Vivez l'expérience rafraîchissante ultime construite avec Next.js et GSAP.",
       },
     },
   }
