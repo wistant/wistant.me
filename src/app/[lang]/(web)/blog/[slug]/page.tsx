@@ -5,6 +5,7 @@ import { mdxComponents } from "@/components/mdx/mdx-components";
 import { getAuthor, isValidAuthor } from "@/lib/authors";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 import { allPosts } from "content-collections";
+import { getPostBySlug } from "@/data/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { Home, BookOpen } from "lucide-react";
@@ -36,7 +37,7 @@ export async function generateMetadata({
   params,
 }: BlogSlugPageProps): Promise<Metadata> {
   const { lang, slug } = await params;
-  const post = allPosts.find((p) => p.slug === slug);
+  const post = getPostBySlug(slug, lang);
 
   if (!post) {
     return getPageMetadata(lang);
@@ -56,7 +57,7 @@ export async function generateMetadata({
 
 export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   const { lang, slug } = await params;
-  const post = allPosts.find((p) => p.slug === slug);
+  const post = getPostBySlug(slug, lang);
 
   if (!post) notFound();
 

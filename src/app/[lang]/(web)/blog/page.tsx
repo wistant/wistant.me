@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { allPosts } from "content-collections";
+import { getPostsByLang } from "@/data/blog";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { BlogCard } from "@/components/blog/blog-card";
 import { TagFilter } from "@/components/blog/tag-filter";
@@ -41,10 +41,8 @@ export default async function BlogPage({
   const resolvedSearchParams = await searchParams;
   const dict = await getDictionary(lang);
 
-  // Sort blog by date (newest first)
-  const sortedPosts = allPosts.sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  // Get all active posts with language fallback resolution and sorted by date
+  const sortedPosts = getPostsByLang(lang);
 
   // Extract unique tags
   const allTags = [
