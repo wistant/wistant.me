@@ -1,5 +1,4 @@
-import { Icons } from "@/components/ui/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+
 
 export const personalData = {
   name: "Wistant Kode",
@@ -14,12 +13,12 @@ export const personalData = {
   avatarUrl: "/me/me.webp",
   post: "Full-Stack IT Architect & Product Engineer",
   navbar: [
-    { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/about", icon: Icons.user, label: "About" },
-    { href: "/projects", icon: Icons.globe, label: "Projects" },
-    // { href: "/hackathons", icon: Icons.trophy, label: "Hackathons" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
-    { href: "/contact", icon: Icons.email, label: "Contact" },
+    { href: "/", icon: "/icons/home.svg", label: "Home" },
+    { href: "/about", icon: "/icons/user.svg", label: "About" },
+    { href: "/projects", icon: "/icons/globe.svg", label: "Projects" },
+    // { href: "/hackathons", icon: "/icons/trophy.svg", label: "Hackathons" },
+    { href: "/blog", icon: "/icons/notebook.svg", label: "Blog" },
+    { href: "/contact", icon: "/icons/mail.svg", label: "Contact" },
   ],
   contact: {
     email: "wistantkode@protonmail.com",
@@ -52,7 +51,7 @@ export const personalData = {
       email: {
         name: "Send Email",
         url: "mailto:wistantkode@protonmail.com",
-        icon: Icons.email,
+        icon: "/icons/mail.svg",
         navbar: true,
       },
     },

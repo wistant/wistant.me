@@ -82,7 +82,7 @@ export const FloatingDockMobile = ({
               )}
             >
               {typeof item.icon === "string" ? (
-                <img src={item.icon} alt={item.title} className={cn("size-full object-contain", (item.title === "GitHub" || item.title === "X") && "dark:invert")} />
+                <img src={item.icon} alt={item.title} className={cn("size-full object-contain", item.title !== "WhatsApp" && "dark:invert")} />
               ) : (
                 <div className="h-5 w-5">{item.icon}</div>
               )}
@@ -219,7 +219,7 @@ function IconContainer({
           className={cn("flex items-center justify-center", isActive ? "text-primary" : "text-foreground/75")}
         >
           {typeof icon === "string" ? (
-            <img src={icon} alt={title} className={cn("size-full object-contain", (title === "GitHub" || title === "X") && "dark:invert")} />
+            <img src={icon} alt={title} className={cn("size-full object-contain", title !== "WhatsApp" && "dark:invert")} />
           ) : (
             icon
           )}
