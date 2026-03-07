@@ -3,7 +3,7 @@ import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { getDictionary } from "@/lib/dictionary";
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export default async function ContactPage({
   params,

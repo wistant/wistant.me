@@ -4,7 +4,7 @@ import { allPosts, allProjects } from "content-collections";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
-  const locales = ["en", "fr"];
+  const locales = ["en", "fr", "es", "ar", "wo"];
   const staticRoutes = ["", "/blog", "/projects", "/about", "/contact", "/hackathons", "/llms.txt"];
 
   const entries: MetadataRoute.Sitemap = [];

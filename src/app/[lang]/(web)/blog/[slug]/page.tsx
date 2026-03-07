@@ -20,7 +20,7 @@ import { getPageMetadata, SITE_CONFIG } from "@/config/metadata";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/json-ld";
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string; lang: Language }>;

@@ -6,15 +6,16 @@ import React from "react";
 
 const BLUR_FADE_DELAY = 0.04;
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
-export default function ProjectsSection({
+export default async function ProjectsSection({
   limit,
   lang,
 }: {
   limit?: number;
   lang: Language;
 }) {
+  const dict = await import("@/lib/dictionary").then((m) => m.getDictionary(lang));
   const sortedProjects = getProjectsByLang(lang);
   const projects = limit ? sortedProjects.slice(0, limit) : sortedProjects;
 
@@ -26,18 +27,17 @@ export default function ProjectsSection({
             <div className="flex-1 h-px bg-linear-to-r from-transparent via-border to-transparent" />
             <div className="border border-border bg-black z-10 rounded-xl px-4 py-1 shadow-sm">
               <span className="text-white text-sm font-medium uppercase tracking-widest">
-                Creations
+                {dict.projects.title}
               </span>
             </div>
             <div className="flex-1 h-px bg-linear-to-l from-transparent via-border to-transparent" />
           </div>
           <div className="flex flex-col gap-y-3 items-center justify-center">
             <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl font-clash italic text-center uppercase">
-              Engineered Solutions
+              {dict.projects.title}
             </h2>
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-lg/relaxed max-w-[700px] text-center font-cabinet">
-              Une collection de systèmes web haute performance, de bibliothèques
-              open-source et d&apos;architectures scalables.
+              {dict.projects.seo.description}
             </p>
           </div>
         </div>

@@ -22,7 +22,7 @@ import { getPageMetadata } from "@/config/metadata";
 
 const BLUR_FADE_DELAY = 0.04;
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,
@@ -149,7 +149,7 @@ export default async function Home({
           buttonTextShow={dict.ui.seeMore}
           buttonTextHide={dict.ui.showLess}
           href={`/${lang}/projects`}
-          linkText={dict.projects.viewAll}
+          linkText={dict.projects.viewAll || "View All"}
         >
           <ProjectsSection limit={6} lang={lang} />
         </ShowMore>
@@ -174,7 +174,7 @@ export default async function Home({
 
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
-          <ContactSection />
+          <ContactSection dict={dict} />
         </BlurFade>
       </section>
     </main>

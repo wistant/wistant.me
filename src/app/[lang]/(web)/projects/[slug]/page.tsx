@@ -28,7 +28,7 @@ const getTechIcon = (tech: string) => {
   return null;
 };
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 interface ProjectSlugPageProps {
   params: Promise<{ slug: string; lang: Language }>;

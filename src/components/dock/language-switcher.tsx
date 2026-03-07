@@ -83,6 +83,60 @@ export function LanguageSwitcher() {
               </div>
             </div>
           </DropdownMenuRadioItem>
+
+          {/*Spanish*/}
+          <DropdownMenuRadioItem
+            value="es"
+            className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
+          >
+            <div className="flex items-center gap-3 w-full">
+              <span className="text-xl">🇪🇸</span>
+              <div className="flex flex-col gap-0">
+                <span className="font-bold text-sm tracking-tight">
+                  Español
+                </span>
+                <span className="text-[10px] text-muted-foreground/70 font-medium">
+                  Versión Global
+                </span>
+              </div>
+            </div>
+          </DropdownMenuRadioItem>
+
+          {/*Arabic*/}
+          <DropdownMenuRadioItem
+            value="ar"
+            className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
+          >
+            <div className="flex items-center gap-3 w-full">
+              <span className="text-xl">🇸🇦</span>
+              <div className="flex flex-col gap-0">
+                <span className="font-bold text-sm tracking-tight text-right w-full">
+                  العربية
+                </span>
+                <span className="text-[10px] text-muted-foreground/70 font-medium text-right w-full">
+                  النسخة العالمية
+                </span>
+              </div>
+            </div>
+          </DropdownMenuRadioItem>
+
+          {/*Wolof*/}
+          <DropdownMenuRadioItem
+            value="wo"
+            className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
+          >
+            <div className="flex items-center gap-3 w-full">
+              <span className="text-xl">🇸🇳</span>
+              <div className="flex flex-col gap-0">
+                <span className="font-bold text-sm tracking-tight">
+                  Wolof
+                </span>
+                <span className="text-[10px] text-muted-foreground/70 font-medium">
+                  Senegal
+                </span>
+              </div>
+            </div>
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

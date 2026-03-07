@@ -44,7 +44,7 @@ const interFont = localFont({
   variable: "--font-inter",
 });
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,
@@ -66,7 +66,7 @@ export default async function RootLayout({
   const dict = await getDictionary(lang as Language);
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
       <body
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
       >

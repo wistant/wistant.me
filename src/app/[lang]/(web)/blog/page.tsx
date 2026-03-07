@@ -10,7 +10,7 @@ import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { getPageMetadata } from "@/config/metadata";
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,

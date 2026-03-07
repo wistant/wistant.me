@@ -8,7 +8,7 @@ import { getPageMetadata } from "@/config/metadata";
 
 const BLUR_FADE_DELAY = 0.04;
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,

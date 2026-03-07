@@ -9,7 +9,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,
@@ -114,7 +114,7 @@ export default async function ProjectsPage({
         <Suspense
           fallback={
             <div className="text-center py-20 text-muted-foreground">
-              {lang === "fr" ? "Chargement des projets..." : "Loading projects..."}
+              {dict.ui.loadingArticles}
             </div>
           }
         >
@@ -157,9 +157,7 @@ export default async function ProjectsPage({
             </div>
           ) : (
             <div className="text-center py-20 text-muted-foreground border border-dashed rounded-xl">
-              {lang === "fr"
-                ? "Aucun projet trouvé avec cette technologie."
-                : "No projects found using this technology."}
+              {dict.ui.noArticlesFound}
             </div>
           )}
         </Suspense>
