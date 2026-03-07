@@ -122,7 +122,7 @@ export default async function ProjectsPage({
           }
         >
           {filteredProjects.length > 0 ? (
-            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x-[3px] border-border ${filteredProjects.length < 4 ? "border-b-[3px]" : "border-b-0"}`}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x-2 border-border ${filteredProjects.length < 4 ? "border-b-2" : "border-b-0"}`}>
               {filteredProjects.map((project, id) => (
                 <BlurFade
                   key={project.slug}

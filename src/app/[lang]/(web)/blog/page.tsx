@@ -139,8 +139,8 @@ export default async function BlogPage({
         >
           {filteredPosts.length > 0 ? (
             <div
-              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x-[3px] border-border ${
-                filteredPosts.length < 4 ? "border-b-[3px]" : "border-b-0"
+              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x-2 border-border ${
+                filteredPosts.length < 4 ? "border-b-2" : "border-b-0"
               }`}
             >
               {filteredPosts.map((post) => (
@@ -156,7 +156,7 @@ export default async function BlogPage({
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 text-muted-foreground border-x-[3px] border-b-[3px] border-border">
+            <div className="text-center py-20 text-muted-foreground border-x-2 border-b-2 border-border">
               {dict.ui.noArticlesFound}
             </div>
           )}

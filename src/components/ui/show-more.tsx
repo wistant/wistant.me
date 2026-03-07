@@ -58,7 +58,7 @@ export function ShowMore({
           variant="default"
           size="sm"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="rounded-full shadow-sm transition-all group px-6 h-10 font-medium"
+          className="rounded-full shadow-sm transition-all group px-6 h-10 font-medium bg-white text-black hover:bg-neutral-200"
         >
           {isExpanded ? (
             <>
@@ -78,7 +78,7 @@ export function ShowMore({
             <Button
               variant="default"
               size="sm"
-              className="rounded-full shadow-sm transition-all group px-6 h-10 font-medium ml-2"
+              className="rounded-full shadow-sm transition-all group px-6 h-10 font-medium ml-2 bg-white text-black hover:bg-neutral-200"
             >
               {linkText}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

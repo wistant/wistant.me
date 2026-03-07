@@ -132,8 +132,8 @@ export default async function Home({
           <div className="flex justify-center mt-4">
             <Link href={`/${lang}/about`}>
               <Button
-                variant="outline"
-                className="group rounded-full shadow-sm font-medium px-6 h-10 border-border"
+                variant="default"
+                className="group rounded-full shadow-sm font-medium px-6 h-10 border border-transparent bg-white text-black hover:bg-neutral-200"
               >
                 {dict.work.viewMore || "View full journey"}
                 <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

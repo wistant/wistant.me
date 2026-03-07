@@ -84,14 +84,24 @@ export function ProjectCard({
       className={cn(
         "group flex flex-col h-full transition-all duration-300 cursor-pointer overflow-hidden",
         isBlogGrid
-          ? cn("border-b-[3px] border-border relative before:absolute before:-left-0.5 before:top-0 before:z-10 before:h-[200%] before:w-[3px] before:bg-border before:content-[''] after:absolute after:-top-0.5 after:left-0 after:z-0 after:h-[3px] after:w-[200%] after:bg-border after:content-['']", showRightBorder && "md:border-r-[3px] border-border border-b-0")
+          ? cn(
+              "border-b-2 border-border relative",
+              variant === "blog" && "before:hidden sm:before:block before:absolute before:-right-[2px] before:top-0 before:h-full before:w-[2px] before:bg-border",
+              variant === "blog" && "after:absolute after:-bottom-[2px] after:left-0 after:w-full after:h-[2px] after:bg-border sm:after:w-[calc(100%+2px)]",
+              showRightBorder && "md:border-r-2 border-border border-b-0"
+            )
           : "bg-muted/10 p-2.5 rounded-4xl border border-border/50 hover:border-border/80 hover:shadow-sm",
         className
       )}
     >
       <div className={cn(
         "relative shrink-0 overflow-hidden",
-        isBlogGrid ? "rounded-none border-b-[3px] border-border" : "rounded-3xl border border-border/30"
+        isBlogGrid
+          ? cn(
+              "flex-col border-b-2 border-border",
+              showRightBorder && "md:border-r-2 md:border-b-0"
+            )
+          : "rounded-3xl border border-border/30"
       )}>
         <Link
           href={href || "#"}

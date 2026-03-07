@@ -26,8 +26,8 @@ export default function ProjectsSection({
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">
             <div className="flex-1 h-px bg-linear-to-r from-transparent via-border to-transparent" />
-            <div className="border border-border bg-background z-10 rounded-xl px-4 py-1">
-              <span className="text-foreground text-sm font-medium uppercase tracking-widest">
+            <div className="border border-border bg-black z-10 rounded-xl px-4 py-1 shadow-sm">
+              <span className="text-white text-sm font-medium uppercase tracking-widest">
                 Creations
               </span>
             </div>
@@ -44,7 +44,7 @@ export default function ProjectsSection({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-200 mx-auto auto-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto relative overflow-hidden border-x-2 border-b-2 border-border">
           {projects.map((project, id) => {
             if (!project) return null;
             return (
@@ -62,6 +62,8 @@ export default function ProjectsSection({
                   image={project.image}
                   video={project.video}
                   links={project.links}
+                  variant="blog"
+                  className="h-full"
                 />
               </BlurFade>
             );

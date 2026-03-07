@@ -23,8 +23,8 @@ export default function HackathonsSection({
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">
             <div className="flex-1 h-px bg-linear-to-r from-transparent from-5% via-border via-95% to-transparent" />
-            <div className="border border-border bg-background z-10 rounded-xl px-4 py-1">
-              <span className="text-foreground text-sm font-medium">{title}</span>
+            <div className="border border-border bg-black z-10 rounded-xl px-4 py-1 shadow-sm">
+              <span className="text-white text-sm font-medium">{title}</span>
             </div>
             <div className="flex-1 h-px bg-linear-to-l from-transparent from-5% via-border via-95% to-transparent" />
           </div>
