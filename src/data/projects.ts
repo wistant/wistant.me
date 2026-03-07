@@ -1,6 +1,6 @@
 import { allProjects } from "content-collections";
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 /**
  * Get all active projects for a specific language, sorted by their order frontmatter property.

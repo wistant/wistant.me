@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { DATA } from "@/data/resume";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ContactSection({ dict }: { dict: Record<string, any> }) {
   return (
     <div className="border border-border/60 rounded-xl p-10 relative bg-muted/10">

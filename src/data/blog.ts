@@ -1,6 +1,6 @@
 import { allPosts } from "content-collections";
 
-type Language = "en" | "fr";
+type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 /**
  * Get all blog posts for a specific language.
