@@ -10,16 +10,16 @@
     "backToHome": "Volver al Inicio"
   },
   "hero": {
-    "title": "Ingeniería de experiencias digitales de alto rendimiento ✦",
-    "description": "Soy Wistant, Ingeniero de Software. Construyo interfaces escalables y robustas para Web, Móvil y Escritorio. Forjo sistemas que rinden."
+    "title": "Arquitectura de Sistemas Resilientes y Plataformas Escalables 🏆",
+    "description": "Soy Wistant, Ingeniero de Software experto en forjar soluciones digitales de alta gama. Construyo arquitecturas distribuidas e interfaces ultrarrápidas para Web, Móvil y Escritorio."
   },
   "about": {
     "title": "Filosofía Técnica",
     "content": "No solo escribo código; diseño sistemas de software enfocados en una experiencia de usuario y rendimiento sin concesiones. Mi objetivo es transformar la lógica compleja en soluciones multiplataforma simples, limpias y ultrarrápidas.",
     "seo": {
-      "title": "Sobre Wistant | Ingeniero de Software",
-      "description": "Conoce a Wistant, un Ingeniero de Software especializado en soluciones digitales escalables (Web, Móvil, Escritorio).",
-      "keywords": "Ingeniero de Software, Desarrollador Full-Stack, Desarrollo Móvil, Aplicaciones de Escritorio, TypeScript"
+      "title": "Sobre Wistant | Ingeniero de Software & Arquitecto Digital",
+      "description": "Explora la filosofía técnica y el stack tecnológico de Wistant. Soluciones expertas para Web, Móvil y Escritorio.",
+      "keywords": "Ingeniero de Software, Desarrollador Full-Stack, Desarrollo Móvil, TypeScript, Next.js, NestJS, Camerún"
     }
   },
   "work": {
@@ -45,18 +45,18 @@
     "cta": "Ver Proyecto",
     "stack": "Tecnologías",
     "seo": {
-      "title": "Wistant | Portfolio y Proyectos",
-      "description": "Explora mis últimos proyectos full-stack construidos con Next.js, NestJS y TypeScript.",
-      "keywords": "Portfolio, Proyectos, TypeScript, Next.js, Desarrollo Web"
+      "title": "Portfolio & Proyectos | Realizaciones de Wistant",
+      "description": "Descubre soluciones digitales de alto rendimiento: SaaS, apps móviles y sistemas robustos creados por Wistant.",
+      "keywords": "Portfolio, Proyectos, TypeScript, Next.js, NestJS, Desarrollo Web, Apps Móviles"
     }
   },
   "blog": {
     "title": "Notas e Insights",
     "description": "Pensamientos sobre ingeniería de software, desarrollo multiplataforma y áreas de aprendizaje.",
     "seo": {
-      "title": "Wistant | Blog y Notas",
-      "description": "Artículos y reflexiones sobre el desarrollo de software moderno y arquitectura de sistemas.",
-      "keywords": "Blog, Desarrollo de Software, TypeScript, Ingeniería"
+      "title": "Notas e Insights Técnicos | Blog de Wistant",
+      "description": "Artículos y reflexiones sobre arquitectura de software, desarrollo multiplataforma y tendencias tecnológicas modernas.",
+      "keywords": "Blog, Desarrollo de Software, Arquitectura de Sistemas, TypeScript, Ingeniería"
     }
   },
   "contact": {
@@ -66,9 +66,9 @@
     "button": "Contactar",
     "social": "Mis redes",
     "seo": {
-      "title": "Contacto Wistant | Hablemos",
-      "description": "Ponte en contacto para oportunidades freelance, consultoría o simplemente para saludar.",
-      "keywords": "Contacto, Desarrollador Freelance, Ingeniero Full-Stack"
+      "title": "Contacta con Wistant | Hablemos de tu Proyecto",
+      "description": "¿Necesitas un ingeniero de software? Ponte en contacto para freelance, consultoría o colaboraciones técnicas innovadoras.",
+      "keywords": "Contacto, Desarrollador Freelance, Ingeniero Full-Stack, Consultoría de Software"
     }
   },
   "hackathons": {
@@ -76,9 +76,18 @@
     "subtitle": "Impulsado por crear",
     "description": "A lo largo de mi trayectoria, he participado en múltiples hackathons. Es fascinante ver a desarrolladores apasionados unirse para construir proyectos innovadores en un fin de semana. Estos sprints intensivos forjaron mi capacidad para entregar valor rápidamente bajo presión.",
     "seo": {
-      "title": "Hackathons | Wistant",
-      "description": "Un historial de mis participaciones en hackathons y sprints de programación.",
-      "keywords": "Hackathons, Competiciones de programación, Proyectos"
+      "title": "Hackathons | Trayectoria de Wistant",
+      "description": "Historial de participaciones en hackathons y sprints de programación. Pasión por construir y entregar valor rápido.",
+      "keywords": "Hackathons, Competiciones de programación, Proyectos, Programación Competitiva"
+    }
+  },
+  "posts": {
+    "title": "Muro Social",
+    "description": "Pensamientos rápidos, aportes técnicos y actualizaciones de X y LinkedIn.",
+    "seo": {
+      "title": "Muro Social y Feed Técnico | Wistant",
+      "description": "Sigue mis actualizaciones técnicas y compartidos en redes sociales (X, LinkedIn). Ideas rápidas y vigilancia tecnológica.",
+      "keywords": "Redes Sociales, X, Twitter, LinkedIn, Vigilancia Tecnológica, Wistant"
     }
   },
   "og": {
@@ -97,9 +106,9 @@
   },
   "global": {
     "seo": {
-      "title": "Wistant | Ingeniero de Software",
-      "description": "Wistant es un Ingeniero de Software especializado en la creación de soluciones digitales de alta calidad en entornos web, móviles y de escritorio.",
-      "keywords": "Ingeniero de Software, Desarrollador Full-Stack, TypeScript, React, Next.js"
+      "title": "Wistant | Ingeniero de Software Freelance y Experto Tech",
+      "description": "Ingeniero de software especializado en la creación de soluciones digitales de alta calidad (Web, Móvil, Escritorio).",
+      "keywords": "Wistant, Wistant Kode, Ingeniero de Software, Desarrollador Full-Stack, TypeScript, React, Next.js, Camerún"
     }
   }
 }

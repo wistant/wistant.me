@@ -10,16 +10,16 @@
     "backToHome": "Retour à l'accueil"
   },
   "hero": {
-    "title": "Ingénierie d'expériences numériques d'avant-garde ✦",
-    "description": "Je suis Wistant, Ingénieur Logiciel. Je conçois des plateformes sur-mesure et ultra-performantes sur le Web, Mobile et Desktop. Je forge des systèmes évolutifs."
+    "title": "Architecte de Systèmes Résilients & Plateformes Scalables 🏆",
+    "description": "Je suis Wistant, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop."
   },
   "about": {
     "title": "Philosophie Technique",
     "content": "Je ne me contente pas de coder ; j'architecte des systèmes logiciels pensés pour l'excellence et l'expérience utilisateur. Mon objectif : distiller la complexité en des solutions multiplateformes simples, élégantes et redoutables de rapidité.",
     "seo": {
-      "title": "À Propos de Wistant | Ingénieur Logiciel",
-      "description": "Découvrez le profil de Wistant, développeur et futur ingénieur spécialisé dans la création de solutions numériques (Web, Mobile, Desktop).",
-      "keywords": "Ingénieur Logiciel, Développeur Full-Stack, Développement Mobile, Applications Desktop, TypeScript, Next.js, NestJS"
+      "title": "Wistant | Ingénieur Logiciel & Architecte Numérique",
+      "description": "Expert en ingénierie logicielle basé au Cameroun. Découvrez ma philosophie technique et ma stack pour des solutions Web, Mobile et Desktop.",
+      "keywords": "Ingénieur Logiciel, Développeur Full-Stack, Développement Mobile, TypeScript, Next.js, NestJS, Cameroun"
     }
   },
   "work": {
@@ -45,18 +45,18 @@
     "cta": "Voir le Projet",
     "stack": "Technologies",
     "seo": {
-      "title": "Wistant | Portfolio & Réalisations",
-      "description": "Découvrez mes projets full-stack les plus récents construits avec Next.js, NestJS et TypeScript.",
-      "keywords": "Portfolio, Projets, TypeScript, Next.js, NestJS, Développement Web"
+      "title": "Projets & Réalisations | Wistant Portfolio",
+      "description": "Explorez mes projets phares en ingénierie logicielle : SaaS, applications mobiles et systèmes robustes conçus avec Next.js et TypeScript.",
+      "keywords": "Portfolio, Projets, TypeScript, Next.js, NestJS, Développement Web, Mobile Apps"
     }
   },
   "blog": {
     "title": "Notes & Insights",
     "description": "Réflexions sur l'ingénierie logicielle, le développement multiplateforme et mes découvertes du moment.",
     "seo": {
-      "title": "Wistant | Blog & Notes",
-      "description": "Articles, notes et réflexions sur le développement logiciel moderne et l'architecture système.",
-      "keywords": "Blog, Développement Logiciel, Développement Mobile, TypeScript, Ingénierie"
+      "title": "Notes & Insights Techniques | Blog de Wistant",
+      "description": "Articles et réflexions sur l'architecture logicielle, le développement multiplateforme et les dernières tendances technologiques.",
+      "keywords": "Blog, Développement Logiciel, Architecture Système, TypeScript, Ingénierie"
     }
   },
   "contact": {
@@ -66,9 +66,9 @@
     "button": "Me contacter",
     "social": "Mes réseaux",
     "seo": {
-      "title": "Contact Wistant | Discutons",
-      "description": "Contactez-moi pour des missions freelance, du consulting ou simplement pour échanger.",
-      "keywords": "Contact, Développeur Freelance, Ingénieur Full-Stack"
+      "title": "Contactez Wistant | Parlons de votre Projet",
+      "description": "Besoin d'un ingénieur logiciel ? Contactez-moi pour du freelance, du consulting ou des collaborations techniques innovantes.",
+      "keywords": "Contact, Développeur Freelance, Ingénieur Full-Stack, Consulting Logiciel"
     }
   },
   "hackathons": {
@@ -76,9 +76,18 @@
     "subtitle": "La passion de bâtir",
     "description": "Tout au long de mon parcours, j'ai participé à de multiples hackathons. C'est fascinant de voir des développeurs passionnés se réunir pour construire des projets innovants en un week-end. Ces sprints intensifs ont forgé ma capacité à livrer de la valeur rapidement et sous pression.",
     "seo": {
-      "title": "Hackathons | Wistant",
-      "description": "Un historique de mes participations aux hackathons et sprints de code.",
-      "keywords": "Hackathons, Compétitions de code, Projets"
+      "title": "Hackathons | Parcours & Sprints de Code de Wistant",
+      "description": "Historique de mes participations aux hackathons. La passion de bâtir et de livrer de la valeur rapidement sous pression.",
+      "keywords": "Hackathons, Compétitions de code, Projets, Programmation Compétitive"
+    }
+  },
+  "posts": {
+    "title": "Social Wall",
+    "description": "Pensées rapides, partages techniques et actualités de X et LinkedIn.",
+    "seo": {
+      "title": "Social Wall & Flux Technique | Wistant",
+      "description": "Suivez mon actualité technique et mes partages sur les réseaux sociaux (X, LinkedIn). Insights rapides et veille techno.",
+      "keywords": "Social Media, X, Twitter, LinkedIn, Veille Technique, Wistant"
     }
   },
   "og": {
@@ -97,9 +106,9 @@
   },
   "global": {
     "seo": {
-      "title": "Wistant | Ingénieur Logiciel",
-      "description": "Wistant est un futur Ingénieur Logiciel basé au Cameroun, spécialisé dans la création de solutions numériques de pointe sur Web, Mobile et Desktop.",
-      "keywords": "Wistant, Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développeur Mobile, TypeScript, Next.js, React Native, Cameroun"
+      "title": "Wistant | Ingénieur Logiciel & Expert Tech",
+      "description": "Ingénieur logiciel spécialisé dans la création de plateformes numériques ultra-performantes (Web, Mobile, Desktop) au Cameroun et à l'international.",
+      "keywords": "Wistant, Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développeur Mobile, TypeScript, Next.js, React Native, Cameroun, Freelance"
     }
   }
 }
