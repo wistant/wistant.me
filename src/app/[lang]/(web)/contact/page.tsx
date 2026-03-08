@@ -2,9 +2,25 @@ import { DATA } from "@/data/resume";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { getDictionary } from "@/lib/dictionary";
+import { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import { getPageMetadata } from "@/config/metadata";
+import { Language } from "@/types/locale";
+import Link from "next/link";
+import React from "react";
 
-type Language = "en" | "fr" | "es" | "ar" | "wo";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  return getPageMetadata(lang, {
+    title: "Contact",
+    description: "Get in touch with me.",
+    url: "/contact",
+  });
+}
 
 export default async function ContactPage({
   params,
@@ -28,16 +44,21 @@ export default async function ContactPage({
       <section className="w-full flex justify-center">
         <div className="w-full max-w-2xl p-8 sm:p-12 lg:p-16">
           <BlurFade delay={0.04}>
-            <div className="flex flex-col gap-4 text-center mb-12">
-              <h1 className="text-4xl font-bold font-cal tracking-tighter sm:text-5xl">
-                {dict.contact?.title || "Contact"}
-              </h1>
-              <p className="text-muted-foreground text-lg">
-                {dict.contact?.subtitle || "Let's work together."}
-              </p>
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-4">
+                <div className="inline-block rounded-lg px-3 py-1 text-sm bg-primary/10 text-primary border border-primary/20">
+                  {dict.navigation.contact}
+                </div>
+                <h2 className="text-4xl md:text-6xl font-bold tracking-tighter sm:text-5xl font-clash">
+                  {dict.contact.title}
+                </h2>
+                <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  {dict.contact.description}
+                </p>
+              </div>
             </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl mx-auto">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl mx-auto mt-12">
               {Object.entries(DATA.contact.social).map(([key, social]) => (
                 <a
                   key={key}
@@ -56,7 +77,6 @@ export default async function ContactPage({
                 </a>
               ))}
             </div>
-
           </BlurFade>
         </div>
       </section>

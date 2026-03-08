@@ -1,53 +1,28 @@
 import { MetadataRoute } from "next";
-import { SITE_CONFIG } from "@/config/metadata";
-import { allPosts, allProjects } from "content-collections";
+import { DATA } from "@/data/resume";
+import { LOCALES } from "@/types/locale";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = SITE_CONFIG.url;
-  const locales = ["en", "fr", "es", "ar", "wo"];
-  const staticRoutes = ["", "/blog", "/projects", "/about", "/contact", "/hackathons", "/llms.txt"];
+export default function sitemap(): MetadataRoute.Sitemap {
+  const routes = [
+    "",
+    "/about",
+    "/projects",
+    "/blog",
+    "/contact",
+    "/hackathons",
+    "/posts",
+  ];
 
-  const entries: MetadataRoute.Sitemap = [];
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || DATA.url;
 
-  // 1. Static Routes
-  locales.forEach((lang) => {
-    staticRoutes.forEach((route) => {
-      entries.push({
-        url: `${baseUrl}/${lang}${route}`,
-        lastModified: new Date(),
-        changeFrequency: route === "" ? "monthly" : "weekly",
-        priority: route === "" ? 1.0 : 0.8,
-      });
-    });
-  });
+  const sitemapEntries = routes.flatMap((route) =>
+    LOCALES.map((locale) => ({
+      url: `${baseUrl}/${locale}${route}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: route === "" ? 1 : 0.8,
+    }))
+  );
 
-  // 2. Dynamic Blog Posts
-  allPosts.forEach((post) => {
-    // Determine last modified date from post.date (if exists) or fallback
-    const lastModified = post.date ? new Date(post.date) : new Date();
-    // Assuming posts have a valid lang. Check for it or default to en.
-    const lang = post.lang || "en";
-    entries.push({
-      url: `${baseUrl}/${lang}/blog/${post.slug}`,
-      lastModified: lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    });
-  });
-
-  // 3. Dynamic Projects
-  allProjects.forEach((project) => {
-    // If dates string starts with a year (e.g. "2024"), use it for lastModified
-    const yearMatch = project.dates?.match(/^20\d{2}/);
-    const lastModified = yearMatch ? new Date(`${yearMatch[0]}-01-01`) : new Date();
-    
-    entries.push({
-      url: `${baseUrl}/${project.lang}/projects/${project.slug}`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    });
-  });
-
-  return entries;
+  return sitemapEntries;
 }

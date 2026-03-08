@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, X } from "lucide-react";
@@ -15,6 +14,9 @@ interface MediaViewerProps {
   height?: number;
 }
 
+import NextImage from "next/image";
+
+// IMAGE MODE (Naked Style with Lightbox)
 export function MediaViewer({
   src,
   alt = "",
@@ -25,48 +27,50 @@ export function MediaViewer({
 }: MediaViewerProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const mediaProps = {
-    src,
-    alt,
-    className: cn(
-      "w-full h-full object-contain rounded-2xl overflow-hidden",
-      className
-    ),
-    ...(width && height ? { width, height } : {}),
-  };
-
   if (type === "video") {
     return (
       <div className="my-6 w-full relative aspect-video overflow-hidden rounded-lg border border-border shadow-sm">
-        <video {...mediaProps} controls loop className="w-full h-full object-cover">
+        <video src={src} controls loop className="w-full h-full object-cover">
           Your browser does not support the video tag.
         </video>
       </div>
     );
   }
 
-  // IMAGE MODE (With Lightbox)
+  const isLocal = src.startsWith("/");
+
   return (
     <>
-      <div className="my-8 w-full">
+      <div className="my-8 w-full flex justify-center">
         <div 
-          className="group relative w-full overflow-hidden rounded-2xl cursor-pointer transition-transform duration-300 border border-border bg-muted/20"
+          className="group relative cursor-pointer"
           onClick={() => setIsOpen(true)}
         >
-          <img
-            src={src}
-            alt={alt}
-            className={cn("w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]", className)}
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-            <div className="bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          {isLocal && width && height ? (
+            <NextImage
+              src={src}
+              alt={alt}
+              width={width}
+              height={height}
+              className={cn("max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01]", className)}
+              style={{ height: "auto" }}
+            />
+          ) : (
+            <img
+              src={src}
+              alt={alt}
+              className={cn("max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01]", className)}
+              loading="lazy"
+            />
+          )}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="bg-black/20 backdrop-blur-sm p-3 rounded-full border border-white/20">
               <Maximize2 className="w-5 h-5 text-white" />
             </div>
           </div>
         </div>
-        {alt && <p className="text-center text-sm text-muted-foreground mt-3 italic">{alt}</p>}
       </div>
+      {alt && <p className="text-center text-sm text-muted-foreground mt-3 italic">{alt}</p>}
 
       {/* Lightbox Modal */}
       <AnimatePresence mode="wait">
@@ -86,13 +90,22 @@ export function MediaViewer({
               className="relative flex items-center justify-center mb-12 md:mb-24 w-full h-full max-w-7xl"
             >
               <div className="relative w-full h-full flex items-center justify-center">
-                <Image
-                  src={src}
-                  alt={alt || "Full preview"}
-                  fill
-                  className="rounded-xl object-contain shadow-2xl"
-                  priority
-                />
+                {isLocal && width && height ? (
+                  <NextImage
+                    src={src}
+                    alt={alt || "Full preview"}
+                    width={width}
+                    height={height}
+                    className="rounded-xl object-contain shadow-2xl max-w-full max-h-full"
+                    style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
+                  />
+                ) : (
+                  <img
+                    src={src}
+                    alt={alt || "Full preview"}
+                    className="rounded-xl object-contain shadow-2xl max-w-full max-h-full"
+                  />
+                )}
               </div>
               <button
                 onClick={(e) => {

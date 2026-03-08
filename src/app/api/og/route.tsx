@@ -1,47 +1,30 @@
-import { ImageResponse } from "next/og";
+import { OG_ASSETS, OgAssetType } from "@/config/opengraph/assets";
 
-// Default Next.js Edge Runtime configuration
 export const runtime = "edge";
-
-// Satori JSX Component for the actual visual rendering
-import { OgVisualArchitect } from "./components/og-visual-architect";
-import { fetchImageWithFallback } from "./utils/fetch-image";
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams, origin } = new URL(request.url);
+    const type = (searchParams.get("type") || "default") as OgAssetType | "default";
+    const imgParam = searchParams.get("img");
 
-    // 1. Validate & Parse parameters
-    const imgUrl = searchParams.get("img");
-    const type = searchParams.get("type") || "default"; // e.g. 'blog', 'project'
+    // If a specific image URL is provided (e.g. from MDX frontmatter), 
+    // we try to use it if it's an absolute internal path or remote.
+    if (imgParam) {
+       if (imgParam.startsWith("/")) {
+          return Response.redirect(`${origin}${imgParam}`, 302);
+       }
+       if (imgParam.startsWith("http")) {
+          return Response.redirect(imgParam, 302);
+       }
+    }
 
-    // 2. Fetch the image robustly (with timeout & fallback)
-    const validImageUrl = await fetchImageWithFallback(imgUrl);
+    // Fallback to our mapped static assets
+    const targetAsset = OG_ASSETS[type as OgAssetType] || OG_ASSETS.fallback;
+    return Response.redirect(`${origin}${targetAsset}`, 302);
 
-    // 3. Render the Pure PNG
-    return new ImageResponse(
-      (
-        <OgVisualArchitect imageUrl={validImageUrl} type={type} />
-      ),
-      {
-        width: 1200,
-        height: 630,
-        headers: {
-          // Aggressive caching as OG images shouldn't change dynamically per URL
-          "Cache-Control": "public, immutable, no-transform, max-age=31536000",
-        },
-      }
-    );
   } catch (error) {
-    console.error("Critical OG Generation Error:", error);
-    // Returning a basic fallback image response to prevent social sharing from crashing (500)
-    return new Response(`Failed to generate the image`, {
-      status: 200, // Returning 200 instead of 500 so social parsers don't fail completely
-      headers: {
-        "Content-Type": "text/plain",
-      },
-      // Ideally here we return an ImageResponse of a pure black fallback PNG.
-      // But text is safer if generating ImageResponse crashed.
-    });
+    console.error("OG Redirect Error:", error);
+    return Response.redirect(`${new URL(request.url).origin}${OG_ASSETS.fallback}`, 302);
   }
 }

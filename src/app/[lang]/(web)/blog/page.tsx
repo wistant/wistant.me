@@ -9,8 +9,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { getPageMetadata } from "@/config/metadata";
-
-type Language = "en" | "fr" | "es" | "ar" | "wo";
+import { Language } from "@/types/locale";
 
 export async function generateMetadata({
   params,

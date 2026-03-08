@@ -1,15 +1,23 @@
 import { DATA } from "@/data/resume";
-import { getDictionary } from "@/lib/dictionary"; // Import getDictionary
+import { getDictionary } from "@/lib/dictionary";
+import { OG_ASSETS } from "./opengraph/assets";
+import { Language, LOCALES, LOCALE_MAP } from "@/types/locale";
+
+// Dynamic base URL detection for Vercel previews and production
+const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return DATA.url;
+};
 
 export const SITE_CONFIG = {
   name: DATA.name,
-  url: process.env.NEXT_PUBLIC_SITE_URL || DATA.url,
+  url: getBaseUrl(),
   links: {
     X: "https://x.com/wistantkode",
     github: "https://github.com/wistantkode",
     LinkedIn: "https://linkedin.com/in/wistantkode",
   },
-  ogImage: `${process.env.NEXT_PUBLIC_SITE_URL || DATA.url}/opengraph`,
 };
 
 export const truncateTo160 = (text?: string): string => {
@@ -26,27 +34,38 @@ interface PageSeo {
   image?: string;
 }
 
+export type { Language };
+export { LOCALES, LOCALE_MAP };
+
 export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
-  const dict = await getDictionary(lang);
+  const dict = await getDictionary(lang as Language);
   const globalSeo = dict.global.seo;
 
   const title = pageSeo?.title || globalSeo.title;
-  // Truncate dynamically provided description, fallback to dictionary
   const rawDescription = pageSeo?.description || globalSeo.description;
   const description = pageSeo?.description ? truncateTo160(rawDescription) : rawDescription;
   const keywords = pageSeo?.keywords || globalSeo.keywords;
   const url = pageSeo?.url || "";
-  const ogImage = pageSeo?.image || SITE_CONFIG.ogImage;
+  
+  // Ensure we use the detected SITE_CONFIG.url to avoid absolute URL issues on previews
+  const baseUrl = SITE_CONFIG.url;
+  const ogImage = pageSeo?.image || `${baseUrl}${OG_ASSETS.home}`;
 
-  // Use the env base or fallback to avoid canonical mismatch on vercel branches
-  const base = new URL(SITE_CONFIG.url);
-  const fullUrl = `${SITE_CONFIG.url}${url}`;
+  // Robust absolute URL for canonical
+  const fullUrl = `${baseUrl}${url}`;
+
+  // Dynamically build language alternates
+  const languageAlternates = LOCALES.reduce((acc, l) => {
+    const locale = LOCALE_MAP[l] || l;
+    acc[locale] = `${baseUrl}/${l}${url}`;
+    return acc;
+  }, {} as Record<string, string>);
 
   return {
-    metadataBase: base,
+    metadataBase: new URL(baseUrl),
     title: {
       default: title,
-      template: `%s 🏆`,
+      template: `%s`,
     },
     description: description,
     keywords: keywords,
@@ -56,10 +75,7 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
     category: "technology",
     alternates: {
       canonical: fullUrl,
-      languages: {
-        "en-US": `${SITE_CONFIG.url}/en`,
-        "fr-FR": `${SITE_CONFIG.url}/fr`,
-      },
+      languages: languageAlternates,
     },
     openGraph: {
       type: "website",
@@ -74,7 +90,8 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
           width: 1200,
           height: 630,
           alt: SITE_CONFIG.name,
-          type: "image/png",
+          // Explicitly set type based on extension
+          type: ogImage.endsWith(".webp") ? "image/webp" : "image/png",
         },
       ],
     },
@@ -108,8 +125,8 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         name: DATA.name,
-        image: `${SITE_CONFIG.url}${DATA.avatarUrl}`,
-        url: SITE_CONFIG.url,
+        image: `${baseUrl}${DATA.avatarUrl}`,
+        url: baseUrl,
         address: {
           "@type": "PostalAddress",
           addressLocality: "Douala",
