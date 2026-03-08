@@ -1,8 +1,8 @@
 export const OG_ASSETS = {
-  home: "/me/me.webp",
-  blog: "/opengraph/blog.webp",
-  project: "/opengraph/",
-  fallback: "/opengraph/",
+  home: "/opengraph/me.png",
+  blog: "/opengraph/blog.png",
+  project: "/opengraph/projects.png",
+  fallback: "/opengraph/me.png",
 } as const;
 
 export type OgAssetType = keyof typeof OG_ASSETS;
