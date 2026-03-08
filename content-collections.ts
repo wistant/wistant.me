@@ -1,5 +1,26 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { z } from "zod";
+import sizeOf from "image-size";
+import path from "path";
+import fs from "fs";
+
+const getImageDimensions = (imagePath?: string) => {
+  if (!imagePath || imagePath.startsWith("http")) return null;
+  
+  try {
+    const fullPath = path.join(process.cwd(), "public", imagePath);
+    if (fs.existsSync(fullPath)) {
+      const dimensions = sizeOf(fs.readFileSync(fullPath));
+      return {
+        width: dimensions.width,
+        height: dimensions.height,
+      };
+    }
+  } catch (error) {
+    console.error(`Failed to get dimensions for ${imagePath}:`, error);
+  }
+  return null;
+};
 
 const posts = defineCollection({
   name: "posts",
@@ -24,6 +45,7 @@ const posts = defineCollection({
     const date = document.date || document.publishedAt || new Date().toISOString();
     const summary = document.summary || document.description || "";
     const image = document.image || document.thumbnail;
+    const dimensions = getImageDimensions(image);
 
     const rawPath = document._meta.path;
     const match = rawPath.match(/^(.*?)(?:\.(en|fr|es|ar|wo))?$/);
@@ -37,6 +59,8 @@ const posts = defineCollection({
       date,
       summary,
       image,
+      imageWidth: dimensions?.width,
+      imageHeight: dimensions?.height,
     };
   },
 });
@@ -68,11 +92,14 @@ const projects = defineCollection({
     const match = rawPath.match(/^(.*?)(?:\.(en|fr|es|ar|wo))?$/);
     const slug = match ? match[1] : rawPath;
     const extractedLang = match && match[2] ? match[2] : "en";
+    const dimensions = getImageDimensions(document.image);
 
     return {
       ...document,
       slug,
       lang: document.lang || extractedLang,
+      imageWidth: dimensions?.width,
+      imageHeight: dimensions?.height,
     };
   },
 });
