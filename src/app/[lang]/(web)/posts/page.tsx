@@ -1,26 +1,28 @@
-import { Suspense } from 'react';
-import { FlickeringGrid } from '@/components/ui/magicui/flickering-grid';
-import { socialPosts } from '@/data/social-posts';
-import TweetCard from '@/components/ui/mvpblocks/twittercard';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { DATA } from '@/data/resume';
-import { Metadata } from 'next';
-import { getDictionary } from '@/lib/dictionary';
+import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import TweetCard from "@/components/ui/mvpblocks/twittercard";
+import { DATA } from "@/data/resume";
+import { getDictionary } from "@/lib/dictionary";
+import { Metadata } from "next";
+import { getPageMetadata } from "@/config/metadata";
+import { Language } from "@/types/locale";
+import { Suspense } from "react";
+import { socialPosts } from "@/data/social-posts";
 
-export const metadata: Metadata = {
-  title: 'Posts | Wistant Kode',
-  description: 'Social sharing, insights, and quick thoughts from X and LinkedIn.',
-  openGraph: {
-    title: 'Posts | Wistant Kode',
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  return getPageMetadata(lang, {
+    title: 'Posts',
     description: 'Social sharing, insights, and quick thoughts from X and LinkedIn.',
-    type: 'website',
-    url: `${DATA.url}/posts`,
-  },
-};
-
-type Language = "en" | "fr" | "es" | "ar" | "wo";
+    url: '/posts',
+  });
+}
 
 export default async function PostsPage({
   params,

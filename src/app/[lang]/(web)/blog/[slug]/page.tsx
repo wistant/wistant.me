@@ -4,6 +4,7 @@ import { TableOfContents } from "@/components/blog/table-of-contents";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { getAuthor, isValidAuthor } from "@/lib/authors";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
+import { remarkImageSize } from "@/lib/remark-image-size";
 import { allPosts } from "content-collections";
 import { getPostBySlug } from "@/data/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -17,10 +18,10 @@ import { ReadMoreSection } from "@/components/blog/read-more-section";
 import { PromoContent } from "@/components/blog/promo-content";
 import { MobileTableOfContents } from "@/components/blog/mobile-toc";
 import { getPageMetadata, SITE_CONFIG } from "@/config/metadata";
+import { Language } from "@/types/locale";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/json-ld";
-
-type Language = "en" | "fr" | "es" | "ar" | "wo";
+import { getOgImageUrl } from "@/config/opengraph/assets";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string; lang: Language }>;
@@ -48,8 +49,7 @@ export async function generateMetadata({
     description: post.summary,
     keywords: post.tags ?? [],
     url: `/${lang}/blog/${slug}`,
-    // Fire our cool Edge Satori Architecture through the API
-    image: post.image ? `${SITE_CONFIG.url}/api/og?type=blog&img=${encodeURIComponent(post.image)}` : undefined,
+    image: getOgImageUrl(SITE_CONFIG.url, "blog", post.image),
   };
 
   return getPageMetadata(lang, pageSeo);
@@ -156,7 +156,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
                 components={mdxComponents}
                 options={{
                   mdxOptions: {
-                    remarkPlugins: [remarkCodeMeta],
+                    remarkPlugins: [remarkCodeMeta, remarkImageSize],
                   },
                 }}
               />

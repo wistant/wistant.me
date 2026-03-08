@@ -5,10 +5,9 @@ import HackathonsSection from "@/components/home/hackathons-section";
 import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
+import { Language } from "@/types/locale";
 
 const BLUR_FADE_DELAY = 0.04;
-
-type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,
@@ -16,11 +15,18 @@ export async function generateMetadata({
   params: Promise<{ lang: Language }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
-  return getPageMetadata(lang, dict.hackathons.seo);
+  return getPageMetadata(lang, {
+    title: "Hackathons",
+    description: "My hackathons timeline and projects.",
+    url: "/hackathons",
+  });
 }
 
-export default async function HackathonsPage({ params }: { params: Promise<{ lang: Language }> }) {
+export default async function HackathonsPage({
+  params,
+}: {
+  params: Promise<{ lang: Language }>;
+}) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 

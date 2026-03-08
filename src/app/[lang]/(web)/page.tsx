@@ -1,28 +1,23 @@
-import { AnimatedShinyText } from "@/components/ui/magicui/animated-shiny-text";
-import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
-import { TextReveal } from "@/components/ui/magicui/text-reveal";
+import BlurFade from "@/components/ui/magicui/blur-fade";
+import { HeroSection } from "@/components/home/hero-section";
+import { AboutSection } from "@/components/home/about-section";
+import SkillsSection from "@/components/home/skills-section";
 import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
-import SkillsSection from "@/components/home/skills-section";
 import Gallery from "@/components/home/gallery";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { DATA } from "@/data/resume";
-import Image from "next/image";
 import Link from "next/link";
-import Markdown from "react-markdown";
 import { getDictionary } from "@/lib/dictionary";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { ShowMore } from "@/components/ui/show-more";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
+import { Language } from "@/types/locale";
 
 const BLUR_FADE_DELAY = 0.04;
-
-type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,
@@ -53,55 +48,17 @@ export default async function Home({
         />
       </div>
 
-      <section id="hero" className="-mb-8">
-        <div className="mx-auto w-full space-y-8">
-          <div className="gap-6 flex flex-col md:flex-row items-start justify-between">
-            <div className="gap-4 flex flex-col flex-1 order-2 md:order-1">
-              <TextReveal
-                delay={0.1}
-                className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-5xl font-cal leading-tight"
-              >
-                {dict.hero.title}
-              </TextReveal>
-              <div className="flex items-center gap-2">
-                <AnimatedShinyText className="text-muted-foreground max-w-150 md:text-xl font-medium">
-                  {dict.hero.description}
-                </AnimatedShinyText>
-              </div>
-            </div>
-            <BlurFade
-              delay={BLUR_FADE_DELAY}
-              className="flex-none order-1 md:order-2"
-            >
-              <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted relative overflow-hidden">
-                <Image
-                  src={DATA.avatarUrl}
-                  alt={DATA.name}
-                  fill
-                  priority
-                  className="object-cover"
-                />
-                <AvatarFallback className="text-2xl font-bold font-cal">
-                  {DATA.initials}
-                </AvatarFallback>
-              </Avatar>
-            </BlurFade>
-          </div>
-        </div>
-      </section>
+      <HeroSection 
+        title={dict.hero.title} 
+        description={dict.hero.description} 
+        blurFadeDelay={BLUR_FADE_DELAY} 
+      />
 
-      <section id="about">
-        <div className="flex min-h-0 flex-col gap-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <h2 className="text-xl font-bold font-clash">{dict.about.title}</h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 4}>
-            <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-              <Markdown>{dict.about.content}</Markdown>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
+      <AboutSection 
+        title={dict.about.title} 
+        content={dict.about.content} 
+        blurFadeDelay={BLUR_FADE_DELAY} 
+      />
 
       <section id="skills">
         <BlurFade delay={BLUR_FADE_DELAY * 5}>

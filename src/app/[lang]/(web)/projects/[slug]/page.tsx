@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { getPageMetadata, SITE_CONFIG } from "@/config/metadata";
+import { Language } from "@/types/locale";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/json-ld";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowUpRight, Github, Home, LayoutGrid } from "lucide-react";
@@ -12,6 +12,8 @@ import { mdxComponents } from "@/components/mdx/mdx-components";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { Icons } from "@/components/ui/icons";
+import Image from "next/image";
+import { remarkImageSize } from "@/lib/remark-image-size";
 
 const getTechIcon = (tech: string) => {
   const normalized = tech.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -28,7 +30,7 @@ const getTechIcon = (tech: string) => {
   return null;
 };
 
-type Language = "en" | "fr" | "es" | "ar" | "wo";
+import { getOgImageUrl } from "@/config/opengraph/assets";
 
 interface ProjectSlugPageProps {
   params: Promise<{ slug: string; lang: Language }>;
@@ -56,7 +58,7 @@ export async function generateMetadata({
     description: project.description || "",
     keywords: project.tags || [],
     url: `/${lang}/projects/${slug}`,
-    image: project.image ? `${SITE_CONFIG.url}/api/og?type=project&img=${encodeURIComponent(project.image)}` : undefined,
+    image: getOgImageUrl(SITE_CONFIG.url, "project", project.image),
   };
 
   return getPageMetadata(lang, pageSeo);
@@ -108,13 +110,15 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
         </div>
 
         {project.image && (
-          <div className="relative w-full aspect-video overflow-hidden rounded-3xl mb-12 flex items-center justify-center">
+          <div className="relative w-full mb-12 flex justify-center">
             <Image
               src={project.image}
               alt={project.title || "Project thumbnail"}
-              fill
-              className="object-contain"
+              width={project.imageWidth || 1200}
+              height={project.imageHeight || 630}
               priority
+              className="max-w-full h-auto object-contain"
+              style={{ height: "auto" }}
             />
           </div>
         )}
@@ -131,7 +135,7 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
                   components={mdxComponents}
                   options={{
                     mdxOptions: {
-                      remarkPlugins: [remarkCodeMeta],
+                      remarkPlugins: [remarkCodeMeta, remarkImageSize],
                     },
                   }}
                 />

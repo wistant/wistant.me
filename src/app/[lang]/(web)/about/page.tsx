@@ -7,10 +7,9 @@ import SkillsSection from "@/components/home/skills-section";
 import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
+import { Language } from "@/types/locale";
 
 const BLUR_FADE_DELAY = 0.04;
-
-type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,

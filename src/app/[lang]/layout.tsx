@@ -1,9 +1,10 @@
-// import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { getPageMetadata } from "@/config/metadata";
+import { Language } from "@/types/locale";
 import "./globals.css";
 import { TargetCursor } from "@/components/ui/magicui/target-cursor";
 import { ThemeProvider } from "./ThemeProvider";
+import React from "react";
 
 import { DATA } from "@/data/resume";
 import { FloatingDock } from "@/components/dock/floating-dock";
@@ -41,8 +42,6 @@ const interFont = localFont({
   ],
   variable: "--font-inter",
 });
-
-type Language = "en" | "fr" | "es" | "ar" | "wo";
 
 export async function generateMetadata({
   params,

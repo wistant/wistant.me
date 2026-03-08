@@ -8,8 +8,7 @@ import React, { Suspense } from "react";
 import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
-
-type Language = "en" | "fr" | "es" | "ar" | "wo";
+import { Language } from "@/types/locale";
 
 export async function generateMetadata({
   params,
