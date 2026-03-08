@@ -1,3 +1,5 @@
+import { Language } from "@/types/locale";
+
 const dictionaries = {
   en: () => import("../dictionaries/en.json").then((module) => module.default),
   fr: () => import("../dictionaries/fr.json").then((module) => module.default),
@@ -6,6 +8,6 @@ const dictionaries = {
   wo: () => import("../dictionaries/wo.json").then((module) => module.default),
 };
 
-export const getDictionary = async (lang: string) => {
+export const getDictionary = async (lang: Language) => {
   return dictionaries[lang as keyof typeof dictionaries]?.() ?? dictionaries.en();
 };
