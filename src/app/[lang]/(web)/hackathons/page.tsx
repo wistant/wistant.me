@@ -15,9 +15,9 @@ export async function generateMetadata({
   params: Promise<{ lang: Language }>;
 }): Promise<Metadata> {
   const { lang } = await params;
+  const dict = await getDictionary(lang);
   return getPageMetadata(lang, {
-    title: "Hackathons",
-    description: "My hackathons timeline and projects.",
+    ...dict.hackathons.seo,
     url: "/hackathons",
   });
 }

@@ -10,16 +10,16 @@
     "backToHome": "Dellu Kër gi"
   },
   "hero": {
-    "title": "Xarala yu kawe ngir liggéey bu mucc ayib ✦",
-    "description": "Man Wistant laa, moom mbirum xarala (Software Engineer). Damay defar ay jumtukaay yu dëgër ci Web, Mobile ak Desktop."
+    "title": "Sàkk ay système yu dëgër ak platform yu kawe 🏆",
+    "description": "Man Wistant laa, moom mbirum xarala (Software Engineer). Damay defar ay xarala yu bees te dëgër ci Web, Mobile ak Desktop."
   },
   "about": {
     "title": "Sama Xalaat",
     "content": "Duma bind ay code kesse; damay sàkk ay system yu dëgër ngir gaawaay ak mbaxu jëfandikukaay. Sama yéene mooy wàññi jaxaso gi joxe lu yomb, lu set te gaaw ci platform yépp.",
     "seo": {
-      "title": "Ci man Wistant | Software Engineer",
-      "description": "Xamle ki di Wistant, Software Engineer bu mën ci liggéeyu Web, Mobile, ak Desktop.",
-      "keywords": "Software Engineer, Full-Stack Developer, Mobile, Desktop, TypeScript"
+      "title": "Ci man Wistant | Software Engineer ak Architecte Digital",
+      "description": "Xamle xalaatu Wistant ci wàll xarala. Ay liggéey yu dëgër ngir Web, Mobile ak Desktop.",
+      "keywords": "Software Engineer, Full-Stack Developer, Mobile, TypeScript, Next.js, Senegal, Cameroun"
     }
   },
   "work": {
@@ -45,18 +45,18 @@
     "cta": "Xool Liggéey bi",
     "stack": "Xarala yi",
     "seo": {
-      "title": "Wistant | Portfolio ak Liggéey",
-      "description": "Xool sama liggéey yu mujj ak Next.js, NestJS, ak TypeScript.",
-      "keywords": "Portfolio, Projects, TypeScript, Next.js, Web Development"
+      "title": "Liggéey yi gën a fëss | Wistant Portfolio",
+      "description": "Xool liggéey yu kawe yi Wistant sàkk: SaaS, mobile apps ak system yu gaaw te dëgër.",
+      "keywords": "Portfolio, Projects, TypeScript, Next.js, Web Development, Mobile"
     }
   },
   "blog": {
     "title": "Bind ak Njàng",
     "description": "Xalaat ci xarala ak lu may jàng bés bu nekk.",
     "seo": {
-      "title": "Wistant | Blog",
-      "description": "Xalaat ci liggéeyu software.",
-      "keywords": "Blog, Software Development, TypeScript"
+      "title": "Bind ak Njàng ci Xarala | Blogu Wistant",
+      "description": "Bind ci wàll xaralau software, architecture ak li bees ci technologie.",
+      "keywords": "Blog, Software Development, Architecture, TypeScript, Xarala"
     }
   },
   "contact": {
@@ -66,9 +66,9 @@
     "button": "Jokkoo ak man",
     "social": "Sama net",
     "seo": {
-      "title": "Jokko Wistant",
-      "description": "Jokko ngir liggéey.",
-      "keywords": "Contact, Freelance, Full-Stack"
+      "title": "Jokko ak Wistant | Waxtaan ci sa Liggéey",
+      "description": "Soxla nga software engineer? Jokko ak man ngir freelance walla liggéeyandoo.",
+      "keywords": "Jokko, Freelance, Software Engineer, Liggéey"
     }
   },
   "hackathons": {
@@ -76,9 +76,18 @@
     "subtitle": "Bëgg a sàkk",
     "description": "Dama bokk ci ay hackathons yu bare. Dafa neex a gis ñu bëgg code dajale seen xalaat defar lu bees ci wikèn bi.",
     "seo": {
-      "title": "Hackathons | Wistant",
-      "description": "Sama listu hackathons.",
-      "keywords": "Hackathons, Coding"
+      "title": "Hackathons | Liggéeyu Wistant",
+      "description": "Listu hackathons yi ma bokk ak mbégte ci sàkk lu bees.",
+      "keywords": "Hackathons, Coding, Liggéey, Sàkk"
+    }
+  },
+  "posts": {
+    "title": "Muro Social",
+    "description": "Bind ci wàll xarala ak actualités ci X ak LinkedIn.",
+    "seo": {
+      "title": "Muro Social ak Xarala | Wistant",
+      "description": "Topal sama actualités ci réseaux sociaux (X, LinkedIn).",
+      "keywords": "Social Media, X, LinkedIn, Xarala, Wistant"
     }
   },
   "og": {
@@ -97,9 +106,9 @@
   },
   "global": {
     "seo": {
-      "title": "Wistant | Software Engineer",
-      "description": "Wistant, Software Engineer ci Senegal ak Cameroun.",
-      "keywords": "Software Engineer, TypeScript, Next.js"
+      "title": "Wistant | Software Engineer Freelance ak Xarala",
+      "description": "Xarala bu mën liggéey yu kawe ci Web, Mobile ak Desktop ci Senegal ak Cameroun.",
+      "keywords": "Wistant, Software Engineer, TypeScript, Next.js, Senegal, Cameroun"
     }
   }
 }

@@ -1,6 +1,5 @@
 import { DATA } from "@/data/resume";
 import { getDictionary } from "@/lib/dictionary";
-import { OG_ASSETS } from "./opengraph/assets";
 import { Language, LOCALES, LOCALE_MAP } from "@/types/locale";
 
 // Dynamic base URL detection for Vercel previews and production
@@ -22,8 +21,23 @@ export const SITE_CONFIG = {
 
 export const truncateTo160 = (text?: string): string => {
   if (!text) return "";
-  const stripped = text.replace(/<[^>]*>?/gm, "").replace(/[#*`_]/g, ""); // Strip HTML & basic markdown
-  return stripped.length > 160 ? stripped.substring(0, 157) + "..." : stripped;
+  // Strip HTML, markdown and redundant spaces
+  const stripped = text
+    .replace(/<[^>]*>?/gm, "")
+    .replace(/[#*`_~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  // Google typically shows ~155-160 chars. 
+  // We truncate at 155 to be safe and avoid cut-off words if possible.
+  if (stripped.length <= 160) return stripped;
+  
+  const truncated = stripped.substring(0, 157);
+  // Try to avoid cutting mid-word if reasonable
+  const lastSpace = truncated.lastIndexOf(" ");
+  if (lastSpace > 140) {
+    return truncated.substring(0, lastSpace) + "...";
+  }
+  return truncated + "...";
 };
 
 interface PageSeo {
@@ -43,21 +57,18 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
 
   const title = pageSeo?.title || globalSeo.title;
   const rawDescription = pageSeo?.description || globalSeo.description;
-  const description = pageSeo?.description ? truncateTo160(rawDescription) : rawDescription;
+  const description = truncateTo160(rawDescription);
   const keywords = pageSeo?.keywords || globalSeo.keywords;
   const url = pageSeo?.url || "";
   
-  // Ensure we use the detected SITE_CONFIG.url to avoid absolute URL issues on previews
-  const baseUrl = SITE_CONFIG.url;
-  const ogImage = pageSeo?.image || `${baseUrl}${OG_ASSETS.home}`;
+  const baseUrl = SITE_CONFIG.url.replace(/\/$/, ""); // Ensure no trailing slash
+  const ogImage = pageSeo?.image || `${baseUrl}/api/og?type=${url.replace(/^\//, "").split("/")[0] || "home"}`;
 
-  // Robust absolute URL for canonical
-  const fullUrl = `${baseUrl}${url}`;
+  const fullUrl = `${baseUrl}/${lang}${url}`;
 
   // Dynamically build language alternates
   const languageAlternates = LOCALES.reduce((acc, l) => {
-    const locale = LOCALE_MAP[l] || l;
-    acc[locale] = `${baseUrl}/${l}${url}`;
+    acc[l] = `${baseUrl}/${l}${url}`;
     return acc;
   }, {} as Record<string, string>);
 
@@ -104,9 +115,9 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
       site: "@wistantkode",
     },
     icons: {
-      icon: "/me/me.png",
-      shortcut: "/me/me.png",
-      apple: "/me/me.png",
+      icon: "/me/me.webp?v=2",
+      shortcut: "/me/me.webp?v=2",
+      apple: "/me/me.png?v=2",
     },
     robots: {
       index: true,

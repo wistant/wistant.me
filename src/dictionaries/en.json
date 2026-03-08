@@ -10,16 +10,16 @@
     "backToHome": "Back to Home"
   },
   "hero": {
-    "title": "Engineering high-performance digital experiences ✦",
-    "description": "I'm Wistant, a Software Engineer crafting scalable, robust interfaces across Web, Mobile, and Desktop platforms. I build systems that perform."
+    "title": "Architecting Robust Platforms & Scalable Systems 🏆",
+    "description": "I'm Wistant, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop."
   },
   "about": {
     "title": "Engineering Philosophy",
     "content": "I don't just write code; I architect robust software systems focused on uncompromising user experience and performance. My drive is transforming complex logic into simple, crisp, and blazingly fast multi-platform solutions.",
     "seo": {
-      "title": "About Wistant | Software Engineer",
-      "description": "Learn more about Wistant, a Software Engineer specializing in scalable digital solutions (Web, Mobile, Desktop).",
-      "keywords": "Software Engineer, Full-Stack Developer, Mobile Development, Desktop Applications, TypeScript, Next.js, NestJS"
+      "title": "About Wistant | Software Engineer & Digital Architect",
+      "description": "Exploring Wistant's software engineering philosophy and tech stack. Expert solutions for Web, Mobile, and Desktop platforms.",
+      "keywords": "Software Engineer, Full-Stack Developer, Mobile Development, TypeScript, Next.js, NestJS, Cameroon"
     }
   },
   "work": {
@@ -45,18 +45,18 @@
     "cta": "View Project",
     "stack": "Stack built with",
     "seo": {
-      "title": "Wistant | Portfolio & Selected Work",
-      "description": "Explore my latest full-stack projects built with Next.js, NestJS, and TypeScript.",
-      "keywords": "Portfolio, Projects, TypeScript, Next.js, NestJS, Web Development"
+      "title": "Work & Projects | Wistant Portfolio",
+      "description": "Explore high-performance digital solutions: SaaS, mobile apps, and robust systems built by Wistant using Next.js and TypeScript.",
+      "keywords": "Portfolio, Projects, TypeScript, Next.js, NestJS, Web Development, Mobile Apps"
     }
   },
   "blog": {
     "title": "Notes & Insights",
     "description": "Thoughts on software engineering, multi-platform development, and things I learn along the way.",
     "seo": {
-      "title": "Wistant | Blog & Notes",
-      "description": "Articles and thoughts on modern software development, TypeScript, and software architecture.",
-      "keywords": "Blog, Software Development, TypeScript, Next.js, Engineering"
+      "title": "Technical Notes & Insights | Wistant's Blog",
+      "description": "Articles and thoughts on software architecture, cross-platform development, and modern engineering trends.",
+      "keywords": "Blog, Software Development, System Architecture, TypeScript, Engineering"
     }
   },
   "contact": {
@@ -66,9 +66,9 @@
     "button": "Get in touch",
     "social": "Connect with me",
     "seo": {
-      "title": "Contact Wistant | Let's Talk",
-      "description": "Get in touch for freelance opportunities, consulting, or just to say hi.",
-      "keywords": "Contact, Hire Developer, Freelance, Full-Stack Engineer"
+      "title": "Contact Wistant | Let's Build Your Vision",
+      "description": "Need a software engineer? Get in touch for freelance, consulting, or innovative technical collaborations.",
+      "keywords": "Contact, Hire Developer, Freelance, Software Consultant"
     }
   },
   "hackathons": {
@@ -76,9 +76,18 @@
     "subtitle": "Driven by the build",
     "description": "Throughout my journey, I have participated in multiple hackathons. It's fascinating to see passionate developers come together to build innovative projects over a weekend. These intensive sprints forged my ability to deliver value rapidly under pressure.",
     "seo": {
-      "title": "Hackathons | Wistant",
-      "description": "A timeline of my hackathon participations and coding sprints.",
-      "keywords": "Hackathons, Coding Competitions, Projects"
+      "title": "Hackathons | Wistant's Coding Journey & Sprints",
+      "description": "A timeline of my hackathon participations. Passionate about building and delivering rapid value under pressure.",
+      "keywords": "Hackathons, Coding Competitions, Projects, Competitive Programming"
+    }
+  },
+  "posts": {
+    "title": "Social Wall",
+    "description": "Quick thoughts, technical shares, and updates from X and LinkedIn.",
+    "seo": {
+      "title": "Social Wall & Technical Feed | Wistant",
+      "description": "Follow my technical updates and social media shares (X, LinkedIn). Quick insights and tech watch.",
+      "keywords": "Social Media, X, Twitter, LinkedIn, Tech Watch, Wistant"
     }
   },
   "og": {
