@@ -62,7 +62,10 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
   const url = pageSeo?.url || "";
   
   const baseUrl = SITE_CONFIG.url.replace(/\/$/, ""); // Ensure no trailing slash
-  const ogImage = pageSeo?.image || `${baseUrl}/api/og?type=${url.replace(/^\//, "").split("/")[0] || "home"}`;
+  const pageType = url.replace(/^\//, "").split("/")[0] || "home";
+  
+  // Directly point to the PNG asset for social crawlers (WhatsApp/LinkedIn compatibility)
+  const ogImage = pageSeo?.image || `${baseUrl}/opengraph/${pageType === "home" ? "me" : pageType}.png?v=3`;
 
   const fullUrl = `${baseUrl}/${lang}${url}`;
 
@@ -102,7 +105,7 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
           height: 630,
           alt: SITE_CONFIG.name,
           // Explicitly set type based on extension
-          type: ogImage.endsWith(".webp") ? "image/webp" : "image/png",
+          type: "image/png",
         },
       ],
     },
