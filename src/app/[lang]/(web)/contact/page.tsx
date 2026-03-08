@@ -6,8 +6,8 @@ import { Metadata } from "next";
 import { cn } from "@/lib/utils";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
-import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 export async function generateMetadata({
   params,
@@ -15,9 +15,9 @@ export async function generateMetadata({
   params: Promise<{ lang: Language }>;
 }): Promise<Metadata> {
   const { lang } = await params;
+  const dict = await getDictionary(lang);
   return getPageMetadata(lang, {
-    title: "Contact",
-    description: "Get in touch with me.",
+    ...dict.contact.seo,
     url: "/contact",
   });
 }
@@ -67,8 +67,8 @@ export default async function ContactPage({
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 rounded-2xl border border-border/50 bg-card hover:bg-muted/50 transition-all duration-300 group"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-background border border-border/50 text-foreground group-hover:scale-110 transition-transform duration-300">
-                    <img src={social.icon} alt={social.name} className={cn("h-6 w-6 object-contain", social.name !== "WhatsApp" && "dark:invert")} />
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-background border border-border/50 text-foreground group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+                    <Image src={social.icon} alt={social.name} fill className={cn("object-contain p-2", social.name !== "WhatsApp" && "dark:invert")} />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-semibold">{social.name}</span>

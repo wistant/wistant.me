@@ -17,10 +17,10 @@ export async function generateMetadata({
   params: Promise<{ lang: Language }>;
 }): Promise<Metadata> {
   const { lang } = await params;
+  const dict = await getDictionary(lang);
   return getPageMetadata(lang, {
-    title: 'Posts',
-    description: 'Social sharing, insights, and quick thoughts from X and LinkedIn.',
-    url: '/posts',
+    ...dict.posts.seo,
+    url: "/posts",
   });
 }
 
@@ -63,11 +63,11 @@ export default async function PostsPage({
       {/* Header Section */}
       <div className="pt-32 pb-16 px-6 relative z-10 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="font-bold text-4xl md:text-6xl tracking-tighter mb-6 bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-            Social Wall
+          <h1 className="font-bold text-4xl md:text-6xl tracking-tighter mb-6 bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent italic font-clash">
+            {dict.posts.title}
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Quick thoughts, technical shares, and updates from X and LinkedIn.
+            {dict.posts.description}
           </p>
         </div>
       </div>
