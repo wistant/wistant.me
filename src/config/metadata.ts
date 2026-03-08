@@ -101,10 +101,10 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
       images: [
         {
           url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: SITE_CONFIG.name,
-          // Explicitly set type based on extension
+          secureUrl: ogImage,
+          width: 800,
+          height: 600,
+          alt: title,
           type: "image/png",
         },
       ],
@@ -135,6 +135,9 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
     },
     // Adding JSON-LD for Local SEO (Cameroun)
     other: {
+      image: ogImage,
+      "og:image:alt": title,
+      "twitter:image:alt": title,
       "application/ld+json": JSON.stringify({
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
