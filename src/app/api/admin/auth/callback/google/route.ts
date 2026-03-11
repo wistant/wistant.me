@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getGoogleOAuthTokens, getGoogleUser } from "@/admin/server/oauth/google";
-import { createSession } from "@/admin/server/oauth/session";
+import { getGoogleOAuthTokens, getGoogleUser } from "@/lib/admin/server/oauth/google";
+import { createSession } from "@/lib/admin/server/oauth/session";
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
