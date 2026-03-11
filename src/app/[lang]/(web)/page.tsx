@@ -16,6 +16,7 @@ import { ShowMore } from "@/components/ui/show-more";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
+import Faq3 from "@/components/ui/mvpblocks/faq-3";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -48,16 +49,16 @@ export default async function Home({
         />
       </div>
 
-      <HeroSection 
-        title={dict.hero.title} 
-        description={dict.hero.description} 
-        blurFadeDelay={BLUR_FADE_DELAY} 
+      <HeroSection
+        title={dict.hero.title}
+        description={dict.hero.description}
+        blurFadeDelay={BLUR_FADE_DELAY}
       />
 
-      <AboutSection 
-        title={dict.about.title} 
-        content={dict.about.content} 
-        blurFadeDelay={BLUR_FADE_DELAY} 
+      <AboutSection
+        title={dict.about.title}
+        content={dict.about.content}
+        blurFadeDelay={BLUR_FADE_DELAY}
       />
 
       <section id="skills">
@@ -120,8 +121,8 @@ export default async function Home({
           href={`/${lang}/hackathons`}
           linkText={dict.navigation.hackathons || "All hackathons"}
         >
-          <HackathonsSection 
-            limit={4} 
+          <HackathonsSection
+            limit={4}
             title={dict.hackathons.title}
             subtitle={dict.hackathons.subtitle}
             description={dict.hackathons.description}
