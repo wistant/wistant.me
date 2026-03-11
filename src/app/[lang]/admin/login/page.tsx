@@ -1,10 +1,10 @@
-import { getOAuthGoogleUrl } from "@/admin/server/oauth/google";
-import { Button } from "@/admin/components/ui/button";
+import { getOAuthGoogleUrl } from "@/lib/admin/server/oauth/google";
+import { Button } from "@/components/admin/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { LockPasswordIcon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { verifySession } from "@/admin/server/oauth/session";
+import { verifySession } from "@/lib/admin/server/oauth/session";
 
 export default async function AdminLogin() {
   const cookieStore = await cookies();

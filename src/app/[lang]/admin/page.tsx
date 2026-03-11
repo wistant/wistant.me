@@ -1,7 +1,7 @@
-import { DashboardSidebar } from "@/admin/components/dashboard/sidebar";
-import { DashboardHeader } from "@/admin/components/dashboard/header";
-import { DashboardContent } from "@/admin/components/dashboard/content";
-import { SidebarProvider } from "@/admin/components/ui/sidebar";
+import { DashboardSidebar } from "@/components/admin/dashboard/sidebar";
+import { DashboardHeader } from "@/components/admin/dashboard/header";
+import { DashboardContent } from "@/components/admin/dashboard/content";
+import { SidebarProvider } from "@/components/admin/ui/sidebar";
 
 export default function DashboardPage() {
   return (
