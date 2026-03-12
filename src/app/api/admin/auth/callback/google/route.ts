@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     // ZERO-TRUST SECURITY: Only allow specific allowed emails.
     const allowedEmails = [
       "wistantkode@gmail.com",
-      process.env.ADMIN_EMAIL // fallback if configured in .env
+      ...(process.env.ADMIN_EMAIL ? process.env.ADMIN_EMAIL.split(",").map(e => e.trim()) : [])
     ].filter(Boolean);
 
     if (!allowedEmails.includes(user.email)) {
