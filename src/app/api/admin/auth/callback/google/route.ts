@@ -15,13 +15,13 @@ export async function GET(req: NextRequest) {
     const user = await getGoogleUser({ id_token, access_token });
 
     // ZERO-TRUST SECURITY: Only allow specific allowed emails.
-    const allowedEmails = [
-      "wistantkode@gmail.com",
-      ...(process.env.ADMIN_EMAIL ? process.env.ADMIN_EMAIL.split(",").map(e => e.trim()) : [])
-    ].filter(Boolean);
+    const allowedEmails = (process.env.ADMIN_EMAIL || "")
+      .split(",")
+      .map(e => e.trim())
+      .filter(Boolean);
 
     if (!allowedEmails.includes(user.email)) {
-      console.warn(`Unauthorized login attempt from ${user.email}`);
+      console.warn(`[AUTH_BLOCKED] Attempt from: "${user.email}". Allowed: `, allowedEmails);
       return NextResponse.redirect(new URL("/?error=unauthorized", req.url));
     }
 
