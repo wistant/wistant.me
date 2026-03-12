@@ -25,12 +25,22 @@ export function EditorToolbar({
   title,
   setTitle,
   saveStatus,
+  isSaving,
+  isTranslating,
+  onSave,
+  onTranslate,
   dict,
+  lang,
 }: {
   title: string;
   setTitle: (t: string) => void;
   saveStatus: string;
+  isSaving?: boolean;
+  isTranslating?: boolean;
+  onSave?: () => void;
+  onTranslate?: (targetLang: string) => void;
   dict?: AdminDictionary;
+  lang?: string;
 }) {
   const { editor } = useCurrentEditor();
 
@@ -41,7 +51,7 @@ export function EditorToolbar({
           <Input 
             value={title} 
             onChange={(e) => setTitle(e.target.value)} 
-            placeholder="Enter document title..."
+            placeholder={dict?.editor?.placeholder || "Enter document title..."}
             className="max-w-md font-semibold text-lg border-transparent hover:border-input focus-visible:ring-0 bg-transparent px-2 h-auto py-1"
           />
           <span className="text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded-md border">
@@ -49,13 +59,30 @@ export function EditorToolbar({
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-2 h-8">
-            <Save className="size-3.5" />
-            <span>{dict?.actions?.save || "Save Draft"}</span>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="gap-2 h-8" 
+            onClick={onSave}
+            disabled={isSaving || isTranslating}
+          >
+            <Save className={cn("size-3.5", isSaving && "animate-spin")} />
+            <span>{isSaving ? (dict?.editor?.saving || "Saving...") : (dict?.actions?.save || "Save Draft")}</span>
           </Button>
-          <Button size="sm" className="gap-2 h-8 bg-blue-600 hover:bg-blue-700 text-white shadow-md">
-            <Wand2 className="size-3.5" />
-            <span>{dict?.actions?.publish || "Publish & AI Translate"}</span>
+          
+          <Button 
+            size="sm" 
+            className="gap-2 h-8 bg-blue-600 hover:bg-blue-700 text-white shadow-md"
+            disabled={isTranslating || isSaving}
+            onClick={() => onTranslate?.(lang === "en" ? "fr" : "en")}
+          >
+            <Wand2 className={cn("size-3.5", isTranslating && "animate-spin")} />
+            <span>
+              {isTranslating 
+                ? (lang === "en" ? "Traduire..." : "Translating...") 
+                : `${dict?.actions?.publish || "Translate to"} ${lang === "en" ? "French" : "English"}`
+              }
+            </span>
           </Button>
         </div>
       </div>

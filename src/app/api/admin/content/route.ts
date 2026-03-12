@@ -1,23 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { listContent, saveContent, ContentType } from "@/lib/admin/server/cms/engine";
-
-import { z } from "zod";
-
-// Validation for content types
-const ContentTypeSchema = z.enum(["projects", "blog"]);
+import { listContent, saveContent } from "@/lib/admin/server/cms/engine";
+import { ContentTypeSchema } from "@/lib/admin/schemas";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type");
   const lang = searchParams.get("lang") || "en";
 
-  const parsedType = ContentTypeSchema.safeParse(type);
-  if (!parsedType.success) {
+  const validation = ContentTypeSchema.safeParse(type);
+  if (!validation.success) {
     return NextResponse.json({ error: "Invalid content type" }, { status: 400 });
   }
 
-  const content = await listContent(parsedType.data, lang);
-  return NextResponse.json({ data: content });
+  try {
+    const content = await listContent(validation.data, lang);
+    return NextResponse.json({ data: content });
+  } catch (_err: unknown) {
+    console.error("List Error:", _err);
+    return NextResponse.json({ error: "Failed to list content" }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -25,20 +26,16 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { type, slug, lang, frontmatter, content } = body;
 
-    const parsedType = ContentTypeSchema.safeParse(type);
-    
-    if (!parsedType.success || !slug || !lang || !frontmatter) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    const validation = ContentTypeSchema.safeParse(type);
+    if (!validation.success) {
+        return NextResponse.json({ error: "Invalid content type" }, { status: 400 });
     }
 
-    const success = await saveContent(parsedType.data, slug, lang, frontmatter, content || "");
-    
-    if (success) {
-      return NextResponse.json({ success: true, message: "Content created successfully" });
-    } else {
-      return NextResponse.json({ error: "Failed to write file" }, { status: 500 });
-    }
-  } catch (err) {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    await saveContent(validation.data, slug, lang, frontmatter, content);
+    return NextResponse.json({ success: true });
+  } catch (_error: unknown) {
+    const message = _error instanceof Error ? _error.message : "Save failed";
+    console.error("Save Error:", _error);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
