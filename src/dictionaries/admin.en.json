@@ -6,7 +6,8 @@
     "resume": "Resume",
     "settings": "Settings",
     "logout": "Logout",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "analytics": "Analytics"
   },
   "stats": {
     "totalViews": "Total Views",
@@ -41,6 +42,26 @@
     "title": "MDX Editor",
     "saved": "Saved",
     "saving": "Saving...",
-    "unsaved": "Unsaved changes"
+    "unsaved": "Unsaved changes",
+    "placeholder": "Enter document title...",
+    "empty": "No results found",
+    "slashMenu": {
+      "text": "Normal Text",
+      "heading": "Headings",
+      "list": "Lists"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": "Profile",
+    "appearance": "Appearance",
+    "notifications": "Notifications",
+    "security": "Security"
+  },
+  "analytics": {
+    "title": "Analytics Overview",
+    "visitors": "Visitors",
+    "engagement": "Engagement",
+    "sources": "Traffic Sources"
   }
 }

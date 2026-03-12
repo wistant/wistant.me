@@ -6,7 +6,8 @@
     "resume": "Currículum",
     "settings": "Ajustes",
     "logout": "Cerrar sesión",
-    "gallery": "Galería"
+    "gallery": "Galería",
+    "analytics": "Analítica"
   },
   "stats": {
     "totalViews": "Vistas Totales",
@@ -41,6 +42,26 @@
     "title": "Editor MDX",
     "saved": "Guardado",
     "saving": "Guardando...",
-    "unsaved": "Cambios sin guardar"
+    "unsaved": "Cambios sin guardar",
+    "placeholder": "Ingrese el título del documento...",
+    "empty": "No se encontraron resultados",
+    "slashMenu": {
+      "text": "Texto normal",
+      "heading": "Encabezados",
+      "list": "Listas"
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "profile": "Perfil",
+    "appearance": "Apariencia",
+    "notifications": "Notificaciones",
+    "security": "Seguridad"
+  },
+  "analytics": {
+    "title": "Resumen analítico",
+    "visitors": "Visitantes",
+    "engagement": "Compromiso",
+    "sources": "Fuentes de tráfico"
   }
 }

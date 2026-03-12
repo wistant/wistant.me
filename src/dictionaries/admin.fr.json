@@ -6,7 +6,8 @@
     "resume": "CV",
     "settings": "Paramètres",
     "logout": "Déconnexion",
-    "gallery": "Galerie"
+    "gallery": "Galerie",
+    "analytics": "Analytique"
   },
   "stats": {
     "totalViews": "Vues Totales",
@@ -41,6 +42,26 @@
     "title": "Rédaction MDX",
     "saved": "Enregistré",
     "saving": "Enregistrement...",
-    "unsaved": "Modifications non enregistrées"
+    "unsaved": "Modifications non enregistrées",
+    "placeholder": "Entrez le titre du document...",
+    "empty": "Aucun résultat trouvé",
+    "slashMenu": {
+      "text": "Texte normal",
+      "heading": "Titres",
+      "list": "Listes"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "profile": "Profil",
+    "appearance": "Apparence",
+    "notifications": "Notifications",
+    "security": "Sécurité"
+  },
+  "analytics": {
+    "title": "Aperçu analytique",
+    "visitors": "Visiteurs",
+    "engagement": "Engagement",
+    "sources": "Sources de trafic"
   }
 }

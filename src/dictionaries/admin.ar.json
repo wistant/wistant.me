@@ -6,7 +6,8 @@
     "resume": "السيرة الذاتية",
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج",
-    "gallery": "المعرض"
+    "gallery": "المعرض",
+    "analytics": "التحليلات"
   },
   "stats": {
     "totalViews": "إجمالي المشاهدات",
@@ -41,6 +42,26 @@
     "title": "محرر MDX",
     "saved": "تم الحفظ",
     "saving": "جاري الحفظ...",
-    "unsaved": "تغييرات غير محفوظة"
+    "unsaved": "تغيير غير محفوظ",
+    "placeholder": "أدخل عنوان المستند...",
+    "empty": "لم يتم العثور على نتائج",
+    "slashMenu": {
+      "text": "نص عادي",
+      "heading": "عناوين",
+      "list": "قوائم"
+    }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "profile": "الملف الشخصي",
+    "appearance": "المظهر",
+    "notifications": "الإشعارات",
+    "security": "الأمان"
+  },
+  "analytics": {
+    "title": "نظرة عامة على التحليلات",
+    "visitors": "الزوار",
+    "engagement": "التفاعل",
+    "sources": "مصادر الحركة"
   }
 }

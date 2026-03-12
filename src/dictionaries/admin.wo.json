@@ -6,7 +6,8 @@
     "resume": "CV",
     "settings": "Lëkalekaay",
     "logout": "Génn",
-    "gallery": "Nataal"
+    "gallery": "Nataal",
+    "analytics": "Xayma yi"
   },
   "stats": {
     "totalViews": "Ñata nit ñoo ko gis",
@@ -41,6 +42,26 @@
     "title": "Béerub MDX",
     "saved": "Denc nañ ko",
     "saving": "Mungiy denc...",
-    "unsaved": "Sopine yuñ dencagul"
+    "unsaved": "Sopine yuñ dencagul",
+    "placeholder": "Mbindal turu mbind mi...",
+    "empty": "Amuñu lenn luñu fa gis",
+    "slashMenu": {
+      "text": "Mbind mu normal",
+      "heading": "Turu mbind",
+      "list": "Lim"
+    }
+  },
+  "settings": {
+    "title": "Nataal",
+    "profile": "Kan la",
+    "appearance": "Nimu mel",
+    "notifications": "Yégal",
+    "security": "Kaarange"
+  },
+  "analytics": {
+    "title": "Xayma yépp",
+    "visitors": "Ñiy bëre",
+    "engagement": "Liganth",
+    "sources": "Funu jóge"
   }
 }
