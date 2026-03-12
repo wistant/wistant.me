@@ -20,7 +20,7 @@ export default async function BlogDashboardPage({ params }: { params: Promise<{ 
               <h2 className="text-2xl font-semibold tracking-tight">{dict.sidebar.blog}</h2>
               <p className="text-muted-foreground">{dict.sidebar.blog} management.</p>
             </div>
-            <ContentTable dict={dict as AdminDictionary} contentType="blog" />
+            <ContentTable dict={dict as AdminDictionary} contentType="blog" lang={lang} />
           </main>
         </div>
       </div>

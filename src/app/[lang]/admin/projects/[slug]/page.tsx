@@ -27,7 +27,14 @@ export default async function ProjectEditorPage({
         <div className="lg:border lg:rounded-md overflow-hidden flex flex-col h-full w-full bg-background">
           <DashboardHeader dict={dict as AdminDictionary} />
           <main className="w-full flex-1 overflow-auto p-4">
-            <MdxEditor initialContent={JSON.stringify(content.content)} />
+            <MdxEditor 
+              slug={slug}
+              contentType="projects"
+              lang={lang}
+              dict={dict as AdminDictionary}
+              initialContent={content.content} 
+              initialFrontmatter={content.frontmatter}
+            />
           </main>
         </div>
       </div>

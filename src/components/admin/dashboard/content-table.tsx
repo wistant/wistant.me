@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ColumnDef,
   flexRender,
@@ -11,10 +12,10 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import { Button } from "@/components/admin/ui/button";
-import { Checkbox } from "@/components/admin/ui/checkbox";
-import { Input } from "@/components/admin/ui/input";
-import { Badge } from "@/components/admin/ui/badge";
+import { Button } from "../ui/button";
+import { Checkbox } from "../ui/checkbox";
+import { Input } from "../ui/input";
+import { Badge } from "../ui/badge";
 import {
   Table,
   TableBody,
@@ -22,7 +23,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/admin/ui/table";
+} from "../ui/table";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Add01Icon,
@@ -31,167 +32,185 @@ import {
   ArrowRight01Icon,
   ArrowLeftDoubleIcon,
   ArrowRightDoubleIcon,
-  ArrowUpDownIcon,
+  Sorting05Icon,
+  Delete02Icon,
+  Edit01Icon,
+  Calendar03Icon,
 } from "@hugeicons/core-free-icons";
-import Link from "next/link";
-import { CMSContent } from "@/lib/admin/server/cms/engine";
-import { AdminDictionary } from "@/types/locale";
+import { Language, AdminDictionary } from "@/types/locale";
+import { ContentType, CMSContent } from "@/lib/admin/schemas";
+import { AssetUpload } from "./asset-upload";
 
-export function ContentTable({ contentType, dict }: { contentType: "projects" | "blog", dict: AdminDictionary }) {
+interface ContentTableProps {
+  dict: AdminDictionary;
+  contentType: ContentType;
+  lang: Language;
+}
+
+export function ContentTable({ dict, contentType, lang }: ContentTableProps) {
   const [data, setData] = useState<CMSContent[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = useState({});
-  const [searchQuery, setSearchQuery] = useState("");
+  const [globalFilter, setGlobalFilter] = useState("");
 
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const res = await fetch(`/api/admin/content?type=${contentType}`);
-        if (res.ok) {
-          const json = await res.json();
-          setData(json.data || []);
-        }
-      } catch (err) {
-        console.error("Failed to fetch content", err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchContent();
-  }, [contentType]);
-
-  const columns = useMemo<ColumnDef<CMSContent>[]>(
-    () => [
-      {
-        id: "select",
-        header: ({ table }) => (
-          <Checkbox
-            checked={
-              table.getIsAllPageRowsSelected()
-                ? true
-                : table.getIsSomePageRowsSelected()
-                ? true
-                : false
-            }
-            onCheckedChange={(value: boolean) => table.toggleAllPageRowsSelected(!!value)}
-            aria-label="Select all"
-          />
-        ),
-        cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value: boolean) => row.toggleSelected(!!value)}
-            aria-label="Select row"
-          />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-      },
-      {
-        accessorKey: "slug",
-        header: ({ column }) => (
-          <Button variant="ghost" className="h-auto p-0 font-medium text-xs hover:bg-transparent" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            {dict.table.title} <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
-          </Button>
-        ),
-        cell: ({ row }) => {
-          const title = String(row.original.frontmatter.title || row.original.slug);
-          return (
-            <div className="flex flex-col min-w-[200px]">
-              <span className="text-sm font-medium truncate">{title}</span>
-              <span className="text-xs text-muted-foreground">{row.original.slug}.{row.original.lang}.mdx</span>
-            </div>
-          );
-        },
-      },
-      {
-        accessorKey: "lang",
-        header: ({ column }) => (
-          <Button variant="ghost" className="h-auto p-0 font-medium text-xs hover:bg-transparent" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-             {dict.table.language} <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
-          </Button>
-        ),
-        cell: ({ row }) => (
-          <Badge variant="outline" className="text-xs font-semibold px-2 py-0.5 uppercase">
-            {row.original.lang}
-          </Badge>
-        ),
-      },
-      {
-        accessorKey: "lastModified",
-        header: ({ column }) => (
-          <Button variant="ghost" className="h-auto p-0 font-medium text-xs hover:bg-transparent" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-             {dict.table.lastEdited} <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
-          </Button>
-        ),
-        cell: ({ row }) => {
-          const date = new Date(row.original.lastModified);
-          return <span className="text-sm text-muted-foreground">{date.toLocaleDateString()}</span>;
-        },
-      },
-      {
-        id: "actions",
-        cell: ({ row }) => (
-          <Link href={`/${row.original.lang}/admin/${contentType}/${row.original.slug}`}>
-            <Button variant="outline" size="sm" className="text-xs">{dict.actions.edit}</Button>
+  const columns = useMemo<ColumnDef<CMSContent>[]>(() => [
+    {
+      id: "select",
+      header: ({ table }) => (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      accessorKey: "slug",
+      header: ({ column }) => (
+        <div 
+          className="flex items-center gap-1 cursor-pointer"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {dict.table.title}
+          <HugeiconsIcon icon={Sorting05Icon} className="size-3" />
+        </div>
+      ),
+      cell: ({ row }) => (
+        <Link 
+          href={`/${lang}/admin/${contentType}/${row.original.slug}`}
+          className="font-medium text-blue-600 hover:underline"
+        >
+          {row.original.frontmatter.title || row.original.frontmatter.name || row.original.slug}
+        </Link>
+      ),
+    },
+    {
+      accessorKey: "frontmatter.date",
+      header: ({ column }) => (
+        <div 
+          className="flex items-center gap-1 cursor-pointer text-xs"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {dict.table.lastEdited}
+          <HugeiconsIcon icon={Sorting05Icon} className="size-2.5 text-muted-foreground" />
+        </div>
+      ),
+      cell: ({ row }) => (
+        <div className="flex items-center gap-2 text-xs text-muted-foreground tabular-nums">
+          <HugeiconsIcon icon={Calendar03Icon} className="size-3" />
+          {row.original.frontmatter.date || "N/A"}
+        </div>
+      ),
+    },
+    {
+      accessorKey: "frontmatter.published",
+      header: dict.table.status,
+      cell: ({ row }) => (
+        <Badge variant={row.original.frontmatter.published ? "default" : "secondary"} className="text-[10px] h-4.5 px-1.5 font-medium">
+          {row.original.frontmatter.published ? dict.table.published : dict.table.draft}
+        </Badge>
+      ),
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => (
+        <div className="flex items-center gap-1 justify-end">
+          <Link href={`/${lang}/admin/${contentType}/${row.original.slug}`}>
+            <Button variant="ghost" size="icon" className="size-7 text-muted-foreground hover:text-foreground">
+              <HugeiconsIcon icon={Edit01Icon} className="size-3.5" />
+            </Button>
           </Link>
-        ),
-      }
-    ],
-    [contentType, dict]
-  );
-
-  const filteredData = useMemo(() => {
-    let result = data;
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      result = result.filter(
-        (c) => c.slug.toLowerCase().includes(q) || 
-               (c.frontmatter.title && String(c.frontmatter.title).toLowerCase().includes(q))
-      );
-    }
-    return result;
-  }, [data, searchQuery]);
+          <Button variant="ghost" size="icon" className="size-7 text-destructive/70 hover:text-destructive hover:bg-destructive/10">
+            <HugeiconsIcon icon={Delete02Icon} className="size-3.5" />
+          </Button>
+        </div>
+      ),
+    },
+  ], [dict, contentType, lang]);
 
   const table = useReactTable({
-    data: filteredData,
+    data,
     columns,
-    state: { sorting, rowSelection },
+    state: {
+      sorting,
+      globalFilter,
+    },
     onSortingChange: setSorting,
-    onRowSelectionChange: setRowSelection,
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    initialState: { pagination: { pageSize: 8 } },
+    getSortedRowModel: getSortedRowModel(),
   });
 
-  const pageSize = table.getState().pagination.pageSize;
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(`/api/admin/content?type=${contentType}&lang=${lang}`);
+        const result = await res.json();
+        if (result.data) {
+          setData(result.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch content:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, [contentType, lang]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64 border rounded-md bg-muted/20">
+        <div className="flex flex-col items-center gap-2">
+          <div className="size-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          <p className="text-sm text-muted-foreground">{dict.table.search}...</p> {/* Minor fallback */}
+        </div>
+      </div>
+    );
+  }
+
   const pageIndex = table.getState().pagination.pageIndex;
-  const totalRows = filteredData.length;
+  const pageSize = table.getState().pagination.pageSize;
+  const totalRows = table.getFilteredRowModel().rows.length;
   const from = totalRows === 0 ? 0 : pageIndex * pageSize + 1;
   const to = Math.min((pageIndex + 1) * pageSize, totalRows);
 
-  if (isLoading) {
-    return <div className="p-8 text-center text-muted-foreground animate-pulse">Loading {contentType} content...</div>;
-  }
-
   return (
-    <div className="rounded-lg border bg-card flex flex-col">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 border-b">
-        <div className="relative flex-1 w-full sm:max-w-xs">
-          <HugeiconsIcon icon={Search01Icon} className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground" />
+    <div className="space-y-4">
+      <div className="flex items-center gap-2">
+        <div className="relative flex-1 max-w-sm">
+          <HugeiconsIcon icon={Search01Icon} className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
           <Input
-            placeholder={`${dict.table.search}...`}
-            value={searchQuery}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+            placeholder={dict.table.search}
             className="pl-9 h-8 text-sm"
+            value={globalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
           />
         </div>
         
-        {/* Wait, I don't have lang yet in ContentTable. Let's fix this properly. */}
-         <Link href={`./${contentType}/new`} className="ml-auto">
+        {contentType === "gallery" && (
+          <AssetUpload 
+            type="gallery" 
+            label="Upload Photo"
+            onSuccess={() => {
+              // Refresh table data
+              window.location.reload(); 
+            }}
+          />
+        )}
+        
+         <Link href={`/${lang}/admin/${contentType}/new`} className="ml-auto">
           <Button size="sm" className="h-8 gap-1.5">
             <HugeiconsIcon icon={Add01Icon} className="size-3.5" />
             <span className="hidden sm:inline">{dict.actions.create}</span>

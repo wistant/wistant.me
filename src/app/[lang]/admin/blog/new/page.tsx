@@ -20,7 +20,12 @@ export default async function NewBlogEditorPage({
         <div className="lg:border lg:rounded-md overflow-hidden flex flex-col h-full w-full bg-background">
           <DashboardHeader dict={dict as AdminDictionary} />
           <main className="w-full h-full flex flex-col">
-            <MdxEditor isNew contentType="blog" dict={dict as AdminDictionary} lang={lang} />
+            <MdxEditor 
+              isNew 
+              contentType="blog" 
+              dict={dict as AdminDictionary} 
+              lang={lang} 
+            />
           </main>
         </div>
       </div>

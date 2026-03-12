@@ -48,6 +48,7 @@ export function DashboardSidebar({ dict, lang, ...props }: SidebarProps) {
     { title: dict.sidebar.blog, icon: Megaphone01Icon, href: `/${lang}/admin/blog` },
     { title: dict.sidebar.resume, icon: UserMultiple02Icon, href: `/${lang}/admin/resume` },
     { title: dict.sidebar.gallery, icon: Image01Icon, href: `/${lang}/admin/gallery` },
+    { title: dict.sidebar.analytics || "Analytics", icon: DashboardSquare01Icon, href: `/${lang}/admin/analytics` },
   ];
 
   const bottomNavItems = [
