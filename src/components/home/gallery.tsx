@@ -3,17 +3,26 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { GALLERY_IMAGES } from "@/data/gallery-data";
 import { cn } from "@/lib/utils";
 import { Maximize2, X } from "lucide-react";
 
-export default function Gallery() {
+interface GalleryProps {
+  images: Array<{
+    src: string;
+    alt: string;
+    className?: string;
+  }>;
+}
+
+export default function Gallery({ images }: GalleryProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const displayImages = images?.length > 0 ? images : [];
 
   return (
     <div className="w-full py-4">
       <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] gap-4">
-        {GALLERY_IMAGES.map((image, index) => (
+        {displayImages.map((image, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}

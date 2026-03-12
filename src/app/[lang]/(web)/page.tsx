@@ -8,6 +8,7 @@ import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
 import Gallery from "@/components/home/gallery";
+import { listContent } from "@/lib/admin/server/cms/engine";
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { Button } from "@/components/ui/button";
@@ -33,8 +34,16 @@ export default async function Home({
 }: {
   params: Promise<{ lang: Language }>;
 }) {
-  const { lang } = await params;
+   const { lang } = await params;
   const dict = await getDictionary(lang);
+  
+  // Fetch Gallery Images from CMS
+  const galleryItems = await listContent("gallery", lang);
+  const galleryImages = galleryItems.map(item => ({
+    src: item.frontmatter.image as string || "",
+    alt: item.frontmatter.alt as string || "",
+    className: item.frontmatter.className as string || "col-span-1 row-span-1"
+  }));
 
   return (
     <main className="min-h-dvh flex flex-col gap-12 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
@@ -48,16 +57,16 @@ export default async function Home({
         />
       </div>
 
-      <HeroSection 
-        title={dict.hero.title} 
-        description={dict.hero.description} 
-        blurFadeDelay={BLUR_FADE_DELAY} 
+      <HeroSection
+        title={dict.hero.title}
+        description={dict.hero.description}
+        blurFadeDelay={BLUR_FADE_DELAY}
       />
 
-      <AboutSection 
-        title={dict.about.title} 
-        content={dict.about.content} 
-        blurFadeDelay={BLUR_FADE_DELAY} 
+      <AboutSection
+        title={dict.about.title}
+        content={dict.about.content}
+        blurFadeDelay={BLUR_FADE_DELAY}
       />
 
       <section id="skills">
@@ -74,7 +83,7 @@ export default async function Home({
           href={`/${lang}/about`}
           linkText={dict.navigation.about || "About me"}
         >
-          <Gallery />
+          <Gallery images={galleryImages} />
         </ShowMore>
       </section>
 
@@ -120,8 +129,8 @@ export default async function Home({
           href={`/${lang}/hackathons`}
           linkText={dict.navigation.hackathons || "All hackathons"}
         >
-          <HackathonsSection 
-            limit={4} 
+          <HackathonsSection
+            limit={4}
             title={dict.hackathons.title}
             subtitle={dict.hackathons.subtitle}
             description={dict.hackathons.description}

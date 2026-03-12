@@ -1,0 +1,67 @@
+{
+  "sidebar": {
+    "dashboard": "لوحة القيادة",
+    "projects": "المشاريع",
+    "blog": "المدونة",
+    "resume": "السيرة الذاتية",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "gallery": "المعرض",
+    "analytics": "التحليلات"
+  },
+  "stats": {
+    "totalViews": "إجمالي المشاهدات",
+    "totalProjects": "إجمالي المشاريع",
+    "totalPosts": "إجمالي المقالات",
+    "activeUsers": "المستخدمون النشطون",
+    "vsLastMonth": "مقارنة بالشهر الماضي"
+  },
+  "table": {
+    "title": "العنوان",
+    "type": "النوع",
+    "status": "الحالة",
+    "views": "المشاهدات",
+    "actions": "الإجراءات",
+    "published": "منشور",
+    "draft": "مسودة",
+    "search": "يبحث",
+    "language": "لغة",
+    "lastEdited": "آخر تعديل",
+    "empty": "لم يتم العثور على نتائج.",
+    "pagination": "إظهار {from} إلى {to} من أصل {total}"
+  },
+  "actions": {
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "create": "إنشاء جديد",
+    "publish": "نشر وترجمة"
+  },
+  "editor": {
+    "title": "محرر MDX",
+    "saved": "تم الحفظ",
+    "saving": "جاري الحفظ...",
+    "unsaved": "تغيير غير محفوظ",
+    "placeholder": "أدخل عنوان المستند...",
+    "empty": "لم يتم العثور على نتائج",
+    "slashMenu": {
+      "text": "نص عادي",
+      "heading": "عناوين",
+      "list": "قوائم"
+    }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "profile": "الملف الشخصي",
+    "appearance": "المظهر",
+    "notifications": "الإشعارات",
+    "security": "الأمان"
+  },
+  "analytics": {
+    "title": "نظرة عامة على التحليلات",
+    "visitors": "الزوار",
+    "engagement": "التفاعل",
+    "sources": "مصادر الحركة"
+  }
+}

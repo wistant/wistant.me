@@ -1,0 +1,67 @@
+{
+  "sidebar": {
+    "dashboard": "Tableau de bord",
+    "projects": "Projets",
+    "blog": "Blog",
+    "resume": "CV",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "gallery": "Galerie",
+    "analytics": "Analytique"
+  },
+  "stats": {
+    "totalViews": "Vues Totales",
+    "totalProjects": "Total Projets",
+    "totalPosts": "Total Articles",
+    "activeUsers": "Utilisateurs Actifs",
+    "vsLastMonth": "par rapport au mois dernier"
+  },
+  "table": {
+    "title": "Titre",
+    "type": "Type",
+    "status": "Statut",
+    "views": "Vues",
+    "actions": "Actions",
+    "published": "Publié",
+    "draft": "Brouillon",
+    "search": "Rechercher",
+    "language": "Langue",
+    "lastEdited": "Dernière modification",
+    "empty": "Aucun résultat trouvé.",
+    "pagination": "Affichage de {from} à {to} sur {total}"
+  },
+  "actions": {
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "create": "Créer",
+    "publish": "Publier & Traduire"
+  },
+  "editor": {
+    "title": "Rédaction MDX",
+    "saved": "Enregistré",
+    "saving": "Enregistrement...",
+    "unsaved": "Modifications non enregistrées",
+    "placeholder": "Entrez le titre du document...",
+    "empty": "Aucun résultat trouvé",
+    "slashMenu": {
+      "text": "Texte normal",
+      "heading": "Titres",
+      "list": "Listes"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "profile": "Profil",
+    "appearance": "Apparence",
+    "notifications": "Notifications",
+    "security": "Sécurité"
+  },
+  "analytics": {
+    "title": "Aperçu analytique",
+    "visitors": "Visiteurs",
+    "engagement": "Engagement",
+    "sources": "Sources de trafic"
+  }
+}

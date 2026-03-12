@@ -133,6 +133,9 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
         "max-snippet": -1,
       },
     },
+    verification: {
+      google: "XVF3LaVsnlk2hGWOSNWwElX4AoXLKlVmeaz1kDxHRJY",
+    },
     // Adding JSON-LD for Local SEO (Cameroun)
     other: {
       image: ogImage,
