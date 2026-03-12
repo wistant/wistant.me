@@ -16,13 +16,6 @@ import { Checkbox } from "@/components/admin/ui/checkbox";
 import { Input } from "@/components/admin/ui/input";
 import { Badge } from "@/components/admin/ui/badge";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/admin/ui/select";
-import {
   Table,
   TableBody,
   TableCell,
@@ -42,8 +35,9 @@ import {
 } from "@hugeicons/core-free-icons";
 import Link from "next/link";
 import { CMSContent } from "@/lib/admin/server/cms/engine";
+import { AdminDictionary } from "@/types/locale";
 
-export function ContentTable({ contentType }: { contentType: "projects" | "blog" }) {
+export function ContentTable({ contentType, dict }: { contentType: "projects" | "blog", dict: AdminDictionary }) {
   const [data, setData] = useState<CMSContent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -98,7 +92,7 @@ export function ContentTable({ contentType }: { contentType: "projects" | "blog"
         accessorKey: "slug",
         header: ({ column }) => (
           <Button variant="ghost" className="h-auto p-0 font-medium text-xs hover:bg-transparent" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Title / Slug <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
+            {dict.table.title} <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
           </Button>
         ),
         cell: ({ row }) => {
@@ -115,7 +109,7 @@ export function ContentTable({ contentType }: { contentType: "projects" | "blog"
         accessorKey: "lang",
         header: ({ column }) => (
           <Button variant="ghost" className="h-auto p-0 font-medium text-xs hover:bg-transparent" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-             Language <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
+             {dict.table.language} <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
           </Button>
         ),
         cell: ({ row }) => (
@@ -128,7 +122,7 @@ export function ContentTable({ contentType }: { contentType: "projects" | "blog"
         accessorKey: "lastModified",
         header: ({ column }) => (
           <Button variant="ghost" className="h-auto p-0 font-medium text-xs hover:bg-transparent" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-             Last Edited <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
+             {dict.table.lastEdited} <HugeiconsIcon icon={ArrowUpDownIcon} className="ml-1 size-3" />
           </Button>
         ),
         cell: ({ row }) => {
@@ -139,13 +133,13 @@ export function ContentTable({ contentType }: { contentType: "projects" | "blog"
       {
         id: "actions",
         cell: ({ row }) => (
-          <Link href={`/en/admin/${contentType}/${row.original.slug}`}>
-            <Button variant="outline" size="sm" className="text-xs">Edit</Button>
+          <Link href={`/${row.original.lang}/admin/${contentType}/${row.original.slug}`}>
+            <Button variant="outline" size="sm" className="text-xs">{dict.actions.edit}</Button>
           </Link>
         ),
       }
     ],
-    [contentType]
+    [contentType, dict]
   );
 
   const filteredData = useMemo(() => {
@@ -189,17 +183,18 @@ export function ContentTable({ contentType }: { contentType: "projects" | "blog"
         <div className="relative flex-1 w-full sm:max-w-xs">
           <HugeiconsIcon icon={Search01Icon} className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground" />
           <Input
-            placeholder={`Search ${contentType}...`}
+            placeholder={`${dict.table.search}...`}
             value={searchQuery}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
             className="pl-9 h-8 text-sm"
           />
         </div>
         
-        <Link href={`/en/admin/${contentType}/new`} className="ml-auto">
+        {/* Wait, I don't have lang yet in ContentTable. Let's fix this properly. */}
+         <Link href={`./${contentType}/new`} className="ml-auto">
           <Button size="sm" className="h-8 gap-1.5">
             <HugeiconsIcon icon={Add01Icon} className="size-3.5" />
-            <span className="hidden sm:inline">New {contentType === "projects" ? "Project" : "Post"}</span>
+            <span className="hidden sm:inline">{dict.actions.create}</span>
           </Button>
         </Link>
       </div>
@@ -231,7 +226,7 @@ export function ContentTable({ contentType }: { contentType: "projects" | "blog"
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center text-muted-foreground">
-                  No {contentType} found.
+                  {dict.table.empty}
                 </TableCell>
               </TableRow>
             )}
@@ -243,8 +238,8 @@ export function ContentTable({ contentType }: { contentType: "projects" | "blog"
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
           <span>
             {totalRows === 0
-              ? "0 items"
-              : `Showing ${from} to ${to} of ${totalRows}`}
+              ? dict.table.empty
+              : dict.table.pagination.replace("{from}", String(from)).replace("{to}", String(to)).replace("{total}", String(totalRows))}
           </span>
         </div>
         <div className="flex items-center gap-1">
