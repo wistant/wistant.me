@@ -15,9 +15,10 @@ export interface AdminDictionary {
     projects: string;
     blog: string;
     resume: string;
-    settings: string;
-    logout: string;
     gallery: string;
+    settings: string;
+    analytics: string;
+    logout: string;
   };
   stats: {
     totalViews: string;
@@ -53,5 +54,25 @@ export interface AdminDictionary {
     saved: string;
     saving: string;
     unsaved: string;
+    placeholder: string;
+    empty: string;
+    slashMenu: {
+      text: string;
+      heading: string;
+      list: string;
+    };
+  };
+  settings: {
+    title: string;
+    profile: string;
+    appearance: string;
+    notifications: string;
+    security: string;
+  };
+  analytics: {
+    title: string;
+    visitors: string;
+    engagement: string;
+    sources: string;
   };
 }
