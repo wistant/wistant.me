@@ -56,7 +56,9 @@ function formatYAxis(value: number): string {
   return value.toString();
 }
 
-export function MonthlyViewsChart() {
+import { AdminDictionary } from "@/types/locale";
+
+export function MonthlyViewsChart({ dict }: { dict: AdminDictionary }) {
   const [period, setPeriod] = useState<Period>("1m");
   const [showGrid, setShowGrid] = useState(true);
   const [smoothCurve, setSmoothCurve] = useState(true);
@@ -87,7 +89,7 @@ export function MonthlyViewsChart() {
     <div className="rounded-lg border bg-card p-4 flex flex-col gap-3 h-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium">Monthly views</span>
+          <span className="text-sm font-medium">{dict?.stats?.totalViews || "Monthly views"}</span>
           <span className="text-xs text-muted-foreground border rounded px-1.5 py-0.5">
             {label}
           </span>

@@ -8,11 +8,13 @@ function formatViews(views: number): string {
   return views.toLocaleString();
 }
 
-export function RecentUploads() {
+import { AdminDictionary } from "@/types/locale";
+
+export function RecentUploads({ dict }: { dict: AdminDictionary }) {
   return (
     <div className="rounded-lg border bg-card p-4 flex flex-col gap-3 h-full">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">Recent uploads</span>
+        <span className="text-sm font-medium">{dict?.sidebar?.blog || "Recent uploads"}</span>
         <HugeiconsIcon icon={Upload01Icon} className="size-3.5 text-muted-foreground" />
       </div>
       <div className="w-full flex gap-2 h-full">

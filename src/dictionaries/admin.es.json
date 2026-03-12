@@ -1,0 +1,46 @@
+{
+  "sidebar": {
+    "dashboard": "Panel de control",
+    "projects": "Proyectos",
+    "blog": "Blog",
+    "resume": "Currículum",
+    "settings": "Ajustes",
+    "logout": "Cerrar sesión",
+    "gallery": "Galería"
+  },
+  "stats": {
+    "totalViews": "Vistas Totales",
+    "totalProjects": "Total Proyectos",
+    "totalPosts": "Total Artículos",
+    "activeUsers": "Usuarios Activos",
+    "vsLastMonth": "vs el mes pasado"
+  },
+  "table": {
+    "title": "Título",
+    "type": "Tipo",
+    "status": "Estado",
+    "views": "Vistas",
+    "actions": "Acciones",
+    "published": "Publicado",
+    "draft": "Borrador",
+    "search": "Buscar",
+    "language": "Idioma",
+    "lastEdited": "Última edición",
+    "empty": "No se encontraron resultados.",
+    "pagination": "Mostrando {from} a {to} de {total}"
+  },
+  "actions": {
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "create": "Crear",
+    "publish": "Publicar y Traducir"
+  },
+  "editor": {
+    "title": "Editor MDX",
+    "saved": "Guardado",
+    "saving": "Guardando...",
+    "unsaved": "Cambios sin guardar"
+  }
+}

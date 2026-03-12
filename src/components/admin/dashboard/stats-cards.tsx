@@ -1,4 +1,3 @@
-import { dashboardStats } from "@/data/admin/creator-dashboard";
 import { cn } from "@/lib/admin/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -20,39 +19,52 @@ function formatCurrency(value: number): string {
   return "$" + value.toLocaleString();
 }
 
-const statsConfig = [
-  {
-    key: "viewsDelivered" as const,
-    label: "Views delivered",
-    icon: ViewIcon,
-    format: formatNumber,
-  },
-  {
-    key: "budgetSpent" as const,
-    label: "Budget spent",
-    icon: Wallet02Icon,
-    format: formatCurrency,
-  },
-  {
-    key: "remainingBudget" as const,
-    label: "Remaining budget",
-    icon: Money01Icon,
-    format: formatCurrency,
-  },
-  {
-    key: "activeCreators" as const,
-    label: "Active creators",
-    icon: UserMultiple02Icon,
-    format: (v: number) => v.toString(),
-  },
-];
+import { AdminDictionary } from "@/types/locale";
 
-export function StatsCards() {
+export function StatsCards({ dict, stats }: { dict: AdminDictionary; stats: { totalViews: number; totalProjects: number; totalPosts: number; activeUsers: number; } }) {
+  const statsConfig = [
+    {
+      key: "totalViews" as const,
+      label: dict?.stats?.totalViews || "Views",
+      icon: ViewIcon,
+      format: formatNumber,
+      value: stats.totalViews,
+      change: 12, // Placeholder trend
+      trend: "up"
+    },
+    {
+      key: "totalProjects" as const,
+      label: dict?.stats?.totalProjects || "Projects",
+      icon: Wallet02Icon,
+      format: formatCurrency,
+      value: stats.totalProjects,
+      change: 8,
+      trend: "up"
+    },
+    {
+      key: "totalPosts" as const,
+      label: dict?.stats?.totalPosts || "Posts",
+      icon: Money01Icon,
+      format: formatCurrency,
+      value: stats.totalPosts,
+      change: -2,
+      trend: "down"
+    },
+    {
+      key: "activeUsers" as const,
+      label: dict?.stats?.activeUsers || "Users",
+      icon: UserMultiple02Icon,
+      format: (v: number) => v.toString(),
+      value: stats.activeUsers,
+      change: 0,
+      trend: "up"
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-      {statsConfig.map(({ key, label, icon: Icon, format }) => {
-        const stat = dashboardStats[key];
-        const isUp = stat.trend === "up";
+      {statsConfig.map(({ key, label, icon: Icon, format, value, change, trend }) => {
+        const isUp = trend === "up";
 
         return (
           <div
@@ -67,7 +79,7 @@ export function StatsCards() {
             </div>
             <div className="rounded-md border bg-card p-3 flex items-center justify-between">
               <span className="text-2xl font-semibold tracking-tight">
-                {format(stat.value)}
+                {key === "totalProjects" || key === "totalPosts" ? value : format(value)}
               </span>
               <div className="flex items-center gap-1">
                 {isUp ? (
@@ -83,7 +95,7 @@ export function StatsCards() {
                       : "text-destructive"
                   )}
                 >
-                  {stat.change}%
+                  {change}%
                 </span>
               </div>
             </div>

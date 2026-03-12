@@ -1,0 +1,46 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "blog": "Blog",
+    "resume": "Resume",
+    "settings": "Settings",
+    "logout": "Logout",
+    "gallery": "Gallery"
+  },
+  "stats": {
+    "totalViews": "Total Views",
+    "totalProjects": "Total Projects",
+    "totalPosts": "Total Posts",
+    "activeUsers": "Active Users",
+    "vsLastMonth": "vs last month"
+  },
+  "table": {
+    "title": "Title",
+    "type": "Type",
+    "status": "Status",
+    "views": "Views",
+    "actions": "Actions",
+    "published": "Published",
+    "draft": "Draft",
+    "search": "Search",
+    "language": "Language",
+    "lastEdited": "Last Edited",
+    "empty": "No items found.",
+    "pagination": "Showing {from} to {to} out of {total}"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "create": "Create New",
+    "publish": "Publish & Translate"
+  },
+  "editor": {
+    "title": "MDX Editor",
+    "saved": "Saved",
+    "saving": "Saving...",
+    "unsaved": "Unsaved changes"
+  }
+}
