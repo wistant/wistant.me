@@ -9,10 +9,7 @@ import {
   EditorCommandEmpty,
   EditorCommandList,
   EditorBubble,
-  EditorBubbleItem,
 } from "novel";
-import { Button } from "@/components/admin/ui/button";
-import { Input } from "@/components/admin/ui/input";
 import { Language, AdminDictionary } from "@/types/locale";
 
 // Basic Tiptap Extensions
@@ -24,21 +21,11 @@ import Highlight from "@tiptap/extension-highlight";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
 import { Markdown } from "tiptap-markdown";
-import {
-  Bold,
-  Italic,
-  Underline as UnderlineIcon,
-  Strikethrough,
-  Code,
-  Heading1,
-  Heading2,
-  Heading3,
-  List,
-  ListOrdered,
-  Quote,
-  Save,
-  Wand2,
-} from "lucide-react";
+import { Heading1, Heading2, List } from "lucide-react";
+
+// Moduler Components
+import { EditorToolbar } from "./editor-toolbar";
+import { EditorBubbleMenuClient } from "./editor-bubble";
 
 const defaultExtensions = [
   StarterKit.configure({
@@ -81,55 +68,16 @@ export function MdxEditor({
 
   return (
     <div className="flex flex-col h-full bg-background rounded-md border shadow-sm overflow-hidden">
-      {/* 1. Word-style Top Toolbar Container */}
-      <div className="flex flex-col border-b bg-card z-10 sticky top-0">
-        
-        {/* Top Header: Title & Actions */}
-        <div className="flex items-center justify-between px-4 py-3 border-b">
-          <div className="flex items-center gap-4 flex-1">
-            <Input 
-              value={title} 
-              onChange={(e) => setTitle(e.target.value)} 
-              placeholder="Enter document title..."
-              className="max-w-md font-semibold text-lg border-transparent hover:border-input focus-visible:ring-0 bg-transparent px-2 h-auto py-1"
-            />
-            <span className="text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded-md border">
-              {saveStatus}
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" className="gap-2 h-8">
-              <Save className="size-3.5" />
-              <span>{dict?.actions?.save || "Save Draft"}</span>
-            </Button>
-            <Button size="sm" className="gap-2 h-8 bg-blue-600 hover:bg-blue-700 text-white shadow-md">
-              <Wand2 className="size-3.5" />
-              <span>{dict?.actions?.publish || "Publish & AI Translate"}</span>
-            </Button>
-          </div>
-        </div>
+      <EditorRoot>
+        <EditorToolbar 
+          title={title} 
+          setTitle={setTitle} 
+          saveStatus={saveStatus} 
+          dict={dict} 
+        />
 
-        {/* Traditional Formatting Toolbar */}
-        <div className="flex items-center gap-1 px-4 py-2 bg-muted/30 overflow-x-auto scrollbar-hide">
-          <ToolbarButton icon={<Heading1 className="size-4" />} tooltip="Heading 1" />
-          <ToolbarButton icon={<Heading2 className="size-4" />} tooltip="Heading 2" />
-          <ToolbarButton icon={<Heading3 className="size-4" />} tooltip="Heading 3" />
-          <div className="w-px h-4 bg-border mx-1" />
-          <ToolbarButton icon={<Bold className="size-4" />} tooltip="Bold" />
-          <ToolbarButton icon={<Italic className="size-4" />} tooltip="Italic" />
-          <ToolbarButton icon={<UnderlineIcon className="size-4" />} tooltip="Underline" />
-          <ToolbarButton icon={<Strikethrough className="size-4" />} tooltip="Strikethrough" />
-          <ToolbarButton icon={<Code className="size-4" />} tooltip="Code" />
-          <div className="w-px h-4 bg-border mx-1" />
-          <ToolbarButton icon={<List className="size-4" />} tooltip="Bullet List" />
-          <ToolbarButton icon={<ListOrdered className="size-4" />} tooltip="Numbered List" />
-          <ToolbarButton icon={<Quote className="size-4" />} tooltip="Blockquote" />
-        </div>
-      </div>
-
-      {/* 2. Edge-to-Edge Responsive Editing Area */}
-      <div className="flex-1 overflow-y-auto bg-muted/10 relative">
-        <EditorRoot>
+        {/* 2. Edge-to-Edge Responsive Editing Area */}
+        <div className="flex-1 overflow-y-auto bg-muted/10 relative">
           <EditorContent
             initialContent={initialContent && !isNew ? JSON.parse(initialContent) : undefined}
             extensions={defaultExtensions as any}
@@ -148,12 +96,7 @@ export function MdxEditor({
           >
             {/* Contextual Action Bubble */}
             <EditorBubble className="flex w-fit max-w-[90vw] overflow-hidden rounded-md border bg-background shadow-xl">
-               <div className="flex items-center p-1">
-                 <button className="p-2 hover:bg-muted text-foreground transition-colors"><Bold className="size-4" /></button>
-                 <button className="p-2 hover:bg-muted text-foreground transition-colors"><Italic className="size-4" /></button>
-                 <button className="p-2 hover:bg-muted text-foreground transition-colors"><UnderlineIcon className="size-4" /></button>
-                 <button className="p-2 hover:bg-muted text-foreground transition-colors"><Code className="size-4" /></button>
-               </div>
+               <EditorBubbleMenuClient />
             </EditorBubble>
 
             {/* Notion-style Slash Commands Menu */}
@@ -204,22 +147,8 @@ export function MdxEditor({
               </EditorCommandList>
             </EditorCommand>
           </EditorContent>
-        </EditorRoot>
-      </div>
+        </div>
+      </EditorRoot>
     </div>
-  );
-}
-
-// Helper component for identical toolbar buttons
-function ToolbarButton({ icon, tooltip, onClick }: { icon: React.ReactNode; tooltip: string; onClick?: () => void }) {
-  return (
-    <button
-      type="button"
-      title={tooltip}
-      onClick={onClick}
-      className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
-    >
-      {icon}
-    </button>
   );
 }
