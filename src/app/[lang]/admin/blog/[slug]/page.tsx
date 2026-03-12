@@ -1,32 +1,33 @@
 import { DashboardSidebar } from "@/components/admin/dashboard/sidebar";
 import { DashboardHeader } from "@/components/admin/dashboard/header";
-import { DashboardContent } from "@/components/admin/dashboard/content";
 import { SidebarProvider } from "@/components/admin/ui/sidebar";
+import { MdxEditor } from "@/components/admin/dashboard/mdx-editor";
+import { getContent } from "@/lib/admin/server/cms/engine";
 import { getAdminDictionary } from "@/lib/dictionary";
 import { Language, AdminDictionary } from "@/types/locale";
-import { listContent } from "@/lib/admin/server/cms/engine";
+import { notFound } from "next/navigation";
 
-export default async function DashboardPage({ params }: { params: Promise<{ lang: Language }> }) {
-  const { lang } = await params;
+export default async function BlogEditorPage({
+  params,
+}: {
+  params: Promise<{ lang: Language; slug: string }>;
+}) {
+  const { lang, slug } = await params;
   const dict = await getAdminDictionary(lang);
-  const projects = await listContent("projects", lang);
-  const blog = await listContent("blog", lang);
+  const content = await getContent("blog", slug, lang);
 
-  const stats = {
-    totalViews: 12500, // Placeholder for analytics
-    totalProjects: projects.length,
-    totalPosts: blog.length,
-    activeUsers: 2,
-  };
+  if (!content) {
+    notFound();
+  }
 
   return (
     <SidebarProvider className="bg-sidebar">
       <DashboardSidebar dict={dict as AdminDictionary} lang={lang} />
       <div className="h-svh overflow-hidden lg:p-2 w-full">
         <div className="lg:border lg:rounded-md overflow-hidden flex flex-col h-full w-full bg-background">
-          <DashboardHeader dict={dict} />
-          <main className="w-full flex-1 overflow-auto">
-            <DashboardContent dict={dict as AdminDictionary} stats={stats} />
+          <DashboardHeader dict={dict as AdminDictionary} />
+          <main className="w-full flex-1 overflow-auto p-4">
+            <MdxEditor initialContent={JSON.stringify(content.content)} />
           </main>
         </div>
       </div>
