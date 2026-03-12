@@ -1,13 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Groq } from "groq-sdk";
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
-    const { content, targetLang, contentType } = await req.json();
+    const groq = new Groq({
+      apiKey: process.env.GROQ_API_KEY || "build-dummy-key",
+    });
+
+    const body = await req.json();
+    const { content, targetLang, contentType } = body;
 
     if (!content || !targetLang) {
       return NextResponse.json({ error: "Missing content or targetLang" }, { status: 400 });
