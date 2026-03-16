@@ -3,7 +3,7 @@
 export const personalData = {
   name: "Wistant Kode",
   initials: "WK",
-  url: "https://wistant.dev",
+  url: "https://wistant.vercel.app",
   location: "Douala, 🇨🇲",
   locationLink: "https://www.google.com/maps/place/Douala",
   description:
