@@ -12,19 +12,26 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
   const projects = await listContent("projects", lang);
   const blog = await listContent("blog", lang);
 
+  const allTags = new Set<string>();
+  projects.forEach(p => (p.frontmatter.tags as string[])?.forEach(t => allTags.add(t)));
+  blog.forEach(p => (p.frontmatter.tags as string[])?.forEach(t => allTags.add(t)));
+
   const stats = {
-    totalViews: 12500,
+    totalContent: projects.length + blog.length,
     totalProjects: projects.length,
     totalPosts: blog.length,
-    activeUsers: 2,
+    totalTags: allTags.size,
   };
 
-  const recentActivities = blog.slice(0, 5).map(post => ({
-    action: "Article publié",
-    item: post.frontmatter.title as string,
-    time: new Date(post.lastModified).toLocaleDateString(),
-    image: post.frontmatter.image as string || post.frontmatter.thumbnail as string
-  }));
+  const recentActivities = [...projects, ...blog]
+    .sort((a, b) => b.lastModified - a.lastModified)
+    .slice(0, 5)
+    .map(doc => ({
+      action: "Dernière modification",
+      item: doc.frontmatter.title as string,
+      time: new Date(doc.lastModified).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }),
+      image: doc.frontmatter.image as string || ""
+    }));
 
   return (
     <SidebarProvider className="bg-sidebar">

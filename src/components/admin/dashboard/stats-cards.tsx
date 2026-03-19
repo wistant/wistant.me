@@ -9,34 +9,24 @@ import {
   ChartDownIcon,
 } from "@hugeicons/core-free-icons";
 
-function formatNumber(value: number): string {
-  if (value >= 1000000) return (value / 1000000).toFixed(1) + "M";
-  if (value >= 1000) return value.toLocaleString();
-  return value.toString();
-}
-
-function formatCurrency(value: number): string {
-  return "$" + value.toLocaleString();
-}
-
 import { AdminDictionary } from "@/types/locale";
 
-export function StatsCards({ dict, stats }: { dict: AdminDictionary; stats: { totalViews: number; totalProjects: number; totalPosts: number; activeUsers: number; } }) {
+export function StatsCards({ dict, stats }: { dict: AdminDictionary; stats: { totalContent: number; totalProjects: number; totalPosts: number; totalTags: number; } }) {
   const statsConfig = [
     {
-      key: "totalViews" as const,
-      label: dict?.stats?.totalViews || "Views",
+      key: "totalContent" as const,
+      label: "Total Content",
       icon: ViewIcon,
-      format: formatNumber,
-      value: stats.totalViews,
-      change: 12, // Placeholder trend
+      format: (v: number) => v.toString(),
+      value: stats.totalContent,
+      change: 3, 
       trend: "up"
     },
     {
       key: "totalProjects" as const,
       label: dict?.stats?.totalProjects || "Projects",
       icon: Wallet02Icon,
-      format: formatCurrency,
+      format: (v: number) => v.toString(),
       value: stats.totalProjects,
       change: 8,
       trend: "up"
@@ -45,18 +35,18 @@ export function StatsCards({ dict, stats }: { dict: AdminDictionary; stats: { to
       key: "totalPosts" as const,
       label: dict?.stats?.totalPosts || "Posts",
       icon: Money01Icon,
-      format: formatCurrency,
+      format: (v: number) => v.toString(),
       value: stats.totalPosts,
-      change: -2,
-      trend: "down"
+      change: 0,
+      trend: "up"
     },
     {
-      key: "activeUsers" as const,
-      label: dict?.stats?.activeUsers || "Users",
+      key: "totalTags" as const,
+      label: "SEO Tags",
       icon: UserMultiple02Icon,
       format: (v: number) => v.toString(),
-      value: stats.activeUsers,
-      change: 0,
+      value: stats.totalTags,
+      change: 12,
       trend: "up"
     },
   ];
