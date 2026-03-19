@@ -2,6 +2,9 @@ import { DashboardSidebar } from "@/components/admin/dashboard/sidebar";
 import { DashboardHeader } from "@/components/admin/dashboard/header";
 import { SidebarProvider } from "@/components/admin/ui/sidebar";
 import { MdxEditor } from "@/components/admin/dashboard/mdx-editor";
+import { ProjectEditor } from "@/components/admin/dashboard/project-editor";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
 import { getAdminDictionary } from "@/lib/dictionary";
 import { Language, AdminDictionary } from "@/types/locale";
 import { ContentTypeSchema, ContentType } from "@/lib/admin/schemas";
@@ -26,13 +29,27 @@ export default async function GenericNewEditorPage({
       <div className="h-svh overflow-hidden lg:p-2 w-full">
         <div className="lg:border lg:rounded-md overflow-hidden flex flex-col h-full w-full bg-background">
           <DashboardHeader dict={dict as AdminDictionary} />
-          <main className="w-full h-full flex flex-col">
-            <MdxEditor 
-              isNew 
-              contentType={validation.data as ContentType} 
-              dict={dict as AdminDictionary} 
-              lang={lang} 
-            />
+          <main className="w-full h-full flex flex-col relative">
+            <div className="px-4 py-2 border-b bg-muted/20">
+              <Link href={`/${lang}/admin`} className="flex w-fit items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                <ChevronLeft className="size-4 mr-1" /> Retour au Dashboard
+              </Link>
+            </div>
+            {type === "projects" ? (
+              <ProjectEditor 
+                isNew 
+                contentType={validation.data as ContentType} 
+                dict={dict as AdminDictionary} 
+                lang={lang} 
+              />
+            ) : (
+              <MdxEditor 
+                isNew 
+                contentType={validation.data as ContentType} 
+                dict={dict as AdminDictionary} 
+                lang={lang} 
+              />
+            )}
           </main>
         </div>
       </div>

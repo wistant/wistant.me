@@ -20,10 +20,14 @@ import {
   Save,
   Wand2,
 } from "lucide-react";
+import { MetadataDrawer } from "./metadata-drawer";
+import { Frontmatter } from "@/lib/admin/schemas";
 
 export function EditorToolbar({
   title,
   setTitle,
+  metadata,
+  setMetadata,
   saveStatus,
   isSaving,
   isTranslating,
@@ -31,9 +35,12 @@ export function EditorToolbar({
   onTranslate,
   dict,
   lang,
+  hideTitle,
 }: {
   title: string;
   setTitle: (t: string) => void;
+  metadata: Frontmatter;
+  setMetadata: (m: Frontmatter) => void;
   saveStatus: string;
   isSaving?: boolean;
   isTranslating?: boolean;
@@ -41,24 +48,30 @@ export function EditorToolbar({
   onTranslate?: (targetLang: string) => void;
   dict?: AdminDictionary;
   lang?: string;
+  hideTitle?: boolean;
 }) {
   const { editor } = useCurrentEditor();
 
   return (
-    <div className="flex flex-col border-b bg-card z-10 sticky top-0">
+    <div className="flex flex-col border-b bg-card z-10 sticky top-0 shadow-sm">
       <div className="flex items-center justify-between px-4 py-3 border-b">
         <div className="flex items-center gap-4 flex-1">
-          <Input 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)} 
-            placeholder={dict?.editor?.placeholder || "Enter document title..."}
-            className="max-w-md font-semibold text-lg border-transparent hover:border-input focus-visible:ring-0 bg-transparent px-2 h-auto py-1"
-          />
+          {!hideTitle && (
+            <Input 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)} 
+              placeholder={dict?.editor?.placeholder || "Enter document title..."}
+              className="max-w-md font-semibold text-lg border-transparent hover:border-input focus-visible:ring-0 bg-transparent px-2 h-auto py-1"
+            />
+          )}
+          {hideTitle && <span className="font-semibold text-lg px-2">Mode Éditeur de Projet</span>}
           <span className="text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded-md border">
             {saveStatus}
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <MetadataDrawer metadata={metadata} onChange={setMetadata} dict={dict} />
+          
           <Button 
             variant="outline" 
             size="sm" 
