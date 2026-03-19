@@ -6,7 +6,7 @@ import React from "react";
 
 const BLUR_FADE_DELAY = 0.04;
 
-type Language = "en" | "fr" | "es" | "ar" | "wo";
+import type { Language } from "@/types/locale";
 
 export default async function ProjectsSection({
   limit,
