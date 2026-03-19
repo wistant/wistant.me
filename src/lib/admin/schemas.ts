@@ -28,6 +28,7 @@ export const FrontmatterSchema = z.object({
     type: z.string(),
     href: z.string(),
   })).optional(),
+  builderBlocks: z.any().optional(),
 });
 
 export type Frontmatter = z.infer<typeof FrontmatterSchema>;
