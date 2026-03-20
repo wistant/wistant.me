@@ -17,6 +17,7 @@ import {
   X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -190,7 +191,7 @@ export function SplitIdeEditor({
 
       {/* CONFIGURATION MODAL (CENTRAL OVERLAY) */}
       {showConfig && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
            <div className="absolute inset-0 bg-background/80 backdrop-blur-md" onClick={() => setShowConfig(false)} />
            <div className="relative bg-card border shadow-2xl rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
               <div className="h-14 border-b flex items-center justify-between px-6 shrink-0 bg-muted/30">
@@ -220,7 +221,7 @@ export function SplitIdeEditor({
                     className="group relative w-full aspect-21/9 rounded-2xl overflow-hidden bg-muted/40 border-2 border-dashed border-muted flex items-center justify-center cursor-pointer transition-all hover:border-primary/50"
                   >
                       {image ? (
-                          <img src={image.startsWith('/') || image.startsWith('http') ? image : `/${image}`} alt="Cover" className="w-full h-full object-cover" />
+                          <Image src={image.startsWith('/') || image.startsWith('http') ? image : `/${image}`} alt="Cover" fill className="object-cover" />
                       ) : (
                           <div className="text-center text-muted-foreground flex flex-col items-center gap-3">
                              <ImageIcon className="size-10 opacity-10" />

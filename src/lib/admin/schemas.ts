@@ -19,7 +19,12 @@ export const FrontmatterSchema = z.object({
   className: z.string().optional(),
   favicon: z.string().optional(),
   logo: z.string().optional(),
+  ogHome: z.string().optional(),
+  ogBlog: z.string().optional(),
+  ogProject: z.string().optional(),
   author: z.string().optional(),
+  authorName: z.string().optional(),
+  authorRole: z.string().optional(),
   socials: z.object({
     github: z.string().optional(),
     twitter: z.string().optional(),
