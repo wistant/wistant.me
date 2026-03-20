@@ -47,7 +47,10 @@ export async function generateMetadata({
   params,
 }: ProjectSlugPageProps): Promise<Metadata> {
   const { lang, slug } = await params;
-  const project = allProjects.find((p) => p.slug === slug && p.lang === lang);
+  let project = allProjects.find((p) => p.slug === slug && p.lang === lang);
+  if (!project && lang !== "en") {
+     project = allProjects.find((p) => p.slug === slug && p.lang === "en");
+  }
 
   if (!project) {
     return getPageMetadata(lang);
@@ -68,7 +71,10 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
   const { lang, slug } = await params;
   
   // Get rich content and metadata from MDX collections
-  const project = allProjects.find((p) => p.slug === slug && p.lang === lang);
+  let project = allProjects.find((p) => p.slug === slug && p.lang === lang);
+  if (!project && lang !== "en") {
+     project = allProjects.find((p) => p.slug === slug && p.lang === "en");
+  }
 
   if (!project) {
     notFound();
@@ -112,7 +118,7 @@ export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) 
         {project.image && (
           <div className="relative w-full mb-12 flex justify-center">
             <Image
-              src={project.image}
+              src={project.image.startsWith('/') || project.image.startsWith('http') ? project.image : `/${project.image}`}
               alt={project.title || "Project thumbnail"}
               width={project.imageWidth || 1200}
               height={project.imageHeight || 630}

@@ -15,11 +15,26 @@ export async function listContent(type: ContentType, lang: string = 'en'): Promi
   
   try {
     const files = await fs.readdir(dirPath);
-    const mdxFiles = files.filter(f => f.endsWith(`.${lang}.mdx`));
     
-    const contents = await Promise.all(mdxFiles.map(async (file) => {
+    // Fallback Logic: Base en English, Override by requested lang
+    const slugMap = new Map<string, string>();
+    files.forEach(f => {
+      if (f.endsWith('.en.mdx')) {
+         slugMap.set(f.replace('.en.mdx', ''), f);
+      }
+    });
+    if (lang !== 'en') {
+      files.forEach(f => {
+        if (f.endsWith(`.${lang}.mdx`)) {
+           slugMap.set(f.replace(`.${lang}.mdx`, ''), f);
+        }
+      });
+    }
+    
+    const mdxEntries = Array.from(slugMap.entries());
+    
+    const contents = await Promise.all(mdxEntries.map(async ([slug, file]) => {
       try {
-        const slug = file.replace(`.${lang}.mdx`, '');
         const filePath = path.join(dirPath, file);
         const fileContent = await fs.readFile(filePath, 'utf-8');
         const stats = await fs.stat(filePath);
@@ -63,23 +78,83 @@ export async function listContent(type: ContentType, lang: string = 'en'): Promi
  * Retrieves a single file's content
  */
 export async function getContent(type: ContentType, slug: string, lang: string = 'en'): Promise<CMSContent | null> {
-  const filePath = path.join(CONTENT_DIR, type, `${slug}.${lang}.mdx`);
+  let filePath = path.join(CONTENT_DIR, type, `${slug}.${lang}.mdx`);
+  let isFallback = false;
   
   try {
-    const fileContent = await fs.readFile(filePath, 'utf-8');
-    const stats = await fs.stat(filePath);
+    let fileContent: string;
+    let stats;
+    try {
+      fileContent = await fs.readFile(filePath, 'utf-8');
+      stats = await fs.stat(filePath);
+    } catch {
+      if (lang !== 'en') {
+        filePath = path.join(CONTENT_DIR, type, `${slug}.en.mdx`);
+        fileContent = await fs.readFile(filePath, 'utf-8');
+        stats = await fs.stat(filePath);
+        isFallback = true;
+      } else {
+        throw new Error("File not found");
+      }
+    }
     const parsed = matter(fileContent);
     
     return {
       slug,
-      lang,
+      lang: isFallback ? 'en' : lang,
       content: parsed.content,
       frontmatter: parsed.data,
       lastModified: stats.mtimeMs
     };
-  } catch (error) {
+  } catch {
     return null; // File might not exist
   }
+}
+
+export async function pushToGithub(githubToken: string, githubRepo: string, path: string, message: string, content: string | Buffer | null = null, isDelete = false): Promise<boolean> {
+  const branches = ["main", "dev"];
+  let success = true;
+
+  const base64Content = content ? (Buffer.isBuffer(content) ? content.toString("base64") : Buffer.from(content).toString("base64")) : undefined;
+
+  for (const branch of branches) {
+    // 1. Get file SHA if it exists on this specific branch (required for update/delete)
+    const fileUrl = `https://api.github.com/repos/${githubRepo}/contents/${path}?ref=${branch}`;
+    let sha = undefined;
+    
+    const getRes = await fetch(fileUrl, {
+      headers: { Authorization: `token ${githubToken}` }
+    });
+    
+    if (getRes.ok) {
+      const data = await getRes.json();
+      sha = data.sha;
+    } else if (isDelete) {
+      continue; // File doesn't exist on this branch, nothing to delete
+    }
+
+    // 2. Put or Delete file on this branch
+    const actionUrl = `https://api.github.com/repos/${githubRepo}/contents/${path}`;
+    const actionRes = await fetch(actionUrl, {
+      method: isDelete ? "DELETE" : "PUT",
+      headers: {
+        Authorization: `token ${githubToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message,
+        content: isDelete ? undefined : base64Content,
+        sha,
+        branch, // Specify branch explicitly
+      }),
+    });
+
+    if (!actionRes.ok) {
+      console.error(`Github API Error on branch ${branch}:`, await actionRes.text());
+      success = false;
+    }
+  }
+  return success;
 }
 
 export async function saveContent(
@@ -98,42 +173,14 @@ export async function saveContent(
     const mdxString = matter.stringify(content, validFrontmatter);
 
     if (process.env.NODE_ENV === "production" && process.env.GITHUB_TOKEN && process.env.GITHUB_REPO) {
-      // PROD: Vercel is Read-Only. Push to GitHub to trigger a new build.
-      const githubToken = process.env.GITHUB_TOKEN;
-      const githubRepo = process.env.GITHUB_REPO; // e.g. "charmantmood/wistant"
-      
-      // 1. Get file SHA if it exists (required for update)
-      const fileUrl = `https://api.github.com/repos/${githubRepo}/contents/${fileRelativePath}`;
-      let sha = undefined;
-      
-      const getRes = await fetch(fileUrl, {
-        headers: { Authorization: `token ${githubToken}` }
-      });
-      if (getRes.ok) {
-        const data = await getRes.json();
-        sha = data.sha;
-      }
-
-      // 2. Put file
-      const putRes = await fetch(fileUrl, {
-        method: "PUT",
-        headers: {
-          Authorization: `token ${githubToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: `cms: update ${slug}.${lang}.mdx via admin dashboard`,
-          content: Buffer.from(mdxString).toString("base64"),
-          sha,
-        }),
-      });
-
-      if (!putRes.ok) {
-        console.error("Github API Error:", await putRes.text());
-        return false;
-      }
-      return true;
-
+      return await pushToGithub(
+        process.env.GITHUB_TOKEN,
+        process.env.GITHUB_REPO,
+        fileRelativePath,
+        `feat(content): publish ${type} ${slug} in ${lang}`,
+        mdxString,
+        false
+      );
     } else {
       // LOCAL: Dev environment, write directly to file system.
       await fs.writeFile(filePath, mdxString, 'utf-8');
@@ -151,27 +198,14 @@ export async function deleteContent(type: ContentType, slug: string, lang: strin
   
   try {
     if (process.env.NODE_ENV === "production" && process.env.GITHUB_TOKEN && process.env.GITHUB_REPO) {
-       const githubToken = process.env.GITHUB_TOKEN;
-       const githubRepo = process.env.GITHUB_REPO;
-       
-       const fileUrl = `https://api.github.com/repos/${githubRepo}/contents/${fileRelativePath}`;
-       const getRes = await fetch(fileUrl, {
-         headers: { Authorization: `token ${githubToken}` }
-       });
-
-       if (getRes.ok) {
-         const data = await getRes.json();
-         const deleteRes = await fetch(fileUrl, {
-           method: "DELETE",
-           headers: { Authorization: `token ${githubToken}`, "Content-Type": "application/json" },
-           body: JSON.stringify({
-             message: `cms: delete ${slug}.${lang}.mdx via admin dashboard`,
-             sha: data.sha
-           })
-         });
-         return deleteRes.ok;
-       }
-       return false;
+       return await pushToGithub(
+         process.env.GITHUB_TOKEN,
+         process.env.GITHUB_REPO,
+         fileRelativePath,
+         `chore(content): delete ${type} ${slug} in ${lang}`,
+         null,
+         true
+       );
     } else {
        await fs.unlink(filePath);
        return true;

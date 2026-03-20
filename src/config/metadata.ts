@@ -4,14 +4,16 @@ import { Language, LOCALES, LOCALE_MAP } from "@/types/locale";
 
 // Dynamic base URL detection for Vercel previews and production
 const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return DATA.url;
+  return DATA.url.replace(/\/$/, "");
 };
+
+const baseUrl = getBaseUrl();
 
 export const SITE_CONFIG = {
   name: DATA.name,
-  url: getBaseUrl(),
+  url: baseUrl,
   links: {
     X: "https://x.com/wistantkode",
     github: "https://github.com/wistantkode",
@@ -64,8 +66,13 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
   const baseUrl = SITE_CONFIG.url.replace(/\/$/, ""); // Ensure no trailing slash
   const pageType = url.replace(/^\//, "").split("/")[0] || "home";
   
-  // Directly point to the PNG asset for social crawlers (WhatsApp/LinkedIn compatibility)
-  const ogImage = pageSeo?.image || `${baseUrl}/opengraph/${pageType === "home" ? "me" : pageType}.png?v=3`;
+  // Directly point to the API generator (Boris's "redoutablement efficace" system)
+  let ogImage = pageSeo?.image || `${baseUrl}/api/og?type=${pageType === "home" ? "home" : pageType}`;
+  
+  // Force absolute URL if relative
+  if (ogImage.startsWith("/")) {
+    ogImage = `${baseUrl}${ogImage}`;
+  }
 
   const fullUrl = `${baseUrl}/${lang}${url}`;
 

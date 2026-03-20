@@ -20,10 +20,14 @@ import {
   Save,
   Wand2,
 } from "lucide-react";
+import { MetadataDrawer } from "./metadata-drawer";
+import { Frontmatter } from "@/lib/admin/schemas";
 
 export function EditorToolbar({
   title,
   setTitle,
+  metadata,
+  setMetadata,
   saveStatus,
   isSaving,
   isTranslating,
@@ -31,9 +35,12 @@ export function EditorToolbar({
   onTranslate,
   dict,
   lang,
+  hideTitle,
 }: {
   title: string;
   setTitle: (t: string) => void;
+  metadata: Frontmatter;
+  setMetadata: (m: Frontmatter) => void;
   saveStatus: string;
   isSaving?: boolean;
   isTranslating?: boolean;
@@ -41,24 +48,30 @@ export function EditorToolbar({
   onTranslate?: (targetLang: string) => void;
   dict?: AdminDictionary;
   lang?: string;
+  hideTitle?: boolean;
 }) {
   const { editor } = useCurrentEditor();
 
   return (
-    <div className="flex flex-col border-b bg-card z-10 sticky top-0">
+    <div className="flex flex-col border-b bg-card z-10 sticky top-0 shadow-sm">
       <div className="flex items-center justify-between px-4 py-3 border-b">
         <div className="flex items-center gap-4 flex-1">
-          <Input 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)} 
-            placeholder={dict?.editor?.placeholder || "Enter document title..."}
-            className="max-w-md font-semibold text-lg border-transparent hover:border-input focus-visible:ring-0 bg-transparent px-2 h-auto py-1"
-          />
+          {!hideTitle && (
+            <Input 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)} 
+              placeholder={dict?.editor?.placeholder || "Enter document title..."}
+              className="max-w-md font-semibold text-lg border-transparent hover:border-input focus-visible:ring-0 bg-transparent px-2 h-auto py-1"
+            />
+          )}
+          {hideTitle && <span className="font-semibold text-lg px-2">Mode Éditeur de Projet</span>}
           <span className="text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded-md border">
             {saveStatus}
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <MetadataDrawer metadata={metadata} onChange={setMetadata} dict={dict} />
+          
           <Button 
             variant="outline" 
             size="sm" 
@@ -91,69 +104,80 @@ export function EditorToolbar({
         <ToolbarButton 
           icon={<Heading1 className="size-4" />} 
           isActive={editor?.isActive("heading", { level: 1 })} 
-          onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleHeading({ level: 1 }).run()} 
           tooltip="Heading 1" 
         />
-        <ToolbarButton 
+        < ToolbarButton 
           icon={<Heading2 className="size-4" />} 
           isActive={editor?.isActive("heading", { level: 2 })} 
-          onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleHeading({ level: 2 }).run()} 
           tooltip="Heading 2" 
         />
         <ToolbarButton 
           icon={<Heading3 className="size-4" />} 
           isActive={editor?.isActive("heading", { level: 3 })} 
-          onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleHeading({ level: 3 }).run()} 
           tooltip="Heading 3" 
         />
         <div className="w-px h-4 bg-border mx-1" />
         <ToolbarButton 
           icon={<Bold className="size-4" />} 
           isActive={editor?.isActive("bold")} 
-          onClick={() => editor?.chain().focus().toggleBold().run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleBold().run()} 
           tooltip="Bold" 
         />
         <ToolbarButton 
           icon={<Italic className="size-4" />} 
           isActive={editor?.isActive("italic")} 
-          onClick={() => editor?.chain().focus().toggleItalic().run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleItalic().run()} 
           tooltip="Italic" 
         />
         <ToolbarButton 
           icon={<UnderlineIcon className="size-4" />} 
           isActive={editor?.isActive("underline")} 
-          onClick={() => editor?.chain().focus().toggleUnderline().run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleUnderline().run()} 
           tooltip="Underline" 
         />
         <ToolbarButton 
           icon={<Strikethrough className="size-4" />} 
           isActive={editor?.isActive("strike")} 
-          onClick={() => editor?.chain().focus().toggleStrike().run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleStrike().run()} 
           tooltip="Strikethrough" 
         />
         <ToolbarButton 
           icon={<Code className="size-4" />} 
           isActive={editor?.isActive("code")} 
-          onClick={() => editor?.chain().focus().toggleCode().run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleCode().run()} 
           tooltip="Code" 
         />
         <div className="w-px h-4 bg-border mx-1" />
         <ToolbarButton 
           icon={<List className="size-4" />} 
           isActive={editor?.isActive("bulletList")} 
-          onClick={() => editor?.chain().focus().toggleBulletList().run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleBulletList().run()} 
           tooltip="Bullet List" 
         />
         <ToolbarButton 
           icon={<ListOrdered className="size-4" />} 
           isActive={editor?.isActive("orderedList")} 
-          onClick={() => editor?.chain().focus().toggleOrderedList().run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleOrderedList().run()} 
           tooltip="Numbered List" 
         />
         <ToolbarButton 
           icon={<Quote className="size-4" />} 
           isActive={editor?.isActive("blockquote")} 
-          onClick={() => editor?.chain().focus().toggleBlockquote().run()} 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onClick={() => (editor as any)?.chain().focus().toggleBlockquote().run()} 
           tooltip="Blockquote" 
         />
       </div>

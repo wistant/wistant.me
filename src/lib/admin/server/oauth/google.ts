@@ -2,7 +2,7 @@ export const getOAuthGoogleUrl = () => {
   const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
   
   const options = {
-    redirect_uri: process.env.NEXT_PUBLIC_SITE_URL 
+    redirect_uri: process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SITE_URL
       ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/auth/callback/google`
       : 'http://localhost:3000/api/admin/auth/callback/google',
     client_id: process.env.GOOGLE_CLIENT_ID || '',
@@ -25,7 +25,7 @@ export async function getGoogleOAuthTokens({ code }: { code: string }) {
     code,
     client_id: process.env.GOOGLE_CLIENT_ID || '',
     client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
-    redirect_uri: process.env.NEXT_PUBLIC_SITE_URL 
+    redirect_uri: process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SITE_URL
       ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/admin/auth/callback/google`
       : 'http://localhost:3000/api/admin/auth/callback/google',
     grant_type: 'authorization_code',

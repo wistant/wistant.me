@@ -32,10 +32,13 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
     return <div className="w-full h-48 bg-muted" />;
   }
 
+  // Next.js Image requires absolute path or absolute URL
+  const validSrc = (!src.startsWith("http") && !src.startsWith("/")) ? `/${src}` : src;
+
   return (
     <div className="relative w-full h-48 overflow-hidden">
       <Image
-        src={src}
+        src={validSrc}
         alt={alt}
         fill
         className="object-cover transition-transform duration-500 hover:scale-105"

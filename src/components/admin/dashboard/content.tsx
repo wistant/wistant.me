@@ -20,7 +20,7 @@ export function DashboardContent({
   activities = []
 }: { 
   dict: AdminDictionary; 
-  stats: { totalViews: number; totalProjects: number; totalPosts: number; activeUsers: number; }; 
+  stats: { totalContent: number; totalProjects: number; totalPosts: number; totalTags: number; }; 
   lang: Language;
   activities?: { action: string; item: string; time: string; image?: string; }[];
 }) {
@@ -48,6 +48,7 @@ export function DashboardContent({
                  <div key={i} className="flex justify-between items-center text-sm border-b border-muted/20 pb-2 last:border-0 last:pb-0 group">
                    <div className="flex items-center gap-3">
                      {act.image && (
+                       /* eslint-disable-next-line @next/next/no-img-element */
                        <img src={act.image} className="size-10 rounded-lg object-cover border border-muted/30 group-hover:border-primary/50 transition-colors" alt="" />
                      )}
                      <div className="flex flex-col">
