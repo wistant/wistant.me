@@ -70,7 +70,7 @@ export default function WorkSection({ presentLabel = "Present" }: { presentLabel
               </p>
               
               {work.icons && work.icons.length > 0 && (
-                <div className="flex flex-wrap gap-3 mt-4">
+                <div className="hidden sm:flex flex-wrap gap-3 mt-4">
                   {work.icons.map((icon) => (
                     <div 
                       key={icon} 

@@ -18,7 +18,7 @@ export function HeroSection({ title, description, blurFadeDelay }: HeroSectionPr
     <section id="hero" className="mb-0">
       <div className="mx-auto w-full space-y-8">
         <div className="gap-6 flex flex-col md:flex-row items-start justify-between">
-          <div className="gap-4 flex flex-col flex-1 order-2 md:order-1">
+          <div className="gap-1 flex flex-col flex-1 order-2 md:order-1">
             <TextReveal
               delay={0.1}
               className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-5xl font-cal leading-tight"
@@ -26,7 +26,7 @@ export function HeroSection({ title, description, blurFadeDelay }: HeroSectionPr
               {title}
             </TextReveal>
             <div className="flex items-center gap-2">
-              <AnimatedShinyText className="text-muted-foreground max-w-150 md:text-xl font-medium">
+              <AnimatedShinyText className="text-muted-foreground max-w-150 text-sm md:text-base font-medium">
                 {description}
               </AnimatedShinyText>
             </div>
