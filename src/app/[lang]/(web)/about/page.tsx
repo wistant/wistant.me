@@ -4,6 +4,7 @@ import { TextReveal } from "@/components/ui/magicui/text-reveal";
 import WorkSection from "@/components/home/work-section";
 import EducationSection from "@/components/home/education-section";
 import SkillsSection from "@/components/home/skills-section";
+import Markdown from "react-markdown";
 import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
@@ -46,9 +47,18 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: La
             {dict.about.title}
           </TextReveal>
           <BlurFade delay={BLUR_FADE_DELAY}>
-            <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-prose">
-              {dict.about.content}
-            </p>
+            <div className="prose prose-lg md:prose-xl max-w-prose text-muted-foreground font-medium dark:prose-invert">
+              <Markdown
+                components={{
+                  p: ({ node: _node, ...props }) => <p {...props} className="m-0" />,
+                  strong: ({ node: _node, ...props }) => (
+                    <u className="underline underline-offset-4 decoration-border/80 text-foreground font-normal" {...props} />
+                  ),
+                }}
+              >
+                {dict.about.content}
+              </Markdown>
+            </div>
           </BlurFade>
         </div>
       </section>

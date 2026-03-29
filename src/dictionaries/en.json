@@ -10,12 +10,12 @@
     "backToHome": "Back to Home"
   },
   "hero": {
-    "title": "Software Architect & Open Source Advocate 🚀",
+    "title": "Hi Welcome to my personal Hub 👋🏻",
     "description": "I'm Wistant, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop."
   },
   "about": {
-    "title": "Engineering Philosophy",
-    "content": "At the start of my career, I immersed myself in full-stack development before evolving into a software architect. Over the past 5+ years, I've built scalable digital platforms across Web, Mobile, and Desktop, contributed heavily to Open Source, and competed in multiple hackathons for the thrill of building under pressure. Today, my focus is on engineering resilient systems that bridge the gap between robust technical architecture and polished user experiences.",
+    "title": "About me",
+    "content": "At the start of my career, I immersed myself in **full-stack development** before evolving into a **software architect**. Over the past **2+ years**, I've built scalable digital platforms across **Web, Mobile, and Desktop**, contributed heavily to **Open Source**, and competed in multiple **hackathons** for the thrill of building under pressure. Today, my focus is on engineering **resilient systems** that bridge the gap between **robust technical architecture** and polished user experiences.",
     "seo": {
       "title": "About Wistant | Software Engineer & Digital Architect",
       "description": "Exploring Wistant's software engineering philosophy and tech stack. Expert solutions for Web, Mobile, and Desktop platforms.",
