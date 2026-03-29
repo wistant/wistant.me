@@ -7,7 +7,7 @@ import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
-import Gallery from "@/components/home/gallery";
+
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { Button } from "@/components/ui/button";
@@ -16,8 +16,7 @@ import { ShowMore } from "@/components/ui/show-more";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
-import fs from "fs";
-import path from "path";
+import { GallerySection } from "@/components/home/gallery-section";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -37,31 +36,7 @@ export default async function Home({
 }) {
    const { lang } = await params;
   const dict = await getDictionary(lang);
-  
-  // Dynamically Fetch Gallery Images from public folder
-  const galleryDir = path.join(process.cwd(), "public", "gallery");
-  let galleryImages: { src: string; alt: string; className: string }[] = [];
-  try {
-    const files = fs.readdirSync(galleryDir);
-    const imageFiles = files.filter(file => /\.(png|jpe?g|webp|avif|gif)$/i.test(file));
-    const patterns = [
-      "col-span-2 row-span-2",
-      "col-span-1 row-span-1",
-      "col-span-1 row-span-2",
-      "col-span-1 row-span-1",
-      "col-span-2 row-span-1",
-      "col-span-1 row-span-1",
-      "col-span-2 row-span-2",
-      "col-span-1 row-span-1",
-    ];
-    galleryImages = imageFiles.map((file, index) => ({
-      src: `/gallery/${file}`,
-      alt: `Highlight ${index + 1}`,
-      className: patterns[index % patterns.length],
-    }));
-  } catch (error) {
-    console.error("Failed to load gallery images:", error);
-  }
+
 
   return (
     <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 py-16 max-w-2xl mx-auto">
@@ -75,13 +50,15 @@ export default async function Home({
         />
       </div>
 
-      <div className="flex flex-col gap-3 sm:gap-6 mt-4">
+      <div className="flex flex-col gap-1 sm:gap-2 mt-4">
         <HeroSection
           title={dict.hero.title}
           description={dict.hero.description}
           blurFadeDelay={BLUR_FADE_DELAY}
         />
+      </div>
 
+      <div className="flex flex-col gap-1 sm:gap-2 mt-4">
       <AboutSection
         title={dict.about.title}
         content={dict.about.content}
@@ -94,24 +71,13 @@ export default async function Home({
         </BlurFade>
       </section> */}
 
-      <section id="gallery">
-        <div className="flex flex-col gap-y-2 mb-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 5.5}>
-            <h2 className="text-xl font-bold font-clash">
-              My Gallery <span className="text-muted-foreground font-medium text-base">({galleryImages.length} captures)</span>
-            </h2>
-          </BlurFade>
-        </div>
-          <ShowMore
-            initialHeight={600}
-            buttonTextShow={dict.ui.seeMore}
-            buttonTextHide={dict.ui.showLess}
-            href={`/${lang}/about`}
-            linkText={dict.navigation.about || "About me"}
-          >
-            <Gallery images={galleryImages} />
-          </ShowMore>
-        </section>
+        <GallerySection
+          lang={lang}
+          seeMoreText={dict.ui.seeMore}
+          showLessText={dict.ui.showLess}
+          aboutLinkText={dict.navigation.about || "About me"}
+          blurFadeDelay={BLUR_FADE_DELAY}
+        />
       </div>
 
       <section id="work">
@@ -125,8 +91,9 @@ export default async function Home({
           <div className="flex justify-center mt-4">
             <Link href={`/${lang}/about`}>
               <Button
-                variant="default"
-                className="group rounded-full shadow-sm font-medium px-6 h-10 border border-transparent bg-white text-black hover:bg-neutral-200"
+                variant="secondary"
+                size="sm"
+                className="rounded-full transition-all group px-5 h-9 text-sm font-medium text-muted-foreground bg-muted/30 border border-border/40 hover:bg-muted/70 hover:text-foreground shadow-none"
               >
                 {dict.work.viewMore || "View full journey"}
                 <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
