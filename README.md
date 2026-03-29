@@ -1,4 +1,4 @@
-# wistant.dev
+# <www.wistant.me>
 
 Personal portfolio of **Wistant Kode** — Full-Stack Software & Product Engineer based in Douala, Cameroon.
 
