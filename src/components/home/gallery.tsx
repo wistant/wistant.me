@@ -21,7 +21,7 @@ export default function Gallery({ images }: GalleryProps) {
 
   return (
     <div className="w-full py-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] md:auto-rows-[200px] gap-3 md:gap-4 grid-flow-dense">
         {displayImages.map((image, index) => (
           <motion.div
             key={index}

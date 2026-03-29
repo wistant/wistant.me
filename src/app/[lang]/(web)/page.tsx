@@ -8,7 +8,6 @@ import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
 import Gallery from "@/components/home/gallery";
-import { GALLERY_IMAGES } from "@/data/gallery-data";
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { Button } from "@/components/ui/button";
@@ -17,6 +16,8 @@ import { ShowMore } from "@/components/ui/show-more";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
+import fs from "fs";
+import path from "path";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -37,11 +38,33 @@ export default async function Home({
    const { lang } = await params;
   const dict = await getDictionary(lang);
   
-  // Fetch Gallery Images from local data
-  const galleryImages = GALLERY_IMAGES;
+  // Dynamically Fetch Gallery Images from public folder
+  const galleryDir = path.join(process.cwd(), "public", "gallery");
+  let galleryImages: { src: string; alt: string; className: string }[] = [];
+  try {
+    const files = fs.readdirSync(galleryDir);
+    const imageFiles = files.filter(file => /\.(png|jpe?g|webp|avif|gif)$/i.test(file));
+    const patterns = [
+      "col-span-2 row-span-2",
+      "col-span-1 row-span-1",
+      "col-span-1 row-span-2",
+      "col-span-1 row-span-1",
+      "col-span-2 row-span-1",
+      "col-span-1 row-span-1",
+      "col-span-2 row-span-2",
+      "col-span-1 row-span-1",
+    ];
+    galleryImages = imageFiles.map((file, index) => ({
+      src: `/gallery/${file}`,
+      alt: `Highlight ${index + 1}`,
+      className: patterns[index % patterns.length],
+    }));
+  } catch (error) {
+    console.error("Failed to load gallery images:", error);
+  }
 
   return (
-    <main className="min-h-dvh flex flex-col gap-12 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 py-16 max-w-2xl mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -52,11 +75,12 @@ export default async function Home({
         />
       </div>
 
-      <HeroSection
-        title={dict.hero.title}
-        description={dict.hero.description}
-        blurFadeDelay={BLUR_FADE_DELAY}
-      />
+      <div className="flex flex-col gap-3 sm:gap-6 mt-4">
+        <HeroSection
+          title={dict.hero.title}
+          description={dict.hero.description}
+          blurFadeDelay={BLUR_FADE_DELAY}
+        />
 
       <AboutSection
         title={dict.about.title}
@@ -64,26 +88,34 @@ export default async function Home({
         blurFadeDelay={BLUR_FADE_DELAY}
       />
 
-      <section id="skills">
+      {/* <section id="skills">
         <BlurFade delay={BLUR_FADE_DELAY * 5}>
           <SkillsSection title={dict.skills.title} />
         </BlurFade>
-      </section>
+      </section> */}
 
       <section id="gallery">
-        <ShowMore
-          initialHeight={600}
-          buttonTextShow={dict.ui.seeMore}
-          buttonTextHide={dict.ui.showLess}
-          href={`/${lang}/about`}
-          linkText={dict.navigation.about || "About me"}
-        >
-          <Gallery images={galleryImages} />
-        </ShowMore>
-      </section>
+        <div className="flex flex-col gap-y-2 mb-4">
+          <BlurFade delay={BLUR_FADE_DELAY * 5.5}>
+            <h2 className="text-xl font-bold font-clash">
+              My Gallery <span className="text-muted-foreground font-medium text-base">({galleryImages.length} captures)</span>
+            </h2>
+          </BlurFade>
+        </div>
+          <ShowMore
+            initialHeight={600}
+            buttonTextShow={dict.ui.seeMore}
+            buttonTextHide={dict.ui.showLess}
+            href={`/${lang}/about`}
+            linkText={dict.navigation.about || "About me"}
+          >
+            <Gallery images={galleryImages} />
+          </ShowMore>
+        </section>
+      </div>
 
       <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-6">
+        <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 6}>
             <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
           </BlurFade>

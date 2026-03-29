@@ -15,7 +15,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ title, description, blurFadeDelay }: HeroSectionProps) {
   return (
-    <section id="hero" className="-mb-8">
+    <section id="hero" className="mb-0">
       <div className="mx-auto w-full space-y-8">
         <div className="gap-6 flex flex-col md:flex-row items-start justify-between">
           <div className="gap-4 flex flex-col flex-1 order-2 md:order-1">
