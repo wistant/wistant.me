@@ -2,7 +2,6 @@ import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { HeroSection } from "@/components/home/hero-section";
 import { AboutSection } from "@/components/home/about-section";
-import SkillsSection from "@/components/home/skills-section";
 import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
@@ -39,7 +38,7 @@ export default async function Home({
 
 
   return (
-    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 py-16 max-w-2xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 py-17 max-w-2xl mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
