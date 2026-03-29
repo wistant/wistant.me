@@ -41,7 +41,7 @@ export default function WorkSection({ presentLabel = "Present" }: { presentLabel
           className="border-none group shadow-none"
         >
           <AccordionTrigger className="hover:no-underline py-0 w-full flex items-start text-left group-data-[state=open]:mb-4 transition-all">
-            <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-5">
+            <div className="w-full flex flex-col cursor-pointer sm:flex-row gap-4 sm:gap-5">
               <div className="flex-none mt-1">
                 <LogoImage src={work.logoUrl} alt={work.company} />
               </div>
