@@ -20,8 +20,8 @@ export default function Gallery({ images }: GalleryProps) {
   const displayImages = images?.length > 0 ? images : [];
 
   return (
-    <div className="w-full py-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] gap-4">
+    <div className="w-full">
+      <div className="columns-2 md:columns-3 gap-3 md:gap-4 space-y-3 md:space-y-4">
         {displayImages.map((image, index) => (
           <motion.div
             key={index}
@@ -30,7 +30,7 @@ export default function Gallery({ images }: GalleryProps) {
             transition={{ duration: 0.5, delay: (index % 4) * 0.1 }}
             viewport={{ once: true }}
             className={cn(
-              "group relative overflow-hidden rounded-3xl border border-border/50 bg-muted/20 shadow-sm transition-all duration-300 hover:shadow-xl hover:border-border/80",
+              "group relative overflow-hidden rounded-xl bg-muted/20 transition-all duration-500 hover:z-10 shadow-sm break-inside-avoid",
               image.className
             )}
             onClick={() => setSelectedImage(image.src)}
@@ -38,10 +38,10 @@ export default function Gallery({ images }: GalleryProps) {
             <Image
               src={image.src}
               alt={image.alt}
-              fill
+              width={600}
+              height={800}
               unoptimized
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-              sizes="(max-width: 768px) 50vw, 25vw"
+              className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer">
               <div className="bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">

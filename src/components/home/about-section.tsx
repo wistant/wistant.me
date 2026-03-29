@@ -12,13 +12,21 @@ interface AboutSectionProps {
 export function AboutSection({ title, content, blurFadeDelay }: AboutSectionProps) {
   return (
     <section id="about">
-      <div className="flex min-h-0 flex-col gap-y-4">
+      <div className="flex min-h-0 flex-col gap-y-1">
         <BlurFade delay={blurFadeDelay * 3}>
           <h2 className="text-xl font-bold font-clash">{title}</h2>
         </BlurFade>
         <BlurFade delay={blurFadeDelay * 4}>
-          <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-            <Markdown>{content}</Markdown>
+          <div className="prose prose-sm md:prose-base max-w-full text-balance font-sans leading-relaxed text-muted-foreground dark:prose-invert">
+            <Markdown
+              components={{
+                strong: ({ node: _node, ...props }) => (
+                  <u className="underline underline-offset-4 decoration-border/80 text-foreground font-normal" {...props} />
+                ),
+              }}
+            >
+              {content}
+            </Markdown>
           </div>
         </BlurFade>
       </div>
