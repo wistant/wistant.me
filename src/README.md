@@ -1,30 +1,20 @@
-# src/
+# Internal Source (`src/`)
 
-Root of all application source code.
+The absolute core of the application source code.
 
-## Directories
+## Architecture Map
 
 | Directory | Purpose |
 |---|---|
-| [`app/`](./app/) | Next.js App Router — pages, layouts, API routes |
-| [`components/`](./components/) | All UI components organized by feature |
-| [`content/`](./content/) | MDX content — blog posts and project case studies |
-| [`data/`](./data/) | Typed static data — personal info, skills, work, hackathons |
-| [`dictionaries/`](./dictionaries/) | i18n JSON translation files for all 5 locales |
-| [`lib/`](./lib/) | Pure utilities — dictionary loader, MDX helpers, pagination, cn() |
-| [`fonts/`](./fonts/) | Self-hosted .woff2 font files (Cal Sans, Inter, Cabinet Grotesk, Clash Display) |
-| [`hooks/`](./hooks/) | Custom React hooks (`use-media-query`) |
-| [`config/`](./config/) | Site-wide metadata configuration |
+| [`app/`](./app/) | Next.js App Router (Pages, Layouts, APIs) |
+| [`components/`](./components/) | Reusable UI components co-located by feature (not type) |
+| [`content/`](./content/) | MDX Content Layer (Blog posts, Case studies) |
+| [`data/`](./data/) | Static typed data (Work, Skills, Hackathons, Config) |
+| [`dictionaries/`](./dictionaries/) | Multi-language JSON UI translations (EN, FR, ES, AR, WO) |
+| [`lib/`](./lib/) | Pure utility functions (Helpers, MDX processing, tailwind merge) |
+| [`fonts/`](./fonts/) | Pre-loaded self-hosted fonts |
+| [`hooks/`](./hooks/) | Custom React DOM Hooks |
+| [`config/`](./config/) | Global application SEO and Metadata |
 
-## Key Files
-
-| File | Purpose |
-|---|---|
-| `proxy.ts` | Next.js Edge middleware — detects locale and redirects unlocalized paths to `/{lang}/...`. Excludes: `api`, `_next`, `icons`, `fonts`, `public assets`. |
-
-## Conventions
-
-- All page components are in `app/[lang]/` — the `[lang]` dynamic segment is always present.
-- Components are co-located by feature, not by type (no global `pages/` or `containers/`).
-- Data is typed and centralized in `data/` — no inline constants in components.
-- Translations are typed via `getDictionary()` — never hardcode UI strings in components.
+## Core Logic (`proxy.ts`)
+The `src/proxy.ts` file acts as the Next.js Edge Middleware. It intercepts incoming requests, detects the user's locale, and automatically redirects to the localized path (e.g. `/{lang}/...`).

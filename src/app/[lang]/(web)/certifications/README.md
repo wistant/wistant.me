@@ -1,10 +1,8 @@
 # Certifications Module
 
-Located at: `src/app/(web)/certifications`
+Displays verified accreditations and achievements.
 
-## Contents
-
-| Folder | Usage |
+| Directory | Role |
 | :--- | :--- |
-| `content/` | **MDX Files.** Certification data. |
-| `page.tsx` | The list view of certifications. |
+| `content/` | Active MDX records of certifications |
+| `page.tsx` | Verified Listing View |

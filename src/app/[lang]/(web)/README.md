@@ -1,16 +1,16 @@
-# Web Route Group `(web)`
+# Web Route Layer (`(web)`)
 
-This directory contains all public-facing pages of wistant.dev.
+All public-facing features and endpoints of `wistant.dev`.
 
-## Structure
+## Web Structure
 
-- **`layout.tsx`**: The global layout for visitors (includes `<Header />`, `<Footer />`, and Theme Provider).
-- **`page.tsx`**: The Homepage (Hero section).
-- **`blog/`**: The Blog feature module.
-- **`projects/`**: The Projects/Portfolio feature module.
-- **`certifications/`**: The Certifications feature module.
+| Endpoint / File | Purpose |
+|---|---|
+| `layout.tsx` | Global Public Layout (Injects Header, Footer, Providers) |
+| `page.tsx` | Homepage (Hero, About, Timeline) |
+| `blog/` | Article listings and Tag filtering |
+| `projects/` | Interactive MDX Case Studies |
+| `certifications/` | Verified Accreditations |
 
-## Rules
-
-- All content here is **public**.
-- Pages here are statically generated (SSG) by default for performance.
+## Rendering Rules
+By default, all content handled inside `(web)` is compiled via **Static Site Generation (SSG)** to ensure maximum performance globally.
