@@ -44,7 +44,7 @@ export const personalData = {
       },
       X: {
         name: "X",
-        url: "https://x.com/wistantkode",
+        url: "https://x.com/wistant",
         icon: "/icons/x.svg",
         navbar: true,
       },
