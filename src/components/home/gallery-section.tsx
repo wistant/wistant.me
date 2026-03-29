@@ -1,16 +1,13 @@
 import fs from "fs";
 import path from "path";
 import Gallery from "@/components/home/gallery";
-import BlurFade from "@/components/ui/magicui/blur-fade";
 import { ShowMore } from "@/components/ui/show-more";
 
 export async function GallerySection({
   lang,
   seeMoreText,
   showLessText,
-  aboutLinkText,
-  blurFadeDelay,
-}: {
+  aboutLinkText,}: {
   lang: string;
   seeMoreText: string;
   showLessText: string;
@@ -44,11 +41,11 @@ export async function GallerySection({
   return (
     <section id="gallery">
       <div className="flex flex-col gap-y-2 mb-4">
-        <BlurFade delay={blurFadeDelay * 5.5}>
-          <h2 className="text-xl font-bold font-clash">
-            My Gallery <span className="text-muted-foreground font-medium text-base">({galleryImages.length} captures)</span>
-          </h2>
-        </BlurFade>
+        {/*<BlurFade delay={blurFadeDelay * 5.5}>*/}
+        {/*  <h2 className="text-xl font-bold font-clash">*/}
+        {/*    My Gallery <span className="text-muted-foreground font-medium text-base">({galleryImages.length} captures)</span>*/}
+        {/*  </h2>*/}
+        {/*</BlurFade>*/}
       </div>
       <ShowMore
         initialHeight={600}
