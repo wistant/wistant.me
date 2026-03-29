@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { getContent } from "@/lib/admin/server/cms/engine";
+import { personalData } from "@/data/personal";
 
 export const runtime = "nodejs"; // On passe en Node.js pour pouvoir lire le filesystem (Settings)
 
@@ -10,11 +10,10 @@ export async function GET(request: Request) {
     const imgParam = searchParams.get("img");
 
     // 1. Get site settings for fallback OG images
-    const siteSettings = await getContent("settings", "site", "en");
     const ogDefaults: Record<string, string> = {
-      home: siteSettings?.frontmatter?.ogHome || "/opengraph/me.png",
-      blog: siteSettings?.frontmatter?.ogBlog || "/opengraph/blog.png",
-      project: siteSettings?.frontmatter?.ogProject || "/opengraph/projects.png",
+      home: "/opengraph/me.png",
+      blog: "/opengraph/blog.png",
+      project: "/opengraph/projects.png",
     };
 
     // 2. Resolve final image URL
@@ -61,7 +60,7 @@ export async function GET(request: Request) {
                  style={{ width: 30, height: 30, marginRight: 15 }} 
                />
                <span style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>
-                 {siteSettings?.frontmatter?.title || "Wistant Kode"}
+                 {personalData.name}
                </span>
             </div>
           )}
