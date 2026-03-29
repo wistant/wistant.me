@@ -35,7 +35,7 @@ export function HeroSection({ title, description, blurFadeDelay }: HeroSectionPr
             delay={blurFadeDelay}
             className="flex-none order-1 md:order-2"
           >
-            <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted relative overflow-hidden">
+            <Avatar className="size-24 cursor-pointer md:size-32 border rounded-full shadow-lg ring-4 ring-muted relative overflow-hidden">
               <Image
                 src={DATA.avatarUrl}
                 alt={DATA.name}
