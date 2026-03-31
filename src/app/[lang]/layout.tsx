@@ -2,8 +2,8 @@ import localFont from "next/font/local";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import "./globals.css";
-import { TargetCursor } from "@/components/ui/magicui/target-cursor";
 import { ThemeProvider } from "./ThemeProvider";
+import Image from "next/image";
 import React from "react";
 
 import { DATA } from "@/data/resume";
@@ -63,12 +63,12 @@ export default async function RootLayout({
   const dict = await getDictionary(lang as Language);
 
   return (
-    <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} prefix="og: http://ogp.me/ns#" suppressHydrationWarning>
+    <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} prefix="og: https://ogp.me/ns#" suppressHydrationWarning>
       <body
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TargetCursor targetSelector="a, button, .cursor-target" />
+          {/*<TargetCursor targetSelector="a, button, .cursor-target" />*/}
           <div className="fixed inset-x-0 bottom-8 md:bottom-6 z-999 flex justify-center pointer-events-none px-4">
             <div className="pointer-events-auto w-fit max-w-full">
               <FloatingDock
@@ -78,18 +78,18 @@ export default async function RootLayout({
                     const key = item.label.toLowerCase() as keyof typeof dict.navigation;
                     return {
                       title: dict.navigation[key] || item.label,
-                      icon: <img src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
+                      icon: <Image width={100} height={100} src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
                       href: item.href === "/" ? `/${lang}` : `/${lang}${item.href}`,
                     };
                   }),
                   {
                     title: "GitHub",
-                    icon: <img src="/icons/github.svg" alt="GitHub" className="h-full w-full object-contain dark:invert" />,
+                    icon: <Image width={100} height={100} src="/icons/github.svg" alt="GitHub" className="h-full w-full object-contain dark:invert" />,
                     href: DATA.contact.social.GitHub.url,
                   },
                   {
                     title: "WhatsApp",
-                    icon: <img src="/icons/whatsapp.svg" alt="WhatsApp" className="h-full w-full object-contain" />,
+                    icon: <Image width={100} height={100} src="/icons/whatsapp.svg" alt="WhatsApp" className="h-full w-full object-contain" />,
                     href: DATA.contact.social.WhatsApp.url,
                   },
                 ]}
@@ -110,13 +110,13 @@ export default async function RootLayout({
                       const key = item.label.toLowerCase() as keyof typeof dict.navigation;
                       return {
                         title: dict.navigation[key] || item.label,
-                        icon: <img src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
+                        icon: <Image width={100} height={100} src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
                         href: `/${lang}${item.href}`,
                       };
                     }),
                   {
                     title: "GitHub",
-                    icon: <img src="/icons/github.svg" alt="GitHub" className="h-full w-full object-contain dark:invert" />,
+                    icon: <Image width={100} height={100} src="/icons/github.svg" alt="GitHub" className="h-full w-full object-contain dark:invert" />,
                     href: DATA.contact.social.GitHub.url,
                   },
                 ]}

@@ -9,6 +9,7 @@ import React from "react";
 import { DockItem } from "./types";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeToggleIcon } from "./theme-toggle-icon";
+import Image from "next/image";
 
 export function FloatingDockMobile({
   items,
@@ -48,7 +49,7 @@ export function FloatingDockMobile({
               )}
             >
               {typeof item.icon === "string" ? (
-                <img src={item.icon} alt={item.title} className={cn("size-full object-contain", item.title !== "WhatsApp" && "dark:invert")} />
+                <Image src={item.icon} alt={item.title} className={cn("size-full object-contain", item.title !== "WhatsApp" && "dark:invert")} />
               ) : (
                 <div className="h-5 w-5">{item.icon}</div>
               )}

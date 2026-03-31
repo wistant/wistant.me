@@ -34,11 +34,11 @@ export function LanguageSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger className="cursor-pointer" asChild>
         <Button
           variant="ghost"
           size="icon"
-          className="size-10 rounded-full hover:bg-muted/50 transition-all duration-300 group relative border-none"
+          className="size-10 cursor-pointer rounded-full hover:bg-muted/50 transition-all duration-300 group relative border-none"
         >
           <Languages className="size-5 transition-all group-hover:scale-110 group-hover:rotate-12 text-foreground/70" />
           <span className="absolute -bottom-1 -right-1 text-sm bg-background/80 px-0.5 rounded-sm border border-border/50">

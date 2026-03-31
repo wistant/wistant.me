@@ -1,11 +1,9 @@
-# Projects Module
+# Projects Feature Module
 
-Located at: `src/app/(web)/projects`
+The main portfolio gallery indexing the robust interactive MDX case studies.
 
-## Contents
-
-| Folder | Usage |
+| Directory | Role |
 | :--- | :--- |
-| `content/` | **MDX Files.** Case studies for each project. |
-| `components/` | Project-specific UI (Gallery, TechStack badges). |
-| `page.tsx` | The portfolio gallery page. |
+| `content/` | Active `.mdx` records of built platforms |
+| `components/` | Domain-specific UI (Gallery Lightboxes, TechStack tags) |
+| `page.tsx` | Visual Portfolio Gallery Layout |
