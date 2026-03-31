@@ -9,8 +9,12 @@ import { useState } from "react";
 import Markdown from "react-markdown";
 import { Icons } from "@/components/ui/icons";
 
+import { ShoppingCart, Wallet, Cloud, Box, PlaySquare, Webhook, ChartBar } from "lucide-react";
+
 const getTechIcon = (tech: string) => {
   const norm = tech.toLowerCase();
+  
+  // Custom SVG Brands
   if (norm.includes("next")) return <Icons.nextjs className="size-3" />;
   if (norm.includes("react")) return <Icons.react className="size-3 text-[#61DAFB]" />;
   if (norm.includes("typescript") || norm === "ts") return <Icons.typescript className="size-3 text-[#3178C6]" />;
@@ -22,6 +26,16 @@ const getTechIcon = (tech: string) => {
   if (norm.includes("postgres") || norm.includes("sql")) return <Icons.postgresql className="size-3" />;
   if (norm.includes("prisma")) return <Icons.prisma className="size-3" />;
   if (norm.includes("redis")) return <Icons.redis className="size-3" />;
+  
+  // Extended Ecosystem via Lucide
+  if (norm.includes("webgl") || norm.includes("3d")) return <Box className="size-3 text-purple-400" />;
+  if (norm.includes("gsap") || norm.includes("animation")) return <PlaySquare className="size-3 text-green-400" />;
+  if (norm.includes("webhook") || norm.includes("api")) return <Webhook className="size-3 text-blue-400" />;
+  if (norm.includes("fintech") || norm.includes("bank")) return <Wallet className="size-3 text-emerald-400" />;
+  if (norm.includes("commerce")) return <ShoppingCart className="size-3 text-orange-400" />;
+  if (norm.includes("saas") || norm.includes("cloud")) return <Cloud className="size-3 text-sky-400" />;
+  if (norm.includes("analytics") || norm.includes("data")) return <ChartBar className="size-3 text-indigo-400" />;
+
   return null;
 };
 
