@@ -15,7 +15,7 @@ export const SITE_CONFIG = {
   name: DATA.name,
   url: baseUrl,
   links: {
-    X: "https://x.com/wistantkode",
+    X: "https://x.com/wistant",
     github: "https://github.com/wistantkode",
     LinkedIn: "https://linkedin.com/in/wistantkode",
   },
