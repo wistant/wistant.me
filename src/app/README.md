@@ -1,16 +1,14 @@
-# App Router Structure
+# App Router (`app/`)
 
-The application is split into two distinct Route Groups to separate concerns and layouts.
+This architecture splits the application into strictly isolated **Route Groups** to prevent layout bleeding.
 
 ## Route Groups
 
-| Group | Path | Description |
+| Designation | Route | Purpose |
 | :--- | :--- | :--- |
-| `(web)` | `/` | **The Public Website.** Contains the Portfolio, Blog, and Home. Uses the public layout (Navbar, Footer). |
-| `(admin)` | `/keystatic` | **The Admin Dashboard.** Isolated environment for content management. Uses a dedicated full-screen layout. |
+| `(web)` | `/` | **Public Application.** Contains Portfolio, Blog, Home, and SEO metadata. Uses the main `layout.tsx` (Navbar/Footer). |
+| `(admin)` | `/keystatic` | **Administrative Hub.** Fully isolated environment for secure content management without global UI elements. |
 
-## Why this structure?
-
-1. **Layout Isolation:** The Admin dashboard should not have the website's navigation bar or footer.
-2. **Asset Separation:** Keeps public-facing assets and logic distinct from administrative tools.
-3. **Scalability:** Allows adding other isolated sections (e.g., `(auth)`) in the future without breaking the main site structure.
+## Why Group Routes?
+1. **Total Layout Isolation**: Prevents the admin dashboard from rendering public footers or navigation.
+2. **Security & Assets**: Separates heavy public JS bundles from administrative API routes.

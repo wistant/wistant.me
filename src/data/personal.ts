@@ -10,7 +10,7 @@ export const personalData = {
     "Full-Stack Software & Product Engineer. I design digital solutions that bridge the gap between robust engineering and user-centric products.",
   about:
     "I'm an architect who codes. I don't just build software; I solve problems with precise, scalable systems. With 5+ years of experience, I focus on creating high-impact digital solutions that understand the business as much as the tech.",
-  avatarUrl: "/me/me.webp",
+  avatarUrl: "/me/me.png",
   post: "Full-Stack IT Architect & Product Engineer",
   navbar: [
     { href: "/", icon: "/icons/home.svg", label: "Home" },
@@ -44,7 +44,7 @@ export const personalData = {
       },
       X: {
         name: "X",
-        url: "https://x.com/wistantkode",
+        url: "https://x.com/wistant",
         icon: "/icons/x.svg",
         navbar: true,
       },

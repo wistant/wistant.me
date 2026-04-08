@@ -2,13 +2,11 @@ import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { HeroSection } from "@/components/home/hero-section";
 import { AboutSection } from "@/components/home/about-section";
-import SkillsSection from "@/components/home/skills-section";
 import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
-import Gallery from "@/components/home/gallery";
-import { listContent } from "@/lib/admin/server/cms/engine";
+
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { Button } from "@/components/ui/button";
@@ -17,6 +15,7 @@ import { ShowMore } from "@/components/ui/show-more";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
+import { GallerySection } from "@/components/home/gallery-section";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -36,17 +35,10 @@ export default async function Home({
 }) {
    const { lang } = await params;
   const dict = await getDictionary(lang);
-  
-  // Fetch Gallery Images from CMS
-  const galleryItems = await listContent("gallery", lang);
-  const galleryImages = galleryItems.map(item => ({
-    src: item.frontmatter.image as string || "",
-    alt: item.frontmatter.alt as string || "",
-    className: item.frontmatter.className as string || "col-span-1 row-span-1"
-  }));
+
 
   return (
-    <main className="min-h-dvh flex flex-col gap-12 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 py-17 max-w-2xl mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -57,38 +49,38 @@ export default async function Home({
         />
       </div>
 
-      <HeroSection
-        title={dict.hero.title}
-        description={dict.hero.description}
-        blurFadeDelay={BLUR_FADE_DELAY}
-      />
+      <div className="flex flex-col gap-1 sm:gap-2 mt-4">
+        <HeroSection
+          title={dict.hero.title}
+          description={dict.hero.description}
+          blurFadeDelay={BLUR_FADE_DELAY}
+        />
+      </div>
 
+      <div className="flex flex-col gap-1 sm:gap-2 mt-4">
       <AboutSection
         title={dict.about.title}
         content={dict.about.content}
         blurFadeDelay={BLUR_FADE_DELAY}
       />
 
-      <section id="skills">
+      {/* <section id="skills">
         <BlurFade delay={BLUR_FADE_DELAY * 5}>
           <SkillsSection title={dict.skills.title} />
         </BlurFade>
-      </section>
+      </section> */}
 
-      <section id="gallery">
-        <ShowMore
-          initialHeight={600}
-          buttonTextShow={dict.ui.seeMore}
-          buttonTextHide={dict.ui.showLess}
-          href={`/${lang}/about`}
-          linkText={dict.navigation.about || "About me"}
-        >
-          <Gallery images={galleryImages} />
-        </ShowMore>
-      </section>
+        <GallerySection
+          lang={lang}
+          seeMoreText={dict.ui.seeMore}
+          showLessText={dict.ui.showLess}
+          aboutLinkText={dict.navigation.about || "About me"}
+          blurFadeDelay={BLUR_FADE_DELAY}
+        />
+      </div>
 
       <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-6">
+        <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 6}>
             <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
           </BlurFade>
@@ -98,8 +90,9 @@ export default async function Home({
           <div className="flex justify-center mt-4">
             <Link href={`/${lang}/about`}>
               <Button
-                variant="default"
-                className="group rounded-full shadow-sm font-medium px-6 h-10 border border-transparent bg-white text-black hover:bg-neutral-200"
+                variant="secondary"
+                size="sm"
+                className="rounded-full transition-all group px-5 h-9 text-sm font-medium text-muted-foreground bg-muted/30 border border-border/40 hover:bg-muted/70 hover:text-foreground shadow-none"
               >
                 {dict.work.viewMore || "View full journey"}
                 <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

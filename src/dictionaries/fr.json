@@ -10,12 +10,12 @@
     "backToHome": "Retour à l'accueil"
   },
   "hero": {
-    "title": "Architecte de Systèmes Résilients & Plateformes Scalables 🏆",
+    "title": "Hi Bienvenue 👋🏻",
     "description": "Je suis Wistant, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop."
   },
   "about": {
-    "title": "Philosophie Technique",
-    "content": "Je ne me contente pas de coder ; j'architecte des systèmes logiciels pensés pour l'excellence et l'expérience utilisateur. Mon objectif : distiller la complexité en des solutions multiplateformes simples, élégantes et redoutables de rapidité.",
+    "title": "À propos de moi",
+    "content": "Au début de ma carrière, je me suis plongé dans le **développement full-stack** avant d'évoluer vers **l'architecture logicielle**. Au cours des **2 dernières années**, j'ai conçu des **plateformes numériques scalables** (Web, Mobile et Desktop), contribué activement à **l'Open Source**, et participé à de multiples **hackathons** pour le plaisir de bâtir sous pression. Aujourd'hui, je me concentre sur la création de **systèmes résilients** qui font le pont entre une **ingénierie robuste** et une expérience utilisateur de premier plan.",
     "seo": {
       "title": "Wistant | Ingénieur Logiciel & Architecte Numérique",
       "description": "Expert en ingénierie logicielle basé au Cameroun. Découvrez ma philosophie technique et ma stack pour des solutions Web, Mobile et Desktop.",

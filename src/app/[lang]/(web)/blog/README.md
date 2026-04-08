@@ -1,11 +1,9 @@
-# Blog Module
+# Blog Feature Module
 
-Located at: `src/app/(web)/blog`
+Renders the blog index and heavily stylized individual MDX articles.
 
-## Contents
-
-| Folder | Usage |
+| Directory | Role |
 | :--- | :--- |
-| `content/` | **MDX Files.** The actual blog posts live here. |
-| `components/` | Components specific to the blog (e.g., `PostList`, `TagFilter`). |
-| `page.tsx` | The blog index page. |
+| `content/` | Active runtime MDX files mapped by Content Collections |
+| `components/` | Sub-components (e.g., `PostList`, `TagFilter`, `MDXRenderer`) |
+| `page.tsx` | The primary blog routing index |
