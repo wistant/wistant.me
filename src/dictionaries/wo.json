@@ -68,10 +68,12 @@
     "title": "Bind ak Njàng",
     "description": "Xalaat ci xarala ak lu may jàng bés bu nekk.",
     "seo": {
-      "title": "Bind ak Njàng ci Xarala | Blogu Wistant",
-      "description": "Bind ci wàll xaralau software, architecture ak li bees ci technologie.",
-      "keywords": "Blog, Software Development, Architecture, TypeScript, Xarala"
-    }
+      "title": "Mbind ak Xalaat ci dektaloogi | Blogu Wistant",
+      "description": "Xalaat ak mbind ci tabaxu masin, dektaloogi bu jàll-jàll, ak yaatalu liggéeyu dektaloogi.",
+      "keywords": "Blog, Liggéeyu dektaloogi, Tabaxu masin, TypeScript, Dektaloogi"
+    },
+    "back": "← blog",
+    "backToAll": "← Dellu ci mbollo mbind yi"
   },
   "contact": {
     "title": "Liggeeyandoo",

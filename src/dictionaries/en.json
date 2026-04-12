@@ -71,7 +71,9 @@
       "title": "Technical Notes & Insights | Wistant's Blog",
       "description": "Articles and thoughts on software architecture, cross-platform development, and modern engineering trends.",
       "keywords": "Blog, Software Development, System Architecture, TypeScript, Engineering"
-    }
+    },
+    "back": "← blog",
+    "backToAll": "← Back to all posts"
   },
   "contact": {
     "title": "Let's collaborate",

@@ -68,10 +68,12 @@
     "title": "Notas e Insights",
     "description": "Pensamientos sobre ingeniería de software, desarrollo multiplataforma y áreas de aprendizaje.",
     "seo": {
-      "title": "Notas e Insights Técnicos | Blog de Wistant",
-      "description": "Artículos y reflexiones sobre arquitectura de software, desarrollo multiplataforma y tendencias tecnológicas modernas.",
+      "title": "Notas Técnicas y Perspectivas | Blog de Wistant",
+      "description": "Artículos y reflexiones sobre arquitectura de software, desarrollo multiplataforma y tendencias modernas de ingeniería.",
       "keywords": "Blog, Desarrollo de Software, Arquitectura de Sistemas, TypeScript, Ingeniería"
-    }
+    },
+    "back": "← blog",
+    "backToAll": "← Volver a todos los artículos"
   },
   "contact": {
     "title": "Colaboremos",

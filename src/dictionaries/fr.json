@@ -71,7 +71,9 @@
       "title": "Notes & Insights Techniques | Blog de Wistant",
       "description": "Articles et réflexions sur l'architecture logicielle, le développement multiplateforme et les dernières tendances technologiques.",
       "keywords": "Blog, Développement Logiciel, Architecture Système, TypeScript, Ingénierie"
-    }
+    },
+    "back": "← blog",
+    "backToAll": "← Retour à tous les articles"
   },
   "contact": {
     "title": "Collaborons",
