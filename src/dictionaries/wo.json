@@ -43,7 +43,21 @@
     "title": "Liggéey yi gën a fëss",
     "viewAll": "Xool archive bi",
     "cta": "Xool Liggéey bi",
-    "stack": "Xarala yi",
+    "stack": "Xalaat yi",
+    "aboutThisProject": "Ci mbirum liggéey bi",
+    "keyFeatures": "Mbir yi gëna fëss",
+    "techStack": "Xarala yi nu jëfandikoo",
+    "toolsUsed": "Jumtukaay yi",
+    "highlights": "Lu am solo",
+    "installation": "Samp",
+    "challengesSolutions": "Jafe-jafe ak safara",
+    "challenge": "Jafe-jafe",
+    "solution": "Safara",
+    "previous": "Bi jiitu",
+    "next": "Bi tegu",
+    "completed": "Pare na",
+    "inProgress": "Mu ngi ci yoon",
+    "backToProjects": "Delli ci liggéey yi",
     "seo": {
       "title": "Liggéey yi gën a fëss | Wistant Portfolio",
       "description": "Xool liggéey yu kawe yi Wistant sàkk: SaaS, mobile apps ak system yu gaaw te dëgër.",
@@ -54,10 +68,12 @@
     "title": "Bind ak Njàng",
     "description": "Xalaat ci xarala ak lu may jàng bés bu nekk.",
     "seo": {
-      "title": "Bind ak Njàng ci Xarala | Blogu Wistant",
-      "description": "Bind ci wàll xaralau software, architecture ak li bees ci technologie.",
-      "keywords": "Blog, Software Development, Architecture, TypeScript, Xarala"
-    }
+      "title": "Mbind ak Xalaat ci dektaloogi | Blogu Wistant",
+      "description": "Xalaat ak mbind ci tabaxu masin, dektaloogi bu jàll-jàll, ak yaatalu liggéeyu dektaloogi.",
+      "keywords": "Blog, Liggéeyu dektaloogi, Tabaxu masin, TypeScript, Dektaloogi"
+    },
+    "back": "← blog",
+    "backToAll": "← Dellu ci mbollo mbind yi"
   },
   "contact": {
     "title": "Liggeeyandoo",

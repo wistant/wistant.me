@@ -84,6 +84,32 @@ const projects = defineCollection({
         href: z.string(),
       })
     ).optional(),
+    longDescription: z.string().optional(),
+    features: z.array(
+      z.object({
+        title: z.string(),
+        items: z.array(z.string()),
+      })
+    ).optional(),
+    highlights: z.array(z.string()).optional(),
+    installation: z.array(
+      z.object({
+        title: z.string(),
+        code: z.string(),
+        type: z.string(),
+      })
+    ).optional(),
+    challengesAndSolutions: z.array(
+      z.object({
+        problem: z.string(),
+        solution: z.string(),
+      })
+    ).optional(),
+    tools: z.array(z.string()).optional(),
+    team: z.string().optional(),
+    role: z.string().optional(),
+    status: z.string().optional(),
+    images: z.array(z.string()).optional(),
     content: z.string().optional(),
     lang: z.string().optional(),
   }),

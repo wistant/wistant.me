@@ -1,27 +1,15 @@
-import { AuthorCard } from "@/components/blog/author-card";
-import { HashScrollHandler } from "@/components/blog/hash-scroll-handler";
-import { TableOfContents } from "@/components/blog/table-of-contents";
-import { mdxComponents } from "@/components/mdx/mdx-components";
-import { getAuthor, isValidAuthor } from "@/lib/authors";
-import { remarkCodeMeta } from "@/lib/remark-code-meta";
-import { remarkImageSize } from "@/lib/remark-image-size";
 import { allPosts } from "content-collections";
-import { getPostBySlug } from "@/data/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
-import { Home, BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
-import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
-import { ReadMoreSection } from "@/components/blog/read-more-section";
-import { PromoContent } from "@/components/blog/promo-content";
-import { MobileTableOfContents } from "@/components/blog/mobile-toc";
-import { getPageMetadata, SITE_CONFIG } from "@/config/metadata";
+import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import { Metadata } from "next";
-import { JsonLd } from "@/components/seo/json-ld";
-import { getOgImageUrl } from "@/config/opengraph/assets";
+import { mdxComponents } from "@/components/mdx/mdx-components";
+import { remarkCodeMeta } from "@/lib/remark-code-meta";
+import { remarkImageSize } from "@/lib/remark-image-size";
+import { getDictionary } from "@/lib/dictionary";
+import { AICloudChart } from "@/components/mdx/charts/AICloudChart";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string; lang: Language }>;
@@ -38,7 +26,7 @@ export async function generateMetadata({
   params,
 }: BlogSlugPageProps): Promise<Metadata> {
   const { lang, slug } = await params;
-  const post = getPostBySlug(slug, lang);
+  const post = allPosts.find((p) => p.slug === slug && p.lang === lang);
 
   if (!post) {
     return getPageMetadata(lang);
@@ -46,10 +34,10 @@ export async function generateMetadata({
 
   const pageSeo = {
     title: post.title,
-    description: post.summary,
+    description: post.summary || post.description || "",
     keywords: post.tags ?? [],
     url: `/${lang}/blog/${slug}`,
-    image: getOgImageUrl(SITE_CONFIG.url, "blog", post.image),
+    image: post.image,
   };
 
   return getPageMetadata(lang, pageSeo);
@@ -57,12 +45,16 @@ export async function generateMetadata({
 
 export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   const { lang, slug } = await params;
-  const post = getPostBySlug(slug, lang);
+  
+  let post = allPosts.find((p) => p.slug === slug && p.lang === lang);
+  if (!post && lang !== "en") {
+    post = allPosts.find((p) => p.slug === slug && p.lang === "en");
+  }
 
   if (!post) notFound();
-
-  const author =
-    post.author && isValidAuthor(post.author) ? getAuthor(post.author) : null;
+  
+  const dict = await getDictionary(lang);
+  const blogDict = dict.blog as Record<string, unknown>;
 
   const formattedDate = new Date(post.date).toLocaleDateString(
     lang === "fr" ? "fr-FR" : "en-US",
@@ -74,137 +66,48 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   );
 
   return (
-    <div className="min-h-screen bg-background relative pt-16 md:pt-20">
-      <JsonLd
-        type="Article"
-        title={post.title}
-        description={post.summary}
-        url={`/${lang}/blog/${slug}`}
-        image={post.image}
-        publishDate={post.date}
-        authorName={author?.name}
-      />
-      <HashScrollHandler />
-
-      {/* Background with Grid */}
-      <div className="absolute top-0 left-0 z-0 w-full h-62.5 mask-[linear-gradient(to_top,transparent_25%,black_95%)]">
-        <FlickeringGrid
-          className="absolute top-0 left-0 size-full"
-          squareSize={4}
-          gridGap={6}
-          color="#6B7280"
-          maxOpacity={0.2}
-          flickerChance={0.05}
-        />
-      </div>
-
-      {/* Hero / Header Section */}
-      <div className="space-y-4 border-b border-border relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col gap-6 p-6">
-          <div className="flex flex-wrap items-center gap-3 gap-y-5 text-sm text-muted-foreground">
-            {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="h-6 px-2.5 text-[10px] sm:text-xs font-medium bg-muted/60 text-muted-foreground rounded-lg border border-border/40 flex items-center justify-center backdrop-blur-sm uppercase tracking-wider"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-            <time className="font-medium text-muted-foreground ml-1">
-              {formattedDate}
-            </time>
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tighter text-balance">
+    <article className="max-w-2xl mx-auto px-6 py-20 min-h-screen relative">
+      <div className="mb-10">
+        <Link 
+          href={`/${lang}/blog`} 
+          className="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300 text-sm mb-8 inline-block transition-colors"
+        >
+          {(blogDict.back as string) || "← blog"}
+        </Link>
+        
+        <header className="flex flex-col gap-1">
+          <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
             {post.title}
           </h1>
-
-          {post.summary && (
-            <p className="text-muted-foreground max-w-4xl md:text-lg md:text-balance leading-relaxed">
-              {post.summary}
-            </p>
-          )}
-        </div>
+          <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
+            <span className="shrink-0">@wistant</span>
+            <span className="text-neutral-300 dark:text-neutral-700">|</span>
+            <time dateTime={post.date} suppressHydrationWarning>{formattedDate}</time>
+          </div>
+        </header>
       </div>
 
-      {/* Layout Content + Sidebar */}
-      <div className="flex divide-x divide-border relative max-w-7xl mx-auto px-4 md:px-0 z-10 border-b border-border">
-        {/* Background visual continuity lines */}
-        <div className="absolute max-w-7xl mx-auto left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] lg:w-full h-full border-x border-border p-0 pointer-events-none -z-10" />
-
-        <main className="w-full p-0 overflow-hidden min-h-screen">
-          {post.image && (
-            <div className="relative w-full h-75 md:h-125 overflow-hidden border-b border-border">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          )}
-
-          <div className="p-6 lg:p-10">
-            <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-lg transition-colors">
-              <MDXRemote
-                source={post.content ?? ""}
-                components={mdxComponents}
-                options={{
-                  mdxOptions: {
-                    remarkPlugins: [remarkCodeMeta, remarkImageSize],
-                  },
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="mt-10">
-            <ReadMoreSection currentSlug={post.slug} currentTags={post.tags} />
-          </div>
-        </main>
-
-        <aside className="hidden lg:block w-87.5 shrink-0 p-6 lg:p-8 bg-muted/20 dark:bg-muted/10 border-r border-border backdrop-blur-sm">
-          <div className="sticky top-20 space-y-4">
-            {/* Navigation Card */}
-            <div className="flex flex-col gap-2 p-4 rounded-xl border border-border/60 bg-card/60 backdrop-blur-md shadow-sm">
-              <Button variant="ghost" asChild className="justify-start gap-3 w-full rounded-xl hover:bg-muted/50 transition-colors">
-                <Link href={`/${lang}`}>
-                  <Home className="size-4 text-muted-foreground" />
-                  <span>{lang === "fr" ? "Accueil" : "Home"}</span>
-                </Link>
-              </Button>
-              <Button variant="ghost" asChild className="justify-start gap-3 w-full rounded-xl hover:bg-muted/50 transition-colors">
-                <Link href={`/${lang}/blog`}>
-                  <BookOpen className="size-4 text-muted-foreground" />
-                  <span>{lang === "fr" ? "Tous les Articles" : "All Articles"}</span>
-                </Link>
-              </Button>
-            </div>
-
-            {author && (
-              <div className="border border-border/60 rounded-xl p-4 bg-card/60 backdrop-blur-md shadow-sm">
-                <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-                  Auteur
-                </h4>
-                <AuthorCard author={author} />
-              </div>
-            )}
-
-            <div className="border border-border/60 rounded-xl p-4 bg-card/60 backdrop-blur-md shadow-sm">
-              <TableOfContents />
-            </div>
-
-            <PromoContent variant="desktop" />
-          </div>
-        </aside>
-      </div>
-
-      <MobileTableOfContents />
-    </div>
+      <main className="prose prose-neutral dark:prose-invert max-w-none 
+        prose-p:my-5 prose-p:leading-relaxed 
+        prose-headings:font-bold prose-headings:tracking-tight
+        prose-a:text-neutral-900 dark:prose-a:text-neutral-100 prose-a:underline decoration-neutral-300 hover:decoration-neutral-900 dark:decoration-neutral-700 dark:hover:decoration-neutral-300
+        prose-img:rounded-xl prose-img:border prose-img:border-neutral-200 dark:prose-img:border-neutral-800">
+        <MDXRemote
+          source={post.content ?? ""}
+          components={mdxComponents}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkCodeMeta, remarkImageSize],
+            },
+          }}
+        />
+      </main>
+      
+      <footer className="mt-20 pt-10 border-t border-neutral-100 dark:border-neutral-900 flex justify-between items-center text-sm text-neutral-500">
+        <Link href={`/${lang}/blog`} className="hover:text-neutral-800 dark:hover:text-neutral-300 transition-colors">
+          {(blogDict.backToAll as string) || "← Back to all posts"}
+        </Link>
+      </footer>
+    </article>
   );
 }

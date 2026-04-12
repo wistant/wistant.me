@@ -44,6 +44,20 @@
     "viewAll": "Explorar el archivo",
     "cta": "Ver Proyecto",
     "stack": "Tecnologías",
+    "aboutThisProject": "Sobre este proyecto",
+    "keyFeatures": "Características clave",
+    "techStack": "Stack tecnológico",
+    "toolsUsed": "Herramientas utilizadas",
+    "highlights": "Puntos destacados",
+    "installation": "Instalación",
+    "challengesSolutions": "Desafíos y soluciones",
+    "challenge": "Desafío",
+    "solution": "Solución",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "completed": "Completado",
+    "inProgress": "En progreso",
+    "backToProjects": "Volver a los proyectos",
     "seo": {
       "title": "Portfolio & Proyectos | Realizaciones de Wistant",
       "description": "Descubre soluciones digitales de alto rendimiento: SaaS, apps móviles y sistemas robustos creados por Wistant.",
@@ -54,10 +68,12 @@
     "title": "Notas e Insights",
     "description": "Pensamientos sobre ingeniería de software, desarrollo multiplataforma y áreas de aprendizaje.",
     "seo": {
-      "title": "Notas e Insights Técnicos | Blog de Wistant",
-      "description": "Artículos y reflexiones sobre arquitectura de software, desarrollo multiplataforma y tendencias tecnológicas modernas.",
+      "title": "Notas Técnicas y Perspectivas | Blog de Wistant",
+      "description": "Artículos y reflexiones sobre arquitectura de software, desarrollo multiplataforma y tendencias modernas de ingeniería.",
       "keywords": "Blog, Desarrollo de Software, Arquitectura de Sistemas, TypeScript, Ingeniería"
-    }
+    },
+    "back": "← blog",
+    "backToAll": "← Volver a todos los artículos"
   },
   "contact": {
     "title": "Colaboremos",

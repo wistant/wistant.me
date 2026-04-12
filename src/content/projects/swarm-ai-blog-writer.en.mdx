@@ -1,0 +1,70 @@
+---
+title: Swarm AI Blog Writer
+description: Production-grade multi-agent blog generation engine powered by Pydantic AI and Groq (Llama 3.3 70B).
+dates: "March 2026"
+active: true
+order: 1
+status: completed
+image: "/portfolio/sleek-ai/home.png"
+tags: ["Vue.js 3", "TypeScript", "Vite 5", "Tailwind CSS 3", "GSAP 3", "Flask", "Python", "Pydantic v2", "Groq API", "FPDF2"]
+longDescription: "A production-grade, multi-agent blog generation engine powered by Pydantic AI structured validation and Groq (Llama 3.3 70B). Multiple specialized AI agents orchestrate in a synchronized pipeline to create long-form, research-backed blog posts exported as professional PDF reports. The system is standardized on Llama 3.3 70B via Groq for superior reasoning and strict schema adherence, featuring a premium SaaS UI with a high-contrast minimalist aesthetic and bento-grid layout."
+team: "Personal Project"
+role: "AI Engineer & Full Stack Developer"
+links:
+  - type: github
+    href: "https://github.com/Arfazrll/Swarm-Agent-Orchestrator"
+features:
+  - title: "Multi-Agent Orchestration"
+    items:
+      - "**Planner Agent**: Generates a structured 5-section outline using Llama 3.3 70B with Pydantic-validated schema adherence."
+      - "**Researcher Agent**: Performs deep-dive research for each planned section, enriching content with contextual information."
+      - "**Writer Agent**: Crafts the final 1000+ word Markdown article from the research, maintaining consistent tone and structure."
+      - "**PDF Generator**: Sanitizes Markdown content and exports a professional, print-ready PDF report automatically."
+  - title: "Premium SaaS UI"
+    items:
+      - "**Bento-Grid Layout**: High-contrast minimalist interface built with Vue.js 3 and Tailwind CSS for a premium visual experience."
+      - "**GSAP Animations**: Smooth, GPU-accelerated animations enhance the live generation panel for real-time feedback."
+      - "**Four-Agent Showcase**: Dedicated UI cards for each agent (Planner, Researcher, Writer, Editor) with live status indicators."
+      - "**Live Generation Panel**: Root App.vue panel that streams orchestration progress in real-time to the user."
+installation:
+  - title: "Clone the Repository"
+    type: "code"
+    code: |-
+      git clone https://github.com/Arfazrll/Swarm-Agent-Orchestrator.git
+      cd Swarm-Agent-Orchestrator
+  - title: "Install Frontend Dependencies"
+    type: "code"
+    code: "npm install"
+  - title: "Install Backend Dependencies"
+    type: "code"
+    code: "pip install -r requirements.txt"
+  - title: "Configure Environment"
+    type: "code"
+    code: |-
+      # Create a .env file in the root directory:
+      GROQ_API_KEY=your_groq_key_here
+  - title: "Run Development Servers"
+    type: "code"
+    code: |-
+      # Terminal 1: Start the Vite frontend dev server
+      npm run dev
+
+      # Terminal 2: Start the Flask API server
+      python api/index.py
+challengesAndSolutions:
+  - problem: "Agent Pipeline Synchronization"
+    solution: "Designed a linear, sequential pipeline in swarm_logic.py where each agent's validated Pydantic output is passed as the structured input to the next, eliminating race conditions and ensuring data integrity throughout the generation flow."
+  - problem: "LLM Output Schema Enforcement"
+    solution: "Leveraged Pydantic v2's model validation to create strict contracts (BlogPlan, FinalBlog) for every LLM response. Any schema violation immediately halts the pipeline, preventing malformed data from corrupting downstream agents."
+  - problem: "Serverless PDF Artifact Management"
+    solution: "Implemented a stateless PDF generation workflow where FPDF2 renders the Markdown content to a temporary file, streams it to the client as a download response, then automatically deletes the local artifact to maintain a clean serverless environment."
+highlights: ["Multi-Agent Orchestration", "Llama 3.3 70B via Groq", "Professional PDF Export"]
+lang: en
+---
+
+# Swarm AI Orcherstration
+
+This project demonstrates the power of multi-agent systems in content creation. By piping specialized agents, we achieve a depth and structure that single-prompt systems often struggle with.
+
+## The Vision
+The goal was to create a research-assistant that doesn't just write, but plans and verifies. Pydantic ensures that the "Planner" doesn't just hallucinate a structure, but follows a strict JSON schema that the "Writer" can reliably consume.
