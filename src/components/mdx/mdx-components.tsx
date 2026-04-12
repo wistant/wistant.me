@@ -56,6 +56,8 @@ export const mdxComponents: MDXComponents = {
   Diagram: Blog.BlogSnippet,
   Demo: Blog.BlogSnippet,
   Demos: Blog.BlogSnippet,
+  Books: Blog.BlogUL,
+  Chat: Blog.BlogSnippet,
   Ref: Blog.BlogRef,
   FootNodes: Blog.BlogFootNotes,
   FootNotes: Blog.BlogFootNotes,
