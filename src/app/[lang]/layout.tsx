@@ -66,6 +66,7 @@ export default async function RootLayout({
     <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} prefix="og: https://ogp.me/ns#" suppressHydrationWarning>
       <body
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
+        suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {/*<TargetCursor targetSelector="a, button, .cursor-target" />*/}
