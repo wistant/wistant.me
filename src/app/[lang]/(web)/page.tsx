@@ -39,13 +39,13 @@ export default async function Home({
 
 
   return (
-    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 py-17 max-w-2xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 pt-12 pb-17 max-w-[608px] mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
           gridGap={6}
           color="#6B7280"
-          maxOpacity={0.35}
+          maxOpacity={0.45}
           flickerChance={0.05}
         />
       </div>
