@@ -6,6 +6,7 @@ import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
+import EducationSection from "@/components/home/education-section";
 
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
@@ -99,6 +100,17 @@ export default async function Home({
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <div className="flex min-h-0 flex-col gap-y-4">
+          <BlurFade delay={BLUR_FADE_DELAY * 8}>
+            <h2 className="text-xl font-bold font-clash">{dict.education.title}</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 9}>
+            <EducationSection presentLabel={dict.work.present} />
+          </BlurFade>
         </div>
       </section>
 
