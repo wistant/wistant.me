@@ -1,6 +1,6 @@
 
 export const personalData = {
-  name: "Wistant",
+  name: "Wistant..</>",
   initials: "W",
   url: "https://wistant.me",
   location: "Douala, 🇨🇲",

@@ -2,8 +2,8 @@ export const educationData = [
   {
     school: "IUT de Douala",
     href: "https://iut-douala.cm",
-    degree: "DUT in Computer Engineering (Génie Informatique)",
-    logoUrl: "/education/logo-GI.jpg",
+    degree: "DUT in Computer Engineering ",
+    logoUrl: "/education/logo-iut.jpg",
     start: "2024",
     end: "Present", // In course
   },
