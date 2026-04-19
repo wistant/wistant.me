@@ -11,6 +11,7 @@ import { FloatingDock } from "@/components/dock/floating-dock";
 import { Analytics } from "@vercel/analytics/next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getDictionary } from "@/lib/dictionary";
+import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 
 const calFont = localFont({
   src: "../../fonts/cal.woff2",
@@ -69,7 +70,20 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {/*<TargetCursor targetSelector="a, button, .cursor-target" />*/}
+          <div className="absolute inset-x-0 top-0 h-[100px] overflow-hidden pointer-events-none z-0">
+            <FlickeringGrid
+              className="h-full w-full opacity-80"
+              squareSize={2}
+              gridGap={2}
+              color="#D1D5DB"
+              maxOpacity={1}
+              flickerChance={0.1}
+              style={{
+                maskImage: "linear-gradient(to bottom, black, transparent)",
+                WebkitMaskImage: "linear-gradient(to bottom, black, transparent)",
+              }}
+            />
+          </div>
           <div className="fixed inset-x-0 bottom-8 md:bottom-6 z-999 flex justify-center pointer-events-none px-4">
             <div className="pointer-events-auto w-fit max-w-full">
               <FloatingDock

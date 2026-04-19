@@ -16,6 +16,17 @@
   "about": {
     "title": "About me",
     "content": "At the start of my career, I immersed myself in **full-stack development** before evolving into a **software architect**. Over the past **2+ years**, I've built scalable digital platforms across **Web, Mobile, and Desktop**, contributed heavily to **Open Source**, and competed in multiple **hackathons** for the thrill of building under pressure. Today, my focus is on engineering **resilient systems** that bridge the gap between **robust technical architecture** and polished user experiences.",
+    "bio": "I'm a software engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop. Originally from Douala, Cameroon, I owe much of my career to the Web and the global Open Source community.\n\nI spent my early years advocating for high-performance software and teaching regional developers how to leverage distributed systems. Later, I developed a passion for JavaScript ecosystems and cross-platform architecture.\n\nAfter joining various influential open-source initiatives, I relocated to Yaoundé to lead technical architectures for transformative digital startups. I saw a major opportunity in creating high-performance tooling and cloud infrastructure to make the Web faster, with a focus on developer experience (DX). My work now centers on bridging the gap between complex backend logic and seamless, fluid user interfaces.",
+    "contributionsTitle": "Technical contributions",
+    "contributions": [
+      "Contributed to numerous high-impact Open Source projects in the TypeScript and JavaScript ecosystem, focusing on performance optimization.",
+      "Authored a series of technical deep-dives on the RODIN protocol and architectural modularity, identifying the potential for hybrid systems to scale globally.",
+      "Lead technical architect for several Douala-based fintech initiatives, building resilient production-grade infrastructure from scratch.",
+      "Participated and won in multiple regional hackathons, demonstrating the ability to build and ship complex products under extreme time constraints.",
+      "Developing a cross-platform Terminal emulator and CLI system focused on high-end engineering aesthetics and developer productivity.",
+      "Actively collaborating on the design of decentralized data architectures and real-time synchronization protocols for unstable network environments.",
+      "Authored several popular utility libraries that facilitate rapid prototyping of cross-platform applications using modern tech stacks."
+    ],
     "seo": {
       "title": "About Wistant | Software Engineer & Digital Architect",
       "description": "Exploring Wistant's software engineering philosophy and tech stack. Expert solutions for Web, Mobile, and Desktop platforms.",

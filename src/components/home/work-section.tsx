@@ -1,97 +1,94 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState } from "react";
-import Image from "next/image";
-import { DATA } from "@/data/resume";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { DATA } from "@/data/resume";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 function LogoImage({ src, alt }: { src: string; alt: string }) {
   const [imageError, setImageError] = useState(false);
 
   if (!src || imageError) {
     return (
-      <div className="size-10 md:size-12 p-1 border rounded-lg shadow-sm ring-1 ring-border bg-muted flex-none" />
+      <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none relative z-10" />
     );
   }
 
   return (
-    <div className="relative size-10 md:size-12 flex-none border rounded-lg shadow-sm ring-1 ring-border overflow-hidden bg-white">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className="object-contain p-1"
-        onError={() => setImageError(true)}
-      />
-    </div>
+    <img
+      src={src}
+      alt={alt}
+      className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-background overflow-hidden object-contain flex-none relative z-10"
+      onError={() => setImageError(true)}
+    />
   );
 }
 
 export default function WorkSection({ presentLabel = "Present" }: { presentLabel?: string }) {
   return (
-    <Accordion type="single" collapsible className="flex flex-col gap-6 w-full mt-2">
-      {DATA.work.map((work) => (
-        <AccordionItem
-          key={work.company}
-          value={work.company}
-          className="border-none group shadow-none"
-        >
-          <AccordionTrigger className="hover:no-underline py-0 w-full flex items-start text-left group-data-[state=open]:mb-4 transition-all">
-            <div className="w-full flex flex-col cursor-pointer sm:flex-row gap-4 sm:gap-5">
-              <div className="flex-none mt-1">
-                <LogoImage src={work.logoUrl} alt={work.company} />
-              </div>
-              <div className="flex flex-col gap-2.5 flex-1 min-w-0">
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 w-full text-left">
-                  <div className="flex flex-col">
-                    <h3 className="font-semibold text-base leading-snug text-foreground">
-                        {work.title}
-                    </h3>
-                    <span className="text-sm font-medium text-muted-foreground mt-0.5">
-                        {work.company}
-                    </span>
-                  </div>
-                  <div className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap pt-0.5">
-                    {work.start} - {work.end ?? presentLabel}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AccordionTrigger>
-          
-          <AccordionContent className="ml-0 sm:ml-16 pb-0">
-            <div className="pl-4 sm:pl-1 border-l sm:border-l-0 border-border/50">
-              <p className="text-sm text-muted-foreground/90 leading-relaxed text-pretty">
-                {work.description}
-              </p>
-              
-              {work.icons && work.icons.length > 0 && (
-                <div className="hidden sm:flex flex-wrap gap-3 mt-4">
-                  {work.icons.map((icon) => (
-                    <div 
-                      key={icon} 
-                      className="p-1.5 rounded-md border border-border/50 bg-muted/30 shadow-sm flex items-center justify-center"
-                      title={icon}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img 
-                        src={`https://cdn.simpleicons.org/${icon}`} 
-                        alt={icon} 
-                        className="h-4 w-4" 
-                      />
+    <div className="flex flex-col gap-6">
+      <Accordion 
+        type="single" 
+        collapsible 
+        className="w-full grid gap-6 relative before:absolute before:inset-y-0 before:left-4 md:before:left-5 before:w-px before:bg-border/60"
+      >
+        {DATA.work.map((work, index) => (
+          <AccordionItem
+            key={`${work.company}-${index}`}
+            value={`${work.company}-${index}`}
+            className="w-full border-b-0 grid gap-2"
+          >
+            <AccordionTrigger className="hover:no-underline p-0 cursor-pointer transition-colors rounded-none group [&>svg]:hidden">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-y-1 gap-x-3 justify-between w-full text-left">
+                <div className="flex items-center gap-x-3 flex-1 min-w-0">
+                  <LogoImage src={work.logoUrl} alt={work.company} />
+                  <div className="flex-1 min-w-0 gap-0.5 flex flex-col">
+                    <div className="font-semibold leading-tight flex items-center gap-2">
+                      {work.company}
+                      <span className="relative inline-flex items-center w-3.5 h-3.5">
+                        <ChevronRight
+                          className={cn(
+                            "absolute h-3.5 w-3.5 shrink-0 text-muted-foreground stroke-2 transition-all duration-300 ease-out",
+                            "translate-x-0 opacity-0",
+                            "group-hover:translate-x-1 group-hover:opacity-100",
+                            "group-data-[state=open]:opacity-0 group-data-[state=open]:translate-x-0"
+                          )}
+                        />
+                        <ChevronDown
+                          className={cn(
+                            "absolute h-3.5 w-3.5 shrink-0 text-muted-foreground stroke-2 transition-all duration-200",
+                            "opacity-0 rotate-0",
+                            "group-data-[state=open]:opacity-100 group-data-[state=open]:rotate-180"
+                          )}
+                        />
+                      </span>
                     </div>
-                  ))}
+                    <div className="font-sans text-sm text-muted-foreground">
+                      {work.title}
+                    </div>
+                  </div>
                 </div>
-              )}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
+                <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground sm:text-right flex-none ml-11 sm:ml-0">
+                  <span>
+                    {work.start} - {work.end ?? presentLabel}
+                  </span>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="p-0 ml-11 md:ml-13 text-xs sm:text-sm text-muted-foreground">
+              <div className="pt-2">
+                {work.description}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
   );
 }
-

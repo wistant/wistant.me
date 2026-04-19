@@ -48,7 +48,7 @@ const posts = defineCollection({
     const dimensions = getImageDimensions(image);
 
     const rawPath = document._meta.path;
-    const match = rawPath.match(/^(.*?)(?:\.(en|fr|es|ar|wo))?$/);
+    const match = rawPath.match(/^(.*?)(?:\.(en|fr))?$/);
     const slug = match ? match[1] : rawPath;
     const extractedLang = match && match[2] ? match[2] : "en";
 
@@ -115,7 +115,7 @@ const projects = defineCollection({
   }),
   transform: (document) => {
     const rawPath = document._meta.path;
-    const match = rawPath.match(/^(.*?)(?:\.(en|fr|es|ar|wo))?$/);
+    const match = rawPath.match(/^(.*?)(?:\.(en|fr))?$/);
     const slug = match ? match[1] : rawPath;
     const extractedLang = match && match[2] ? match[2] : "en";
     const dimensions = getImageDimensions(document.image);

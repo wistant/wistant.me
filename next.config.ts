@@ -1,7 +1,9 @@
 import { type NextConfig } from "next";
 import { withContentCollections } from "@content-collections/next";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
@@ -31,7 +33,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/twitter",
-        destination: "https://x.com/wistantkode",
+        destination: "https://x.com/wistan",
         permanent: true,
       },
       {
@@ -77,4 +79,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withContentCollections(nextConfig);
+const withMDX = createMDX();
+
+export default withContentCollections(withMDX(nextConfig));

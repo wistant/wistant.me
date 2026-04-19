@@ -16,6 +16,17 @@
   "about": {
     "title": "À propos de moi",
     "content": "Au début de ma carrière, je me suis plongé dans le **développement full-stack** avant d'évoluer vers **l'architecture logicielle**. Au cours des **2 dernières années**, j'ai conçu des **plateformes numériques scalables** (Web, Mobile et Desktop), contribué activement à **l'Open Source**, et participé à de multiples **hackathons** pour le plaisir de bâtir sous pression. Aujourd'hui, je me concentre sur la création de **systèmes résilients** qui font le pont entre une **ingénierie robuste** et une expérience utilisateur de premier plan.",
+    "bio": "Je suis un ingénieur logiciel spécialisé dans la conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop. Originaire de Douala, au Cameroun, je dois une grande partie de ma carrière au Web et à la communauté Open Source mondiale.\n\nJ'ai passé mes premières années à promouvoir les logiciels de haute performance et à enseigner aux développeurs régionaux comment exploiter les systèmes distribués. Plus tard, j'ai développé une passion pour les écosystèmes JavaScript et l'architecture multiplateforme.\n\nAprès avoir rejoint diverses initiatives open-source influentes, je me suis installé à Yaoundé pour diriger les architectures techniques de startups numériques transformatrices. J'ai vu une opportunité majeure dans la création d'outils de haute performance et d'infrastructures cloud pour accélérer le Web, avec un accent sur l'expérience développeur (DX). Mon travail se concentre aujourd'hui sur la réduction du fossé entre les logiques backend complexes et les interfaces utilisateur fluides et transparentes.",
+    "contributionsTitle": "Contributions techniques",
+    "contributions": [
+      "Contribution à de nombreux projets Open Source à fort impact dans l'écosystème TypeScript et JavaScript, avec un accent sur l'optimisation des performances.",
+      "Auteur d'une série d'analyses techniques approfondies sur le protocole RODIN et la modularité architecturale, identifiant le potentiel des systèmes hybrides à l'échelle mondiale.",
+      "Architecte technique principal pour plusieurs initiatives fintech basées à Douala, construisant des infrastructures de production résilientes à partir de zéro.",
+      "Participation et victoire à plusieurs hackathons régionaux, démontrant la capacité à construire et livrer des produits complexes sous des contraintes de temps extrêmes.",
+      "Développement d'un émulateur de terminal et d'un système CLI multiplateforme axés sur l'esthétique de l'ingénierie haut de gamme et la productivité des développeurs.",
+      "Collaboration active à la conception d'architectures de données décentralisées et de protocoles de synchronisation en temps réel pour les environnements réseau instables.",
+      "Auteur de plusieurs bibliothèques utilitaires populaires qui facilitent le prototypage rapide d'applications multiplateformes utilisant des stacks technologiques modernes."
+    ],
     "seo": {
       "title": "Wistant | Ingénieur Logiciel & Architecte Numérique",
       "description": "Expert en ingénierie logicielle basé au Cameroun. Découvrez ma philosophie technique et ma stack pour des solutions Web, Mobile et Desktop.",

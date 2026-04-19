@@ -6,6 +6,7 @@ import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
+import EducationSection from "@/components/home/education-section";
 
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
@@ -38,13 +39,13 @@ export default async function Home({
 
 
   return (
-    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 py-17 max-w-2xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 pt-12 pb-17 max-w-[608px] mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
           gridGap={6}
           color="#6B7280"
-          maxOpacity={0.35}
+          maxOpacity={0.45}
           flickerChance={0.05}
         />
       </div>
@@ -99,6 +100,17 @@ export default async function Home({
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <div className="flex min-h-0 flex-col gap-y-4">
+          <BlurFade delay={BLUR_FADE_DELAY * 8}>
+            <h2 className="text-xl font-bold font-clash">{dict.education.title}</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 9}>
+            <EducationSection presentLabel={dict.work.present} />
+          </BlurFade>
         </div>
       </section>
 
