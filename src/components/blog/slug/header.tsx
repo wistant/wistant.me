@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 interface HeaderProps {
   post: {
@@ -29,9 +30,9 @@ export function Header({ post, lang, dict, readingTime }: HeaderProps) {
       <Link
         title={dict.blog?.back || "Go back"}
         href={`/${lang}/blog`}
-        className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm flex items-center gap-2 w-fit -ml-2 px-2 py-1 rounded"
+        className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm flex items-center gap-1.5 w-fit"
       >
-        <span className="text-lg leading-none mb-[2px]">←</span>
+        <ArrowLeft className="w-4 h-4" />
         <span>{dict.blog?.back || "blog"}</span>
       </Link>
       

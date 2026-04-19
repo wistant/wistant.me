@@ -61,7 +61,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
-    <article className="max-w-[608px] mx-auto px-6 py-16 min-h-screen flex flex-col gap-10">
+    <article className="max-w-2xl mx-auto px-6 py-16 min-h-screen flex flex-col gap-10">
       
       <Header 
         post={{ title: post.title, summary: post.summary, date: post.date }}

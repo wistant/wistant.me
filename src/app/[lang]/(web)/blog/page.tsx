@@ -40,7 +40,7 @@ export default async function BlogPage({
     .sort((a, b) => b - a);
 
   return (
-    <main className="max-w-[608px] mx-auto px-6 py-20 min-h-screen">
+    <main className="max-w-2xl mx-auto px-6 py-20 min-h-screen">
       <div className="flex flex-col gap-10">
         <div className="flex flex-row gap-4 items-center justify-between">
            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl font-cal leading-tight">{dict.blog.title || "Blog"}</h1>
