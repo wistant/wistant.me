@@ -1,7 +1,7 @@
 import { allPosts } from "content-collections";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import Image from "next/image";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import { Metadata } from "next";
@@ -9,7 +9,6 @@ import { mdxComponents } from "@/components/mdx/mdx-components";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 import { remarkImageSize } from "@/lib/remark-image-size";
 import { getDictionary } from "@/lib/dictionary";
-import { AICloudChart } from "@/components/mdx/charts/AICloudChart";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string; lang: Language }>;
@@ -43,6 +42,10 @@ export async function generateMetadata({
   return getPageMetadata(lang, pageSeo);
 }
 
+import { Header } from "@/components/blog/slug/header";
+import { ShareButton } from "@/components/blog/slug/share-button";
+import { Reactions } from "@/components/blog/slug/reactions";
+
 export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   const { lang, slug } = await params;
   
@@ -54,44 +57,41 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   if (!post) notFound();
   
   const dict = await getDictionary(lang);
-  const blogDict = dict.blog as Record<string, unknown>;
-
-  const formattedDate = new Date(post.date).toLocaleDateString(
-    lang === "fr" ? "fr-FR" : "en-US",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    },
-  );
+  const wordCount = post.content?.split(/\s+/).length || 500;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
-    <article className="max-w-2xl mx-auto px-6 py-20 min-h-screen relative">
-      <div className="mb-10">
-        <Link 
-          href={`/${lang}/blog`} 
-          className="text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300 text-sm mb-8 inline-block transition-colors"
-        >
-          {(blogDict.back as string) || "← blog"}
-        </Link>
-        
-        <header className="flex flex-col gap-1">
-          <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-            {post.title}
-          </h1>
-          <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
-            <span className="shrink-0">@wistant</span>
-            <span className="text-neutral-300 dark:text-neutral-700">|</span>
-            <time dateTime={post.date} suppressHydrationWarning>{formattedDate}</time>
-          </div>
-        </header>
-      </div>
+    <article className="max-w-[608px] mx-auto px-6 py-16 min-h-screen flex flex-col gap-10">
+      
+      <Header 
+        post={{ title: post.title, summary: post.summary, date: post.date }}
+        lang={lang}
+        dict={dict}
+        readingTime={readingTime}
+      />
 
-      <main className="prose prose-neutral dark:prose-invert max-w-none 
-        prose-p:my-5 prose-p:leading-relaxed 
-        prose-headings:font-bold prose-headings:tracking-tight
-        prose-a:text-neutral-900 dark:prose-a:text-neutral-100 prose-a:underline decoration-neutral-300 hover:decoration-neutral-900 dark:decoration-neutral-700 dark:hover:decoration-neutral-300
-        prose-img:rounded-xl prose-img:border prose-img:border-neutral-200 dark:prose-img:border-neutral-800">
+      {post.image && (
+        <div className="w-full">
+          <div className="relative aspect-[2/1] w-full rounded-md overflow-hidden border border-border/50 bg-neutral-100 dark:bg-neutral-900">
+             <Image 
+               src={post.image} 
+               alt={post.title} 
+               fill 
+               className="object-cover" 
+               priority 
+             />
+          </div>
+        </div>
+      )}
+
+      <main className="prose prose-neutral dark:prose-invert font-sans max-w-none 
+        prose-p:leading-relaxed prose-p:mb-6
+        prose-headings:font-clash prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
+        prose-h2:mt-16 prose-h2:mb-6 prose-h2:text-2xl
+        prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-xl
+        prose-a:text-foreground prose-a:font-medium prose-a:underline prose-a:decoration-neutral-300 dark:prose-a:decoration-neutral-700 hover:prose-a:decoration-foreground transition-colors prose-a:underline-offset-[3px]
+        prose-li:marker:text-neutral-400 dark:prose-li:marker:text-neutral-600
+        prose-img:rounded-xl prose-img:border prose-img:border-border prose-img:shadow-sm">
         <MDXRemote
           source={post.content ?? ""}
           components={mdxComponents}
@@ -103,11 +103,30 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
         />
       </main>
       
-      <footer className="mt-20 pt-10 border-t border-neutral-100 dark:border-neutral-900 flex justify-between items-center text-sm text-neutral-500">
-        <Link href={`/${lang}/blog`} className="hover:text-neutral-800 dark:hover:text-neutral-300 transition-colors">
-          {(blogDict.backToAll as string) || "← Back to all posts"}
-        </Link>
-      </footer>
+      <hr className="m-0 border-none h-px bg-neutral-200 dark:bg-neutral-800 -my-6 -mx-6 w-auto sm:mx-0 sm:w-full" />
+      
+      <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-center justify-between sm:gap-4 mt-8">
+        <div className="flex flex-row items-center gap-2.5 sm:gap-3">
+          <ShareButton title="Share blog post" slug={slug || ""} />
+          <a
+            title="Edit blog post"
+            href={`https://github.com/wistantkode/wistant.me/edit/main/src/content/blog/${slug}.${lang}.mdx`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-md border border-neutral-200 dark:border-neutral-800 px-4 py-2 text-sm font-medium hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
+          >
+            <svg
+              className="size-4"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+            </svg>
+            <span>Edit on GitHub</span>
+          </a>
+        </div>
+        <Reactions slug={slug} />
+      </div>
     </article>
   );
 }
