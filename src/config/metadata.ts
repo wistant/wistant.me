@@ -66,13 +66,12 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
   const baseUrl = SITE_CONFIG.url.replace(/\/$/, ""); // Ensure no trailing slash
   const pageType = url.replace(/^\//, "").split("/")[0] || "home";
   
-  // Directly point to the API generator (Boris's "redoutablement efficace" system)
-  let ogImage = pageSeo?.image || `${baseUrl}/api/og?type=${pageType === "home" ? "home" : pageType}`;
+  // Dynamic OG image generation with robust validation
+  const ogTitle = encodeURIComponent(title);
+  const ogDesc = encodeURIComponent(description || "");
+  const ogType = pageType === "home" ? "home" : pageType;
   
-  // Force absolute URL if relative
-  if (ogImage.startsWith("/")) {
-    ogImage = `${baseUrl}${ogImage}`;
-  }
+  const ogImage = pageSeo?.image || `${baseUrl}/api/og?type=${ogType}&title=${ogTitle}&description=${ogDesc}&lang=${lang}`;
 
   const fullUrl = `${baseUrl}/${lang}${url}`;
 

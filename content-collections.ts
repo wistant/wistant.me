@@ -130,6 +130,37 @@ const projects = defineCollection({
   },
 });
 
+const certifications = defineCollection({
+  name: "certifications",
+  directory: "src/content/certifications",
+  include: "**/*.mdx",
+  schema: z.object({
+    title: z.string(),
+    issuer: z.string(),
+    date: z.string(),
+    image: z.string().optional(),
+    href: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    description: z.string().optional(),
+    lang: z.string().optional(),
+  }),
+  transform: (document) => {
+    const rawPath = document._meta.path;
+    const match = rawPath.match(/^(.*?)(?:\.(en|fr))?$/);
+    const slug = match ? match[1] : rawPath;
+    const extractedLang = match && match[2] ? match[2] : "en";
+    const dimensions = getImageDimensions(document.image);
+
+    return {
+      ...document,
+      slug,
+      lang: document.lang || extractedLang,
+      imageWidth: dimensions?.width,
+      imageHeight: dimensions?.height,
+    };
+  },
+});
+
 export default defineConfig({
-  content: [posts, projects],
+  content: [posts, projects, certifications],
 });

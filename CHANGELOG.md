@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.0] - 2026-04-20 - [Neural Credential Ignition]
+
+### Features
+
+- **Supreme Certifications Module**: Deployed a high-performance credential registry with MDX-based narrations and high-fidelity 16:9 rectangular showcases.
+- **Dynamic OG System**: Implemented a universal Open Graph generation pipeline utilizing Next.js `opengraph-image.tsx` primitives and an Edge-ready orchestration route for social media excellence.
+- **Narrated Professional Prose**: Re-engineered 5 core AWS certification descriptions with detailed architectural impact stories, matching the "About" page narrative depth.
+- **Dock Navigation Refresh**: Integrated the Certifications experiential anchor into the global navigation, replacing legacy entry for enhanced professional discovery.
+
+### Fixes & Refactoring
+
+- **Security Proxy Hardening**: Sanitized `proxy.ts` middleware configuration to allow high-performance asset resolution for the certification badge pipeline.
+- **Metadata Orchestration**: Synchronized bilingual dictionary keys and SEO primitives across all newly deployed module viewports.
+
 ## [1.2.0] - 2026-04-20 - [Analytical Sight & Sober Refinement]
 
 ### Features

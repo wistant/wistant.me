@@ -98,9 +98,9 @@ export default async function RootLayout({
                     };
                   }),
                   {
-                    title: "GitHub",
-                    icon: <Image width={100} height={100} src="/icons/github.svg" alt="GitHub" className="h-full w-full object-contain dark:invert" />,
-                    href: DATA.contact.social.GitHub.url,
+                    title: dict.navigation.certifications || "Certifications",
+                    icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
+                    href: `/${lang}/certifications`,
                   },
                   {
                     title: "WhatsApp",
@@ -130,9 +130,9 @@ export default async function RootLayout({
                       };
                     }),
                   {
-                    title: "GitHub",
-                    icon: <Image width={100} height={100} src="/icons/github.svg" alt="GitHub" className="h-full w-full object-contain dark:invert" />,
-                    href: DATA.contact.social.GitHub.url,
+                    title: dict.navigation.certifications || "Certifications",
+                    icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
+                    href: `/${lang}/certifications`,
                   },
                 ]}
               />

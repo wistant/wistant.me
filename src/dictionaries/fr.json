@@ -6,6 +6,7 @@
     "about": "À Propos",
     "hackathons": "Hackathons",
     "contact": "Contact",
+    "certifications": "Certifications",
     "resume": "CV",
     "backToHome": "Retour à l'accueil"
   },
@@ -106,6 +107,19 @@
       "title": "Hackathons | Parcours & Sprints de Code de Wistant",
       "description": "Historique de mes participations aux hackathons. La passion de bâtir et de livrer de la valeur rapidement sous pression.",
       "keywords": "Hackathons, Compétitions de code, Projets, Programmation Compétitive"
+    }
+  },
+  "certifications": {
+    "title": "Certifications",
+    "subtitle": "Validation de l'expertise",
+    "description": "Une sélection de mes certifications professionnelles et académiques démontrant mon engagement envers l'apprentissage continu et l'excellence technique.",
+    "viewCertificate": "Voir le Certificat",
+    "issuedBy": "Délivré par",
+    "date": "Date d'obtention",
+    "seo": {
+      "title": "Certifications & Diplômes | Expertise de Wistant",
+      "description": "Découvrez mes certifications professionnelles en ingénierie logicielle, cloud architecture et cybersécurité.",
+      "keywords": "Certifications, Diplômes, Expertise, Cloud, Sécurité, TypeScript"
     }
   },
   "posts": {

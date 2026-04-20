@@ -1,78 +1,38 @@
-import { ImageResponse } from 'next/og';
-import { personalData } from "@/data/personal";
+import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
+import { ogImageSchema } from "@/lib/og/schema";
+import { OgImage } from "@/components/og/og-image";
 
-export const runtime = "nodejs"; // On passe en Node.js pour pouvoir lire le filesystem (Settings)
+export const runtime = "edge";
 
-export async function GET(request: Request) {
+export async function GET(req: NextRequest) {
   try {
-    const { searchParams, origin } = new URL(request.url);
-    const type = searchParams.get("type") || "home";
-    const imgParam = searchParams.get("img");
-
-    // 1. Get site settings for fallback OG images
-    const ogDefaults: Record<string, string> = {
-      home: "/opengraph/me.png",
-      blog: "/opengraph/blog.png",
-      project: "/opengraph/projects.png",
-    };
-
-    // 2. Resolve final image URL
-    let imageUrl = imgParam || ogDefaults[type] || ogDefaults.home;
+    const { searchParams } = new URL(req.url);
     
-    // Ensure absolute URL for the image
-    if (imageUrl.startsWith("/")) {
-       imageUrl = `${origin}${imageUrl}`;
+    // Validate search params with Zod
+    const result = ogImageSchema.safeParse({
+      title: searchParams.get("title") || undefined,
+      description: searchParams.get("description") || undefined,
+      type: searchParams.get("type") || undefined,
+      lang: searchParams.get("lang") || undefined,
+      label: searchParams.get("label") || undefined,
+    });
+
+    if (!result.success) {
+      return new Response("Invalid OG parameters", { status: 400 });
     }
 
-    // 3. Render OG Image
+    const { title, description, type, lang, label } = result.data;
+
     return new ImageResponse(
-      (
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#000',
-            backgroundImage: `url(${imageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          {/* Optionnel: Overlay branding si l'image n'est pas une "landing" complète */}
-          {!imageUrl.includes('landing') && (
-            <div style={{
-              position: 'absolute',
-              bottom: 40,
-              left: 40,
-              display: 'flex',
-              alignItems: 'center',
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              padding: '10px 20px',
-              borderRadius: '12px',
-              border: '1px solid rgba(255,255,255,0.1)',
-            }}>
-               <img 
-                 src={`${origin}/logo-wistant.png`} 
-                 alt="Logo"
-                 style={{ width: 30, height: 30, marginRight: 15 }} 
-               />
-               <span style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>
-                 {personalData.name}
-               </span>
-            </div>
-          )}
-        </div>
-      ),
+      <OgImage title={title} description={description} type={type} lang={lang} label={label} />,
       {
         width: 1200,
         height: 630,
       }
     );
-  } catch (e) {
-    console.error("OG Generation Error:", e);
-    return new Response(`Failed to generate image`, { status: 500 });
+  } catch (error) {
+    console.error("OG generation failed:", error);
+    return new Response("Internal Server Error", { status: 500 });
   }
 }
