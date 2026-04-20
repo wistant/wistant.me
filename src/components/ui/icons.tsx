@@ -1,4 +1,13 @@
-import { GlobeIcon, MailIcon, TrophyIcon, UserIcon } from "lucide-react";
+import { 
+  GlobeIcon, 
+  MailIcon, 
+  TrophyIcon, 
+  UserIcon, 
+  Building2Icon, 
+  ChevronLeftIcon, 
+  CalendarIcon, 
+  ExternalLinkIcon 
+} from "lucide-react";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -7,6 +16,10 @@ export const Icons = {
   email: (props: IconProps) => <MailIcon {...props} />,
   user: (props: IconProps) => <UserIcon {...props} />,
   trophy: (props: IconProps) => <TrophyIcon {...props} />,
+  building: (props: IconProps) => <Building2Icon {...props} />,
+  chevronLeft: (props: IconProps) => <ChevronLeftIcon {...props} />,
+  calendar: (props: IconProps) => <CalendarIcon {...props} />,
+  externalLink: (props: IconProps) => <ExternalLinkIcon {...props} />,
   linkedin: (props: IconProps) => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>LinkedIn</title>
