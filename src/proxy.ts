@@ -15,7 +15,15 @@ export async function proxy(request: NextRequest) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
-  if (pathnameHasLocale) return NextResponse.next();
+  if (pathnameHasLocale) {
+    // If it's a localized API call, redirect to global API to avoid 404
+    if (pathname.match(/^\/[a-z]{2}\/api\//)) {
+      const newPath = pathname.replace(/^\/[a-z]{2}\/api\//, "/api/");
+      request.nextUrl.pathname = newPath;
+      return NextResponse.redirect(request.nextUrl);
+    }
+    return NextResponse.next();
+  }
 
   // Redirect if there is no locale
   const acceptLang = request.headers.get("accept-language") || "";
@@ -28,6 +36,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next)
-    "/((?!_next/static|_next/image|favicon.ico|icons|me|fonts|gallery|certifications|opengraph|robots.txt|sitemap.xml|experiences|portfolio|blog/thumbnails|blog/authors|education|hackatons|logos).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|icons|me|fonts|gallery|certifications|opengraph|robots.txt|sitemap.xml|experiences|portfolio|blog/thumbnails|blog/authors|education|hackatons|logos).*)",
   ],
 };

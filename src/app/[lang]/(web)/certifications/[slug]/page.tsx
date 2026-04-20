@@ -36,7 +36,6 @@ export async function generateMetadata({
     title: `${cert.title} | Certifications`,
     description: cert.description,
     url: `/certifications/${cert.slug}`,
-    image: `/api/og?type=about&title=${encodeURIComponent(cert.title)}&label=Certification&lang=${lang}`,
   });
 }
 
