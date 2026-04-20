@@ -1,23 +1,20 @@
-import { ImageResponse } from "next/og";
-import { OgImage } from "@/components/og/og-image";
+import { getOgImage } from "@/components/og/response";
 import { getDictionary } from "@/lib/dictionary";
 import { Language } from "@/types/locale";
 
 export const runtime = "edge";
-export const size = { width: 1200, height: 630 };
+export const alt = "About Wistant";
 export const contentType = "image/png";
 
 export default async function Image({ params }: { params: Promise<{ lang: Language }> }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
   
-  return new ImageResponse(
-    <OgImage 
-      title={dict.about.seo.title} 
-      description={dict.about.seo.description} 
-      type="about" 
-      lang={lang} 
-    />,
-    { ...size }
-  );
+  return getOgImage({
+    title: dict.about?.title || "About Me",
+    description: dict.global.seo.description,
+    type: "about",
+    lang,
+    label: "Identity"
+  });
 }

@@ -1,7 +1,6 @@
-import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 import { ogImageSchema } from "@/lib/og/schema";
-import { OgImage } from "@/components/og/og-image";
+import { getOgImage } from "@/components/og/response";
 
 export const runtime = "edge";
 
@@ -24,13 +23,13 @@ export async function GET(req: NextRequest) {
 
     const { title, description, type, lang, label } = result.data;
 
-    return new ImageResponse(
-      <OgImage title={title} description={description} type={type} lang={lang} label={label} />,
-      {
-        width: 1200,
-        height: 630,
-      }
-    );
+    return getOgImage({
+      title,
+      description,
+      type,
+      lang,
+      label
+    });
   } catch (error) {
     console.error("OG generation failed:", error);
     return new Response("Internal Server Error", { status: 500 });
