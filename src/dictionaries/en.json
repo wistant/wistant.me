@@ -29,8 +29,8 @@
       "Authored several popular utility libraries that facilitate rapid prototyping of cross-platform applications using modern tech stacks."
     ],
     "seo": {
-      "title": "About Wistant | Software Engineer & Digital Architect",
-      "description": "Exploring Wistant's software engineering philosophy and tech stack. Expert solutions for Web, Mobile, and Desktop platforms.",
+      "title": "About Wistant | Digital Architect & Senior Software Engineer",
+      "description": "Explore the engineering philosophy and professional journey of Wistant, a specialist in resilient technical architectures and high-end digital experiences.",
       "keywords": "Software Engineer, Full-Stack Developer, Mobile Development, TypeScript, Next.js, NestJS, Cameroon"
     }
   },
@@ -71,8 +71,8 @@
     "inProgress": "In Progress",
     "backToProjects": "Back to Projects",
     "seo": {
-      "title": "Work & Projects | Wistant Portfolio",
-      "description": "Explore high-performance digital solutions: SaaS, mobile apps, and robust systems built by Wistant using Next.js and TypeScript.",
+      "title": "Projects & Portfolio | High-Performance Digital Solutions",
+      "description": "A curated showcase of production-grade SaaS, mobile applications, and robust technical architectures built by Wistant.",
       "keywords": "Portfolio, Projects, TypeScript, Next.js, NestJS, Web Development, Mobile Apps"
     }
   },
@@ -80,8 +80,8 @@
     "title": "Notes & Insights",
     "description": "Thoughts on software engineering, multi-platform development, and things I learn along the way.",
     "seo": {
-      "title": "Technical Notes & Insights | Wistant's Blog",
-      "description": "Articles and thoughts on software architecture, cross-platform development, and modern engineering trends.",
+      "title": "Engineering Blog | Technical Notes & Insights",
+      "description": "Deep dives into software architecture, cross-platform development, and modern engineering trends to help you build stable and scalable systems.",
       "keywords": "Blog, Software Development, System Architecture, TypeScript, Engineering"
     },
     "back": "← blog",
@@ -117,8 +117,8 @@
     "issuedBy": "Issued by",
     "date": "Issue Date",
     "seo": {
-      "title": "Certifications & Degrees | Wistant's Expertise",
-      "description": "Explore my professional certifications in software engineering, cloud architecture, and cybersecurity.",
+      "title": "Professional Certifications | Technical Expertise",
+      "description": "Verified professional certifications in cloud architecture, software engineering, and security, demonstrating a commitment to technical excellence.",
       "keywords": "Certifications, Degrees, Expertise, Cloud, Security, TypeScript"
     }
   },
@@ -147,8 +147,8 @@
   },
   "global": {
     "seo": {
-      "title": "Wistant | Software Engineer",
-      "description": "Wistant is a Software Engineer based in Cameroon, specializing in building high-quality digital solutions across web, mobile, and desktop environments.",
+      "title": "Wistant | Senior Software Engineer & Systems Architect",
+      "description": "Senior Software Engineer in Cameroon specializing in high-performance digital solutions across Web, Mobile, and Distributed Systems. Let's build your vision.",
       "keywords": "Wistant, Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Developer, Desktop Apps, TypeScript, Next.js, React, NestJS, Cameroon"
     }
   }
