@@ -65,8 +65,9 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   let views = 0;
   if (redis) {
     try {
-      views = await redis.get<number>(`blog:views:${slug}`) || 0;
+      views = (await redis.get<number>(`blog:views:${slug}`)) || 0;
     } catch (error) {
+      // Ignore dynamic server usage errors during static generation
       console.error("Failed to fetch views from Redis:", error);
     }
   }
