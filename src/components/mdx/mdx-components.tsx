@@ -4,6 +4,9 @@ import { ImageViewer } from "./media-viewer";
 import { Callout } from "./callout";
 import { AICloudChart } from "@/components/mdx/charts/AICloudChart";
 import * as Blog from "./BlogElements";
+import { CodeBlock } from "./code-block";
+import { TechBadge } from "./tech-badge";
+import { CodeComparison } from "@/components/ui/magicui/code-comparison";
 
 export const mdxComponents: MDXComponents = {
   // HTML elements mapping (Lowercase)
@@ -23,9 +26,19 @@ export const mdxComponents: MDXComponents = {
   td: Blog.BlogTD,
   blockquote: Blog.BlogBlockquote,
   hr: (props) => <hr className="my-8 border-neutral-200 dark:border-neutral-800" {...props} />,
-  code: (props) => <code className="bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded text-sm" {...props} />,
-  pre: Blog.BlogSnippet,
-
+  code: ({ className, ...props }: any) => {
+    // If it's a server-side syntax highlighted block, preserve its pure output
+    if (props["data-language"] || props["data-theme"] || (className && className.includes("shiki"))) {
+      return <code className={className} {...props} />;
+    }
+    // High-end inline code design
+    return (
+      <code 
+        className="bg-neutral-200/50 dark:bg-neutral-800/80 text-foreground border border-neutral-300 dark:border-neutral-700/50 px-[0.3rem] py-[0.15rem] rounded-md font-mono text-[13px] tracking-tight mx-0.5" 
+        {...props} 
+      />
+    );
+  },
   // Capitalized Aliases (Legacy/React tags support)
   P: Blog.BlogP,
   A: Blog.BlogA,
@@ -43,9 +56,21 @@ export const mdxComponents: MDXComponents = {
   TD: Blog.BlogTD,
   Blockquote: Blog.BlogBlockquote,
   HR: (props) => <hr className="my-8 border-neutral-200 dark:border-neutral-800" {...props} />,
-  Code: (props) => <code className="bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded text-sm" {...props} />,
+  Code: ({ className, ...props }: any) => {
+    if (props["data-language"] || props["data-theme"] || (className && className.includes("shiki"))) {
+      return <code className={className} {...props} />;
+    }
+    return (
+      <code 
+        className="bg-neutral-200/50 dark:bg-neutral-800/80 text-foreground border border-neutral-300 dark:border-neutral-700/50 px-[0.3rem] py-[0.15rem] rounded-md font-mono text-[13px] tracking-tight mx-0.5" 
+        {...props} 
+      />
+    );
+  },
 
   // Blog Specific components
+  CodeComparison,
+  TechBadge,
   Callout,
   Chart: AICloudChart,
   Tweet: Blog.BlogTweet,
