@@ -1,10 +1,9 @@
-import { ImageResponse } from "next/og";
-import { OgImage } from "@/components/og/og-image";
+import { getOgImage } from "@/components/og/response";
 import { allCertifications } from "content-collections";
 import { Language } from "@/types/locale";
 
 export const runtime = "edge";
-export const size = { width: 1200, height: 630 };
+export const alt = "Wistant Certification";
 export const contentType = "image/png";
 
 export default async function Image({ 
@@ -13,23 +12,14 @@ export default async function Image({
   params: Promise<{ lang: Language; slug: string }> 
 }) {
   const { lang, slug } = await params;
-  const cert = allCertifications.find((p) => p.slug === slug && p.lang === lang);
+  const cert = allCertifications.find((c) => c.slug === slug && c.lang === lang)
+            || allCertifications.find((c) => c.slug === slug && c.lang === "en");
   
-  if (!cert) {
-     return new ImageResponse(
-       <OgImage title="Certification" type="about" lang={lang} label="Certification" />,
-       { ...size }
-     );
-  }
-  
-  return new ImageResponse(
-    <OgImage 
-      title={cert.title} 
-      description={cert.description || ""} 
-      type="about" 
-      lang={lang} 
-      label="Certification"
-    />,
-    { ...size }
-  );
+  return getOgImage({
+    title: cert?.title || "Certification",
+    description: cert?.issuer || "",
+    type: "home",
+    lang,
+    label: "Credential"
+  });
 }

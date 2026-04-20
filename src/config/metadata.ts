@@ -64,15 +64,6 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
   const url = pageSeo?.url || "";
   
   const baseUrl = SITE_CONFIG.url.replace(/\/$/, ""); // Ensure no trailing slash
-  const pageType = url.replace(/^\//, "").split("/")[0] || "home";
-  
-  // Dynamic OG image generation with robust validation
-  const ogTitle = encodeURIComponent(title);
-  const ogDesc = encodeURIComponent(description || "");
-  const ogType = pageType === "home" ? "home" : pageType;
-  
-  const ogImage = pageSeo?.image || `${baseUrl}/api/og?type=${ogType}&title=${ogTitle}&description=${ogDesc}&lang=${lang}`;
-
   const fullUrl = `${baseUrl}/${lang}${url}`;
 
   // Dynamically build language alternates
@@ -104,22 +95,11 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
       siteName: SITE_CONFIG.name,
       title: title,
       description: description,
-      images: [
-        {
-          url: ogImage,
-          secureUrl: ogImage,
-          width: 800,
-          height: 600,
-          alt: title,
-          type: "image/png",
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: title,
       description: description,
-      images: [ogImage],
       creator: "@wistantkode",
       site: "@wistantkode",
     },
@@ -144,7 +124,6 @@ export const getPageMetadata = async (lang: string, pageSeo?: PageSeo) => {
     },
     // Adding JSON-LD for Local SEO (Cameroun)
     other: {
-      image: ogImage,
       "og:image:alt": title,
       "twitter:image:alt": title,
       "application/ld+json": JSON.stringify({

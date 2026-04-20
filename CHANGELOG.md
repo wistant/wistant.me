@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.0] - 2026-04-20 - [Neural OG Synchronization]
+
+### Fonctionnalités
+- **Supreme OG Orchestration** : Portage de la primitive `OgResponse` pour une parité visuelle totale avec `jahir.dev`.
+- **Edge Font Hardening** : Intégration du chargement binaire explicite pour `ClashDisplay` et `Inter` sur Vercel Edge.
+- **Metadata Liberation** : Restauration du système automatique `opengraph-image.tsx` en supprimant les dépendances API codées en dur.
+
+### Corrections & Refactoring
+- **Universal Synchronization** : Refactorisation de 12 routes d'images sociales pour une cohérence absolue.
+- **Layout Precision** : Correction des typos de ratio `aspect-video` et `aspect-[2/1]` dans les viewports critiques.
+
 ## [1.3.0] - 2026-04-20 - [Neural Credential Ignition]
 
 ### Features

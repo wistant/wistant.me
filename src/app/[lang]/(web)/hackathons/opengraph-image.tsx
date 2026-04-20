@@ -1,24 +1,20 @@
-import { ImageResponse } from "next/og";
-import { OgImage } from "@/components/og/og-image";
+import { getOgImage } from "@/components/og/response";
 import { getDictionary } from "@/lib/dictionary";
 import { Language } from "@/types/locale";
 
 export const runtime = "edge";
-export const size = { width: 1200, height: 630 };
+export const alt = "Wistant Hackathons";
 export const contentType = "image/png";
 
 export default async function Image({ params }: { params: Promise<{ lang: Language }> }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
   
-  return new ImageResponse(
-    <OgImage 
-      title={dict.hackathons.title} 
-      description={dict.hackathons.description} 
-      type="projects" 
-      lang={lang} 
-      label="Hackathons"
-    />,
-    { ...size }
-  );
+  return getOgImage({
+    title: dict.hackathons?.title || "Hackathons",
+    description: dict.global.seo.description,
+    type: "home",
+    lang,
+    label: "Awards"
+  });
 }
