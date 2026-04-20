@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/github",
-        destination: "https://github.com/wistantkode",
+        destination: "https://github.com/wistant",
         permanent: true,
       },
       {
@@ -28,12 +28,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/x",
-        destination: "https://x.com/wistantkode",
+        destination: "https://x.com/wistant",
         permanent: true,
       },
       {
         source: "/twitter",
-        destination: "https://x.com/wistan",
+        destination: "https://x.com/wistant",
         permanent: true,
       },
       {

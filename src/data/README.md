@@ -1,14 +1,17 @@
-# Static Data (`data/`)
+# Data Dictionary (`data/`)
 
-The strongly typed static data layer serving as the primary content registry for the interface.
+Centralized configuration and static content registry for the entire application.
 
-| File | Content |
-|---|---|
-| `personal.tsx` | Core profile info, bio, avatar, SEO strings |
-| `resume.tsx` | Master export (`DATA`) consolidating all modules |
-| `skills.tsx` | Core domain technologies & tools |
-| `work.tsx` | Experience timelines |
-| `projects.ts` | Query wrappers for `content-collections` |
+| File              | Structure  | Role                                                             |
+|-------------------|------------|------------------------------------------------------------------|
+| `resume.ts`       | `DATA`     | Root object aggregating all static details (Personal, Work, Edu) |
+| `personal.ts`     | Identity   | Contact info, social links, and core brand assets                |
+| `work.ts`         | Experience | Professional timeline with roles and accomplishments             |
+| `education.ts`    | Academic   | Scholarly path and certification details                         |
+| `projects.ts`     | Showcase   | Curated list of high-value development projects                  |
+| `skills.ts`       | Technical  | Grouped expertise (Languages, Tools, DevOps)                     |
+| `hackathons.ts`   | Events     | Record of collaborative coding competitions                      |
+| `gallery-data.ts` | Visuals    | Configuration for the homepage image gallery                     |
+| `blog.ts`         | Content    | High-level metadata and static configuration for the blog        |
 
-## Icon Management
-Icons used across these files exist purely as **string paths** (`/icons/github.svg`). They are never imported as React Components. They are natively resolved by standard HTML `<img>` tags.
+> This directory acts as the **Headless Content Layer**. For dynamic `.mdx` content, see `src/content/`.
