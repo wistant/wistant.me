@@ -1,21 +1,24 @@
+import { SITE_CONFIG } from '@/config/metadata';
 import type { SatoriOptions } from 'next/dist/compiled/@vercel/og/satori';
 import { ImageResponse } from 'next/og';
 import { OgImage } from './og-image';
 
-const getFont = async (): Promise<SatoriOptions['fonts'] | undefined> => {
-  // Use a reliable font URL or local path. For Edge, local relative paths are better.
-  const url = new URL('../../../public/fonts/ClashDisplay-Semibold.ttf', import.meta.url);
+const getFonts = async (): Promise<SatoriOptions['fonts'] | undefined> => {
   try {
-    const fontData = await fetch(url).then((res) => res.arrayBuffer());
+    const [clashData] = await Promise.all([
+      fetch(new URL('../../assets/fonts/ClashDisplay-Semibold.ttf', import.meta.url)).then(res => res.arrayBuffer())
+    ]);
+
     return [
       {
         name: 'ClashDisplay',
-        data: fontData,
+        data: clashData,
         style: 'normal',
-      },
+        weight: 700,
+      }
     ];
   } catch (e) {
-    console.error("Failed to load font for OG:", e);
+    console.error("Failed to load fonts for OG:", e);
     return undefined;
   }
 };
@@ -31,18 +34,26 @@ export const getOgImage = async (
 ) => {
   const { title, description, type = "home", label, lang = 'en' } = options;
 
-  return new ImageResponse(
-    <OgImage 
-      title={title} 
-      description={description} 
-      type={type as "home" | "blog" | "projects" | "about" | "contact"} 
-      label={label} 
-      lang={lang as "en" | "fr"} 
-    />,
-    {
-      width: 1200,
-      height: 630,
-      fonts: await getFont(),
-    },
-  );
+  try {
+    const fonts = await getFonts();
+    
+    return new ImageResponse(
+      <OgImage 
+        title={title} 
+        description={description} 
+        type={type as "home" | "blog" | "projects" | "about" | "contact"} 
+        label={label} 
+        lang={lang as "en" | "fr"} 
+      />,
+      {
+        width: 1200,
+        height: 630,
+        fonts: fonts,
+      },
+    );
+  } catch (error) {
+    console.error("Error generating OG image:", error);
+    // Fallback to basic text response if ImageResponse fails
+    return new Response(`Error generating image: ${error}`, { status: 500 });
+  }
 };

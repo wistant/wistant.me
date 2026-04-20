@@ -29,8 +29,8 @@
       "Auteur de plusieurs bibliothèques utilitaires populaires qui facilitent le prototypage rapide d'applications multiplateformes utilisant des stacks technologiques modernes."
     ],
     "seo": {
-      "title": "Wistant | Ingénieur Logiciel & Architecte Numérique",
-      "description": "Expert en ingénierie logicielle basé au Cameroun. Découvrez ma philosophie technique et ma stack pour des solutions Web, Mobile et Desktop.",
+      "title": "À Propos | Wistant - Ingénieur Logiciel & Architecte Numérique",
+      "description": "Découvrez la philosophie d'ingénierie et le parcours de Wistant, expert en architectures techniques résilientes et en expériences numériques haut de gamme.",
       "keywords": "Ingénieur Logiciel, Développeur Full-Stack, Développement Mobile, TypeScript, Next.js, NestJS, Cameroun"
     }
   },
@@ -71,8 +71,8 @@
     "inProgress": "En cours",
     "backToProjects": "Retour aux Projets",
     "seo": {
-      "title": "Projets & Réalisations | Wistant Portfolio",
-      "description": "Explorez mes projets phares en ingénierie logicielle : SaaS, applications mobiles et systèmes robustes conçus avec Next.js et TypeScript.",
+      "title": "Projets & Réalisations | Solutions Digitales d'Élite",
+      "description": "Découvrez mes réalisations techniques : SaaS, applications mobiles et architectures distribuées conçues pour la performance et la scalabilité.",
       "keywords": "Portfolio, Projets, TypeScript, Next.js, NestJS, Développement Web, Mobile Apps"
     }
   },
@@ -80,8 +80,8 @@
     "title": "Notes & Insights",
     "description": "Réflexions sur l'ingénierie logicielle, le développement multiplateforme et mes découvertes du moment.",
     "seo": {
-      "title": "Notes & Insights Techniques | Blog de Wistant",
-      "description": "Articles et réflexions sur l'architecture logicielle, le développement multiplateforme et les dernières tendances technologiques.",
+      "title": "Blog Technique | Architecture & Ingénierie Logicielle",
+      "description": "Analyses approfondies sur l'architecture système, le développement multiplateforme et les meilleures pratiques pour bâtir des logiciels robustes.",
       "keywords": "Blog, Développement Logiciel, Architecture Système, TypeScript, Ingénierie"
     },
     "back": "← blog",
@@ -117,8 +117,8 @@
     "issuedBy": "Délivré par",
     "date": "Date d'obtention",
     "seo": {
-      "title": "Certifications & Diplômes | Expertise de Wistant",
-      "description": "Découvrez mes certifications professionnelles en ingénierie logicielle, cloud architecture et cybersécurité.",
+      "title": "Certifications & Diplômes | Expertise Technique",
+      "description": "Parcours certifié en architecture cloud, ingénierie logicielle et technologies web, validant mes compétences techniques de haut niveau.",
       "keywords": "Certifications, Diplômes, Expertise, Cloud, Sécurité, TypeScript"
     }
   },
@@ -147,8 +147,8 @@
   },
   "global": {
     "seo": {
-      "title": "Wistant | Ingénieur Logiciel & Expert Tech",
-      "description": "Ingénieur logiciel spécialisé dans la création de plateformes numériques ultra-performantes (Web, Mobile, Desktop) au Cameroun et à l'international.",
+      "title": "Wistant | Ingénieur Logiciel Senior & Architecte de Systèmes",
+      "description": "Ingénieur logiciel expert au Cameroun spécialisé dans les solutions numériques haute performance (Web, Mobile, Systèmes Distribués). Bâtissons votre vision.",
       "keywords": "Wistant, Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développeur Mobile, TypeScript, Next.js, React Native, Cameroun, Freelance"
     }
   }
