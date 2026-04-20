@@ -9,7 +9,9 @@ const dictionaries = {
 };
 
 
-export const getDictionary = async (lang: Language) => {
-  return dictionaries[lang as keyof typeof dictionaries]?.() ?? dictionaries.en();
+export type Dictionary = typeof import("../dictionaries/en.json");
+
+export const getDictionary = async (lang: Language): Promise<Dictionary> => {
+  return (dictionaries[lang as keyof typeof dictionaries]?.() ?? dictionaries.en()) as Promise<Dictionary>;
 };
 
