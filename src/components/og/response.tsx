@@ -5,9 +5,8 @@ import { OgImage } from './og-image';
 
 const getFonts = async (): Promise<SatoriOptions['fonts'] | undefined> => {
   try {
-    const [clashData, interData] = await Promise.all([
-      fetch(new URL('../../assets/fonts/ClashDisplay-Semibold.ttf', import.meta.url)).then(res => res.arrayBuffer()),
-      fetch(new URL('../../assets/fonts/Inter-Medium.ttf', import.meta.url)).then(res => res.arrayBuffer())
+    const [clashData] = await Promise.all([
+      fetch(new URL('../../assets/fonts/ClashDisplay-Semibold.ttf', import.meta.url)).then(res => res.arrayBuffer())
     ]);
 
     return [
@@ -16,12 +15,6 @@ const getFonts = async (): Promise<SatoriOptions['fonts'] | undefined> => {
         data: clashData,
         style: 'normal',
         weight: 700,
-      },
-      {
-        name: 'Inter',
-        data: interData,
-        style: 'normal',
-        weight: 500,
       }
     ];
   } catch (e) {
