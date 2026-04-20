@@ -8,7 +8,9 @@ import { Metadata } from "next";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { remarkCodeMeta } from "@/lib/remark-code-meta";
 import { remarkImageSize } from "@/lib/remark-image-size";
+import rehypePrettyCode from "rehype-pretty-code";
 import { getDictionary } from "@/lib/dictionary";
+import { redis } from "@/lib/redis";
 
 interface BlogSlugPageProps {
   params: Promise<{ slug: string; lang: Language }>;
@@ -60,6 +62,15 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
   const wordCount = post.content?.split(/\s+/).length || 500;
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
+  let views = 0;
+  if (redis) {
+    try {
+      views = await redis.get<number>(`blog:views:${slug}`) || 0;
+    } catch (error) {
+      console.error("Failed to fetch views from Redis:", error);
+    }
+  }
+
   return (
     <article className="max-w-2xl mx-auto px-6 py-16 min-h-screen flex flex-col gap-10">
       
@@ -68,6 +79,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
         lang={lang}
         dict={dict}
         readingTime={readingTime}
+        views={views}
       />
 
       {post.image && (
@@ -98,6 +110,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
           options={{
             mdxOptions: {
               remarkPlugins: [remarkCodeMeta, remarkImageSize],
+              rehypePlugins: [[rehypePrettyCode, { theme: "one-dark-pro" }]],
             },
           }}
         />
@@ -105,7 +118,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
       
       <hr className="m-0 border-none h-px bg-neutral-200 dark:bg-neutral-800 -my-6 -mx-6 w-auto sm:mx-0 sm:w-full" />
       
-      <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-center justify-between sm:gap-4 mt-8">
+      <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-center justify-between sm:gap-4 mt-8 pb-32">
         <div className="flex flex-row items-center gap-2.5 sm:gap-3">
           <ShareButton title="Share blog post" slug={slug || ""} />
           <a
