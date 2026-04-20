@@ -1,132 +1,55 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
-import {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerHeader,
-} from "@/components/ui/drawer";
+import { useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface TagFilterProps {
   tags: string[];
   selectedTag: string;
-  tagCounts?: Record<string, number>;
-}
-
-// Sub-components extracted OUTSIDE the parent to avoid "components created during render" error
-function DesktopTagFilter({
-  tags,
-  selectedTag,
-  tagCounts,
-  onTagClick,
-}: TagFilterProps & { onTagClick: (tag: string) => void }) {
-  return (
-    <div className="hidden md:flex flex-wrap gap-2">
-      {tags.map((tag) => (
-        <button
-          key={tag}
-          onClick={() => onTagClick(tag)}
-          className={`h-8 flex items-center px-1 pl-3 rounded-lg cursor-pointer border text-sm transition-colors ${
-            selectedTag === tag
-              ? "border-primary bg-primary text-primary-foreground"
-              : "border-border hover:bg-muted"
-          }`}
-        >
-          <span>{tag}</span>
-          {tagCounts?.[tag] && (
-            <span
-              className={`ml-2 text-xs border rounded-md h-6 min-w-6 font-medium flex items-center justify-center ${
-                selectedTag === tag
-                  ? "border-border/40 dark:border-primary-foreground bg-background text-primary"
-                  : "border-border dark:border-border"
-              }`}
-            >
-              {tagCounts[tag]}
-            </span>
-          )}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function MobileTagFilter({
-  tags,
-  selectedTag,
-  tagCounts,
-  onTagClick,
-}: TagFilterProps & { onTagClick: (tag: string) => void }) {
-  return (
-    <Drawer>
-      <DrawerTrigger className="md:hidden w-full flex items-center justify-between px-4 py-2 border border-border rounded-lg hover:bg-muted transition-colors">
-        <span className="capitalize text-sm font-medium">{selectedTag}</span>
-        <ChevronDown className="h-4 w-4" />
-      </DrawerTrigger>
-
-      <DrawerContent className="md:hidden">
-        <DrawerHeader>
-          <h3 className="font-semibold text-sm">Select Category</h3>
-        </DrawerHeader>
-
-        <div className="p-4">
-          <div className="space-y-2">
-            {tags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => onTagClick(tag)}
-                className="w-full flex items-center justify-between font-medium cursor-pointer text-sm transition-colors"
-              >
-                <span
-                  className={`w-full flex items-center justify-between font-medium cursor-pointer text-sm transition-colors ${
-                    selectedTag === tag
-                      ? "underline underline-offset-4 text-primary"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {tag}
-                </span>
-                {tagCounts?.[tag] && (
-                  <span className="flex-shrink-0 ml-2 border border-border rounded-md h-6 min-w-6 flex items-center justify-center">
-                    {tagCounts[tag]}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-      </DrawerContent>
-    </Drawer>
-  );
+  tagCounts: Record<string, number>;
 }
 
 export function TagFilter({ tags, selectedTag, tagCounts }: TagFilterProps) {
   const router = useRouter();
-  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const handleTagClick = (tag: string) => {
-    const params = new URLSearchParams();
-    if (tag !== "All") {
+    const params = new URLSearchParams(searchParams.toString());
+    if (tag === tags[0]) { // Assuming first tag is "All"
+      params.delete("tag");
+    } else {
       params.set("tag", tag);
     }
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   return (
-    <>
-      <DesktopTagFilter
-        tags={tags}
-        selectedTag={selectedTag}
-        tagCounts={tagCounts}
-        onTagClick={handleTagClick}
-      />
-      <MobileTagFilter
-        tags={tags}
-        selectedTag={selectedTag}
-        tagCounts={tagCounts}
-        onTagClick={handleTagClick}
-      />
-    </>
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag) => {
+        const isSelected = tag === selectedTag;
+        const count = tagCounts[tag] || 0;
+
+        return (
+          <button
+            key={tag}
+            onClick={() => handleTagClick(tag)}
+            className={cn(
+              "px-3 py-1.5 text-xs font-medium rounded-full transition-all border",
+              isSelected
+                ? "bg-foreground text-background border-foreground shadow-sm"
+                : "bg-background text-muted-foreground border-border hover:border-neutral-400 dark:hover:border-neutral-600"
+            )}
+          >
+            {tag}
+            <span className={cn(
+              "ml-1.5 opacity-60",
+              isSelected ? "text-background/80" : "text-muted-foreground/80"
+            )}>
+              {count}
+            </span>
+          </button>
+        );
+      })}
+    </div>
   );
 }

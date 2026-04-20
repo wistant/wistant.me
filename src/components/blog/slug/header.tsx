@@ -17,9 +17,10 @@ interface HeaderProps {
     [key: string]: unknown;
   };
   readingTime: number;
+  views?: number;
 }
 
-export function Header({ post, lang, dict, readingTime }: HeaderProps) {
+export function Header({ post, lang, dict, readingTime, views }: HeaderProps) {
   const formattedDate = new Date(post.date).toLocaleDateString(
     lang === "fr" ? "fr-FR" : "en-US",
     { month: "short", day: "numeric", year: "numeric" }
@@ -55,6 +56,15 @@ export function Header({ post, lang, dict, readingTime }: HeaderProps) {
         </time>
         <span>|</span>
         <span>{readingTime} min read</span>
+        {views !== undefined && (
+          <>
+            <span>|</span>
+            <span className="flex items-center gap-1.5">
+              <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /><circle cx="12" cy="12" r="3" /></svg>
+              {views.toLocaleString()} views
+            </span>
+          </>
+        )}
       </div>
     </div>
   );

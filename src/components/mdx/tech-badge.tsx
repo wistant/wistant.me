@@ -23,22 +23,21 @@ export function TechBadge({ name }: TechBadgeProps) {
 
   return (
     <span
-      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-mono font-bold mx-0.5 align-middle"
+      className="inline-flex items-center gap-[0.3em] px-[0.5em] py-[0.1em] rounded-[0.3em] font-mono font-bold mx-[0.1em] transition-colors border"
       style={{
-        backgroundColor: `${tech.color}18`,
+        fontSize: '0.85em',
+        backgroundColor: `${tech.color}12`,
         color: tech.color,
-        border: `1px solid ${tech.color}30`,
+        borderColor: `${tech.color}30`,
       }}
     >
-      <Image
+      <img
         src={tech.icon}
         alt={name}
-        width={11}
-        height={11}
-        className="inline-block shrink-0"
+        className="w-[1.1em] h-[1.1em] shrink-0 object-contain"
         style={{ filter: "none" }}
       />
-      {tech.label}
+      <span className="leading-none">{tech.label}</span>
     </span>
   );
 }

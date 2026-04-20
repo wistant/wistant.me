@@ -1,19 +1,17 @@
-# Components (`components/`)
+# UI Components Architecture (`components/`)
 
-All UI elements strictly co-located by **Feature Domain** (Not type).
+Shared components built with **Radix UI**, **Framer Motion**, and **Tailwind CSS**.
 
-## Domain Catalog
+| Folder       | Scope           | Role                                                     |
+|--------------|-----------------|----------------------------------------------------------|
+| `ui/`        | Primitive       | Low-level design system elements (buttons, inputs, etc.) |
+| `shared/`    | Cross-page      | Reusable patterns like navigation or footers             |
+| `mdx/`       | Documentation   | Custom React components used inside `.mdx` content       |
+| `home/`      | Hero / Sections | Specific blocks for the landing page                     |
+| `blog/`      | Layout          | Card items, views counters, and reading-time logic       |
+| `projects/`  | Showcase        | Visual grid and detailed views for projects              |
+| `dock/`      | Global Nav      | Interactive floating dock with mobile responsiveness     |
+| `seo/`       | Metadata        | JSON-LD scripts and specialized head management          |
+| `mvpblocks/` | High-level      | Complex pre-built UI segments (MagicUI/Aceternity)       |
 
-| Domain | Scope |
-|---|---|
-| [`home/`](./home/) | Landing page blocks (Hero, Skills, Work Timeline, Contact) |
-| [`dock/`](./dock/) | Floating MacOS-style navigation & Locale switchers |
-| [`blog/`](./blog/) | Article lists, Author banners, Filter chips |
-| [`projects/`](./projects/) | Isometric Cards & Portfolio UI |
-| [`mdx/`](./mdx/) | Custom `react-markdown`/`next-mdx-remote` node overrides |
-| [`seo/`](./seo/) | `Schema.org` JSON-LD injectors |
-| [`ui/`](./ui/) | Baseline Design System (`shadcn/ui`, `MagicUI`, generic atoms) |
-
-## Icon Architecture
-We aggressively strip 3rd-party icon libraries from production build bundles:
-Always render icons via standard `<img>` tags mapping to `public/icons/*.svg`. Leverage the unified `dark:invert` utility for theme scaling.
+> Components are strictly client-side when using motion/state, and server-side by default where possible.

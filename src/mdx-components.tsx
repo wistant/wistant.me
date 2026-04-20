@@ -7,6 +7,7 @@ import { GithubCalendar } from "@/components/home/github-calendar"
 import WorkSection from "@/components/home/work-section"
 import EducationSection from "@/components/home/education-section"
 import Image from "next/image"
+import { CodeComparison } from "@/components/ui/magicui/code-comparison"
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -17,6 +18,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     GithubCalendar,
     WorkSection,
     EducationSection,
+    CodeComparison,
     Image,
     // Add custom structural styling for the about page
     h1: (props) => <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl font-cal leading-tight mb-8" {...props} />,
