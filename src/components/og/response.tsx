@@ -1,59 +1,43 @@
-import { SITE_CONFIG } from '@/config/metadata';
 import type { SatoriOptions } from 'next/dist/compiled/@vercel/og/satori';
 import { ImageResponse } from 'next/og';
-import { OgImage } from './og-image';
 
-const getFonts = async (): Promise<SatoriOptions['fonts'] | undefined> => {
+import { config } from '@/utils/og';
+
+import type { PathName } from './og';
+import { OgImage } from './og';
+
+const getClashFont = async (): Promise<SatoriOptions['fonts'] | undefined> => {
+  const url = new URL('../../assets/fonts/ClashDisplay-Semibold.ttf', import.meta.url);
   try {
-    const [clashData] = await Promise.all([
-      fetch(new URL('../../assets/fonts/ClashDisplay-Semibold.ttf', import.meta.url)).then(res => res.arrayBuffer())
-    ]);
-
+    const fontData = await fetch(url).then((res) => res.arrayBuffer());
     return [
       {
         name: 'ClashDisplay',
-        data: clashData,
+        data: fontData,
         style: 'normal',
         weight: 700,
-      }
+      },
     ];
-  } catch (e) {
-    console.error("Failed to load fonts for OG:", e);
+  } catch {
     return undefined;
   }
 };
 
 export const getOgImage = async (
-  options: {
-    title: string;
-    description?: string;
-    type?: "home" | "blog" | "projects" | "about" | "contact";
-    label?: string;
-    lang?: string;
-  }
+  path?: PathName,
+  title?: string | null,
+  hero?: string | null,
 ) => {
-  const { title, description, type = "home", label, lang = 'en' } = options;
+  const actualPath = (path || null) as PathName;
+  let actualHero = hero || 'me/me.webp';
+  if (actualHero.startsWith('/')) actualHero = actualHero.substring(1);
 
-  try {
-    const fonts = await getFonts();
-    
-    return new ImageResponse(
-      <OgImage 
-        title={title} 
-        description={description} 
-        type={type as "home" | "blog" | "projects" | "about" | "contact"} 
-        label={label} 
-        lang={lang as "en" | "fr"} 
-      />,
-      {
-        width: 1200,
-        height: 630,
-        fonts: fonts,
-      },
-    );
-  } catch (error) {
-    console.error("Error generating OG image:", error);
-    // Fallback to basic text response if ImageResponse fails
-    return new Response(`Error generating image: ${error}`, { status: 500 });
-  }
+  return new ImageResponse(
+    <OgImage path={actualPath} title={title} hero={actualHero} />,
+    {
+      width: config.size.width,
+      height: config.size.height,
+      fonts: await getClashFont(),
+    },
+  );
 };
