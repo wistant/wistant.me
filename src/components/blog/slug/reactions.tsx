@@ -75,7 +75,7 @@ export function Reactions({ slug }: ReactionsProps) {
           <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
           <circle cx="12" cy="12" r="3" />
         </svg>
-        <span>{views !== null ? views.toLocaleString() : "..."} views</span>
+        <span>{typeof views === "number" ? views.toLocaleString() : "..."} views</span>
       </div>
 
       <button 
@@ -103,7 +103,7 @@ export function Reactions({ slug }: ReactionsProps) {
         >
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
         </svg>
-        <span>{likes !== null ? likes.toLocaleString() : "..."}</span>
+        <span>{typeof likes === "number" ? likes.toLocaleString() : "..."}</span>
       </button>
     </div>
   );
