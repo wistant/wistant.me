@@ -117,8 +117,6 @@ export default async function Home({
       <section id="projects">
         <ShowMore
           initialHeight={1650}
-          buttonTextShow={dict.ui.seeMore}
-          buttonTextHide={dict.ui.showLess}
           href={`/${lang}/projects`}
           linkText={dict.projects.viewAll || "View All"}
         >
