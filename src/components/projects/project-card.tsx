@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
+import { Calendar } from "lucide-react";
 import { Icons } from "@/components/ui/icons";
 import TechIconMap from "./tech-icon-map.json";
 
@@ -103,26 +104,24 @@ export function ProjectCard({
       {/* --- Right Pane : Content --- */}
       <div className="flex flex-col items-start justify-center w-full sm:w-[55%] relative z-20 py-1">
         {/* Label de catégorie & Date */}
-        <div className="flex items-center gap-2 mb-2 w-full">
-          <span className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+        <div className="flex items-center gap-3 mb-3 w-full">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-800 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-muted-foreground shadow-sm">
             <span
-              className="size-1.5 rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]"
+              className="size-1.5 rounded-full"
               style={{ backgroundColor: getCategoryColor(category) }}
             />
             {categoryLabels[category as keyof typeof categoryLabels] || "Project"}
-          </span>
+          </div>
           {dates && (
-            <>
-              <span className="text-[10px] text-muted-foreground/40 hidden sm:block">•</span>
-              <span className="text-[9px] sm:text-[10px] font-mono text-muted-foreground/70 hidden sm:block">
-                {dates}
-              </span>
-            </>
+            <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/60">
+              <Calendar className="size-3" />
+              {dates}
+            </div>
           )}
         </div>
 
         {/* Titre du projet */}
-        <h3 className="text-lg lg:text-xl font-bold font-clash tracking-tight text-foreground leading-tight mb-2.5 group-hover:text-blue-500 transition-colors duration-500">
+        <h3 className="text-xl lg:text-2xl font-bold font-clash tracking-tight text-foreground leading-none mb-3 group-hover:text-blue-500 transition-colors duration-500">
           {title}
         </h3>
 
@@ -131,23 +130,30 @@ export function ProjectCard({
           <Markdown>{description}</Markdown>
         </div>
 
-        {/* Stack Technique avec Icônes harmonieuses */}
+        {/* Stack Technique avec Icônes intelligentes */}
         {tags && tags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5 w-full mb-5">
+          <div className="flex flex-wrap items-center gap-2 w-full mb-5">
             {tags.map((tag) => {
               const tagKey = tag.toLowerCase().replace(/[\s.]/g, '');
               const mappedImage = (TechIconMap as Record<string, string>)[tagKey];
               const IconComp = Icons[tagKey as keyof typeof Icons];
               
+              const needsInvert = ["nextjs", "github", "vercel", "prisma", "notebook", "eclipse"].includes(tagKey);
+
               return (
-                <div key={tag} className="flex items-center justify-center p-1.5 rounded bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-100 dark:border-neutral-800 transition-all duration-500 hover:scale-110 hover:bg-neutral-100 dark:hover:bg-neutral-800" title={tag}>
+                <div key={tag} className="flex items-center justify-center p-1.5 rounded-md bg-neutral-50 dark:bg-neutral-800/40 border border-neutral-200/60 dark:border-neutral-800 transition-all duration-300 hover:scale-110 hover:bg-neutral-100 dark:hover:bg-neutral-800" title={tag}>
                   {mappedImage ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={mappedImage} alt={tag} className="size-3 object-contain" />
+                    <Image 
+                      src={mappedImage} 
+                      alt={tag} 
+                      width={16} 
+                      height={16} 
+                      className={cn("object-contain", needsInvert && "dark:invert dark:opacity-90")}
+                    />
                   ) : IconComp ? (
-                    <IconComp className="size-3 text-neutral-600 dark:text-neutral-400" />
+                    <IconComp className="size-4 text-neutral-600 dark:text-neutral-400" />
                   ) : (
-                    <span className="text-[9px] font-mono font-medium uppercase px-1 text-neutral-500">{tag}</span>
+                    <span className="text-[10px] font-mono font-medium uppercase px-1 text-neutral-500">{tag}</span>
                   )}
                 </div>
               );
