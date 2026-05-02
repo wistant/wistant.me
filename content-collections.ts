@@ -67,11 +67,12 @@ const posts = defineCollection({
 
 const projects = defineCollection({
   name: "projects",
-  directory: "src/content/projects",
-  include: "**/*.mdx",
+  directory: "src/app",
+  include: "**/projects/**/page.mdx",
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
+    // Fields are now parsed manually from the MDX content to avoid Turbopack serialization issues
+    title: z.string().optional(),
+    description: z.string().optional(),
     dates: z.string().optional(),
     order: z.number().optional().default(99),
     active: z.boolean().optional().default(true),
@@ -85,47 +86,70 @@ const projects = defineCollection({
         href: z.string(),
       })
     ).optional(),
-    longDescription: z.string().optional(),
-    features: z.array(
-      z.object({
-        title: z.string(),
-        items: z.array(z.string()),
-      })
-    ).optional(),
-    highlights: z.array(z.string()).optional(),
-    installation: z.array(
-      z.object({
-        title: z.string(),
-        code: z.string(),
-        type: z.string(),
-      })
-    ).optional(),
-    challengesAndSolutions: z.array(
-      z.object({
-        problem: z.string(),
-        solution: z.string(),
-      })
-    ).optional(),
-    tools: z.array(z.string()).optional(),
-    team: z.string().optional(),
-    role: z.string().optional(),
+    category: z.enum(["client", "opensource", "personal"]).optional().default("personal"),
     status: z.string().optional(),
-    images: z.array(z.string()).optional(),
-    content: z.string().optional(),
-    lang: z.string().optional(),
-    category: z.enum(["client", "opensource", "personal"]).default("personal"),
   }),
   transform: (document) => {
     const rawPath = document._meta.path;
-    const match = rawPath.match(/^(.*?)(?:\.(en|fr))?$/);
-    const slug = match ? match[1] : rawPath;
-    const extractedLang = match && match[2] ? match[2] : "en";
-    const dimensions = getImageDimensions(document.image);
+    const parts = rawPath.split("/");
+    const lang = parts[0] === "[lang]" ? "en" : parts[0];
+    const slug = parts[3] || parts[parts.length - 2];
+    
+    // Extract projectData fields from the MDX content using high-reliability regex
+    const content = document.content;
+    const extractField = (field: string) => {
+      const regex = new RegExp(`${field}:\\s*(?:"(.*?)"|'(.*?)'|(\\d+)|(true|false)|(\\[.*?\\]))`, "s");
+      const match = content.match(regex);
+      if (!match) return null;
+      
+      const value = match[1] || match[2] || match[3] || match[4] || match[5];
+      
+      // Handle simple types
+      if (match[4]) return value === "true"; // Boolean
+      if (match[3]) return parseInt(value, 10); // Number
+      if (match[1] || match[2]) return value; // String
+      
+      // Handle Arrays (match[5])
+      if (match[5]) {
+        const rawArray = match[5];
+        if (field === "links") {
+          // Specialized parsing for [{ type: "...", href: "..." }]
+          const linkRegex = /\{\s*type:\s*["'](.*?)["'],\s*href:\s*["'](.*?)["']\s*\}/g;
+          const links: { type: string; href: string }[] = [];
+          let linkMatch;
+          while ((linkMatch = linkRegex.exec(rawArray)) !== null) {
+            links.push({ type: linkMatch[1], href: linkMatch[2] });
+          }
+          return links;
+        }
+        // Generic simple array (tags, images)
+        return rawArray.replace(/[\[\]\s"']/g, "").split(",").filter(Boolean);
+      }
+      return value;
+    };
+
+    const finalData = {
+      title: (extractField("title") as string) || slug,
+      description: (extractField("description") as string) || "",
+      order: (extractField("order") as number) ?? 99,
+      active: (extractField("active") as boolean) ?? true,
+      featured: (extractField("featured") as boolean) ?? false,
+      category: ((extractField("category") as string) || "personal") as "client" | "opensource" | "personal",
+      image: (extractField("image") as string) || "",
+      video: (extractField("video") as string) || "",
+      tags: (extractField("tags") as string[]) || [],
+      dates: (extractField("dates") as string) || "",
+      status: (extractField("status") as string) || "completed",
+      links: (extractField("links") as { type: string; href: string }[]) || [],
+      images: (extractField("images") as string[]) || [],
+    };
+
+    const dimensions = getImageDimensions(finalData.image);
 
     return {
-      ...document,
+      ...finalData,
       slug,
-      lang: document.lang || extractedLang,
+      lang: lang,
       imageWidth: dimensions?.width,
       imageHeight: dimensions?.height,
     };
