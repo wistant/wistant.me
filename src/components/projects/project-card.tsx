@@ -23,6 +23,7 @@ interface Props {
   }[];
   className?: string;
   category?: "client" | "opensource" | "personal";
+  reverse?: boolean;
 }
 
 export function ProjectCard({
@@ -36,6 +37,7 @@ export function ProjectCard({
   links,
   className,
   category = "personal",
+  reverse = false,
 }: Props) {
   const getCategoryColor = (cat: string) => {
     switch (cat) {
@@ -58,14 +60,14 @@ export function ProjectCard({
   const liveLink = links?.find((l) => l.type.toLowerCase() === "website" || l.type.toLowerCase() === "live" || l.type.toLowerCase() === "preview") || links?.[0];
 
   return (
-    <div className={cn("group flex flex-col sm:flex-row w-full relative gap-6 sm:gap-8 lg:gap-10 items-stretch overflow-visible", className)}>
+    <div className={cn("group flex flex-col w-full relative gap-6 sm:gap-8 lg:gap-10 items-stretch overflow-visible", reverse ? "sm:flex-row-reverse" : "sm:flex-row", className)}>
       <Link href={href || "#"} className="absolute inset-0 z-10" aria-label={`View ${title}`}>
         <span className="sr-only">View {title}</span>
       </Link>
 
-      {/* --- Left Pane : Superposed Media --- */}
+      {/* --- Left/Right Pane : Superposed Media --- */}
       {/* overflow-visible on BOTH the pane and the card root lets bg layer bleed out */}
-      <div className="w-full sm:w-[45%] relative aspect-4/3 rounded-2xl shrink-0 perspective-[1000px] overflow-visible">
+      <div className={cn("w-full sm:w-[52%] relative rounded-2xl shrink-0 perspective-[1000px] overflow-visible", reverse ? "-mr-6 lg:-mr-10" : "-ml-6 lg:-ml-10")} style={{ aspectRatio: "16/10" }}>
         {/* Background Layer — default behind fg, rises on direct hover */}
         <div className="peer/bg absolute top-0 left-0 w-[80%] h-[80%] rounded-2xl overflow-hidden transform-gpu z-1 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-x-4 group-hover:-translate-y-4 group-hover:-rotate-2 hover:z-20! hover:shadow-2xl">
           {image && (
