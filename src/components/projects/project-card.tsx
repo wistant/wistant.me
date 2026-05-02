@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
 import { Icons } from "@/components/ui/icons";
+import TechIconMap from "./tech-icon-map.json";
 
 interface Props {
   href: string;
@@ -62,21 +63,21 @@ export function ProjectCard({
       </Link>
 
       {/* --- Left Pane : Superposed Media --- */}
-      <div className="w-full sm:w-[45%] relative aspect-4/3 rounded-2xl shrink-0 perspective-[1000px]">
+      <div className="w-full sm:w-[45%] relative aspect-4/3 rounded-2xl shrink-0 perspective-[1000px] overflow-visible">
         {/* Background Layer (décalé gauche/haut) */}
-        <div className="absolute top-0 left-0 w-[80%] h-[80%] rounded-2xl shadow-xl overflow-hidden opacity-60 dark:opacity-30 transform-gpu transition-transform duration-700 group-hover:-translate-x-3 group-hover:-translate-y-3 bg-muted">
+        <div className="absolute top-0 left-0 w-[80%] h-[80%] rounded-2xl shadow-sm overflow-hidden opacity-50 dark:opacity-20 transform-gpu transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-x-4 group-hover:-translate-y-4 group-hover:-rotate-2 bg-muted">
           {image && (
             <Image
               src={image}
               alt={`${title} background`}
               fill
-              className="object-cover grayscale blur-[2px]"
+              className="object-cover grayscale blur-[3px] scale-110"
             />
           )}
         </div>
         
         {/* Foreground Layer (décalé bas/droite) */}
-        <div className="absolute bottom-0 right-0 w-[85%] h-[85%] rounded-2xl z-10 shadow-[0_20px_50px_rgb(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgb(255,255,255,0.05)] overflow-hidden transform-gpu transition-all duration-700 group-hover:scale-[1.03] bg-background border border-border/50">
+        <div className="absolute bottom-0 right-0 w-[85%] h-[85%] rounded-2xl z-10 shadow-[0_15px_40px_rgb(0,0,0,0.12)] dark:shadow-[0_15px_40px_rgb(255,255,255,0.03)] overflow-hidden transform-gpu transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:rotate-1 bg-background border border-border/40">
           {video ? (
             <video
               src={video}
@@ -100,10 +101,10 @@ export function ProjectCard({
       </div>
 
       {/* --- Right Pane : Content --- */}
-      <div className="flex flex-col items-start justify-center w-full sm:w-[55%] relative z-20">
+      <div className="flex flex-col items-start justify-center w-full sm:w-[55%] relative z-20 py-1">
         {/* Label de catégorie & Date */}
-        <div className="flex items-center justify-between w-full mb-2">
-          <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+        <div className="flex items-center gap-2 mb-2 w-full">
+          <span className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             <span
               className="size-1.5 rounded-full shadow-[0_0_8px_rgba(0,0,0,0.2)]"
               style={{ backgroundColor: getCategoryColor(category) }}
@@ -111,29 +112,42 @@ export function ProjectCard({
             {categoryLabels[category as keyof typeof categoryLabels] || "Project"}
           </span>
           {dates && (
-            <span className="text-[10px] font-mono text-muted-foreground/60 hidden sm:block">
-              {dates}
-            </span>
+            <>
+              <span className="text-[10px] text-muted-foreground/40 hidden sm:block">•</span>
+              <span className="text-[9px] sm:text-[10px] font-mono text-muted-foreground/70 hidden sm:block">
+                {dates}
+              </span>
+            </>
           )}
         </div>
 
         {/* Titre du projet */}
-        <h3 className="text-xl lg:text-2xl font-extrabold font-clash tracking-tight text-foreground leading-none mb-3 group-hover:text-blue-500 transition-colors">
+        <h3 className="text-lg lg:text-xl font-bold font-clash tracking-tight text-foreground leading-tight mb-2.5 group-hover:text-blue-500 transition-colors duration-500">
           {title}
         </h3>
 
-        {/* Stack Technique avec Icônes (miniaturisé) */}
+        {/* Description (Priorisée avec lineHeight agréable) */}
+        <div className="text-xs text-muted-foreground leading-[1.65] w-full mb-4 line-clamp-4 dark:text-muted-foreground/90">
+          <Markdown>{description}</Markdown>
+        </div>
+
+        {/* Stack Technique avec Icônes harmonieuses */}
         {tags && tags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2 w-full mb-3">
+          <div className="flex flex-wrap items-center gap-1.5 w-full mb-5">
             {tags.map((tag) => {
-              const tagKey = tag.toLowerCase().replace(/[\s.]/g, '') as keyof typeof Icons;
-              const IconComp = Icons[tagKey];
+              const tagKey = tag.toLowerCase().replace(/[\s.]/g, '');
+              const mappedImage = (TechIconMap as Record<string, string>)[tagKey];
+              const IconComp = Icons[tagKey as keyof typeof Icons];
+              
               return (
-                <div key={tag} className="flex items-center justify-center p-1.5 rounded-md bg-neutral-100 dark:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-700 shadow-sm transition-transform hover:scale-110" title={tag}>
-                  {IconComp ? (
-                    <IconComp className="size-3.5 text-neutral-700 dark:text-neutral-300" />
+                <div key={tag} className="flex items-center justify-center p-1.5 rounded bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-100 dark:border-neutral-800 transition-all duration-500 hover:scale-110 hover:bg-neutral-100 dark:hover:bg-neutral-800" title={tag}>
+                  {mappedImage ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={mappedImage} alt={tag} className="size-3 object-contain" />
+                  ) : IconComp ? (
+                    <IconComp className="size-3 text-neutral-600 dark:text-neutral-400" />
                   ) : (
-                    <span className="text-[9px] font-mono font-semibold uppercase px-1">{tag}</span>
+                    <span className="text-[9px] font-mono font-medium uppercase px-1 text-neutral-500">{tag}</span>
                   )}
                 </div>
               );
@@ -141,21 +155,16 @@ export function ProjectCard({
           </div>
         )}
 
-        {/* Description courte */}
-        <div className="text-xs md:text-sm prose prose-neutral dark:prose-invert text-muted-foreground leading-relaxed w-full mb-5 line-clamp-3">
-          <Markdown>{description}</Markdown>
-        </div>
-
-        {/* Action Buttons (Live & GitHub) */}
+        {/* Action Buttons (Live & GitHub) finement placés */}
         <div className="flex items-center gap-2 mt-auto">
           {githubLink && (
             <Link 
               href={githubLink.href} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold text-neutral-700 bg-white border border-neutral-200 shadow-xs hover:bg-neutral-50 hover:text-black dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-medium text-neutral-600 bg-transparent border border-neutral-200 hover:bg-neutral-100 hover:text-black dark:border-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white transition-all duration-300"
             >
-              <Icons.github className="size-3" />
+              <Icons.github className="size-2.5" />
               Source
             </Link>
           )}
@@ -164,10 +173,10 @@ export function ProjectCard({
               href={liveLink.href} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-bold text-white bg-blue-600 shadow-md hover:bg-blue-700 hover:shadow-lg dark:bg-blue-500 dark:hover:bg-blue-600 transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-semibold text-white bg-blue-500 shadow-xs hover:bg-blue-600 hover:shadow-md dark:bg-blue-500/90 dark:hover:bg-blue-500 transition-all duration-300"
             >
-              <Icons.globe className="size-3" />
-              Live Preview
+              <Icons.globe className="size-2.5" />
+              Live
             </Link>
           )}
         </div>
