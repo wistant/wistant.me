@@ -2,10 +2,8 @@ import BlurFade from "@/components/ui/magicui/blur-fade";
 import { ProjectCard } from "@/components/projects/project-card";
 import { getProjectsByLang } from "@/data/projects";
 import { Icons } from "@/components/ui/icons";
+import { ShowMore } from "@/components/ui/show-more";
 import React from "react";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -51,9 +49,14 @@ export default async function ProjectsSection({
         </div>
 
         {displayProjects.length > 0 && (
-          <div className="relative flex flex-col">
-            {/* Project list */}
-            <div className="flex flex-col w-full mx-auto gap-y-16">
+          <ShowMore
+            initialHeight={560}
+            buttonTextShow="Show more"
+            buttonTextHide="Show less"
+            href={`/${lang}/projects`}
+            linkText={dict.projects.viewAll || "Explore the archive"}
+          >
+            <div className="flex flex-col w-full mx-auto gap-y-16 pb-4">
               {displayProjects.map((project, id) => {
                 const projectLinks = project.links?.map((link) => ({
                   ...link,
@@ -78,24 +81,7 @@ export default async function ProjectsSection({
                 );
               })}
             </div>
-
-            {/* Gradient Blur Overlay — se fond avec le background */}
-            <div className="relative mt-0 h-32 -translate-y-32 bg-linear-to-t from-background via-background/80 to-transparent pointer-events-none" />
-
-            {/* View All Button — centré sous le fondu */}
-            <div className="flex justify-center -mt-16">
-              <Link href={`/${lang}/projects`}>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="rounded-full transition-all group px-8 h-12 text-sm font-semibold text-foreground bg-background/80 backdrop-blur-md border border-border/50 hover:bg-muted/80 shadow-lg hover:shadow-xl"
-                >
-                  {dict.projects.viewAll || "View all projects"}
-                  <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </div>
-          </div>
+          </ShowMore>
         )}
 
       </div>
