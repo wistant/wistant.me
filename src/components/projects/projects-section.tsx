@@ -24,7 +24,8 @@ export default async function ProjectsSection({
   // Préférer les projets marqués "featured", ou fallback sur 4 projets (pas d'open source)
   const featured = sortedProjects.filter(p => p.featured);
   const fallback = sortedProjects.filter(p => p.category !== "opensource").slice(0, 4);
-  const displayProjects = (featured.length > 0 ? featured : fallback).slice(0, limit || 4);
+  const rawDisplay = featured.length > 0 ? featured : fallback;
+  const displayProjects = limit ? rawDisplay.slice(0, limit) : rawDisplay;
 
   return (
     <section id="projects">
@@ -49,10 +50,10 @@ export default async function ProjectsSection({
           </div>
         </div>
 
-        {/* Featured Projects with Restacked Blur Effect */}
         {displayProjects.length > 0 && (
-          <div className="relative flex flex-col gap-10 mt-4 rounded-3xl">
-            <div className="flex flex-col w-full mx-auto gap-y-16 pb-40">
+          <div className="relative flex flex-col">
+            {/* Project list */}
+            <div className="flex flex-col w-full mx-auto gap-y-16">
               {displayProjects.map((project, id) => {
                 const projectLinks = project.links?.map((link) => ({
                   ...link,
@@ -78,16 +79,16 @@ export default async function ProjectsSection({
               })}
             </div>
 
-            {/* Gradient Blur Overlay */}
-            <div className="absolute bottom-0 left-0 w-full h-56 bg-linear-to-t from-background via-background/90 to-transparent pointer-events-none z-10" />
+            {/* Gradient Blur Overlay — se fond avec le background */}
+            <div className="relative mt-0 h-32 -translate-y-32 bg-linear-to-t from-background via-background/80 to-transparent pointer-events-none" />
 
-            {/* Float View All Button inside the Blur */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
+            {/* View All Button — centré sous le fondu */}
+            <div className="flex justify-center -mt-16">
               <Link href={`/${lang}/projects`}>
                 <Button
                   variant="secondary"
                   size="sm"
-                  className="rounded-full transition-all group px-8 py-6 h-12 text-sm font-semibold text-foreground bg-background/50 backdrop-blur-md border border-border/50 hover:bg-muted/80 shadow-lg hover:shadow-xl dark:shadow-none"
+                  className="rounded-full transition-all group px-8 h-12 text-sm font-semibold text-foreground bg-background/80 backdrop-blur-md border border-border/50 hover:bg-muted/80 shadow-lg hover:shadow-xl"
                 >
                   {dict.projects.viewAll || "View all projects"}
                   <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
