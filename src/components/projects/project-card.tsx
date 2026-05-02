@@ -65,19 +65,19 @@ export function ProjectCard({
 
       {/* --- Left Pane : Superposed Media --- */}
       <div className="w-full sm:w-[45%] relative aspect-4/3 rounded-2xl shrink-0 perspective-[1000px] overflow-visible">
-        {/* Background Layer (décalé gauche/haut) */}
-        <div className="absolute top-0 left-0 w-[80%] h-[80%] rounded-2xl shadow-sm overflow-hidden opacity-50 dark:opacity-20 transform-gpu transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-x-4 group-hover:-translate-y-4 group-hover:-rotate-2 bg-muted">
+        {/* Background Layer — rises on hover via [&:hover]:z-20 */}
+        <div className="absolute top-0 left-0 w-[80%] h-[80%] rounded-2xl shadow-sm overflow-hidden opacity-50 dark:opacity-20 transform-gpu transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-x-4 group-hover:-translate-y-4 group-hover:-rotate-2 bg-muted z-0 hover:z-20! hover:opacity-100! hover:scale-[1.02]! hover:grayscale-0!">
           {image && (
             <Image
               src={image}
               alt={`${title} background`}
               fill
-              className="object-cover grayscale blur-[3px] scale-110"
+              className="object-cover grayscale blur-[3px] scale-110 transition-all duration-700 [div:hover>img]:grayscale-0 [div:hover>img]:blur-0"
             />
           )}
         </div>
         
-        {/* Foreground Layer (décalé bas/droite) */}
+        {/* Foreground Layer — recedes behind on background hover */}
         <div className="absolute bottom-0 right-0 w-[85%] h-[85%] rounded-2xl z-10 shadow-[0_15px_40px_rgb(0,0,0,0.12)] dark:shadow-[0_15px_40px_rgb(255,255,255,0.03)] overflow-hidden transform-gpu transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:rotate-1 bg-background border border-border/40">
           {video ? (
             <video
