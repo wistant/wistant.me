@@ -40,11 +40,11 @@ export function ProjectCard({
   const getCategoryColor = (cat: string) => {
     switch (cat) {
       case "client":
-        return "bg-emerald-500";
+        return "#10b981"; // emerald-500
       case "opensource":
-        return "bg-orange-500";
+        return "#f97316"; // orange-500
       default:
-        return "bg-blue-500";
+        return "#3b82f6"; // blue-500
     }
   };
 
@@ -58,27 +58,30 @@ export function ProjectCard({
   const liveLink = links?.find((l) => l.type.toLowerCase() === "website" || l.type.toLowerCase() === "live" || l.type.toLowerCase() === "preview") || links?.[0];
 
   return (
-    <div className={cn("group flex flex-col sm:flex-row w-full relative gap-6 sm:gap-8 lg:gap-10 items-stretch", className)}>
+    <div className={cn("group flex flex-col sm:flex-row w-full relative gap-6 sm:gap-8 lg:gap-10 items-stretch overflow-visible", className)}>
       <Link href={href || "#"} className="absolute inset-0 z-10" aria-label={`View ${title}`}>
         <span className="sr-only">View {title}</span>
       </Link>
 
       {/* --- Left Pane : Superposed Media --- */}
+      {/* overflow-visible on BOTH the pane and the card root lets bg layer bleed out */}
       <div className="w-full sm:w-[45%] relative aspect-4/3 rounded-2xl shrink-0 perspective-[1000px] overflow-visible">
-        {/* Background Layer — rises on hover via [&:hover]:z-20 */}
-        <div className="absolute top-0 left-0 w-[80%] h-[80%] rounded-2xl shadow-sm overflow-hidden opacity-50 dark:opacity-20 transform-gpu transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-x-4 group-hover:-translate-y-4 group-hover:-rotate-2 bg-muted z-0 hover:z-20! hover:opacity-100! hover:scale-[1.02]! hover:grayscale-0!">
+        {/* Background Layer — default behind fg, rises on direct hover */}
+        <div className="peer/bg absolute top-0 left-0 w-[80%] h-[80%] rounded-2xl overflow-hidden transform-gpu z-1 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-x-4 group-hover:-translate-y-4 group-hover:-rotate-2 hover:z-20! hover:shadow-2xl">
           {image && (
             <Image
               src={image}
               alt={`${title} background`}
               fill
-              className="object-cover grayscale blur-[3px] scale-110 transition-all duration-700 [div:hover>img]:grayscale-0 [div:hover>img]:blur-0"
+              className="object-cover transition-all duration-700"
             />
           )}
+          {/* Grayscale overlay that fades on hover */}
+          <div className="absolute inset-0 bg-black/40 dark:bg-black/60 transition-opacity duration-700 hover:opacity-0" />
         </div>
-        
-        {/* Foreground Layer — recedes behind on background hover */}
-        <div className="absolute bottom-0 right-0 w-[85%] h-[85%] rounded-2xl z-10 shadow-[0_15px_40px_rgb(0,0,0,0.12)] dark:shadow-[0_15px_40px_rgb(255,255,255,0.03)] overflow-hidden transform-gpu transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:rotate-1 bg-background border border-border/40">
+
+        {/* Foreground Layer — de-emphasizes when bg is hovered */}
+        <div className="absolute bottom-0 right-0 w-[85%] h-[85%] rounded-2xl z-10 shadow-[0_15px_40px_rgb(0,0,0,0.12)] dark:shadow-[0_15px_40px_rgb(255,255,255,0.03)] overflow-hidden transform-gpu transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:rotate-1 bg-background border border-border/40 peer-hover/bg:opacity-40 peer-hover/bg:scale-95 peer-hover/bg:blur-sm">
           {video ? (
             <video
               src={video}

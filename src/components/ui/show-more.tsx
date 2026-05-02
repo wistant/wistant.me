@@ -36,7 +36,7 @@ export function ShowMore({
         animate={{ height: isExpanded ? "auto" : initialHeight }}
         initial={{ height: initialHeight }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="overflow-y-hidden overflow-x-visible relative"
+        className="overflow-y-clip overflow-x-visible relative"
       >
         {children}
 
