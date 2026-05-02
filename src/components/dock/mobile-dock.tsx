@@ -25,7 +25,7 @@ export function FloatingDockMobile({
   return (
     <div
       className={cn(
-        "flex md:hidden items-center justify-between w-full max-w-[400px] gap-1 px-2 py-2 rounded-2xl",
+        "flex md:hidden items-center justify-center w-fit gap-0.5 px-2 py-1.5 rounded-2xl",
         "bg-card/90 dark:bg-card/95 backdrop-blur-2xl",
         "border border-border/60",
         "shadow-[0_8px_30px_rgba(0,0,0,0.12)] z-50",

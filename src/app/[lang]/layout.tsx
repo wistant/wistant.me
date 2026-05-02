@@ -120,7 +120,7 @@ export default async function RootLayout({
                     href: `/${lang}`,
                   },
                   ...DATA.navbar
-                    .filter((item) => ["/about", "/projects", "/blog"].includes(item.href))
+                    .filter((item) => ["/about", "/projects", "/blog", "/contact"].includes(item.href))
                     .map((item) => {
                       const key = item.label.toLowerCase() as keyof typeof dict.navigation;
                       return {
@@ -129,6 +129,11 @@ export default async function RootLayout({
                         href: `/${lang}${item.href}`,
                       };
                     }),
+                  // {
+                  //   title: dict.navigation.certifications || "Certifications",
+                  //   icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
+                  //   href: `/${lang}/certifications`,
+                  // },
                 ]}
               />
             </div>
