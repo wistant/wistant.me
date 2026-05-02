@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.0] - 2026-05-02 - [Cinematic Grid & Fluid Navigation]
+
+### Fonctionnalités
+
+- **Cinematic Projects Overhaul** : Refont complète de la section Projets avec une grille horizontale alternée (Gauche/Droite).
+- **Expanding Mobile Navigation** : Implémentation d'un dock mobile extensible (style Aceternity) avec labels textuels et icônes.
+- **Visual Depth Dynamics** : Ajout du système `peer/bg` pour l'élévation des couches d'images au survol dans les cartes projets.
+- **Smart Adaptive Height** : Refactorisation de `ShowMore` avec détection automatique de la hauteur du contenu pour cacher les gradients/boutons inutiles.
+
+### Corrections & Refactoring
+
+- **Layout Integrity** : Correction des débordements horizontaux via `overflow-y-clip` permettant le "bleed" des médias sans scroll horizontal forcé.
+- **Data Curation** : Mise à jour des informations personnelles et des liens sociaux pour une découverte fluide.
+
 ## [1.4.0] - 2026-04-20 - [Neural OG Synchronization]
 
 ### Fonctionnalités

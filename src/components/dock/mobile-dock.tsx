@@ -94,7 +94,7 @@ export function FloatingDockMobile({
           type="button"
           onClick={() => setOpen(!open)}
           className={cn(
-            "h-12 w-12 flex items-center justify-center rounded-full bg-card/95 backdrop-blur-xl border border-border/60 shadow-xl transition-all active:scale-90 relative z-[60]",
+            "h-12 w-12 flex items-center justify-center rounded-full bg-card/95 backdrop-blur-xl border border-border/60 shadow-xl transition-all active:scale-90 relative z-50",
             open ? "bg-primary/10" : ""
           )}
         >
