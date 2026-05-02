@@ -25,7 +25,7 @@ export const personalData = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/wistantkode",
+        url: "https://github.com/wistant",
         icon: "/icons/github.svg",
         navbar: true,
       },
