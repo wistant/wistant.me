@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
@@ -13,9 +13,9 @@ interface ShowMoreProps {
   className?: string;
   buttonTextShow?: string;
   buttonTextHide?: string;
-  href?: string; // Link to the full page
-  linkText?: string; // Text for the full page link
-  buttonClassName?: string; // Additional classes for the button container
+  href?: string;
+  linkText?: string;
+  buttonClassName?: string;
 }
 
 export function ShowMore({
@@ -29,49 +29,65 @@ export function ShowMore({
   buttonClassName,
 }: ShowMoreProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [needsToggle, setNeedsToggle] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      // Only show the toggle button if content is actually taller than the initial height
+      setNeedsToggle(contentRef.current.scrollHeight > initialHeight);
+    }
+  }, [initialHeight]);
 
   return (
     <div className={cn("relative w-full", className)}>
       <motion.div
-        animate={{ height: isExpanded ? "auto" : initialHeight }}
-        initial={{ height: initialHeight }}
+        animate={{ height: isExpanded ? "auto" : (needsToggle ? initialHeight : "auto") }}
+        initial={{ height: needsToggle ? initialHeight : "auto" }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="overflow-y-clip overflow-x-visible relative"
       >
-        {children}
+        <div ref={contentRef}>
+          {children}
+        </div>
 
-        {/* The blur overlay is now just a standard div with opacity transition, completely bypassing framer-motion exit conflicts */}
-        <div 
-          className={cn(
-            "absolute inset-x-0 bottom-0 z-10 h-72 pointer-events-none transition-opacity duration-500",
-            "bg-linear-to-t from-background via-background/80 to-transparent",
-            isExpanded ? "opacity-0" : "opacity-100"
-          )}
-        />
+        {/* Blur overlay — only when collapsed AND content actually overflows */}
+        {needsToggle && (
+          <div
+            className={cn(
+              "absolute inset-x-0 bottom-0 z-10 h-72 pointer-events-none transition-opacity duration-500",
+              "bg-linear-to-t from-background via-background/80 to-transparent",
+              isExpanded ? "opacity-0" : "opacity-100"
+            )}
+          />
+        )}
       </motion.div>
 
       <div className={cn(
         "relative z-20 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-500",
-        isExpanded ? "mt-8" : cn("-mt-12", buttonClassName)
+        isExpanded ? "mt-8" : cn(needsToggle ? "-mt-12" : "mt-8", buttonClassName)
       )}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="rounded-full transition-all group px-5 h-9 text-sm font-medium text-muted-foreground bg-muted/30 hover:bg-muted/70 hover:text-foreground shadow-none border border-border/40"
-        >
-          {isExpanded ? (
-            <>
-              {buttonTextHide}
-              <ChevronUp className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
-            </>
-          ) : (
-            <>
-              {buttonTextShow}
-              <ChevronDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-            </>
-          )}
-        </Button>
+        {/* Toggle button — only when content overflows */}
+        {needsToggle && (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="rounded-full transition-all group px-5 h-9 text-sm font-medium text-muted-foreground bg-muted/30 hover:bg-muted/70 hover:text-foreground shadow-none border border-border/40"
+          >
+            {isExpanded ? (
+              <>
+                {buttonTextHide}
+                <ChevronUp className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+              </>
+            ) : (
+              <>
+                {buttonTextShow}
+                <ChevronDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+              </>
+            )}
+          </Button>
+        )}
 
         {href && (
           <Link href={href}>
