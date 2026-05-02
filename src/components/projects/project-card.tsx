@@ -110,7 +110,7 @@ export function ProjectCard({
       <div className="flex flex-col items-start justify-center w-full sm:w-[55%] relative z-20 py-1">
         {/* Label de catégorie & Date */}
         <div className="flex items-center gap-3 mb-3 w-full">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-800 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-muted-foreground shadow-sm">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-neutral-100 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-800 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-muted-foreground shadow-sm">
             <span
               className="size-1.5 rounded-full"
               style={{ backgroundColor: getCategoryColor(category) }}
@@ -146,7 +146,7 @@ export function ProjectCard({
               const needsInvert = ["nextjs", "github", "vercel", "prisma", "notebook", "eclipse"].includes(tagKey);
 
               return (
-                <div key={tag} className="flex items-center justify-center p-1.5 rounded-md bg-neutral-50 dark:bg-neutral-800/40 border border-neutral-200/60 dark:border-neutral-800 transition-all duration-300 hover:scale-110 hover:bg-neutral-100 dark:hover:bg-neutral-800" title={tag}>
+                <div key={tag} className="flex items-center justify-center p-1.5 rounded-none bg-neutral-50 dark:bg-neutral-800/40 border border-neutral-200/60 dark:border-neutral-800 transition-all duration-300 hover:scale-110 hover:bg-neutral-100 dark:hover:bg-neutral-800" title={tag}>
                   {mappedImage ? (
                     <Image 
                       src={mappedImage} 
@@ -173,7 +173,7 @@ export function ProjectCard({
               href={githubLink.href} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-medium text-neutral-600 bg-transparent border border-neutral-200 hover:bg-neutral-100 hover:text-black dark:border-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white transition-all duration-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[10px] font-medium text-neutral-600 bg-transparent border border-neutral-200 hover:bg-neutral-100 hover:text-black dark:border-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white transition-all duration-300"
             >
               <Icons.github className="size-2.5" />
               Source
@@ -184,7 +184,7 @@ export function ProjectCard({
               href={liveLink.href} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-semibold text-white bg-blue-500 shadow-xs hover:bg-blue-600 hover:shadow-md dark:bg-blue-500/90 dark:hover:bg-blue-500 transition-all duration-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-none text-[10px] font-semibold text-white bg-blue-500 shadow-xs hover:bg-blue-600 hover:shadow-md dark:bg-blue-500/90 dark:hover:bg-blue-500 transition-all duration-300"
             >
               <Icons.globe className="size-2.5" />
               Live

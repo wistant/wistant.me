@@ -106,7 +106,7 @@ export default async function Home({
         </div>
       </section>
 
-      <section id="education">
+      {/* <section id="education">
         <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 8}>
             <h2 className="text-xl font-bold font-clash">{dict.education.title}</h2>
@@ -115,21 +115,23 @@ export default async function Home({
             <EducationSection data={resume.education} presentLabel={dict.work.present} />
           </BlurFade>
         </div>
-      </section>
+      </section> */}
 
       <section id="projects">
         <ShowMore
-          initialHeight={1650}
+          initialHeight={1200}
+          buttonTextShow={dict.ui.seeMore}
+          buttonTextHide={dict.ui.showLess}
           href={`/${lang}/projects`}
           linkText={dict.projects.viewAll || "View All"}
         >
-          <ProjectsSection limit={6} lang={lang} />
+          <ProjectsSection lang={lang} />
         </ShowMore>
       </section>
 
       <section id="hackathons">
         <ShowMore
-          initialHeight={450}
+          initialHeight={350}
           buttonTextShow={dict.ui.seeMore}
           buttonTextHide={dict.ui.showLess}
           href={`/${lang}/hackathons`}
