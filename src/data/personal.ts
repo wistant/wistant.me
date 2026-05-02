@@ -1,16 +1,17 @@
 import { PersonalData, Contact } from "@/types/resume";
+import { siteConfig } from "@/config/site";
 
 export const personalData: { en: PersonalData; fr: PersonalData; contact: Contact } = {
   en: {
-    name: "Wistant..</>",
-    initials: "W",
-    url: "https://wistant.me",
-    location: "Douala, 🇨🇲",
-    locationLink: "https://www.google.com/maps/place/Douala",
+    name: siteConfig.name,
+    initials: siteConfig.initials,
+    url: siteConfig.url,
+    location: siteConfig.location,
+    locationLink: siteConfig.locationLink,
     description:
-      "I'm Wistant, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop.",
+      "I'm Wistant Kode, a Architect & Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop.",
     about:
-      "I'm Wistant, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop. My passion lies in creating seamless user experiences that are as robust under the hood as they are beautiful on the surface.",
+      "I'm Wistant Kode, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop. My passion lies in creating seamless user experiences that are as robust under the hood as they are beautiful on the surface.",
     avatarUrl: "/me/me.png",
     post: "Software Engineer • Distributed Systems • High-End Interfaces",
     navbar: [
@@ -22,15 +23,15 @@ export const personalData: { en: PersonalData; fr: PersonalData; contact: Contac
     ],
   },
   fr: {
-    name: "Wistant..</>",
-    initials: "W",
-    url: "https://wistant.me",
-    location: "Douala, 🇨🇲",
-    locationLink: "https://www.google.com/maps/place/Douala",
+    name: siteConfig.name,
+    initials: siteConfig.initials,
+    url: siteConfig.url,
+    location: siteConfig.location,
+    locationLink: siteConfig.locationLink,
     description:
-      "Je suis Wistant, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop.",
+      "Je suis Wistant Kode, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop.",
     about:
-      "Je suis Wistant, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop. Ma passion réside dans la création d'expériences utilisateur fluides, aussi robustes sous le capot que belles en surface.",
+      "Je suis Wistant Kode, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop. Ma passion réside dans la création d'expériences utilisateur fluides, aussi robustes sous le capot que belles en surface.",
     avatarUrl: "/me/me.png",
     post: "Ingénieur Logiciel • Systèmes Distribués • Interfaces Haut de Gamme",
     navbar: [
@@ -42,13 +43,13 @@ export const personalData: { en: PersonalData; fr: PersonalData; contact: Contac
     ],
   },
   contact: {
-    email: "wistantkode@protonmail.com",
-    tel: "+237697135341",
+    email: siteConfig.links.email,
+    tel: siteConfig.links.tel,
     social: {
-      GitHub: { name: "GitHub", url: "https://github.com/wistant", icon: "Github", navbar: true },
-      LinkedIn: { name: "LinkedIn", url: "https://linkedin.com/in/wistantkode", icon: "Linkedin", navbar: true },
-      WhatsApp: { name: "WhatsApp", url: "https://wa.me/+237697135341", icon: "Whatsapp", navbar: true },
-      X: { name: "X", url: "https://x.com/iamwistant", icon: "X", navbar: true },
+      GitHub: { name: "GitHub", url: siteConfig.links.github, icon: "Github", navbar: true },
+      LinkedIn: { name: "LinkedIn", url: siteConfig.links.linkedin, icon: "Linkedin", navbar: true },
+      WhatsApp: { name: "WhatsApp", url: siteConfig.links.whatsapp, icon: "Whatsapp", navbar: true },
+      X: { name: "X", url: siteConfig.links.x, icon: "X", navbar: true },
     },
   },
 };
