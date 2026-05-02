@@ -112,6 +112,7 @@ const projects = defineCollection({
     images: z.array(z.string()).optional(),
     content: z.string().optional(),
     lang: z.string().optional(),
+    category: z.enum(["client", "opensource", "personal"]).default("personal"),
   }),
   transform: (document) => {
     const rawPath = document._meta.path;
