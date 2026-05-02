@@ -1,7 +1,7 @@
 import { getProjectsByLang } from "@/data/projects";
 import { Icons } from "@/components/ui/icons";
 import { ProjectCard } from "@/components/projects/project-card";
-import { TagFilter } from "@/components/blog/tag-filter";
+import { OpenSourceCard } from "@/components/projects/open-source-card";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import React, { Suspense } from "react";
@@ -22,94 +22,48 @@ export async function generateMetadata({
 
 export default async function ProjectsPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ lang: Language }>;
-  searchParams: Promise<{ tag?: string }>;
 }) {
   const { lang } = await params;
-  const resolvedSearchParams = await searchParams;
   const dict = await getDictionary(lang);
   const BLUR_FADE_DELAY = 0.04;
 
-  // Extract unique tags from active projects
-  const sortedProjects = getProjectsByLang(lang);
-  const allTags = [
-    dict.ui.allFilter,
-    ...Array.from(
-      new Set(
-        sortedProjects.flatMap(
-          (project) => (project.tags ?? []).filter(Boolean) as string[],
-        ),
-      ),
-    ).sort(),
-  ];
-
-  // Filter logic
-  const selectedTag = resolvedSearchParams.tag || dict.ui.allFilter;
-  const filteredProjects =
-    selectedTag === dict.ui.allFilter
-      ? sortedProjects
-      : sortedProjects.filter((project) =>
-          (project.tags ?? []).includes(selectedTag),
-        );
-
-  // Compute tag counts
-  const tagCounts = allTags.reduce(
-    (acc, tag) => {
-      if (tag === dict.ui.allFilter) {
-        acc[tag] = sortedProjects.length;
-      } else {
-        acc[tag] = sortedProjects.filter((project) =>
-          (project.tags ?? []).includes(tag),
-        ).length;
-      }
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
+  const allProjects = getProjectsByLang(lang);
+  
+  const clientProjects = allProjects.filter((p) => p.category === "client");
+  const openSourceProjects = allProjects.filter((p) => p.category === "opensource");
+  const personalProjects = allProjects.filter((p) => p.category === "personal");
 
   return (
-    <div className="min-h-screen bg-background relative pt-12 md:pt-16">
+    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 pt-12 pb-17 max-w-[608px] mx-auto">
       {/* Hero Background */}
-      <div className="absolute top-0 left-0 z-0 w-full h-[300px] mask-[linear-gradient(to_top,transparent_10%,black_80%)]">
+      <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
-          className="absolute top-0 left-0 size-full"
           squareSize={4}
           gridGap={6}
           color="#6B7280"
-          maxOpacity={0.2}
+          maxOpacity={0.45}
           flickerChance={0.05}
         />
       </div>
 
       {/* Header Section */}
-      <div className="p-6 border-b border-border flex flex-col gap-6 min-h-[250px] justify-center relative z-10">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="flex flex-col gap-2">
-            <h1 className="font-medium text-4xl md:text-5xl tracking-tighter">
+      <div className="flex flex-col gap-6 justify-center relative z-10 pt-8 pb-10">
+        <div className="w-full">
+          <div className="flex flex-col gap-4">
+            <h1 className="font-bold text-4xl md:text-5xl tracking-tighter text-foreground font-clash">
               {dict.projects.title}
             </h1>
-            <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl">
+            <p className="text-muted-foreground text-sm md:text-base font-light">
               {dict.projects.seo.description}
             </p>
           </div>
         </div>
-
-        {/* Filters */}
-        {allTags.length > 0 && (
-          <div className="max-w-7xl mx-auto w-full">
-            <TagFilter
-              tags={allTags}
-              selectedTag={selectedTag}
-              tagCounts={tagCounts}
-            />
-          </div>
-        )}
       </div>
 
-      {/* Projects Grid */}
-      <div className="max-w-7xl mx-auto w-full px-6 lg:px-0 py-8 md:py-12">
+      {/* Categorized Projects Grid */}
+      <div className="w-full relative z-10">
         <Suspense
           fallback={
             <div className="text-center py-20 text-muted-foreground">
@@ -117,42 +71,109 @@ export default async function ProjectsPage({
             </div>
           }
         >
-          {filteredProjects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden bg-border gap-[2px] border-x-2 border-b-2 border-border">
-              {filteredProjects.map((project, id) => {
-                const projectLinks = project.links?.map((link) => ({
-                  ...link,
-                  icon:
-                    link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? (
-                      <Icons.github className="size-3" />
-                    ) : (
-                      <Icons.globe className="size-3" />
-                    ),
-                })) || [];
+          {allProjects.length > 0 ? (
+            <div className="flex flex-col gap-y-24">
+              
+              {/* Selected Client Work */}
+              {clientProjects.length > 0 && (
+                <section className="flex flex-col gap-10">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-clash">Client Work</h2>
+                    <div className="h-px flex-1 bg-border/50 translate-y-1" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-12">
+                    {clientProjects.map((project, id) => {
+                      const projectLinks = project.links?.map((link) => ({
+                        ...link,
+                        icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? <Icons.github className="size-3" /> : <Icons.globe className="size-3" />,
+                      })) || [];
 
-                return (
-                  <BlurFade
-                    key={project.slug}
-                    delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-                    className="h-full"
-                  >
-                    <ProjectCard
-                      href={`/${lang}/projects/${project.slug}`}
-                      variant="blog"
-                      title={project.title || ""}
-                      description={project.description || ""}
-                      dates={project.dates || ""}
-                      tags={(project.tags ?? []).filter((t): t is string =>
-                        Boolean(t),
-                      )}
-                      image={project.image}
-                      video={project.video}
-                      links={projectLinks}
-                      className="h-full"
-                    />
-                  </BlurFade>
-                );
-              })}
+                      return (
+                        <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 10 + id * 0.05} className="w-full">
+                          <ProjectCard
+                            category="client"
+                            href={`/${lang}/projects/${project.slug}`}
+                            title={project.title || ""}
+                            description={project.description || ""}
+                            dates={project.dates || ""}
+                            tags={project.tags ?? []}
+                            image={project.image}
+                            video={project.video}
+                            links={projectLinks}
+                            className="w-full"
+                          />
+                        </BlurFade>
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
+
+              {/* Open Source Contributions */}
+              {openSourceProjects.length > 0 && (
+                <section className="flex flex-col gap-10">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-clash">Open Source</h2>
+                    <div className="h-px flex-1 bg-border/50 translate-y-1" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-6">
+                    {openSourceProjects.map((project, id) => {
+                      const projectLinks = project.links?.map((link) => ({
+                        ...link,
+                        icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? <Icons.github className="size-3" /> : <Icons.globe className="size-3" />,
+                      })) || [];
+
+                      return (
+                        <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 12 + id * 0.05} className="w-full">
+                          <OpenSourceCard
+                            title={project.title || ""}
+                            description={project.description || ""}
+                            dates={project.dates || ""}
+                            tags={project.tags ?? []}
+                            links={projectLinks}
+                          />
+                        </BlurFade>
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
+
+              {/* Personal Projects */}
+              {personalProjects.length > 0 && (
+                <section className="flex flex-col gap-10">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-clash">Personal Projects</h2>
+                    <div className="h-px flex-1 bg-border/50 translate-y-1" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-12">
+                    {personalProjects.map((project, id) => {
+                      const projectLinks = project.links?.map((link) => ({
+                        ...link,
+                        icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? <Icons.github className="size-3" /> : <Icons.globe className="size-3" />,
+                      })) || [];
+
+                      return (
+                        <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 14 + id * 0.05} className="w-full">
+                          <ProjectCard
+                            category="personal"
+                            href={`/${lang}/projects/${project.slug}`}
+                            title={project.title || ""}
+                            description={project.description || ""}
+                            dates={project.dates || ""}
+                            tags={project.tags ?? []}
+                            image={project.image}
+                            video={project.video}
+                            links={projectLinks}
+                            className="w-full"
+                          />
+                        </BlurFade>
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
+
             </div>
           ) : (
             <div className="text-center py-20 text-muted-foreground border border-dashed rounded-xl">
@@ -161,6 +182,6 @@ export default async function ProjectsPage({
           )}
         </Suspense>
       </div>
-    </div>
+    </main>
   );
 }
