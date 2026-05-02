@@ -57,40 +57,56 @@ export function ProjectCard({
   const liveLink = links?.find((l) => l.type.toLowerCase() === "website" || l.type.toLowerCase() === "live" || l.type.toLowerCase() === "preview") || links?.[0];
 
   return (
-    <div className={cn("group flex flex-col items-start w-full relative", className)}>
+    <div className={cn("group flex flex-col md:flex-row items-center w-full relative gap-8 lg:gap-16", className)}>
       <Link href={href || "#"} className="absolute inset-0 z-10" aria-label={`View ${title}`}>
         <span className="sr-only">View {title}</span>
       </Link>
 
-      <div className="w-full relative overflow-hidden rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(255,255,255,0.02)] transition-shadow duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:hover:shadow-[0_8px_30px_rgb(255,255,255,0.06)]">
-        {video ? (
-          <video
-            src={video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full aspect-square object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-        ) : image ? (
-          <Image
-            src={image}
-            alt={title}
-            width={800}
-            height={800}
-            className="w-full aspect-square object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-        ) : (
-          <div className="w-full aspect-square bg-muted/20" />
-        )}
+      {/* --- Left Pane : Superposed Media --- */}
+      <div className="w-full md:w-1/2 relative aspect-4/3 md:aspect-square lg:aspect-4/3 rounded-2xl md:rounded-3xl shrink-0 perspective-[1000px]">
+        {/* Background Layer (décalé gauche/haut) */}
+        <div className="absolute top-0 left-0 w-4/5 h-4/5 rounded-2xl shadow-xl overflow-hidden opacity-60 dark:opacity-30 transform-gpu transition-transform duration-700 group-hover:-translate-x-4 group-hover:-translate-y-4">
+          {image && (
+            <Image
+              src={image}
+              alt={`${title} background`}
+              fill
+              className="object-cover grayscale blur-[2px]"
+            />
+          )}
+        </div>
         
-        {/* Badge de lien en bas à droite */}
-        <div className="absolute bottom-4 right-4 size-10 bg-black dark:bg-white text-white dark:text-black rounded-lg flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-md">
-          <ArrowUpRight className="size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        {/* Foreground Layer (décalé bas/droite) */}
+        <div className="absolute bottom-0 right-0 w-[85%] h-[85%] rounded-2xl z-10 shadow-[0_20px_50px_rgb(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgb(255,255,255,0.05)] overflow-hidden transform-gpu transition-all duration-700 group-hover:scale-105 hover:scale-110!">
+          {video ? (
+            <video
+              src={video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : image ? (
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-muted/20" />
+          )}
+
+          {/* Badge de lien sur l'image */}
+          <div className="absolute bottom-4 right-4 size-10 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-md">
+            <ArrowUpRight className="size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </div>
         </div>
       </div>
 
-      <div className="flex flex-col items-start mt-6 w-full gap-3">
+      {/* --- Right Pane : Content --- */}
+      <div className="flex flex-col items-start w-full md:w-1/2 gap-4">
         {/* Label de catégorie */}
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -131,7 +147,7 @@ export function ProjectCard({
         </div>
 
         {/* Description courte */}
-        <div className="text-sm prose prose-neutral dark:prose-invert text-muted-foreground leading-relaxed w-full">
+        <div className="text-sm md:text-base prose prose-neutral dark:prose-invert text-muted-foreground leading-relaxed w-full">
           <Markdown>{description}</Markdown>
         </div>
 

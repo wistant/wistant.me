@@ -29,7 +29,7 @@ export default async function ProjectsSection({
 
   return (
     <section id="projects">
-      <div className="flex min-h-0 flex-col gap-y-20 max-w-[608px] mx-auto w-full px-6 lg:px-0">
+      <div className="flex min-h-0 flex-col gap-y-20 max-w-5xl mx-auto w-full px-6 lg:px-0">
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">
             <div className="flex-1 h-px bg-linear-to-r from-transparent via-border to-transparent" />
@@ -57,8 +57,8 @@ export default async function ProjectsSection({
               <h3 className="text-xl md:text-2xl font-bold font-clash">Client Work</h3>
               <div className="h-px flex-1 bg-border/50" />
             </div>
-            {/* Grille flexible adaptée à 608px : 1 colonne par défaut, 2 si la place */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-12">
+            {/* Liste verticale pour les projets en dual pane */}
+            <div className="flex flex-col w-full mx-auto gap-y-24 mt-8">
               {clientProjects.map((project, id) => {
                 const projectLinks = project.links?.map((link) => ({
                   ...link,
@@ -93,8 +93,8 @@ export default async function ProjectsSection({
               <h3 className="text-xl md:text-2xl font-bold font-clash">Personal Projects</h3>
               <div className="h-px flex-1 bg-border/50" />
             </div>
-            {/* Grille flexible adaptée à 608px : 1 colonne par défaut, 2 si la place */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-12">
+            {/* Liste verticale pour les projets en dual pane */}
+            <div className="flex flex-col w-full mx-auto gap-y-24 mt-8">
               {personalProjects.map((project, id) => {
                 const projectLinks = project.links?.map((link) => ({
                   ...link,
@@ -129,8 +129,8 @@ export default async function ProjectsSection({
               <h3 className="text-xl md:text-2xl font-bold font-clash">Open Source</h3>
               <div className="h-px flex-1 bg-border/50" />
             </div>
-            {/* Grille OS réduite à un stack vertical fluide sur petite largeur */}
-            <div className="flex flex-col w-full mx-auto gap-y-6">
+            {/* Grille OS en 2 colonnes strictes horizontalement */}
+            <div className="grid grid-cols-1 md:grid-cols-2 w-full mx-auto gap-x-8 gap-y-8 mt-8">
               {openSourceProjects.map((project, id) => {
                 const projectLinks = project.links?.map((link) => ({
                   ...link,

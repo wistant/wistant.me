@@ -36,7 +36,7 @@ export default async function ProjectsPage({
   const personalProjects = allProjects.filter((p) => p.category === "personal");
 
   return (
-    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 pt-12 pb-17 max-w-[608px] mx-auto">
+    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 pt-12 pb-17 max-w-5xl mx-auto">
       {/* Hero Background */}
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
@@ -52,10 +52,10 @@ export default async function ProjectsPage({
       <div className="flex flex-col gap-6 justify-center relative z-10 pt-8 pb-10">
         <div className="w-full">
           <div className="flex flex-col gap-4">
-            <h1 className="font-bold text-4xl md:text-5xl tracking-tighter text-foreground font-clash">
+            <h1 className="font-bold text-4xl md:text-6xl tracking-tighter text-foreground font-clash">
               {dict.projects.title}
             </h1>
-            <p className="text-muted-foreground text-sm md:text-base font-light">
+            <p className="text-muted-foreground text-base md:text-lg font-light max-w-2xl">
               {dict.projects.seo.description}
             </p>
           </div>
@@ -63,7 +63,7 @@ export default async function ProjectsPage({
       </div>
 
       {/* Categorized Projects Grid */}
-      <div className="w-full relative z-10">
+      <div className="w-full relative z-10 pb-32">
         <Suspense
           fallback={
             <div className="text-center py-20 text-muted-foreground">
@@ -78,10 +78,10 @@ export default async function ProjectsPage({
               {clientProjects.length > 0 && (
                 <section className="flex flex-col gap-10">
                   <div className="flex items-center gap-4">
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-clash">Client Work</h2>
+                    <h2 className="text-3xl font-bold tracking-tight font-clash">Client Work</h2>
                     <div className="h-px flex-1 bg-border/50 translate-y-1" />
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-12">
+                  <div className="flex flex-col w-full mx-auto gap-y-24 mt-8">
                     {clientProjects.map((project, id) => {
                       const projectLinks = project.links?.map((link) => ({
                         ...link,
@@ -113,10 +113,10 @@ export default async function ProjectsPage({
               {openSourceProjects.length > 0 && (
                 <section className="flex flex-col gap-10">
                   <div className="flex items-center gap-4">
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-clash">Open Source</h2>
+                    <h2 className="text-3xl font-bold tracking-tight font-clash">Open Source</h2>
                     <div className="h-px flex-1 bg-border/50 translate-y-1" />
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 w-full mx-auto gap-x-8 gap-y-8 mt-8">
                     {openSourceProjects.map((project, id) => {
                       const projectLinks = project.links?.map((link) => ({
                         ...link,
@@ -143,10 +143,10 @@ export default async function ProjectsPage({
               {personalProjects.length > 0 && (
                 <section className="flex flex-col gap-10">
                   <div className="flex items-center gap-4">
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-clash">Personal Projects</h2>
+                    <h2 className="text-3xl font-bold tracking-tight font-clash">Personal Projects</h2>
                     <div className="h-px flex-1 bg-border/50 translate-y-1" />
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-12">
+                  <div className="flex flex-col w-full mx-auto gap-y-24 mt-8">
                     {personalProjects.map((project, id) => {
                       const projectLinks = project.links?.map((link) => ({
                         ...link,
