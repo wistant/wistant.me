@@ -26,14 +26,6 @@ export const educationData: Record<string, Education[]> = {
       start: "2023",
       end: "2024",
     },
-    {
-      school: "Lycée Technique de Douala",
-      href: "https://",
-      degree: "BTS in Computer Science and Management (Informatique de Gestion)",
-      logoUrl: "/education/logo-iut.jpg",
-      start: "2021",
-      end: "2023",
-    },
   ],
   fr: [
     {
