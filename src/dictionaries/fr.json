@@ -12,7 +12,7 @@
   },
   "hero": {
     "title": "Hi Bienvenue 👋🏻",
-    "description": "Je suis Wistant, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop."
+    "description": "Je suis Wistant Kode, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop."
   },
   "about": {
     "title": "À propos de moi",
@@ -29,9 +29,9 @@
       "Auteur de plusieurs bibliothèques utilitaires populaires qui facilitent le prototypage rapide d'applications multiplateformes utilisant des stacks technologiques modernes."
     ],
     "seo": {
-      "title": "À Propos | Wistant - Ingénieur Logiciel & Architecte Numérique",
-      "description": "Découvrez la philosophie d'ingénierie et le parcours de Wistant, expert en architectures techniques résilientes et en expériences numériques haut de gamme.",
-      "keywords": "Ingénieur Logiciel, Développeur Full-Stack, Développement Mobile, TypeScript, Next.js, NestJS, Cameroun"
+      "title": "À Propos | Wistant Kode - Ingénieur Logiciel & Architecte Numérique",
+      "description": "Découvrez la philosophie d'ingénierie et le parcours de Wistant Kode, expert en architectures techniques résilientes et en expériences numériques haut de gamme.",
+      "keywords": "Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développement Mobile, TypeScript, Next.js, NestJS, Cameroun"
     }
   },
   "work": {
@@ -94,9 +94,9 @@
     "button": "Me contacter",
     "social": "Mes réseaux",
     "seo": {
-      "title": "Contactez Wistant | Parlons de votre Projet",
-      "description": "Besoin d'un ingénieur logiciel ? Contactez-moi pour du freelance, du consulting ou des collaborations techniques innovantes.",
-      "keywords": "Contact, Développeur Freelance, Ingénieur Full-Stack, Consulting Logiciel"
+      "title": "Contactez Wistant Kode | Parlons de votre Projet",
+      "description": "Besoin d'un ingénieur logiciel ? Contactez Wistant Kode pour du freelance, consulting ou collaborations techniques innovantes.",
+      "keywords": "Contact, Wistant Kode, Développeur Freelance, Ingénieur Full-Stack, Consulting Logiciel"
     }
   },
   "hackathons": {
@@ -147,9 +147,9 @@
   },
   "global": {
     "seo": {
-      "title": "Wistant | Ingénieur Logiciel Senior & Architecte de Systèmes",
+      "title": "Wistant Kode | Ingénieur Logiciel Senior & Architecte de Systèmes",
       "description": "Ingénieur logiciel expert au Cameroun spécialisé dans les solutions numériques haute performance (Web, Mobile, Systèmes Distribués). Bâtissons votre vision.",
-      "keywords": "Wistant, Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développeur Mobile, TypeScript, Next.js, React Native, Cameroun, Freelance"
+      "keywords": "Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développeur Mobile, TypeScript, Next.js, React Native, Cameroun, Freelance"
     }
   }
 }

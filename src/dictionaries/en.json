@@ -12,7 +12,7 @@
   },
   "hero": {
     "title": "Hi Welcome 👋🏻",
-    "description": "I'm Wistant, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop."
+    "description": "I'm Wistant Kode, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop."
   },
   "about": {
     "title": "About me",
@@ -29,21 +29,21 @@
       "Authored several popular utility libraries that facilitate rapid prototyping of cross-platform applications using modern tech stacks."
     ],
     "seo": {
-      "title": "About Wistant | Digital Architect & Senior Software Engineer",
-      "description": "Explore the engineering philosophy and professional journey of Wistant, a specialist in resilient technical architectures and high-end digital experiences.",
-      "keywords": "Software Engineer, Full-Stack Developer, Mobile Development, TypeScript, Next.js, NestJS, Cameroon"
+      "title": "About Wistant Kode | Digital Architect & Senior Software Engineer",
+      "description": "Explore the engineering philosophy and professional journey of Wistant Kode, a specialist in resilient technical architectures and high-end digital experiences.",
+      "keywords": "Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Development, TypeScript, Next.js, NestJS, Cameroon"
     }
   },
   "work": {
-    "title": "Experience",
+    "title": "My Experience",
     "viewMore": "View full journey",
     "present": "Present"
   },
   "education": {
-    "title": "Education"
+    "title": "My Education Steps"
   },
   "skills": {
-    "title": "My Stack",
+    "title": "My Technical stack",
     "description": "The technologies I use daily to build and ship reliable products.",
     "categories": {
       "frontend": "Frontend",
@@ -53,7 +53,7 @@
   },
   "projects": {
     "title": "Featured Work",
-    "viewAll": "Explore the archive",
+    "viewAll": "Explore all projects",
     "cta": "View Project",
     "stack": "Stack built with",
     "aboutThisProject": "About this project",
@@ -72,8 +72,8 @@
     "backToProjects": "Back to Projects",
     "seo": {
       "title": "Projects & Portfolio | High-Performance Digital Solutions",
-      "description": "A curated showcase of production-grade SaaS, mobile applications, and robust technical architectures built by Wistant.",
-      "keywords": "Portfolio, Projects, TypeScript, Next.js, NestJS, Web Development, Mobile Apps"
+      "description": "A curated showcase of Open Source contributions, production-grade SaaS, mobile applications, and robust technical architectures built by Wistant.",
+      "keywords": "Open source contributions, OpenSource, Side projects,Personnals projects,Portfolio, Projects, TypeScript, Next.js, NestJS, Web Development, Mobile Apps"
     }
   },
   "blog": {
@@ -84,8 +84,8 @@
       "description": "Deep dives into software architecture, cross-platform development, and modern engineering trends to help you build stable and scalable systems.",
       "keywords": "Blog, Software Development, System Architecture, TypeScript, Engineering"
     },
-    "back": "← blog",
-    "backToAll": "← Back to all posts"
+    "back": "Blog",
+    "backToAll": "Back to all posts"
   },
   "contact": {
     "title": "Let's collaborate",
@@ -94,9 +94,9 @@
     "button": "Get in touch",
     "social": "Connect with me",
     "seo": {
-      "title": "Contact Wistant | Let's Build Your Vision",
-      "description": "Need a software engineer? Get in touch for freelance, consulting, or innovative technical collaborations.",
-      "keywords": "Contact, Hire Developer, Freelance, Software Consultant"
+      "title": "Contact Wistant Kode | Let's Build Your Vision",
+      "description": "Need a software engineer? Get in touch with Wistant Kode for freelance, consulting, or innovative technical collaborations.",
+      "keywords": "Contact, Wistant Kode, Hire Developer, Freelance, Software Consultant"
     }
   },
   "hackathons": {
@@ -110,7 +110,7 @@
     }
   },
   "certifications": {
-    "title": "Certifications",
+    "title": "Certifications & Technicals certificates",
     "subtitle": "Proof of Expertise",
     "description": "A curated collection of my professional and academic certifications, demonstrating my commitment to continuous learning and technical excellence.",
     "viewCertificate": "View Certificate",
@@ -147,8 +147,8 @@
   },
   "global": {
     "seo": {
-      "title": "Wistant | Senior Software Engineer & Systems Architect",
-      "description": "Senior Software Engineer in Cameroon specializing in high-performance digital solutions across Web, Mobile, and Distributed Systems. Let's build your vision.",
+      "title": "Wistant Kode | Senior Software Engineer & Systems Architect",
+      "description": "Software Engineer/Architect in Cameroon specializing in high-performance digital solutions across Web, Mobile, and Distributed Systems. Let's build your vision.",
       "keywords": "Wistant, Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Developer, Desktop Apps, TypeScript, Next.js, React, NestJS, Cameroon"
     }
   }
