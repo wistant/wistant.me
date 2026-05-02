@@ -129,11 +129,6 @@ export default async function RootLayout({
                         href: `/${lang}${item.href}`,
                       };
                     }),
-                  {
-                    title: dict.navigation.certifications || "Certifications",
-                    icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
-                    href: `/${lang}/certifications`,
-                  },
                 ]}
               />
             </div>
