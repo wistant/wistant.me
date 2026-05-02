@@ -55,7 +55,7 @@ export default async function ProjectsSection({
           {displayProjects.map((project, id) => {
             const projectLinks = project.links?.map((link) => ({
               ...link,
-              icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github"
+              icon: (link.type?.toLowerCase() === "source" || link.type?.toLowerCase() === "github")
                 ? <Icons.github className="size-3" />
                 : <Icons.globe className="size-3" />,
             })) || [];
