@@ -1,8 +1,13 @@
+import { allProjects } from "content-collections";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import { Metadata } from "next";
-import { allProjects } from "content-collections";
+import { mdxComponents } from "@/components/mdx/mdx-components";
+import { remarkCodeMeta } from "@/lib/remark-code-meta";
+import { remarkImageSize } from "@/lib/remark-image-size";
+import rehypePrettyCode from "rehype-pretty-code";
 import { getDictionary } from "@/lib/dictionary";
 import ProjectDetailClient from "@/components/projects/ProjectDetailClient";
 
@@ -13,7 +18,7 @@ interface ProjectSlugPageProps {
 export async function generateStaticParams() {
   return allProjects.map((project) => ({
     slug: project.slug,
-    lang: project.lang,
+    lang: project.lang || "en",
   }));
 }
 
@@ -21,21 +26,18 @@ export async function generateMetadata({
   params,
 }: ProjectSlugPageProps): Promise<Metadata> {
   const { lang, slug } = await params;
-  let project = allProjects.find((p) => p.slug === slug && p.lang === lang);
-  if (!project && lang !== "en") {
-     project = allProjects.find((p) => p.slug === slug && p.lang === "en");
-  }
+  const project = allProjects.find((p) => p.slug === slug && p.lang === lang);
 
   if (!project) {
     return getPageMetadata(lang);
   }
 
   const pageSeo = {
-    title: project.title || "",
-    description: project.description || "",
-    keywords: project.tags || [],
+    title: project.title,
+    description: project.description,
+    keywords: project.tags ?? [],
     url: `/${lang}/projects/${slug}`,
-    image: project.image ? (project.image.startsWith("/") ? project.image : `/project/${project.image}`) : undefined,
+    image: project.image,
   };
 
   return getPageMetadata(lang, pageSeo);
@@ -43,69 +45,50 @@ export async function generateMetadata({
 
 export default async function ProjectSlugPage({ params }: ProjectSlugPageProps) {
   const { lang, slug } = await params;
-  const dict = await getDictionary(lang);
   
   let project = allProjects.find((p) => p.slug === slug && p.lang === lang);
   if (!project && lang !== "en") {
-     project = allProjects.find((p) => p.slug === slug && p.lang === "en");
+    project = allProjects.find((p) => p.slug === slug && p.lang === "en");
   }
 
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
-  // Pre-calculate navigation data
-  const sortedProjects = allProjects.filter(p => p.lang === lang || (p.lang === 'en' && !allProjects.some(x => x.slug === p.slug && x.lang === lang)));
-  const projectIndex = sortedProjects.findIndex((p) => p.slug === slug);
-  
-  const totalProjects = sortedProjects.length;
-  const prev = projectIndex !== -1 ? sortedProjects[(projectIndex - 1 + totalProjects) % totalProjects] : undefined;
-  const next = projectIndex !== -1 ? sortedProjects[(projectIndex + 1) % totalProjects] : undefined;
+  const currentIndex = allProjects.findIndex(p => p.slug === slug && (p.lang === lang || p.lang === "en"));
+  const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : undefined;
+  const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : undefined;
 
-  const websiteLink = project.links?.find(l => ["website", "demo", "live"].includes(l.type.toLowerCase()));
-  const repoLink = project.links?.find(l => ["github", "source", "repo"].includes(l.type.toLowerCase()));
+  const dict = await getDictionary(lang);
 
-  // Map Content Collections project to the interface expected by ProjectDetailClient
   const projectData = {
     slug: project.slug,
     title: project.title,
     description: project.description,
-    longDescription: project.longDescription,
-    techStack: project.tags || [],
-    tools: project.tools || [],
-    status: project.status,
-    demoUrl: websiteLink?.href,
-    repoUrl: repoLink?.href,
-    startDate: project.dates, // using dates as startDate string
-    role: project.role,
-    team: project.team,
-    highlights: project.highlights || [],
-    category: project.tags?.[0], // using first tag as category
-    images: project.images || (project.image ? [project.image] : []),
-    features: (project.features || []).map(f => ({
-        title: f.title,
-        items: f.items || []
-    })),
-    installation: (project.installation || []).map(i => ({
-        title: i.title,
-        code: i.code,
-        type: i.type
-    })),
-    challengesAndSolutions: (project.challengesAndSolutions || []).map(cs => ({
-        problem: cs.problem,
-        solution: cs.solution
-    }))
+    images: project.images || [],
+    image: project.image,
+    date: project.dates,
+    category: project.category,
   };
 
   return (
-    <main className="min-h-dvh py-12 pb-24 sm:py-20 px-6 max-w-2xl mx-auto relative z-10">
-      <ProjectDetailClient 
-        project={projectData} 
-        dict={dict} 
+    <main className="max-w-2xl mx-auto px-6 py-16 min-h-screen">
+      <ProjectDetailClient
+        project={projectData}
+        dict={dict}
         lang={lang}
-        prevProject={prev ? { slug: prev.slug, title: prev.title } : undefined}
-        nextProject={next ? { slug: next.slug, title: next.title } : undefined}
-      />
+        prevProject={prevProject ? { slug: prevProject.slug, title: prevProject.title } : undefined}
+        nextProject={nextProject ? { slug: nextProject.slug, title: nextProject.title } : undefined}
+      >
+          <MDXRemote
+            source={project.content ?? ""}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkCodeMeta, remarkImageSize],
+                rehypePlugins: [[rehypePrettyCode, { theme: "one-dark-pro" }]],
+              },
+            }}
+          />
+      </ProjectDetailClient>
     </main>
   );
 }
