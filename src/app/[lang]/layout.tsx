@@ -119,21 +119,36 @@ export default async function RootLayout({
                     ),
                     href: `/${lang}`,
                   },
-                  ...DATA.navbar
-                    .filter((item) => ["/about", "/projects", "/blog", "/contact"].includes(item.href))
-                    .map((item) => {
-                      const key = item.label.toLowerCase() as keyof typeof dict.navigation;
-                      return {
-                        title: dict.navigation[key] || item.label,
-                        icon: <Image width={100} height={100} src={item.icon} alt={item.label} className="h-full w-full object-contain dark:invert" />,
-                        href: `/${lang}${item.href}`,
-                      };
-                    }),
-                  // {
-                  //   title: dict.navigation.certifications || "Certifications",
-                  //   icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
-                  //   href: `/${lang}/certifications`,
-                  // },
+                  {
+                    title: dict.navigation.about || "About",
+                    icon: <Image width={100} height={100} src="/icons/user.svg" alt="About" className="h-full w-full object-contain dark:invert" />,
+                    href: `/${lang}/about`,
+                  },
+                  {
+                    title: dict.navigation.projects || "Work",
+                    icon: <Image width={100} height={100} src="/icons/globe.svg" alt="Projects" className="h-full w-full object-contain dark:invert" />,
+                    href: `/${lang}/projects`,
+                  },
+                  {
+                    title: dict.navigation.blog || "Notes",
+                    icon: <Image width={100} height={100} src="/icons/notebook.svg" alt="Blog" className="h-full w-full object-contain dark:invert" />,
+                    href: `/${lang}/blog`,
+                  },
+                  {
+                    title: dict.navigation.certifications || "Certifications",
+                    icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
+                    href: `/${lang}/certifications`,
+                  },
+                  {
+                    title: dict.navigation.contact || "Contact",
+                    icon: <Image width={100} height={100} src="/icons/mail.svg" alt="Contact" className="h-full w-full object-contain dark:invert" />,
+                    href: `/${lang}/contact`,
+                  },
+                  {
+                    title: "WhatsApp",
+                    icon: <Image width={100} height={100} src="/icons/whatsapp.svg" alt="WhatsApp" className="h-full w-full object-contain" />,
+                    href: DATA.contact.social.WhatsApp.url,
+                  },
                 ]}
               />
             </div>
