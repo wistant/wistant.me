@@ -20,6 +20,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     EducationSection,
     CodeComparison,
     Image,
+    L: ({ en, fr }: { en: React.ReactNode, fr: React.ReactNode }) => {
+      // Small client-side or server-side bridge for language
+      return (
+        <span className="inline">
+          <span className="hidden [:lang(en)_&]:inline">{en}</span>
+          <span className="hidden [:lang(fr)_&]:inline">{fr}</span>
+        </span>
+      );
+    },
     // Add custom structural styling for the about page
     h1: (props) => <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl font-cal leading-tight mb-8" {...props} />,
     h2: (props) => <h2 className="text-2xl font-bold font-clash tracking-tight text-foreground mt-16 mb-6" {...props} />,
