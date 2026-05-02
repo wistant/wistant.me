@@ -6,9 +6,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DATA } from "@/data/resume";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Education } from "@/types/resume";
 
 function LogoImage({ src, alt }: { src: string; alt: string }) {
   const [imageError, setImageError] = useState(false);
@@ -29,7 +29,13 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export default function EducationSection({ presentLabel = "Present" }: { presentLabel?: string }) {
+export default function EducationSection({ 
+  data, 
+  presentLabel = "Present" 
+}: { 
+  data: Education[]; 
+  presentLabel?: string 
+}) {
   return (
     <div className="flex flex-col gap-6">
       <Accordion 
@@ -37,7 +43,7 @@ export default function EducationSection({ presentLabel = "Present" }: { present
         collapsible 
         className="w-full grid gap-6 relative before:absolute before:inset-y-0 before:left-4 md:before:left-5 before:w-px before:bg-border/60"
       >
-        {DATA.education.map((edu, index) => (
+        {data.map((edu: Education, index: number) => (
           <AccordionItem
             key={`${edu.school}-${index}`}
             value={`${edu.school}-${index}`}

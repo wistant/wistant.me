@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
-import { DATA } from "@/data/resume";
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ContactSection({ dict }: { dict: Record<string, any> }) {
+export default function ContactSection({ 
+  dict, 
+  whatsappUrl 
+}: { 
+  dict: Record<string, any>; 
+  whatsappUrl: string 
+}) {
   return (
     <div className="border border-border/60 rounded-xl p-10 relative bg-muted/10">
       <div className="absolute -top-4 border border-border bg-black shadow-sm z-10 rounded-xl px-4 py-1 left-1/2 -translate-x-1/2">
@@ -28,7 +32,7 @@ export default function ContactSection({ dict }: { dict: Record<string, any> }) 
         <p className="mx-auto max-w-lg text-muted-foreground text-balance leading-relaxed">
           {dict.contact.subtitle}{" "}
           <Link
-            href={DATA.contact.social.WhatsApp.url}
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline underline-offset-4 font-semibold"

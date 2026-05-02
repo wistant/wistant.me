@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import BlurFade from "@/components/ui/magicui/blur-fade";
-import { skillsData } from "@/data/skills";
+import { Skill } from "@/types/resume";
+
 type SkillCardProps = {
   name: string;
   icon: string;
@@ -29,14 +30,20 @@ function SkillCard({ name, icon, index }: SkillCardProps) {
   );
 }
 
-export default function SkillsSection({ title }: { title?: string }) {
+export default function SkillsSection({ 
+  title, 
+  data = [] 
+}: { 
+  title?: string; 
+  data?: Skill[] 
+}) {
   return (
     <div className="flex min-h-0 flex-col gap-y-4">
       <BlurFade delay={0.02}>
         <h2 className="text-xl font-bold font-clash">{title || "Skills"}</h2>
       </BlurFade>
       <div className="flex flex-wrap gap-3">
-        {skillsData.map((skill, i) => (
+        {data.map((skill: Skill, i: number) => (
           <SkillCard
             key={skill.name}
             name={skill.name}

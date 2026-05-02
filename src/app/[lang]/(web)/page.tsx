@@ -7,6 +7,7 @@ import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
 import WorkSection from "@/components/home/work-section";
 import EducationSection from "@/components/home/education-section";
+import SkillsSection from "@/components/home/skills-section";
 
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
@@ -17,6 +18,7 @@ import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import { GallerySection } from "@/components/home/gallery-section";
+import { getResumeData } from "@/data/resume";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -36,6 +38,7 @@ export default async function Home({
 }) {
    const { lang } = await params;
   const dict = await getDictionary(lang);
+  const resume = getResumeData(lang);
 
 
   return (
@@ -52,8 +55,8 @@ export default async function Home({
 
       <div className="flex flex-col gap-1 sm:gap-2 mt-4">
         <HeroSection
-          title={dict.hero.title}
-          description={dict.hero.description}
+          title={resume.description}
+          description={resume.about}
           blurFadeDelay={BLUR_FADE_DELAY}
         />
       </div>
@@ -86,7 +89,7 @@ export default async function Home({
             <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <WorkSection presentLabel={dict.work.present} />
+            <WorkSection data={resume.work} presentLabel={dict.work.present} />
           </BlurFade>
           <div className="flex justify-center mt-4">
             <Link href={`/${lang}/about`}>
@@ -109,7 +112,7 @@ export default async function Home({
             <h2 className="text-xl font-bold font-clash">{dict.education.title}</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <EducationSection presentLabel={dict.work.present} />
+            <EducationSection data={resume.education} presentLabel={dict.work.present} />
           </BlurFade>
         </div>
       </section>
@@ -133,7 +136,7 @@ export default async function Home({
           linkText={dict.navigation.hackathons || "All hackathons"}
         >
           <HackathonsSection
-            limit={4}
+            data={resume.hackathons}
             title={dict.hackathons.title}
             subtitle={dict.hackathons.subtitle}
             description={dict.hackathons.description}
@@ -143,7 +146,7 @@ export default async function Home({
 
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
-          <ContactSection dict={dict} />
+          <ContactSection dict={dict} whatsappUrl={resume.contact.social.WhatsApp.url} />
         </BlurFade>
       </section>
     </main>
