@@ -3,20 +3,7 @@ import { WorkExperience } from "@/types/resume";
 export const workData: Record<string, WorkExperience[]> = {
   en: [
     {
-      company: "Port Autonome de Douala (PAD)",
-      href: "https://",
-      badges: ["Next.js", "Java"],
-      icons: ["nextdotjs"],
-      location: "Douala, Cameroon",
-      title: "Information Systems Intern",
-      logoUrl: "/experiences/unity-link.jpg",
-      start: "March 2026",
-      end: "Present",
-      description:
-        "Assisting in the modernization of port logistics software using Next.js and high-performance Java microservices. Participating in the migration of legacy database schemas to a more robust architectural foundation.",
-    },
-    {
-      company: "Orange Cameroun",
+      company: "Orange Digital Center Cameroun",
       href: "https://",
       badges: ["React", "TypeScript", "TailwindCSS"],
       icons: ["react", "typescript", "tailwindcss"],
