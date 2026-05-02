@@ -1,6 +1,5 @@
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { ProjectCard } from "@/components/projects/project-card";
-import { OpenSourceCard } from "@/components/projects/open-source-card";
 import { getProjectsByLang } from "@/data/projects";
 import { Icons } from "@/components/ui/icons";
 import React from "react";
@@ -20,12 +19,12 @@ export default async function ProjectsSection({
   lang: Language;
 }) {
   const dict = await import("@/lib/dictionary").then((m) => m.getDictionary(lang));
-  const sortedProjects = getProjectsByLang(lang);
-  const projects = limit ? sortedProjects.slice(0, limit) : sortedProjects;
-
-  const clientProjects = projects.filter((p) => p.category === "client");
-  const personalProjects = projects.filter((p) => p.category === "personal");
-  const openSourceProjects = projects.filter((p) => p.category === "opensource");
+  const sortedProjects = getProjectsByLang(lang).sort((a, b) => (a.order || 99) - (b.order || 99));
+  
+  // Préférer les projets marqués "featured", ou fallback sur 4 projets (pas d'open source)
+  const featured = sortedProjects.filter(p => p.featured);
+  const fallback = sortedProjects.filter(p => p.category !== "opensource").slice(0, 4);
+  const displayProjects = (featured.length > 0 ? featured : fallback).slice(0, limit || 4);
 
   return (
     <section id="projects">
@@ -50,16 +49,11 @@ export default async function ProjectsSection({
           </div>
         </div>
 
-        {/* Selected Client Work (Contributions et réalisations) */}
-        {clientProjects.length > 0 && (
-          <div className="flex flex-col gap-10">
-            <div className="flex items-center gap-4">
-              <h3 className="text-xl md:text-2xl font-bold font-clash">Client Work</h3>
-              <div className="h-px flex-1 bg-border/50" />
-            </div>
-            {/* Liste verticale pour les projets en dual pane */}
-            <div className="flex flex-col w-full mx-auto gap-y-16 mt-6">
-              {clientProjects.map((project, id) => {
+        {/* Featured Projects with Restacked Blur Effect */}
+        {displayProjects.length > 0 && (
+          <div className="relative flex flex-col gap-10 mt-4 rounded-3xl">
+            <div className="flex flex-col w-full mx-auto gap-y-16 pb-40">
+              {displayProjects.map((project, id) => {
                 const projectLinks = project.links?.map((link) => ({
                   ...link,
                   icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? <Icons.github className="size-3" /> : <Icons.globe className="size-3" />,
@@ -68,7 +62,7 @@ export default async function ProjectsSection({
                 return (
                   <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 12 + id * 0.05} className="w-full">
                     <ProjectCard
-                      category="client"
+                      category={project.category as "client" | "opensource" | "personal"}
                       href={`/${lang}/projects/${project.slug}`}
                       title={project.title || ""}
                       description={project.description || ""}
@@ -83,88 +77,25 @@ export default async function ProjectsSection({
                 );
               })}
             </div>
-          </div>
-        )}
 
-        {/* Personal Projects */}
-        {personalProjects.length > 0 && (
-          <div className="flex flex-col gap-10">
-            <div className="flex items-center gap-4">
-              <h3 className="text-xl md:text-2xl font-bold font-clash">Personal Projects</h3>
-              <div className="h-px flex-1 bg-border/50" />
-            </div>
-            {/* Liste verticale pour les projets en dual pane */}
-            <div className="flex flex-col w-full mx-auto gap-y-24 mt-8">
-              {personalProjects.map((project, id) => {
-                const projectLinks = project.links?.map((link) => ({
-                  ...link,
-                  icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? <Icons.github className="size-3" /> : <Icons.globe className="size-3" />,
-                })) || [];
+            {/* Gradient Blur Overlay */}
+            <div className="absolute bottom-0 left-0 w-full h-56 bg-linear-to-t from-background via-background/90 to-transparent pointer-events-none z-10" />
 
-                return (
-                  <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 14 + id * 0.05} className="w-full">
-                    <ProjectCard
-                      category="personal"
-                      href={`/${lang}/projects/${project.slug}`}
-                      title={project.title || ""}
-                      description={project.description || ""}
-                      dates={project.dates || ""}
-                      tags={project.tags ?? []}
-                      image={project.image}
-                      video={project.video}
-                      links={projectLinks}
-                      className="w-full"
-                    />
-                  </BlurFade>
-                );
-              })}
+            {/* Float View All Button inside the Blur */}
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
+              <Link href={`/${lang}/projects`}>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="rounded-full transition-all group px-8 py-6 h-12 text-sm font-semibold text-foreground bg-background/50 backdrop-blur-md border border-border/50 hover:bg-muted/80 shadow-lg hover:shadow-xl dark:shadow-none"
+                >
+                  {dict.projects.viewAll || "View all projects"}
+                  <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </div>
           </div>
         )}
-
-        {/* Open Source Contributions (Grille de Dépôts) */}
-        {openSourceProjects.length > 0 && (
-          <div className="flex flex-col gap-10">
-            <div className="flex items-center gap-4">
-              <h3 className="text-xl md:text-2xl font-bold font-clash">Open Source</h3>
-              <div className="h-px flex-1 bg-border/50" />
-            </div>
-            {/* Grille OS en 2 colonnes strictes horizontalement */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-6 mt-6">
-              {openSourceProjects.map((project, id) => {
-                const projectLinks = project.links?.map((link) => ({
-                  ...link,
-                  icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? <Icons.github className="size-3" /> : <Icons.globe className="size-3" />,
-                })) || [];
-
-                return (
-                  <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 16 + id * 0.05} className="w-full">
-                    <OpenSourceCard
-                      title={project.title || ""}
-                      description={project.description || ""}
-                      dates={project.dates || ""}
-                      tags={project.tags ?? []}
-                      links={projectLinks}
-                    />
-                  </BlurFade>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        <div className="flex justify-center pt-10">
-          <Link href={`/${lang}/projects`}>
-            <Button
-              variant="secondary"
-              size="sm"
-              className="rounded-full transition-all group px-6 h-10 text-sm font-semibold text-muted-foreground bg-muted/40 border border-border/40 hover:bg-muted/80 hover:text-foreground shadow-sm hover:shadow"
-            >
-              {dict.projects.viewAll || "View all projects"}
-              <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </div>
 
       </div>
     </section>
