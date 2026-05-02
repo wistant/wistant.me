@@ -51,7 +51,7 @@ export default async function BlogPage({
         });
       }
     } catch (error) {
-      console.error("Redis fetch failed (views):", error);
+      console.warn("Redis fetch failed (views). Disabling view counters locally.");
     }
   }
 

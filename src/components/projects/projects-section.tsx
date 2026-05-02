@@ -16,12 +16,20 @@ export default async function ProjectsSection({
   lang: Language;
 }) {
   const dict = await import("@/lib/dictionary").then((m) => m.getDictionary(lang));
-  const sortedProjects = getProjectsByLang(lang);
-  const projects = limit ? sortedProjects.slice(0, limit) : sortedProjects;
+  const sortedProjects = getProjectsByLang(lang).sort((a, b) => (a.order || 99) - (b.order || 99));
+
+  // Prefer featured projects, otherwise fallback to first N non-open-source
+  const featured = sortedProjects.filter(p => p.featured);
+  const fallback = sortedProjects.filter(p => p.category !== "opensource");
+  const rawDisplay = featured.length > 0 ? featured : fallback;
+  const displayProjects = limit ? rawDisplay.slice(0, limit) : rawDisplay;
+
+  if (displayProjects.length === 0) return null;
 
   return (
     <section id="projects">
-      <div className="flex min-h-0 flex-col gap-y-12">
+      <div className="flex min-h-0 flex-col gap-y-20 max-w-[608px] mx-auto w-full px-6 lg:px-0">
+        {/* Header */}
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">
             <div className="flex-1 h-px bg-linear-to-r from-transparent via-border to-transparent" />
@@ -42,27 +50,21 @@ export default async function ProjectsSection({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto relative overflow-hidden bg-border gap-[2px] border-x-2 border-b-2 border-border">
-          {projects.map((project, id) => {
-            if (!project) return null;
-            
+        {/* Projects list — clean, no overflow clipping */}
+        <div className="flex flex-col w-full gap-y-16">
+          {displayProjects.map((project, id) => {
             const projectLinks = project.links?.map((link) => ({
               ...link,
-              icon:
-                link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? (
-                  <Icons.github className="size-3" />
-                ) : (
-                  <Icons.globe className="size-3" />
-                ),
+              icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github"
+                ? <Icons.github className="size-3" />
+                : <Icons.globe className="size-3" />,
             })) || [];
 
             return (
-              <BlurFade
-                key={project.slug}
-                delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-                className="h-full"
-              >
+              <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 12 + id * 0.05} className="w-full">
                 <ProjectCard
+                  reverse={id % 2 !== 0}
+                  category={project.category as "client" | "opensource" | "personal"}
                   href={`/${lang}/projects/${project.slug}`}
                   title={project.title || ""}
                   description={project.description || ""}
@@ -71,8 +73,7 @@ export default async function ProjectsSection({
                   image={project.image}
                   video={project.video}
                   links={projectLinks}
-                  variant="blog"
-                  className="h-full"
+                  className="w-full"
                 />
               </BlurFade>
             );

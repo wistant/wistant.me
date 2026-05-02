@@ -6,6 +6,7 @@ export const ogImageSchema = z.object({
   type: z.enum(["home", "blog", "projects", "about", "contact"]).default("home"),
   lang: z.enum(["en", "fr"]).default("en"),
   label: z.string().optional(),
+  image: z.string().optional(),
 });
 
 export type OgImageParams = z.infer<typeof ogImageSchema>;

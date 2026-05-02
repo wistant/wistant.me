@@ -75,6 +75,7 @@ const projects = defineCollection({
     dates: z.string().optional(),
     order: z.number().optional().default(99),
     active: z.boolean().optional().default(true),
+    featured: z.boolean().optional().default(false),
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
     video: z.string().optional(),
@@ -112,6 +113,7 @@ const projects = defineCollection({
     images: z.array(z.string()).optional(),
     content: z.string().optional(),
     lang: z.string().optional(),
+    category: z.enum(["client", "opensource", "personal"]).default("personal"),
   }),
   transform: (document) => {
     const rawPath = document._meta.path;
