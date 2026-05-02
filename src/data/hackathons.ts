@@ -1,52 +1,19 @@
-import React from "react";
+import { Hackathon } from "@/types/resume";
 
-export interface Hackathon {
-  title: string;
-  dates: string;
-  location: string;
-  description: string;
-  image?: string;
-  mlh?: string;
-  links: readonly {
-    title: string;
-    icon: React.ReactNode;
-    href: string;
-  }[];
-  win?: string;
-  icon?: string;
-}
-
-export const hackathonsData: readonly Hackathon[] = [
+export const hackathonsData: Hackathon[] = [
   {
-    title: "IDEM AI Challenge",
-    dates: "Febuary 01rst - 21th, 2026",
+    title: "Hackathon Douala 2026",
+    dates: "March 2026",
     location: "Douala, Cameroon",
     description:
-      "I had developped FAiDD. The Framework for Ai-Driven Developpement Most AI orchestration tools (like legacy B-Mad) focus on the output—generating files, pushing commits, writing boilerplates. They treat the AI as a simple worker. **FAIDD treats the AI as a strategic entity** that requires a high-fidelity environment to function at peak performance.",
-    image: "/hackatons/faidd.png",
+      "Developed a real-time logistics tracking system for local vendors. Integrated with SMS APIs for instant notifications in low-bandwidth areas.",
+    image: "/hackathons/logistics.png",
     links: [
       {
         title: "Source",
-        icon: null,
-        href: "https://github.com/wistantkode/legal-transformer",
+        icon: "Github",
+        href: "https://github.com/wistant/hack-logistics",
       },
     ],
-    win: "1st Place - Best Innovation",
-  },
-  {
-    title: "FinTech Hack North",
-    dates: "November 5th - 7th, 2025",
-    location: "Douala, Cameroon",
-    description:
-      "Created a decentralized payment gateway for cross-border transactions in Africa, reducing fees by over 80% using Layer-2 solutions.",
-    image: "/me/me.png",
-    links: [
-      {
-        title: "Project",
-        icon: null,
-        href: "https://github.com/wistantkode/africa-pay",
-      },
-    ],
-    win: "Top 10 Finalist",
   },
 ];

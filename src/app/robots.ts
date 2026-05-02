@@ -14,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: ["/", "/llms.txt"],
       }
     ],
-    sitemap: `${SITE_CONFIG.url}/sitemap.xml`,
+    sitemap: `${SITE_CONFIG.url.replace(/\/$/, "")}/sitemap.xml`,
   };
 }
