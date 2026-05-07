@@ -72,6 +72,7 @@ export default async function ProjectsSection({
                   images={(project as Record<string, unknown>).images as string[]}
                   video={project.video}
                   links={projectLinks}
+                  index={(id + 1).toString().padStart(2, "0")}
                   className="w-full"
                 />
               </BlurFade>

@@ -26,6 +26,7 @@ interface Props {
   className?: string;
   category?: "client" | "opensource" | "personal";
   reverse?: boolean;
+  index?: string;
 }
 
 // SLIDESHOW INTERVAL IN SECONDS
@@ -42,6 +43,7 @@ export function ProjectCard({
   links,
   className,
   href,
+  index,
 }: Props) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -76,6 +78,11 @@ export function ProjectCard({
         className="w-full relative rounded-2xl overflow-hidden bg-muted/20 border border-border/40 block transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.01] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] dark:group-hover:shadow-[0_20px_40px_rgba(255,255,255,0.03)]" 
         style={{ aspectRatio: "2/1" }}
       >
+        {index && (
+          <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-background/80 backdrop-blur-md border border-border shadow-sm flex items-center justify-center transition-opacity duration-300">
+            <span className="text-xs font-mono font-bold tracking-widest text-foreground">{index}</span>
+          </div>
+        )}
         {video ? (
           <video
             src={video}
