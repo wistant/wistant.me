@@ -46,9 +46,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       />
     ),
     wrapper: ({ children }) => (
-      <main className="min-h-screen relative px-6 lg:px-0 py-12 pb-24 max-w-[608px] mx-auto prose prose-neutral dark:prose-invert font-sans">
+      <div className="prose prose-neutral dark:prose-invert font-sans w-full">
         {children}
-      </main>
+      </div>
     ),
     ...components,
   }

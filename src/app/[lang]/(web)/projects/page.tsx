@@ -1,7 +1,6 @@
 import { getProjectsByLang } from "@/data/projects";
 import { Icons } from "@/components/ui/icons";
 import { ProjectCard } from "@/components/projects/project-card";
-import { OpenSourceCard } from "@/components/projects/open-source-card";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import React, { Suspense } from "react";
@@ -16,8 +15,7 @@ export async function generateMetadata({
   params: Promise<{ lang: Language }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
-  return getPageMetadata(lang, dict.projects.seo);
+  return getPageMetadata(lang);
 }
 
 export default async function ProjectsPage({
@@ -36,7 +34,7 @@ export default async function ProjectsPage({
   const personalProjects = allProjects.filter((p) => p.category === "personal");
 
   return (
-    <main className="min-h-dvh flex flex-col gap-6 relative px-6 lg:px-0 pt-12 pb-17 max-w-[608px] mx-auto">
+    <main className="min-h-dvh flex flex-col gap-6 relative">
       {/* Hero Background */}
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
@@ -98,6 +96,7 @@ export default async function ProjectsPage({
                             dates={project.dates || ""}
                             tags={project.tags ?? []}
                             image={project.image}
+                            images={(project as Record<string, unknown>).images as string[]}
                             video={project.video}
                             links={projectLinks}
                             className="w-full"
@@ -116,7 +115,7 @@ export default async function ProjectsPage({
                     <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-clash">Open Source</h2>
                     <div className="h-px flex-1 bg-border/50 translate-y-1" />
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 w-full mx-auto gap-x-6 gap-y-6 mt-6">
+                  <div className="flex flex-col w-full mx-auto gap-y-16 mt-6">
                     {openSourceProjects.map((project, id) => {
                       const projectLinks = project.links?.map((link) => ({
                         ...link,
@@ -125,12 +124,18 @@ export default async function ProjectsPage({
 
                       return (
                         <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 12 + id * 0.05} className="w-full">
-                          <OpenSourceCard
+                          <ProjectCard
+                            category="opensource"
+                            href={`/${lang}/projects/${project.slug}`}
                             title={project.title || ""}
                             description={project.description || ""}
                             dates={project.dates || ""}
                             tags={project.tags ?? []}
+                            image={project.image}
+                            images={(project as Record<string, unknown>).images as string[]}
+                            video={project.video}
                             links={projectLinks}
+                            className="w-full"
                           />
                         </BlurFade>
                       );
@@ -163,6 +168,7 @@ export default async function ProjectsPage({
                             dates={project.dates || ""}
                             tags={project.tags ?? []}
                             image={project.image}
+                            images={(project as Record<string, unknown>).images as string[]}
                             video={project.video}
                             links={projectLinks}
                             className="w-full"
