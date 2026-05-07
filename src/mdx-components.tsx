@@ -8,6 +8,7 @@ import WorkSection from "@/components/home/work-section"
 import EducationSection from "@/components/home/education-section"
 import Image from "next/image"
 import { CodeComparison } from "@/components/ui/magicui/code-comparison"
+import { BackToProjects } from "@/components/projects/back-to-projects"
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -20,6 +21,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     EducationSection,
     CodeComparison,
     Image,
+    BackToProjects,
     L: ({ en, fr }: { en: React.ReactNode, fr: React.ReactNode }) => {
       // Small client-side or server-side bridge for language
       return (
