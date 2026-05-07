@@ -2,10 +2,12 @@ import { Metadata } from "next";
 import { Language } from "@/types/locale";
 import { siteConfig } from "@/config/site";
 
-export function getPageMetadata(lang: Language = "en"): Metadata {
+export type CustomMetadata = Partial<Metadata> & { url?: string };
+
+export function getPageMetadata(lang: Language = "en", override?: CustomMetadata): Metadata {
   const isEn = lang === "en";
   
-  return {
+  const base: Metadata = {
     title: {
       default: siteConfig.name,
       template: `%s | ${siteConfig.name}`,
@@ -58,5 +60,30 @@ export function getPageMetadata(lang: Language = "en"): Metadata {
       apple: "/apple-touch-icon.png",
     },
     manifest: `${siteConfig.url}/site.webmanifest`,
+  };
+
+  const finalOpenGraph = {
+    ...base.openGraph,
+    ...(override?.openGraph as any),
+  };
+
+  // If a generic URL is passed, map it to the OpenGraph block automatically
+  if (override?.url) {
+    // We prepend the baseUrl if it's a relative path just in case
+    const path = override.url.startsWith("/") ? `${siteConfig.url}${override.url}` : override.url;
+    finalOpenGraph.url = path;
+  }
+
+  // Purge the arbitrary url field from being placed at the root of the standard Metadata response
+  const { url: _url, ...validOverride } = override || {};
+
+  return {
+    ...base,
+    ...validOverride,
+    openGraph: finalOpenGraph,
+    twitter: {
+      ...base.twitter,
+      ...(override?.twitter as any),
+    },
   };
 }

@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { SITE_CONFIG } from "@/config/metadata";
+import { siteConfig as SITE_CONFIG } from "@/config/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {

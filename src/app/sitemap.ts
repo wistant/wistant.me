@@ -4,7 +4,7 @@ import {
   allProjects, 
   allCertifications 
 } from "../../.content-collections/generated";
-import { SITE_CONFIG } from "@/config/metadata";
+import { siteConfig as SITE_CONFIG } from "@/config/site";
 import { LOCALES } from "@/types/locale";
 
 /**
