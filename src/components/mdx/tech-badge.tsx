@@ -21,18 +21,30 @@ interface TechBadgeProps {
   name: keyof typeof TECH_MAP;
 }
 
+import { cn } from "@/lib/utils";
+
 export function TechBadge({ name }: TechBadgeProps) {
   const tech = TECH_MAP[name];
   if (!tech) return <span className="font-semibold">{name}</span>;
 
+  // Checks for highly dark colors that fail contrast tests in dark mode
+  const isDarkColor = ["#000000", "#2D3748"].includes(tech.color);
+
   return (
     <span
-      className="inline-flex items-center gap-[0.3em] px-[0.5em] py-[0.1em] rounded-[0.3em] font-mono font-bold mx-[0.1em] transition-colors border"
+      className={cn(
+        "inline-flex items-center gap-[0.3em] px-[0.5em] py-[0.1em] rounded-[0.3em] font-mono font-bold mx-[0.1em] transition-colors border",
+        isDarkColor 
+          ? "bg-black/5 text-black border-black/20 dark:bg-white/10 dark:text-white dark:border-white/30" 
+          : "dark:bg-opacity-20 dark:brightness-125"
+      )}
       style={{
         fontSize: '0.85em',
-        backgroundColor: `${tech.color}12`,
-        color: tech.color,
-        borderColor: `${tech.color}30`,
+        ...(isDarkColor ? {} : {
+          backgroundColor: `${tech.color}15`,
+          color: tech.color,
+          borderColor: `${tech.color}30`,
+        })
       }}
     >
       <Image
@@ -40,8 +52,7 @@ export function TechBadge({ name }: TechBadgeProps) {
         alt={name}
         width={16}
         height={16}
-        className="w-[1.1em] h-[1.1em] shrink-0 object-contain"
-        style={{ filter: "none" }}
+        className={cn("w-[1.1em] h-[1.1em] shrink-0 object-contain", isDarkColor && "dark:invert dark:opacity-90")}
       />
       <span className="leading-none">{tech.label}</span>
     </span>
