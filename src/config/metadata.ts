@@ -55,9 +55,9 @@ export function getPageMetadata(lang: Language = "en", override?: CustomMetadata
       creator: "@wistant",
     },
     icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon-16x16.png",
-      apple: "/apple-touch-icon.png",
+      icon: "/wistant-logo.png",
+      shortcut: "/wistant-logo.png",
+      apple: "/wistant-logo.png",
     },
     manifest: `${siteConfig.url}/site.webmanifest`,
   };
