@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, X } from "lucide-react";
+import Image from "next/image";
 
 interface MediaViewerProps {
   src: string;
@@ -52,14 +53,16 @@ export function MediaViewer({
               alt={alt}
               width={width}
               height={height}
-              className={cn("max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01]", className)}
+              className={cn("max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01] rounded-xl border border-border/50 shadow-sm", className)}
+
               style={{ height: "auto" }}
             />
           ) : (
-            <img
+            <Image
               src={src}
               alt={alt}
-              className={cn("max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01]", className)}
+              className={cn("max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01] rounded-xl border border-border/50 shadow-sm", className)}
+
               loading="lazy"
             />
           )}
@@ -100,7 +103,7 @@ export function MediaViewer({
                     style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
                   />
                 ) : (
-                  <img
+                  <Image
                     src={src}
                     alt={alt || "Full preview"}
                     className="rounded-xl object-contain shadow-2xl max-w-full max-h-full"
