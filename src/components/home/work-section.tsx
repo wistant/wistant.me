@@ -7,9 +7,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DATA } from "@/data/resume";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { WorkExperience } from "@/types/resume";
+import { useParams } from "next/navigation";
+import { getResumeData } from "@/data/resume";
+import { Language } from "@/types/locale";
 
 function LogoImage({ src, alt }: { src: string; alt: string }) {
   const [imageError, setImageError] = useState(false);
@@ -30,7 +33,20 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export default function WorkSection({ presentLabel = "Present" }: { presentLabel?: string }) {
+export default function WorkSection({ 
+  data, 
+  presentLabel 
+}: { 
+  data?: WorkExperience[]; 
+  presentLabel?: string 
+}) {
+  const params = useParams();
+  const lang = (params?.lang as Language) || "en";
+  const resume = getResumeData(lang);
+  
+  const workData = data && data.length > 0 ? data : resume.work;
+  const label = presentLabel || (lang === "fr" ? "Présent" : "Present");
+
   return (
     <div className="flex flex-col gap-6">
       <Accordion 
@@ -38,7 +54,7 @@ export default function WorkSection({ presentLabel = "Present" }: { presentLabel
         collapsible 
         className="w-full grid gap-6 relative before:absolute before:inset-y-0 before:left-4 md:before:left-5 before:w-px before:bg-border/60"
       >
-        {DATA.work.map((work, index) => (
+        {workData.map((work: WorkExperience, index: number) => (
           <AccordionItem
             key={`${work.company}-${index}`}
             value={`${work.company}-${index}`}
@@ -74,9 +90,9 @@ export default function WorkSection({ presentLabel = "Present" }: { presentLabel
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground sm:text-right flex-none ml-11 sm:ml-0">
+            <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground sm:text-right flex-none ml-11 sm:ml-0">
                   <span>
-                    {work.start} - {work.end ?? presentLabel}
+                    {work.start} - {work.end ?? label}
                   </span>
                 </div>
               </div>

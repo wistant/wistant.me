@@ -6,6 +6,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
+import { getResumeData } from "@/data/resume";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -29,6 +30,7 @@ export default async function HackathonsPage({
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const resume = getResumeData(lang);
 
   return (
     <main className="min-h-dvh flex flex-col gap-16 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
@@ -59,7 +61,7 @@ export default async function HackathonsPage({
       </section>
 
       <BlurFade delay={BLUR_FADE_DELAY * 2}>
-        <HackathonsSection />
+        <HackathonsSection data={resume.hackathons} />
       </BlurFade>
     </main>
   );

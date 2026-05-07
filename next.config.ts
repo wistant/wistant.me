@@ -55,11 +55,11 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "X-Frame-Options",
-            value: "DENY", // Prevents clickjacking
+            value: "DENY",
           },
           {
             key: "X-Content-Type-Options",
-            value: "nosniff", // Defends against MIME sniffing
+            value: "nosniff",
           },
           {
             key: "Referrer-Policy",

@@ -1,21 +1,29 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Image from "next/image";
-import { DATA } from "@/data/resume";
 import { Timeline, TimelineItem, TimelineConnectItem } from "@/components/timeline";
+import { Hackathon } from "@/types/resume";
+import { useParams } from "next/navigation";
+import { getResumeData } from "@/data/resume";
+import { Language } from "@/types/locale";
 
 export default function HackathonsSection({
-  limit,
+  data,
   title = "Hackathons",
   subtitle = "I like building things",
   description
 }: {
-  limit?: number;
+  data?: Hackathon[];
   title?: string;
   subtitle?: string;
   description?: string;
 }) {
-  const hackathons = limit ? DATA.hackathons.slice(0, limit) : DATA.hackathons;
+  const params = useParams();
+  const lang = (params?.lang as Language) || "en";
+  const resume = getResumeData(lang);
+  
+  const hackathons = data && data.length > 0 ? data : resume.hackathons;
 
   return (
     <section id="hackathons" className="overflow-hidden">
@@ -36,7 +44,7 @@ export default function HackathonsSection({
           </div>
         </div>
         <Timeline>
-          {hackathons.map((hackathon) => (
+          {hackathons.map((hackathon: Hackathon) => (
             <TimelineItem key={hackathon.title + hackathon.dates} className="w-full flex items-start justify-between gap-10">
               <TimelineConnectItem className="flex items-start justify-center">
                 {hackathon.image ? (
@@ -69,7 +77,7 @@ export default function HackathonsSection({
                 )}
                 {hackathon.links && hackathon.links.length > 0 && (
                   <div className="mt-1 flex flex-row flex-wrap items-start gap-2">
-                    {hackathon.links.map((link, idx) => (
+                    {hackathon.links.map((link, idx: number) => (
                       <Link
                         href={link.href}
                         key={idx}

@@ -6,9 +6,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DATA } from "@/data/resume";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Education } from "@/types/resume";
+import { useParams } from "next/navigation";
+import { getResumeData } from "@/data/resume";
+import { Language } from "@/types/locale";
 
 function LogoImage({ src, alt }: { src: string; alt: string }) {
   const [imageError, setImageError] = useState(false);
@@ -29,7 +32,20 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export default function EducationSection({ presentLabel = "Present" }: { presentLabel?: string }) {
+export default function EducationSection({ 
+  data, 
+  presentLabel 
+}: { 
+  data?: Education[]; 
+  presentLabel?: string 
+}) {
+  const params = useParams();
+  const lang = (params?.lang as Language) || "en";
+  const resume = getResumeData(lang);
+  
+  const educationData = data && data.length > 0 ? data : resume.education;
+  const label = presentLabel || (lang === "fr" ? "Présent" : "Present");
+
   return (
     <div className="flex flex-col gap-6">
       <Accordion 
@@ -37,7 +53,7 @@ export default function EducationSection({ presentLabel = "Present" }: { present
         collapsible 
         className="w-full grid gap-6 relative before:absolute before:inset-y-0 before:left-4 md:before:left-5 before:w-px before:bg-border/60"
       >
-        {DATA.education.map((edu, index) => (
+        {educationData.map((edu: Education, index: number) => (
           <AccordionItem
             key={`${edu.school}-${index}`}
             value={`${edu.school}-${index}`}
@@ -75,7 +91,7 @@ export default function EducationSection({ presentLabel = "Present" }: { present
                 </div>
                 <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground sm:text-right flex-none ml-11 sm:ml-0">
                   <span>
-                    {edu.start} - {edu.end || presentLabel}
+                    {edu.start} - {edu.end || label}
                   </span>
                 </div>
               </div>

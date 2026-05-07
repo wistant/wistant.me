@@ -17,7 +17,7 @@ interface GalleryProps {
 export default function Gallery({ images }: GalleryProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const displayImages = images?.length > 0 ? images : [];
+  const displayImages = [...(images || [])].sort((a, b) => a.src.localeCompare(b.src));
 
   return (
     <div className="w-full">

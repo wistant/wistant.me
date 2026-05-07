@@ -1,4 +1,6 @@
-export const skillsData = [
+import { Skill } from "@/types/resume";
+
+export const skillsData: Skill[] = [
   { name: "TypeScript", icon: "/icons/typescript.svg" },
   { name: "Next.js", icon: "/icons/nextjs.svg" },
   { name: "NestJS", icon: "/icons/nestjs.svg" },

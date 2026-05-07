@@ -1,15 +1,16 @@
-# Wistant.dev
+# ⚡ WISTANT KODE | PREMIUM TECH CONTEXT
 
-Ce site est le portfolio et le blog personnel de Wistant, développeur spécialisé en React, Next.js et IA.
+Full-Stack Software & Product Engineer specializing in Next.js, AI, and High-End Engineering.
 
-## Sections principales
+## 📡 Dynamic LLM Resources
+- **Full Context**: https://wistant.me/llms.txt (Dynamic machine-readable profile)
+- **Blog**: https://wistant.me/blog
+- **Projects**: https://wistant.me/projects
+- **About**: https://wistant.me/about
 
-- /blog : Articles techniques, tutoriels et réflexions sur le développement web et l'IA.
-- /projects : Études de cas détaillées des projets réalisés (Stack technique, challenges).
-- /certifications : Liste des certifications et badges professionnels.
+## 🛠️ Stack Summary
+Next.js 15, NestJS, TypeScript, Vite, Framer Motion, Prisma, PostgreSQL, MariaDB, Redis, Linux, Docker, Bash.
 
-## Contenu recommandé pour l'indexation
-
-> https://wistant.dev/blog
-> https://wistant.dev/projects
-> https://wistant.dev/about
+## 👤 Identity
+Bridging the gap between robust software architecture and premium user experiences. 
+Based in Douala, Cameroon.

@@ -28,7 +28,7 @@ export default async function ProjectsSection({
 
   return (
     <section id="projects">
-      <div className="flex min-h-0 flex-col gap-y-20 max-w-[608px] mx-auto w-full px-6 lg:px-0">
+      <div className="flex min-h-0 flex-col gap-y-20 w-full">
         {/* Header */}
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">
@@ -55,7 +55,7 @@ export default async function ProjectsSection({
           {displayProjects.map((project, id) => {
             const projectLinks = project.links?.map((link) => ({
               ...link,
-              icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github"
+              icon: (link.type?.toLowerCase() === "source" || link.type?.toLowerCase() === "github")
                 ? <Icons.github className="size-3" />
                 : <Icons.globe className="size-3" />,
             })) || [];
@@ -63,14 +63,13 @@ export default async function ProjectsSection({
             return (
               <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 12 + id * 0.05} className="w-full">
                 <ProjectCard
-                  reverse={id % 2 !== 0}
-                  category={project.category as "client" | "opensource" | "personal"}
                   href={`/${lang}/projects/${project.slug}`}
                   title={project.title || ""}
                   description={project.description || ""}
                   dates={project.dates || ""}
                   tags={project.tags ?? []}
                   image={project.image}
+                  images={(project as Record<string, unknown>).images as string[]}
                   video={project.video}
                   links={projectLinks}
                   className="w-full"

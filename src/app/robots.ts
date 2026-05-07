@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { SITE_CONFIG } from "@/config/metadata";
+import { siteConfig as SITE_CONFIG } from "@/config/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -14,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: ["/", "/llms.txt"],
       }
     ],
-    sitemap: `${SITE_CONFIG.url}/sitemap.xml`,
+    sitemap: `${SITE_CONFIG.url.replace(/\/$/, "")}/sitemap.xml`,
   };
 }

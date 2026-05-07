@@ -1,67 +1,125 @@
-export const workData = [
-  {
-    company: "Port Autonome de Douala (PAD)",
-    href: "https://",
-    badges: ["Next.js", "Java"],
-    icons: ["nextdotjs"],
-    location: "Douala, Cameroon",
-    title: "Information Systems Intern",
-    logoUrl: "/experiences/unity-link.jpg", // Placeholder logo
-    start: "March 2026",
-    end: "Present",
-    description:
-      "Assisting in the modernization of port logistics software using Next.js and high-performance Java microservices. Participating in the migration of legacy database schemas to a more robust architectural foundation.",
-  },
-  {
-    company: "Orange Cameroun",
-    href: "https://",
-    badges: ["React", "TypeScript", "TailwindCSS"],
-    icons: ["react", "typescript", "tailwindcss"],
-    location: "Douala (Akwa), Cameroon",
-    title: "Junior Web Developer",
-    logoUrl: "/logos/magicui-logo.png",
-    start: "Jan 2026",
-    end: "March 2026",
-    description:
-      "Developed responsive customer dashboard components and optimized internal landing pages for 4G+ promotional campaigns. Improved accessibility across various web properties.",
-  },
-  {
-    company: "Douala Tech Solutions",
-    href: "https://",
-    badges: ["React", "Node.js"],
-    icons: ["react", "nodedotjs"],
-    location: "Douala, Cameroon",
-    title: "Frontend Developer",
-    logoUrl: "/logos/atomic.png",
-    start: "Oct 2025",
-    end: "Dec 2025",
-    description:
-      "Collaborated on the development of a localized fintech platform for SMEs in the Littoral region. Implemented complex state management for real-time transaction monitoring.",
-  },
-  {
-    company: "Eneo Cameroon",
-    href: "https://",
-    badges: ["JavaScript", "Python"],
-    icons: ["javascript", "python"],
-    location: "Douala, Cameroon",
-    title: "Software Integrator Intern",
-    logoUrl: "/experiences/devia.jpg",
-    start: "July 2025",
-    end: "Sept 2025",
-    description:
-      "Developed data visualization scripts to monitor energy distribution metrics. Automated report generation workflows using Python and integrated them into a central web dashboard.",
-  },
-  {
-    company: "Littoral Innovate",
-    href: "https://",
-    badges: ["PHP", "Symfony"],
-    icons: ["php", "symfony"],
-    location: "Douala, Cameroon",
-    title: "Web Development Intern",
-    logoUrl: "/logos/buildspace.jpg",
-    start: "May 2025",
-    end: "June 2025",
-    description:
-      "Maintained legacy Symfony applications and contributed to the development of new API endpoints for a regional e-commerce portal.",
-  },
-];
+import { WorkExperience } from "@/types/resume";
+
+export const workData: Record<string, WorkExperience[]> = {
+  en: [
+    {
+      company: "Orange Digital Center Cameroun",
+      href: "https://",
+      badges: ["React", "TypeScript", "TailwindCSS"],
+      icons: ["react", "typescript", "tailwindcss"],
+      location: "Douala (Akwa), Cameroon",
+      title: "Junior Web Developer",
+      logoUrl: "/logos/magicui-logo.png",
+      start: "Jan 2026",
+      end: "March 2026",
+      description:
+        "Developed responsive customer dashboard components and optimized internal landing pages for 4G+ promotional campaigns. Improved accessibility across various web properties.",
+    },
+    {
+      company: "Douala Tech Solutions",
+      href: "https://",
+      badges: ["React", "Node.js"],
+      icons: ["react", "nodedotjs"],
+      location: "Douala, Cameroon",
+      title: "Frontend Developer",
+      logoUrl: "/logos/atomic.png",
+      start: "Oct 2025",
+      end: "Dec 2025",
+      description:
+        "Collaborated on the development of a localized fintech platform for SMEs in the Littoral region. Implemented complex state management for real-time transaction monitoring.",
+    },
+    {
+      company: "Eneo Cameroon",
+      href: "https://",
+      badges: ["JavaScript", "Python"],
+      icons: ["javascript", "python"],
+      location: "Douala, Cameroon",
+      title: "Software Integrator Intern",
+      logoUrl: "/experiences/devia.jpg",
+      start: "July 2025",
+      end: "Sept 2025",
+      description:
+        "Developed data visualization scripts to monitor energy distribution metrics. Automated report generation workflows using Python and integrated them into a central web dashboard.",
+    },
+    {
+      company: "Littoral Innovate",
+      href: "https://",
+      badges: ["PHP", "Symfony"],
+      icons: ["php", "symfony"],
+      location: "Douala, Cameroon",
+      title: "Web Development Intern",
+      logoUrl: "/logos/buildspace.jpg",
+      start: "May 2025",
+      end: "June 2025",
+      description:
+        "Maintained legacy Symfony applications and contributed to the development of new API endpoints for a regional e-commerce portal.",
+    },
+  ],
+  fr: [
+    {
+      company: "Port Autonome de Douala (PAD)",
+      href: "https://",
+      badges: ["Next.js", "Java"],
+      icons: ["nextdotjs"],
+      location: "Douala, Cameroun",
+      title: "Stagiaire Systèmes d'Information",
+      logoUrl: "/experiences/unity-link.jpg",
+      start: "Mars 2026",
+      end: "Présent",
+      description:
+        "Aide à la modernisation des logiciels de logistique portuaire en utilisant Next.js et des microservices Java haute performance. Participation à la migration des schémas de base de données hérités vers une fondation architecturale plus robuste.",
+    },
+    {
+      company: "Orange Cameroun",
+      href: "https://",
+      badges: ["React", "TypeScript", "TailwindCSS"],
+      icons: ["react", "typescript", "tailwindcss"],
+      location: "Douala (Akwa), Cameroun",
+      title: "Développeur Web Junior",
+      logoUrl: "/logos/magicui-logo.png",
+      start: "Jan 2026",
+      end: "Mars 2026",
+      description:
+        "Développement de composants de tableau de bord client réactifs et optimisation des pages d'atterrissage internes pour les campagnes promotionnelles 4G+. Amélioration de l'accessibilité sur diverses propriétés web.",
+    },
+    {
+      company: "Douala Tech Solutions",
+      href: "https://",
+      badges: ["React", "Node.js"],
+      icons: ["react", "nodedotjs"],
+      location: "Douala, Cameroun",
+      title: "Développeur Frontend",
+      logoUrl: "/logos/atomic.png",
+      start: "Oct 2025",
+      end: "Déc 2025",
+      description:
+        "Collaboration au développement d'une plateforme fintech localisée pour les PME de la région du Littoral. Mise en œuvre d'une gestion d'état complexe pour le suivi des transactions en temps réel.",
+    },
+    {
+      company: "Eneo Cameroon",
+      href: "https://",
+      badges: ["JavaScript", "Python"],
+      icons: ["javascript", "python"],
+      location: "Douala, Cameroun",
+      title: "Stagiaire Intégrateur Logiciel",
+      logoUrl: "/experiences/devia.jpg",
+      start: "Juillet 2025",
+      end: "Sept 2025",
+      description:
+        "Développement de scripts de visualisation de données pour surveiller les métriques de distribution d'énergie. Automatisation des flux de génération de rapports utilisant Python et intégration dans un tableau de bord web central.",
+    },
+    {
+      company: "Littoral Innovate",
+      href: "https://",
+      badges: ["PHP", "Symfony"],
+      icons: ["php", "symfony"],
+      location: "Douala, Cameroun",
+      title: "Stagiaire Développement Web",
+      logoUrl: "/logos/buildspace.jpg",
+      start: "Mai 2025",
+      end: "Juin 2025",
+      description:
+        "Maintenance d'applications Symfony héritées et contribution au développement de nouveaux points de terminaison API pour un portail e-commerce régional.",
+    },
+  ],
+};

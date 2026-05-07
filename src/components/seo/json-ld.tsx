@@ -1,5 +1,5 @@
 import { DATA } from "@/data/resume";
-import { SITE_CONFIG } from "@/config/metadata";
+import { siteConfig as SITE_CONFIG } from "@/config/site";
 
 export type JsonLdType = "Person" | "ProfessionalService" | "SoftwareSourceCode" | "Article";
 
@@ -47,8 +47,8 @@ export const JsonLd = ({
         },
         sameAs: [
           SITE_CONFIG.links.github,
-          SITE_CONFIG.links.X,
-          SITE_CONFIG.links.LinkedIn,
+          SITE_CONFIG.links.x,
+          SITE_CONFIG.links.linkedin,
         ],
       };
       break;

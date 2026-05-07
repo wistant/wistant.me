@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0] - 2026-05-07 - [Industrial Supreme Typography]
+
+### Fonctionnalités
+- **Architecture "Industrial Supreme"** : refonte complète de la grille de présention des ProjectCards et Slideshows (100% de la largeur du WebLayout).
+- **Galerie Intelligente** : Tri alphabétique automatique et badge de progression pour les sliders.
+- **MDX & Markdown** : Intégration Native de l'analyse YAML (`remark-frontmatter`) et héritage direct du design "rounded-xl" pour les assets intégrés.
+
+### Corrections & Refactoring
+- **Dark Mode TechBadges** : Optimisation du Dark Mode par inversion dynamique des contrastes ciblés.
+- **Clean Architecture** : Purge de code mort (suppression des layouts granulaires obsolètes).
+
+
 ## [1.5.0] - 2026-05-02 - [Cinematic Grid & Fluid Navigation]
 
 ### Fonctionnalités
