@@ -9,7 +9,10 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
   const dict = await getDictionary(lang);
   const isEn = lang === "en";
   
+  const url = process.env.NEXT_PUBLIC_APP_URL || "https://wistant.me";
+  
   const base: Metadata = {
+    metadataBase: new URL(url),
     title: typeof override?.title === 'string'
       ? { absolute: override.title }
       : (override?.title ?? {
