@@ -9,6 +9,17 @@ import { CodeComparison } from "@/components/ui/magicui/code-comparison";
 import Link from "next/link";
 import React, { ComponentPropsWithoutRef } from "react";
 
+import { 
+  BlogCaption as Caption, 
+  BlogTweet as Tweet, 
+  BlogYouTube as YouTube, 
+  BlogFigure as Figure, 
+  BlogSnippet as Snippet,
+  BlogFootNote as FootNote,
+  BlogFootNotes as FootNotes,
+  BlogRef as Ref
+} from "./BlogElements";
+
 // Slugify function for headings
 function slugify(str: string): string {
   return str
@@ -89,6 +100,25 @@ export const mdxComponents: MDXComponents = {
   ),
 
   // Custom Components
+  Caption,
+  Tweet,
+  YouTube,
+  Figure,
+  Snippet,
+  FootNote,
+  FootNotes,
+  Ref,
+  Demo: ({ children }: { children?: React.ReactNode }) => (
+    <div className="my-8 p-6 rounded-xl border border-border/50 bg-muted/10">
+      {children}
+    </div>
+  ),
+  Diagram: ({ children }: { children?: React.ReactNode }) => (
+    <div className="my-8 p-6 rounded-xl border-2 border-dashed border-border/50 bg-muted/20 flex flex-col items-center justify-center text-muted-foreground italic text-sm text-center">
+      <div className="mb-2 font-bold not-italic">📊 Diagram Placeholder</div>
+      {children}
+    </div>
+  ),
   CodeBlock,
   CodeComparison,
   TechBadge,
