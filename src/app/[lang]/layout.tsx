@@ -6,14 +6,13 @@ import { ThemeProvider } from "./ThemeProvider";
 import Image from "next/image";
 import React from "react";
 
-import { getResumeData } from "@/data/resume";
+import { siteConfig } from "@/config/site";
 import { FloatingDock } from "@/components/dock/floating-dock";
 import { Analytics } from "@vercel/analytics/next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getDictionary } from "@/lib/dictionary";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
-import { NavbarItem } from "@/types/resume";
-import { Metadata } from "next";
+
 
 const calFont = localFont({
   src: "../../fonts/cal.woff2",
@@ -64,7 +63,6 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
   const dict = await getDictionary(lang as Language);
-  const resume = getResumeData(lang);
 
   return (
     <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} prefix="og: https://ogp.me/ns#" suppressHydrationWarning>
@@ -91,15 +89,10 @@ export default async function RootLayout({
             <div className="pointer-events-auto w-fit max-w-full">
               <FloatingDock
                 items={[
-                  ...resume.navbar.map((item: NavbarItem) => {
-                    // Match the data label (e.g. 'Home') to the dict property (e.g. dict.navigation.home)
-                    const key = item.label.toLowerCase() as keyof typeof dict.navigation;
-                    return {
-                      title: dict.navigation[key] || item.label,
-                      icon: <Image width={100} height={100} src={`/icons/${item.icon.toLowerCase()}.svg`} alt={item.label} className="h-full w-full object-contain dark:invert" />,
-                      href: item.href === "/" ? `/${lang}` : `/${lang}${item.href}`,
-                    };
-                  }),
+                  { title: dict.navigation.home || "Home", icon: <Image width={100} height={100} src="/icons/home.svg" alt="Home" className="h-full w-full object-contain dark:invert" />, href: `/${lang}` },
+                  { title: dict.navigation.about || "About", icon: <Image width={100} height={100} src="/icons/user.svg" alt="About" className="h-full w-full object-contain dark:invert" />, href: `/${lang}/about` },
+                  { title: dict.navigation.projects || "Projects", icon: <Image width={100} height={100} src="/icons/globe.svg" alt="Projects" className="h-full w-full object-contain dark:invert" />, href: `/${lang}/projects` },
+                  { title: dict.navigation.blog || "Blog", icon: <Image width={100} height={100} src="/icons/notebook.svg" alt="Blog" className="h-full w-full object-contain dark:invert" />, href: `/${lang}/blog` },
                   {
                     title: dict.navigation.certifications || "Certifications",
                     icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
@@ -108,7 +101,7 @@ export default async function RootLayout({
                   {
                     title: "WhatsApp",
                     icon: <Image width={100} height={100} src="/icons/whatsapp.svg" alt="WhatsApp" className="h-full w-full object-contain" />,
-                    href: resume.contact.social.WhatsApp.url,
+                    href: siteConfig.links.whatsapp,
                   },
                 ]}
                 mobileItems={[
@@ -116,8 +109,8 @@ export default async function RootLayout({
                     title: dict.navigation.home || "Home",
                     icon: (
                       <Avatar className="h-full w-full border border-border/50">
-                        <AvatarImage src={resume.avatarUrl} alt={resume.name} />
-                        <AvatarFallback>{resume.initials}</AvatarFallback>
+                        <AvatarImage src="/wistant-logo.png" alt={siteConfig.name} />
+                        <AvatarFallback>{siteConfig.initials}</AvatarFallback>
                       </Avatar>
                     ),
                     href: `/${lang}`,
@@ -150,7 +143,7 @@ export default async function RootLayout({
                   {
                     title: "WhatsApp",
                     icon: <Image width={100} height={100} src="/icons/whatsapp.svg" alt="WhatsApp" className="h-full w-full object-contain" />,
-                    href: resume.contact.social.WhatsApp.url,
+                    href: siteConfig.links.whatsapp,
                   },
                 ]}
               />
