@@ -38,7 +38,7 @@ const posts = defineCollection({
     image: z.string().optional(),
     thumbnail: z.string().optional(),
     published: z.boolean().default(true),
-    content: z.string().optional(),
+    content: z.string().optional(), // Already explicitly defined
     lang: z.string().optional(),
   }),
   transform: (document) => {
@@ -88,6 +88,7 @@ const projects = defineCollection({
     ).optional(),
     category: z.enum(["client", "opensource", "personal"]).optional().default("personal"),
     status: z.string().optional(),
+    content: z.string(), // Explicitly added content property
   }),
   transform: (document) => {
     const rawPath = document._meta.path;
@@ -169,6 +170,7 @@ const certifications = defineCollection({
     tags: z.array(z.string()).optional(),
     description: z.string().optional(),
     lang: z.string().optional(),
+    content: z.string().optional(), // Explicitly added content property
   }),
   transform: (document) => {
     const rawPath = document._meta.path;
