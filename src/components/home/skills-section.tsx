@@ -1,37 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { Skill } from "@/types/resume";
-import { useParams } from "next/navigation";
-import { getResumeData } from "@/data/resume";
-import { Language } from "@/types/locale";
+import { skillsData } from "@/data/skills";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-type SkillCardProps = {
-  name: string;
-  icon: string;
-  index: number;
+const BLUR_FADE_DELAY = 0.04;
+
+const BRAND_COLORS: Record<string, { bg: string; text: string }> = {
+  TypeScript: { bg: "bg-[#3178c6]", text: "text-white" },
+  "Next.js": { bg: "bg-black", text: "text-white" },
+  NestJS: { bg: "bg-[#e0234e]", text: "text-white" },
+  React: { bg: "bg-[#61dafb]", text: "text-black" },
+  PostgreSQL: { bg: "bg-[#336791]", text: "text-white" },
+  Redis: { bg: "bg-[#d82c20]", text: "text-white" },
+  Prisma: { bg: "bg-[#2d3748]", text: "text-white" },
+  Vercel: { bg: "bg-black", text: "text-white" },
+  Linux: { bg: "bg-[#fcc624]", text: "text-black" },
 };
-
-function SkillCard({ name, icon, index }: SkillCardProps) {
-  return (
-    <BlurFade delay={0.04 * index}>
-      <motion.div
-        whileHover={{ scale: 1.08, y: -4 }}
-        whileTap={{ scale: 0.93 }}
-        transition={{ type: "spring", stiffness: 380, damping: 18 }}
-        className="group flex flex-col items-center justify-center gap-2.5 w-[88px] h-[88px] rounded-2xl cursor-default select-none bg-background border border-border/50 hover:border-border hover:shadow-md transition-shadow duration-200"
-      >
-        <div className="size-9 flex items-center justify-center">
-          <img src={icon} alt={name} className="size-full object-contain" />
-        </div>
-        <span className="text-[10px] font-semibold text-muted-foreground group-hover:text-foreground transition-colors duration-150 leading-tight text-center">
-          {name}
-        </span>
-      </motion.div>
-    </BlurFade>
-  );
-}
 
 export default function SkillsSection({ 
   title, 
@@ -40,27 +27,45 @@ export default function SkillsSection({
   title?: string; 
   data?: Skill[] 
 }) {
-  const params = useParams();
-  const lang = (params?.lang as Language) || "en";
-  const resume = getResumeData(lang);
-  
-  const skillsData = data && data.length > 0 ? data : resume.skills;
+  const skillsDataToUse = data && data.length > 0 ? data : skillsData;
 
   return (
-    <div className="flex min-h-0 flex-col gap-y-4">
-      <BlurFade delay={0.02}>
-        <h2 className="text-xl font-bold font-clash">{title || "Skills"}</h2>
-      </BlurFade>
-      <div className="flex flex-wrap gap-3">
-        {skillsData.map((skill: Skill, i: number) => (
-          <SkillCard
-            key={skill.name}
-            name={skill.name}
-            icon={skill.icon}
-            index={i}
-          />
-        ))}
+    <section id="skills" className="py-2">
+      <div className="flex min-h-0 flex-col gap-y-4">
+        <BlurFade delay={BLUR_FADE_DELAY * 9}>
+          <h2 className="text-xl font-bold font-clash">{title || "Skills"}</h2>
+        </BlurFade>
+        <div className="flex flex-wrap gap-2">
+          {skillsDataToUse.map((skill: Skill, i: number) => {
+            const color = BRAND_COLORS[skill.name] || { bg: "bg-secondary/50", text: "text-foreground" };
+            return (
+              <BlurFade 
+                key={skill.name} 
+                delay={BLUR_FADE_DELAY * 10 + i * 0.05}
+              >
+                <Badge 
+                  variant="secondary"
+                  className={cn(
+                    "flex items-center gap-2 px-3 py-1.5 text-xs font-bold tracking-tight border-transparent transition-all duration-300 pointer-events-none",
+                    color.bg,
+                    color.text,
+                    "hover:opacity-80 shadow-sm"
+                  )}
+                >
+                  {skill.icon && (
+                    <img 
+                      src={skill.icon} 
+                      alt={skill.name} 
+                      className={cn("size-3.5 object-contain", skill.name === "Next.js" && "dark:invert")} 
+                    />
+                  )}
+                  <span>{skill.name}</span>
+                </Badge>
+              </BlurFade>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
