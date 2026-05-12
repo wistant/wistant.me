@@ -3,11 +3,11 @@ import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import React from "react";
 import Image from "next/image";
-import { getResumeData } from "@/data/resume";
 
 export async function generateMetadata({
   params,
@@ -29,7 +29,6 @@ export default async function ContactPage({
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-  const resume = getResumeData(lang);
 
   return (
     <main className="min-h-dvh flex flex-col gap-6 relative px-4 sm:px-6 lg:px-0 py-12 sm:py-24 max-w-3xl mx-auto">
@@ -60,7 +59,7 @@ export default async function ContactPage({
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl mx-auto mt-12">
-              {Object.entries(resume.contact.social).map(([key, social]) => (
+              {Object.entries(siteConfig.contact.social).map(([key, social]) => (
                 <a
                   key={key}
                   href={social.url}
