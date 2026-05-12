@@ -72,7 +72,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
 
       {post.image && (
         <div className="w-full">
-          <div className="relative aspect-[2/1] w-full rounded-md overflow-hidden border border-border/50 bg-neutral-100 dark:bg-neutral-900">
+          <div className="relative aspect-2/1 w-full rounded-md overflow-hidden border border-border/50 bg-neutral-100 dark:bg-neutral-900">
              <Image 
                src={post.image} 
                alt={post.title} 
