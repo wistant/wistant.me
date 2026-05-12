@@ -1,6 +1,6 @@
-import { getProjectsByLang } from "@/data/projects";
 import { Icons } from "@/components/ui/icons";
 import { ProjectCard } from "@/components/projects/project-card";
+import { allProjects } from "content-collections";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import React, { Suspense } from "react";
@@ -27,7 +27,18 @@ export default async function ProjectsPage({
   const dict = await getDictionary(lang);
   const BLUR_FADE_DELAY = 0.04;
 
-  const allProjects = getProjectsByLang(lang);
+  // Directly fetch and filter projects from content-collections
+  const projectsBySlug = new Map<string, typeof allProjects[0]>();
+  allProjects.forEach(p => {
+    if (p.active !== false) {
+      const existing = projectsBySlug.get(p.slug);
+      if (!existing || p.lang === lang) {
+        projectsBySlug.set(p.slug, p);
+      }
+    }
+  });
+
+  const sortedProjects = Array.from(projectsBySlug.values()).sort((a, b) => (a.order || 99) - (b.order || 99));
   
   // The sequence mapping sets the visual rendering order of the project categories on this page.
   const PROJECT_CATEGORY_ORDER = ["personal", "opensource", "client"] as const;
@@ -41,13 +52,12 @@ export default async function ProjectsPage({
     return {
       categoryName,
       title,
-      items: allProjects.filter((p) => p.category === categoryName)
+      items: sortedProjects.filter((p) => p.category === categoryName)
     };
   });
 
   return (
     <main className="min-h-dvh flex flex-col gap-6 relative">
-      {/* Hero Background */}
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -82,7 +92,7 @@ export default async function ProjectsPage({
           }
         >
           {allProjects.length > 0 ? (
-            <div className="flex flex-col gap-y-24">
+            <div className="flex flex-col gap-y-16">
               
               {sections.map((section) => {
                 if (section.items.length === 0) return null;
@@ -93,7 +103,7 @@ export default async function ProjectsPage({
                       <h2 className="text-2xl md:text-3xl font-bold tracking-tight font-clash">{section.title}</h2>
                       <div className="h-px flex-1 bg-border/50 translate-y-1" />
                     </div>
-                    <div className="flex flex-col w-full mx-auto gap-y-16 mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 mt-6">
                       {section.items.map((project, id) => {
                         const projectLinks = project.links?.map((link) => ({
                           ...link,
@@ -103,17 +113,15 @@ export default async function ProjectsPage({
                         return (
                           <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 10 + id * 0.05} className="w-full">
                             <ProjectCard
-                              category={section.categoryName}
                               href={`/${lang}/projects/${project.slug}`}
                               title={project.title || ""}
                               description={project.description || ""}
                               dates={project.dates || ""}
                               tags={project.tags ?? []}
                               image={project.image}
-                              images={(project as Record<string, unknown>).images as string[]}
                               video={project.video}
                               links={projectLinks}
-                              className="w-full"
+                              className="h-full"
                             />
                           </BlurFade>
                         );

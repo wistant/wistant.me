@@ -1,22 +1,24 @@
 "use client";
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import Markdown from "react-markdown";
-import { Icons } from "@/components/ui/icons";
-import TechIconMap from "./tech-icon-map.json";
-
-import { useState, useEffect, useMemo } from "react";
-
+import { TechBadge } from "@/components/mdx/tech-badge";
 interface Props {
-  href: string;
   title: string;
+  href?: string;
   description: string;
   dates: string;
   tags: readonly string[];
+  link?: string;
   image?: string;
-  images?: string[];
   video?: string;
   links?: readonly {
     icon: React.ReactNode;
@@ -24,175 +26,96 @@ interface Props {
     href: string;
   }[];
   className?: string;
-  category?: "client" | "opensource" | "personal";
-  reverse?: boolean;
-  index?: string;
 }
-
-// SLIDESHOW INTERVAL IN SECONDS
-const SLIDESHOW_INTERVAL_SECONDS = 1.5;
 
 export function ProjectCard({
   title,
+  href,
   description,
   dates,
   tags,
+  link,
   image,
-  images = [],
   video,
   links,
-  className,
-  href,
-  index,
 }: Props) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // Combine image and images to get all available pictures
-  const allImages = useMemo(() => {
-    const list: string[] = [];
-    if (image) list.push(image);
-    if (images && images.length > 0) {
-      images.forEach((img) => {
-        if (!list.includes(img)) list.push(img);
-      });
-    }
-    return list;
-  }, [image, images]);
-
-  useEffect(() => {
-    if (allImages.length <= 1 || video) return;
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
-    }, SLIDESHOW_INTERVAL_SECONDS * 1000);
-    return () => clearInterval(interval);
-  }, [allImages.length, video]);
-
-  const githubLink = links?.find((l) => l.type.toLowerCase() === "github" || l.type.toLowerCase() === "source");
-  const liveLink = links?.find((l) => l.type.toLowerCase() === "website" || l.type.toLowerCase() === "live" || l.type.toLowerCase() === "preview") || links?.[0];
-
   return (
-    <div className={cn("flex flex-col w-full relative items-start", className)}>
-      {/* 1. Large Image (1280x640 ratio = 2:1) Clickable & Animated */}
+    <Card
+      className={
+        "flex flex-col overflow-hidden border hover:shadow-lg pt-0 transition-all duration-300 ease-out h-full"
+      }
+    >
       <Link 
         href={href || "#"} 
-        className="w-full relative rounded-2xl overflow-hidden bg-muted/20 border border-border/40 block transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.01] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] dark:group-hover:shadow-[0_20px_40px_rgba(255,255,255,0.03)]" 
-        style={{ aspectRatio: "2/1" }}
+        className={cn("block cursor-pointer group/card")}
       >
-        {index && (
-          <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-background/80 backdrop-blur-md border border-border shadow-sm flex items-center justify-center transition-opacity duration-300">
-            <span className="text-xs font-mono font-bold tracking-widest text-foreground">{index}</span>
-          </div>
-        )}
-        {video ? (
-          <video
-            src={video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover transition-transform duration-1000 ease-in-out group-hover:scale-105"
-          />
-        ) : allImages.length > 0 ? (
-          allImages.map((img, idx) => (
-            <Image
-              key={img}
-              src={img}
-              alt={`${title} - image ${idx + 1}`}
-              fill
-              className={cn(
-                "object-cover transition-all duration-1000 ease-in-out group-hover:scale-105 group-hover:brightness-110",
-                idx === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-              )}
+          {video && (
+            <video
+              src={video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="pointer-events-none mx-auto h-40 w-full object-cover object-top transition-transform duration-700 group-hover/card:scale-105"
             />
-          ))
-        ) : (
-          <div className="w-full h-full bg-muted/20 transition-transform duration-1000 group-hover:scale-105" />
-        )}
-        {allImages.length > 1 && !video && (
-          <div className="absolute bottom-3 right-3 z-20 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white shadow-xl flex items-center justify-center transition-opacity duration-300">
-            <span className="text-[10px] font-mono font-medium tracking-widest">{currentImageIndex + 1} / {allImages.length}</span>
-          </div>
-        )}
+          )}
+          {image && !video && (
+            <Image
+              src={image}
+              alt={title}
+              width={500}
+              height={300}
+              className="h-40 w-full overflow-hidden object-cover object-top transition-transform duration-700 group-hover/card:scale-105"
+              priority
+            />
+          )}
+
+        <CardHeader className="px-4 py-5 gap-y-2">
+            <CardTitle className="text-xl font-clash font-bold leading-tight tracking-tight group-hover/card:text-primary transition-colors">
+              {title}
+            </CardTitle>
+            <time className="font-sans text-xs">{dates}</time>
+            <div className="hidden font-sans text-xs underline print:visible">
+             {link?.replace("https://", "").replace("www.", "").replace("/", "")}
+            </div>
+            <Markdown>
+              {description}
+            </Markdown>
+        </CardHeader>
       </Link>
 
-      <div className="flex flex-col w-full mt-5 px-1">
-        {/* Title & Date */}
-        <div className="flex items-end gap-3 mb-3 mt-1">
-          <Link href={href || "#"} className="group/title">
-            <h3 className="text-xl font-bold font-clash tracking-tight text-foreground leading-none group-hover/title:text-blue-500 transition-colors">
-              {title}
-            </h3>
-          </Link>
-          {dates && (
-            <div className="flex items-center text-[10px] font-mono text-muted-foreground/60 mb-0.5">
-              {dates}
-            </div>
-          )}
+      {links && links.length > 0 && (
+        <div className="absolute top-3 right-3 z-40 flex flex-row gap-2 pointer-events-auto">
+          {links?.map((link, idx) => {
+            const isSource = link.type?.toLowerCase() === "source" || link.type?.toLowerCase() === "github";
+            const label = isSource ? "Source Code" : "Website";
+            
+            return (
+              <Link 
+                key={idx} 
+                href={link?.href} 
+                target="_blank"
+                className="h-8 px-3 flex items-center gap-2 rounded-full bg-background/95 backdrop-blur-md border border-border shadow-sm hover:bg-primary hover:text-primary-foreground transition-all duration-300 group/link"
+              >
+                <div className="size-3.5 flex items-center justify-center shrink-0">
+                  {link.icon}
+                </div>
+                <span className="text-[8px] font-black tracking-tight uppercase whitespace-nowrap">{label}</span>
+              </Link>
+            );
+          })}
         </div>
+      )}
 
-        {/* Description */}
-        <div className="text-sm text-muted-foreground leading-relaxed w-full dark:text-muted-foreground/90 mb-6">
-          <Markdown>{description}</Markdown>
-        </div>
-
-        {/* Action Buttons & Techs : CONTINUOUS FLOW SAME LINE NO WRAP */}
-        <div className="flex items-center w-full gap-3 mt-auto overflow-hidden flex-nowrap">
-          {/* Buttons (Left side) */}
-          {liveLink && liveLink.href !== githubLink?.href && (
-            <Link 
-              href={liveLink.href} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center shrink-0 gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-blue-600 shadow-sm hover:bg-blue-700 transition-colors whitespace-nowrap"
-            >
-              <Icons.globe className="size-3.5" />
-              Live Preview
-            </Link>
-          )}
-          {githubLink && (
-            <Link 
-              href={githubLink.href} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center shrink-0 gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-foreground bg-secondary border border-border/50 hover:bg-secondary/80 transition-colors whitespace-nowrap"
-            >
-              <Icons.github className="size-3.5" />
-              Source Code
-            </Link>
-          )}
-
-          <div className="w-px h-6 bg-border mx-1 shrink-0" /> {/* Petit séparateur */}
-
-          {/* Tech Icons (Flow right after buttons) */}
-          {tags && tags.length > 0 && (
-            <div className="flex items-center gap-2.5 overflow-hidden shrink flex-nowrap">
-              {tags.map((tag) => {
-                const tagKey = tag.toLowerCase().replace(/[\s.]/g, '');
-                const mappedImage = (TechIconMap as Record<string, string>)[tagKey];
-                const IconComp = Icons[tagKey as keyof typeof Icons];
-                
-                const needsInvert = ["nextjs", "github", "vercel", "prisma", "notebook", "eclipse", "express"].includes(tagKey);
-
-                return mappedImage ? (
-                  <div key={tag} title={tag} className="flex items-center justify-center shrink-0 transition-transform hover:scale-110">
-                    <Image 
-                      src={mappedImage} 
-                      alt={tag} 
-                      width={16} 
-                      height={16} 
-                      className={cn("object-contain", needsInvert && "dark:invert dark:opacity-90")}
-                    />
-                  </div>
-                ) : IconComp ? (
-                  <div key={tag} title={tag} className="flex items-center justify-center shrink-0 transition-transform hover:scale-110">
-                    <IconComp className={cn("size-4 text-neutral-700 dark:text-neutral-300", needsInvert && "dark:text-white")} />
-                  </div>
-                ) : null;
-              })}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+      <CardContent className="mt-auto flex flex-col px-2">
+        {tags && tags.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {tags?.map((tag) => (
+              <TechBadge key={tag} name={tag} />
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
