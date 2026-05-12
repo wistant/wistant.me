@@ -36,6 +36,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next)
-    "/((?!api|_next/static|_next/image|favicon.ico|icons|me|fonts|gallery|certifications|opengraph|robots.txt|sitemap.xml|experiences|portfolio|blog/thumbnails|blog/authors|education|hackatons|logos).*)",
+    "/((?!api|_next/static|_next/image|google5ac449b5ff3c8630.html|llm.txt|favicon.ico|wistant-logo.png|og.me|icons|me|fonts|gallery|certifications|opengraph|robots.txt|sitemap.xml|experiences|resume|portfolio|blog/thumbnails|blog/authors|education|hackatons|logos).*)",
   ],
 };
