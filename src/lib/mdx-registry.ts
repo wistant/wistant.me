@@ -46,30 +46,35 @@ export type BlogPost = z.infer<typeof BlogDataSchema>;
 export type CertPost = z.infer<typeof CertDataSchema>;
 export type ProjectEntry = z.infer<typeof ProjectDataSchema>;
 
-// --- HELPERS ---
-
 /**
  * Extracts a JavaScript object block from MDX content using a variable name.
  */
 function extractDataBlock(content: string, variableName: string): unknown {
-  const regex = new RegExp(`export const ${variableName} = {([\\s\\S]*?)};`);
-  const match = content.match(regex);
-  if (!match || !match[1]) return null;
+  const startMarker = `export const ${variableName} = {`;
+  const startIndex = content.indexOf(startMarker);
+  if (startIndex === -1) return null;
 
+  let braceCount = 1;
+  let currentIndex = startIndex + startMarker.length;
+  
+  while (braceCount > 0 && currentIndex < content.length) {
+    if (content[currentIndex] === '{') braceCount++;
+    else if (content[currentIndex] === '}') braceCount--;
+    currentIndex++;
+  }
+
+  if (braceCount !== 0) return null;
+
+  const block = content.substring(startIndex + startMarker.length - 1, currentIndex);
+  
   try {
-    // We use a safe-ish evaluation for the simple object literal
-    // This avoids complex regex for nested arrays/objects
-    const block = match[1];
-    // Convert the JS object string to something JSON-like or evaluatable
-    // Note: Since we are in a build-time script, we can use Function constructor for simple literals
-    return new Function(`return {${block}}`)();
+    return new Function(`return ${block}`)();
   } catch (e) {
-    console.error(`Failed to parse ${variableName} block:`, e);
+    console.error(`Failed to parse ${variableName} block in MDX:`, e);
     return null;
   }
 }
 
-// --- REGISTRY FUNCTIONS ---
 
 export function getAllBlogs(): BlogPost[] {
   const blogDir = path.join(process.cwd(), 'src/app/[lang]/(web)/blog');
