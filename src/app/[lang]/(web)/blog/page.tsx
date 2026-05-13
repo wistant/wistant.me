@@ -1,4 +1,4 @@
-import { allPosts } from "content-collections";
+import { getAllBlogs } from "@/lib/mdx-registry";
 import { getDictionary } from "@/lib/dictionary";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
@@ -24,10 +24,8 @@ export default async function BlogPage({
   const { lang } = await params;
   const dict = await getDictionary(lang);
   
-  // Get and sort posts
-  const posts = allPosts
-    .filter((p) => p.lang === lang || (p.lang === "en" && !allPosts.some(x => x.slug === p.slug && x.lang === lang)))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Get and sort posts directly from our custom pure MDX registry
+  const posts = getAllBlogs();
 
   const postsByYear = posts.reduce((acc, post) => {
     const year = new Date(post.date).getFullYear();

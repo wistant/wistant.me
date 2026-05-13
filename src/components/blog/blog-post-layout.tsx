@@ -1,0 +1,62 @@
+import Image from "next/image";
+import { getDictionary } from "@/lib/dictionary";
+import { Header } from "@/components/blog/slug/header";
+import { ShareButton } from "@/components/blog/slug/share-button";
+import { Reactions } from "@/components/blog/slug/reactions";
+
+import { Language } from "@/types/locale";
+
+export default async function BlogPostLayout({ 
+  post, 
+  lang, 
+  children 
+}: { 
+  post: { title: string; date: string; image?: string; slug: string; description?: string }; 
+  lang: Language; 
+  children: React.ReactNode 
+}) {
+  const dict = await getDictionary(lang);
+  const readingTime = 5; // Default reading time since we don't have raw string at layout level easily
+
+  return (
+    <article className="max-w-2xl mx-auto px-6 py-16 min-h-screen flex flex-col gap-10">
+      <Header 
+        post={{ title: post.title, summary: post.description, date: post.date }}
+        lang={lang}
+        dict={dict}
+        readingTime={readingTime}
+      />
+
+      {post.image && post.image !== "" && (
+        <div className="w-full">
+          <div className="relative aspect-2/1 w-full rounded-md overflow-hidden border border-border/50 bg-neutral-100 dark:bg-neutral-900">
+             <Image 
+               src={post.image} 
+               alt={post.title} 
+               fill 
+               className="object-cover" 
+               priority 
+             />
+          </div>
+        </div>
+      )}
+
+      <main className="prose prose-neutral dark:prose-invert font-sans max-w-none 
+        prose-p:leading-relaxed prose-headings:font-clash prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
+        prose-a:text-foreground prose-a:font-medium prose-a:underline prose-a:decoration-neutral-300 dark:prose-a:decoration-neutral-700 hover:prose-a:decoration-foreground transition-colors prose-a:underline-offset-[3px]
+        prose-li:marker:text-neutral-400 dark:prose-li:marker:text-neutral-600
+        prose-img:rounded-xl prose-img:border prose-img:border-border prose-img:shadow-sm">
+        {children}
+      </main>
+      
+      <hr className="m-0 border-none h-px bg-neutral-200 dark:bg-neutral-800 -my-6 -mx-6 w-auto sm:mx-0 sm:w-full" />
+      
+      <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-center justify-between sm:gap-4 mt-8 pb-32">
+        <div className="flex flex-row items-center gap-2.5 sm:gap-3">
+          <ShareButton title={dict.blog?.backToAll?.toString() || "Share"} slug={post.slug || ""} />
+        </div>
+        <Reactions slug={post.slug} />
+      </div>
+    </article>
+  );
+}
