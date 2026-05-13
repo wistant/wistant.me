@@ -81,13 +81,15 @@ export type Education = z.infer<typeof EducationSchema>;
 export type Skill = z.infer<typeof SkillSchema>;
 export type Hackathon = z.infer<typeof HackathonSchema>;
 
+import { ProjectEntry } from "@/lib/mdx-registry";
+
 export const ResumeDataSchema = PersonalDataSchema.extend({
   contact: ContactSchema,
   work: z.array(WorkExperienceSchema),
   education: z.array(EducationSchema),
   skills: z.array(SkillSchema),
   hackathons: z.array(HackathonSchema),
-  projects: z.array(z.any()), // Projects come from content-collections, keeping flexible for now or can be fully typed
+  projects: z.array(z.custom<ProjectEntry>()), // Projects come from our native mdx-registry
 });
 
 export type ResumeData = z.infer<typeof ResumeDataSchema>;
