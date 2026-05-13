@@ -14,7 +14,7 @@ export function AboutSection({ content, blurFadeDelay }: AboutSectionProps) {
     <section id="about">
       <div className="flex min-h-0 flex-col gap-y-1">
         <BlurFade delay={blurFadeDelay * 4}>
-          <div className="prose prose-sm md:prose-base max-w-full text-balance font-sans leading-relaxed text-muted-foreground dark:prose-invert">
+          <div className="prose prose-sm text-justify md:prose-base max-w-full text-balance font-sans leading-relaxed text-muted-foreground dark:prose-invert">
             <Markdown
               components={{
                 strong: ({ node: _node, ...props }) => (
