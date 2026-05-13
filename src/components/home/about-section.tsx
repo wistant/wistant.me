@@ -14,7 +14,7 @@ export function AboutSection({ title, content, blurFadeDelay }: AboutSectionProp
     <section id="about">
       <div className="flex min-h-0 flex-col gap-y-1">
         <BlurFade delay={blurFadeDelay * 3}>
-          <h2 className="text-xl font-bold font-clash">{title}</h2>
+          {/* <h2 className="text-xl font-bold font-clash">{title}</h2> */}
         </BlurFade>
         <BlurFade delay={blurFadeDelay * 4}>
           <div className="prose prose-sm md:prose-base max-w-full text-balance font-sans leading-relaxed text-muted-foreground dark:prose-invert">
