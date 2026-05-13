@@ -1,8 +1,13 @@
 <BackToProjects />
 
-export const metadata = {
-  title: "My portfolio",
-  description: "Modern, high-performance engineering portfolio with 3D elements and industrial aesthetics.",
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: projectData.title,
+    description: projectData.description,
+    image: projectData.image,
+  });
 }
 
 export const projectData = {

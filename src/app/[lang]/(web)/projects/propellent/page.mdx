@@ -1,8 +1,13 @@
 <BackToProjects />
 
-export const metadata = {
-  title: "Propellent | Wistant",
-  description: "High-growth SaaS landing page and dashboard for data-driven business scaling.",
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: projectData.title,
+    description: projectData.description,
+    image: projectData.image,
+  });
 }
 
 export const projectData = {
@@ -45,11 +50,15 @@ Built with a focus on extreme performance and developer experience, Propellent l
 
 ### Business Intelligence Dashboard
 
+
 The core of Propellent is its data-rich dashboard. We bridge the gap between raw business metrics and strategic growth execution by visualizing KPIs in real-time.
 
-<div className="my-12">
-  ![Dashboard](/portfolio/propellent/propellent.product.png)
-  *Real-time analytics dashboard with custom visualization widgets.*
+<div className="my-8">
+
+![Dashboard](/portfolio/propellent/propellent.product.png)
+
+*Real-time analytics dashboard with custom visualization widgets.*
+
 </div>
 
 ## Open Source Mission

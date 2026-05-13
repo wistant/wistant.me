@@ -1,8 +1,13 @@
 <BackToProjects />
 
-export const metadata = {
-  title: "Swarm AI Orchestration | Wistant",
-  description: "Advanced multi-agent blog generation engine using Pydantic AI and Groq.",
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: projectData.title,
+    description: projectData.description,
+    image: projectData.image,
+  });
 }
 
 export const projectData = {
