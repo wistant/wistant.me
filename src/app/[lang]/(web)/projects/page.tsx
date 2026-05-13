@@ -1,6 +1,6 @@
 import { Icons } from "@/components/ui/icons";
 import { ProjectCard } from "@/components/projects/project-card";
-import { allProjects } from "content-collections";
+import { getAllProjects } from "@/lib/mdx-registry";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import React, { Suspense } from "react";
@@ -27,18 +27,10 @@ export default async function ProjectsPage({
   const dict = await getDictionary(lang);
   const BLUR_FADE_DELAY = 0.04;
 
-  // Directly fetch and filter projects from content-collections
-  const projectsBySlug = new Map<string, typeof allProjects[0]>();
-  allProjects.forEach(p => {
-    if (p.active !== false) {
-      const existing = projectsBySlug.get(p.slug);
-      if (!existing || p.lang === lang) {
-        projectsBySlug.set(p.slug, p);
-      }
-    }
-  });
-
-  const sortedProjects = Array.from(projectsBySlug.values()).sort((a, b) => (a.order || 99) - (b.order || 99));
+  // Directly fetch and filter projects from our new native registry
+  const allProjects = getAllProjects();
+  
+  const sortedProjects = allProjects.filter(p => p.active !== false);
   
   // The sequence mapping sets the visual rendering order of the project categories on this page.
   const PROJECT_CATEGORY_ORDER = ["personal", "opensource", "client"] as const;
@@ -105,7 +97,7 @@ export default async function ProjectsPage({
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 mt-6">
                       {section.items.map((project, id) => {
-                        const projectLinks = project.links?.map((link) => ({
+                        const projectLinks = project.links?.map((link: { type: string; href: string }) => ({
                           ...link,
                           icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? <Icons.github className="size-3" /> : <Icons.globe className="size-3" />,
                         })) || [];

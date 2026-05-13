@@ -1,5 +1,5 @@
 import BlurFade from "@/components/ui/magicui/blur-fade";
-import { allProjects } from "content-collections";
+import { getAllProjects } from "@/lib/mdx-registry";
 import { ProjectCard } from "./project-card";
 import { Icons } from "@/components/ui/icons";
 import React from "react";
@@ -17,19 +17,9 @@ export default async function ProjectsSection({
 }) {
   const dict = await import("@/lib/dictionary").then((m) => m.getDictionary(lang));
   
-  // Directly fetch and filter projects from content-collections
-  const projectsBySlug = new Map<string, typeof allProjects[0]>();
-  allProjects.forEach(p => {
-    if (p.active !== false) {
-      const existing = projectsBySlug.get(p.slug);
-      // We prefer the requested language, or the first one we find
-      if (!existing || p.lang === lang) {
-        projectsBySlug.set(p.slug, p);
-      }
-    }
-  });
-
-  const sortedProjects = Array.from(projectsBySlug.values()).sort((a, b) => (a.order || 99) - (b.order || 99));
+  // Directly fetch and filter projects from our new native registry
+  const allProjects = getAllProjects();
+  const sortedProjects = allProjects.filter(p => p.active !== false);
 
   // Prefer featured projects, otherwise fallback to first N non-open-source
   const featured = sortedProjects.filter(p => p.featured);
@@ -66,7 +56,7 @@ export default async function ProjectsSection({
         {/* Projects list — high-density grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
           {displayProjects.map((project, id) => {
-            const projectLinks = project.links?.map((link) => ({
+            const projectLinks = project.links?.map((link: { type: string; href: string }) => ({
               ...link,
               icon: (link.type?.toLowerCase() === "source" || link.type?.toLowerCase() === "github")
                 ? <Icons.github className="size-3" />

@@ -1,8 +1,22 @@
----
-title: "The AI Cloud"
-date: "Oct 17, 2025"
-image: "https://images.unsplash.com/photo-1627398240411-8bbeb734125b?q=80&w=2070"
----
+import BlogPostLayout from "@/components/blog/blog-post-layout";
+
+import { getPageMetadata } from "@/config/metadata";
+
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: "The AI Cloud",
+    description: "Read The AI Cloud on Wistant Kode Blog.",
+  });
+}
+
+export const blogData = {
+  title: "The AI Cloud",
+  date: "Oct 17, 2025",
+  image: "https://images.unsplash.com/photo-1627398240411-8bbeb734125b?q=80&w=2070",
+  slug: "the-ai-cloud",
+};
 
 Vercel was born out of my frustration in 2015 that while the cloud enabled
 this seemingly infinite array of possibilities (and compute), the _pixels_
@@ -182,3 +196,9 @@ insights and solutions](https://x.com/rauchg/status/1978585286130221336), not en
 
 For all of us, [developers or not](https://v0.app), this is an opportunity to reinvent and reimagine the web
 and continue building it on open foundations.
+
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <BlogPostLayout post={blogData} lang={params.lang}>{props.children}</BlogPostLayout>;
+}

@@ -1,0 +1,40 @@
+import CertLayout from "@/components/certifications/cert-layout";
+
+import { getPageMetadata } from "@/config/metadata";
+
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: "AWS Certified Security – Specialty",
+    description: "Certification: AWS Certified Security – Specialty from Amazon Web Services (AWS)",
+  });
+}
+
+export const certData = {
+  title: "AWS Certified Security – Specialty",
+  date: "2024-06-10",
+  image: "/certifications/aws-security-specialty.png",
+  issuer: "Amazon Web Services (AWS)",
+  slug: "aws-security-specialty",
+};
+
+La certification **AWS Certified Security – Specialty** valide mes compétences en cybersécurité cloud, de la protection des données au chiffrement.
+
+<Callout type="info">
+La sécurité est la priorité numéro zéro chez AWS. Cette certification prouve une capacité à bâtir des forteresses numériques.
+</Callout>
+
+### Focus Technique
+- **IAM** : Gestion fine des accès et politiques de sécurité granulaires.
+- **Détection des menaces** : GuardDuty, Inspector et analyse des journaux.
+- **Protection des données** : Chiffrement au repos (KMS) et en transit (TLS).
+- **Incident Response** : Automatisation de la réponse aux alertes de sécurité.
+
+<TechBadge name="Cybersecurity" /> <TechBadge name="IAM" /> <TechBadge name="Encryption" />
+
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <CertLayout cert={certData} lang={params.lang}>{props.children}</CertLayout>;
+}

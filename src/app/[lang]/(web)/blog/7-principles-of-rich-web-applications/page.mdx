@@ -1,9 +1,22 @@
----
-title: "7 principles of rich web applications"
-date: "November 4, 2014"
-description: "7 actionable principles for websites that want to make use of JavaScript to control their UI and deliver the best performance"
-image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070"
----
+import BlogPostLayout from "@/components/blog/blog-post-layout";
+
+import { getPageMetadata } from "@/config/metadata";
+
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: "7 principles of rich web applications",
+    description: "Read 7 principles of rich web applications on Wistant Kode Blog.",
+  });
+}
+
+export const blogData = {
+  title: "7 principles of rich web applications",
+  date: "November 4, 2014",
+  image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070",
+  slug: "7-principles-of-rich-web-applications",
+};
 
 This is a writeup based on a presentation I gave at BrazilJS in August 2014. It builds on some of the ideas I've been [blogging](https://cloudup.com/blog/the-need-for-speed) [about](https://cloudup.com/blog/introducing-mydb) recently related mostly to UX and performance.
 
@@ -302,3 +315,9 @@ The web remains one of the most versatile mediums for the transmission of inform
 Pages interconnected by hyperlinks are a great building block for any type of application. Progressive loading of code, style and markup as the user navigates through them will ensure great performance without sacrificing interactivity.
 
 New unique opportunities have been enabled by JavaScript that, once universally adopted, will ensure the best possible user experience for the broadest and freest platform in existence.
+
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <BlogPostLayout post={blogData} lang={params.lang}>{props.children}</BlogPostLayout>;
+}

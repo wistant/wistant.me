@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { type Post } from "content-collections";
+import { type BlogPost } from "@/lib/mdx-registry";
 import { Language } from "@/types/locale";
 
 interface BlogPostItemProps {
-  post: Post;
+  post: BlogPost;
   lang: Language;
   views?: number;
 }
@@ -16,8 +16,7 @@ export function BlogPostItem({ post, lang, views }: BlogPostItemProps) {
     { month: "short", day: "numeric", year: "numeric" }
   );
 
-  const wordCount = post.content?.split(/\s+/).length || 500;
-  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+  const readingTime = 5; // Default reading time for list view
 
   return (
     <Link
@@ -47,7 +46,7 @@ export function BlogPostItem({ post, lang, views }: BlogPostItemProps) {
           {post.title}
         </h3>
         <p className="text-xs sm:text-sm text-muted-foreground line-clamp-1">
-          {post.summary}
+          {post.description}
         </p>
         <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-neutral-400 font-mono mt-0.5">
           <time dateTime={date.toISOString()}>{formattedDate}</time>

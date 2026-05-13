@@ -1,18 +1,18 @@
 import { MetadataRoute } from "next";
-import { 
-  allPosts, 
-  allProjects, 
-  allCertifications 
-} from "../../.content-collections/generated";
+import { getAllBlogs, getAllProjects, getAllCertifications } from "@/lib/mdx-registry";
 import { siteConfig as SITE_CONFIG } from "@/config/site";
 import { LOCALES } from "@/types/locale";
 
 /**
  * Generates a comprehensive, multilingual sitemap for the application.
- * Utilizes content-collections to dynamically index blog posts, projects, and certifications.
+ * Utilizes the custom MDX registry to dynamically index blog posts, projects, and certifications.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url.replace(/\/$/, "");
+
+  const allPosts = getAllBlogs();
+  const allProjects = getAllProjects();
+  const allCertifications = getAllCertifications();
 
   // 1. Static Routes
   const staticRoutes = [
@@ -45,62 +45,66 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   // 2. Dynamic Blog Posts
-  const blogEntries = allPosts.map((post) => {
-    const route = `/blog/${post.slug}`;
-    const url = `${baseUrl}/${post.lang}${route}`;
+  const blogEntries = allPosts.flatMap((post) => {
+    return LOCALES.map((lang) => {
+      const route = `/blog/${post.slug}`;
+      const url = `${baseUrl}/${lang}${route}`;
 
-    // Find alternates for this specific post slug in other languages
-    const languages = LOCALES.reduce((acc, l) => {
-      // We assume slugs are consistent across languages for the same content
-      acc[l] = `${baseUrl}/${l}${route}`;
-      return acc;
-    }, {} as Record<string, string>);
+      const languages = LOCALES.reduce((acc, l) => {
+        acc[l] = `${baseUrl}/${l}${route}`;
+        return acc;
+      }, {} as Record<string, string>);
 
-    return {
-      url,
-      lastModified: new Date(post.date || new Date()),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-      languages,
-    };
+      return {
+        url,
+        lastModified: new Date(post.date || new Date()),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+        languages,
+      };
+    });
   });
 
   // 3. Dynamic Projects
-  const projectEntries = allProjects.map((project) => {
-    const route = `/projects/${project.slug}`;
-    const url = `${baseUrl}/${project.lang}${route}`;
+  const projectEntries = allProjects.flatMap((project) => {
+    return LOCALES.map((lang) => {
+      const route = `/projects/${project.slug}`;
+      const url = `${baseUrl}/${lang}${route}`;
 
-    const languages = LOCALES.reduce((acc, l) => {
-      acc[l] = `${baseUrl}/${l}${route}`;
-      return acc;
-    }, {} as Record<string, string>);
+      const languages = LOCALES.reduce((acc, l) => {
+        acc[l] = `${baseUrl}/${l}${route}`;
+        return acc;
+      }, {} as Record<string, string>);
 
-    return {
-      url,
-      lastModified: new Date(), // Projects usually don't have a date field in this schema
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-      languages,
-    };
+      return {
+        url,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+        languages,
+      };
+    });
   });
 
   // 4. Dynamic Certifications
-  const certificationEntries = allCertifications.map((cert) => {
-    const route = `/certifications/${cert.slug}`;
-    const url = `${baseUrl}/${cert.lang}${route}`;
+  const certificationEntries = allCertifications.flatMap((cert) => {
+    return LOCALES.map((lang) => {
+      const route = `/certifications/${cert.slug}`;
+      const url = `${baseUrl}/${lang}${route}`;
 
-    const languages = LOCALES.reduce((acc, l) => {
-      acc[l] = `${baseUrl}/${l}${route}`;
-      return acc;
-    }, {} as Record<string, string>);
+      const languages = LOCALES.reduce((acc, l) => {
+        acc[l] = `${baseUrl}/${l}${route}`;
+        return acc;
+      }, {} as Record<string, string>);
 
-    return {
-      url,
-      lastModified: new Date(cert.date),
-      changeFrequency: "yearly" as const,
-      priority: 0.5,
-      languages,
-    };
+      return {
+        url,
+        lastModified: new Date(cert.date),
+        changeFrequency: "yearly" as const,
+        priority: 0.5,
+        languages,
+      };
+    });
   });
 
   return [
