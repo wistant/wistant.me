@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: Lan
   return getPageMetadata(lang, {
     title: dict.certifications.seo.title,
     description: dict.certifications.seo.description,
+    image: "/og.png",
     url: "/certifications",
   });
 }

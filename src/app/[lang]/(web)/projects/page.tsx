@@ -15,7 +15,10 @@ export async function generateMetadata({
   params: Promise<{ lang: Language }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  return getPageMetadata(lang);
+  return getPageMetadata(lang, {
+    image: "/og.png",
+    url: "/projects",
+  });
 }
 
 export default async function ProjectsPage({
