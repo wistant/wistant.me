@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.web-layout {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
