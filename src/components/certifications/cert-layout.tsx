@@ -1,54 +1,22 @@
-import { allCertifications } from "content-collections";
 import { getDictionary } from "@/lib/dictionary";
-import { Language } from "@/types/locale";
-import { notFound } from "next/navigation";
 import BlurFade from "@/components/ui/magicui/blur-fade";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { mdxComponents } from "@/components/mdx/mdx-components";
-import { remarkCodeMeta } from "@/lib/remark-code-meta";
-import { remarkImageSize } from "@/lib/remark-image-size";
-import rehypePrettyCode from "rehype-pretty-code";
-import { getPageMetadata } from "@/config/metadata";
 import { Icons } from "@/components/ui/icons";
-
 import NextImage from "next/image";
 import Link from "next/link";
+import { Language } from "@/types/locale";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export async function generateStaticParams() {
-  return allCertifications.map((p) => ({
-    lang: p.lang,
-    slug: p.slug,
-  }));
-}
-
-export async function generateMetadata({ 
-  params 
+export default async function CertLayout({ 
+  cert, 
+  lang,
+  children
 }: { 
-  params: Promise<{ lang: Language; slug: string }> 
+  cert: { title: string; date: string; image?: string; issuer: string; slug: string; href?: string; description?: string }; 
+  lang: Language;
+  children: React.ReactNode;
 }) {
-  const { lang, slug } = await params;
-  const cert = allCertifications.find((p) => p.slug === slug && p.lang === lang);
-  if (!cert) return {};
-  
-  return getPageMetadata(lang, {
-    title: `${cert.title} | Certifications`,
-    description: cert.description,
-    url: `/certifications/${cert.slug}`,
-  });
-}
-
-export default async function CertificationPost({ 
-  params 
-}: { 
-  params: Promise<{ lang: Language; slug: string }> 
-}) {
-  const { lang, slug } = await params;
-  const cert = allCertifications.find((p) => p.slug === slug && p.lang === lang);
   const dict = await getDictionary(lang);
-
-  if (!cert) notFound();
 
   return (
     <article className="max-w-[608px] mx-auto py-12 md:py-24 px-6 lg:px-0 mb-32">
@@ -85,7 +53,7 @@ export default async function CertificationPost({
                       <div className="flex items-center gap-2 border-l border-border/30 pl-6 group">
                          <Icons.globe className="h-3.5 w-3.5 group-hover:text-primary transition-colors" />
                          <a 
-                           href={cert.href} 
+                           href={cert.href || "#"} 
                            target="_blank" 
                            rel="noopener noreferrer"
                            className="hover:text-primary transition-colors cursor-pointer"
@@ -98,12 +66,11 @@ export default async function CertificationPost({
              </div>
           </div>
 
-          {/* Supreme Badge Showcase - 16:9 Rectangular Frame of Excellence */}
+          {/* Supreme Badge Showcase */}
           {cert.image && (
             <div className="relative group">
               <div className="absolute -inset-2 bg-linear-to-tr from-primary/10 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-all duration-1000 blur-2xl" />
               <div className="relative aspect-video w-full flex items-center justify-center p-12 bg-neutral-100/20 dark:bg-neutral-900/40 border border-border/30 overflow-hidden shadow-2xl backdrop-blur-md">
-                 {/* Procedural Pattern */}
                  <div className="absolute inset-0 opacity-[0.1] dark:opacity-[0.1]" 
                       style={{ backgroundImage: 'radial-gradient(circle, currentColor 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }} 
                  />
@@ -119,7 +86,6 @@ export default async function CertificationPost({
                     />
                  </div>
 
-                 {/* Technical Stamp & Metadata */}
                  <div className="absolute bottom-6 left-10 flex items-center gap-4">
                     <div className="w-8 h-px bg-border/40" />
                     <span className="text-[9px] font-mono uppercase tracking-[0.4em] text-muted-foreground/50">
@@ -139,16 +105,7 @@ export default async function CertificationPost({
             prose-a:text-foreground prose-a:font-medium prose-a:underline prose-a:decoration-neutral-300 dark:prose-a:decoration-neutral-700 hover:prose-a:decoration-foreground transition-colors prose-a:underline-offset-[3px]
             prose-li:text-muted-foreground/90 prose-li:marker:text-primary prose-li:my-2
             prose-img:rounded-xl prose-img:border prose-img:border-border prose-img:shadow-sm">
-            <MDXRemote
-              source={cert.content ?? ""}
-              components={mdxComponents}
-              options={{
-                mdxOptions: {
-                  remarkPlugins: [remarkCodeMeta, remarkImageSize],
-                  rehypePlugins: [[rehypePrettyCode, { theme: "one-dark-pro" }]],
-                },
-              }}
-            />
+            {children}
           </div>
 
           {/* Verification CTA */}
@@ -161,7 +118,7 @@ export default async function CertificationPost({
                  className="inline-flex items-center gap-3 bg-foreground text-background px-10 py-5 font-bold hover:bg-primary hover:text-primary-foreground transition-all duration-500 rounded-none w-full sm:w-auto justify-center group"
                >
                  <Icons.externalLink className="h-4 w-4 group-hover:rotate-12 transition-transform duration-300" />
-                 <span>{dict.certifications.viewCertificate}</span>
+                 <span>{dict.certifications.viewCertificate || "Voir le Certificat"}</span>
                </a>
                <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60">
                  Délivré par {cert.issuer} • ID: {cert.slug.toUpperCase()}

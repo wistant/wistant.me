@@ -1,7 +1,7 @@
 import { getDictionary } from "@/lib/dictionary";
 import { Language } from "@/types/locale";
 import BlurFade from "@/components/ui/magicui/blur-fade";
-import { allCertifications } from "content-collections";
+import { getAllCertifications } from "@/lib/mdx-registry";
 import Link from "next/link";
 import { Icons } from "@/components/ui/icons";
 import { getPageMetadata } from "@/config/metadata";
@@ -26,9 +26,7 @@ export default async function CertificationsPage({
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-  const certifications = allCertifications
-    .filter((c) => c.lang === lang)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const certifications = getAllCertifications();
 
   return (
     <article className="max-w-[608px] mx-auto py-12 md:py-24 px-6 lg:px-0 mb-32">

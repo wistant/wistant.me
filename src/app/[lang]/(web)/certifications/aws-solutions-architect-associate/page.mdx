@@ -1,12 +1,23 @@
----
-title: "AWS Certified Solutions Architect – Associate"
-issuer: "Amazon Web Services (AWS)"
-date: "2023-11-15"
-image: "/certifications/aws-solutions-architect-associate.png"
-href: "https://www.credly.com/badges/..."
-tags: ["Cloud", "Architecture", "Associate"]
-description: "Validation accurate des compétences en conception de systèmes distribués robustes sur AWS."
----
+import CertLayout from "@/components/certifications/cert-layout";
+
+import { getPageMetadata } from "@/config/metadata";
+
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: "AWS Certified Solutions Architect – Associate",
+    description: "Certification: AWS Certified Solutions Architect – Associate from Amazon Web Services (AWS)",
+  });
+}
+
+export const certData = {
+  title: "AWS Certified Solutions Architect – Associate",
+  date: "2023-11-15",
+  image: "/certifications/aws-solutions-architect-associate.png",
+  issuer: "Amazon Web Services (AWS)",
+  slug: "aws-solutions-architect-associate",
+};
 
 La certification **AWS Certified Solutions Architect – Associate** (SAA-C03) valide ma capacité à concevoir et à déployer des systèmes sécurisés et robustes sur les technologies AWS.
 
@@ -21,3 +32,9 @@ Cette certification est le standard de l'industrie pour démontrer une maîtrise
 - **Optimisation des coûts** : Sélection des services et types d'instances les plus rentables.
 
 <TechBadge name="AWS" /> <TechBadge name="Cloud Architecture" /> <TechBadge name="Security" />
+
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <CertLayout cert={certData} lang={params.lang}>{props.children}</CertLayout>;
+}
