@@ -19,7 +19,7 @@ export default async function CertLayout({
   const dict = await getDictionary(lang);
 
   return (
-    <article className="max-w-[608px] mx-auto py-12 md:py-24 px-6 lg:px-0 mb-32">
+    <article className="max-w-[608px] mx-auto py-12 md:py-24 mb-32">
       <BlurFade delay={BLUR_FADE_DELAY}>
         <div className="flex flex-col space-y-12">
           {/* Supreme Header */}
