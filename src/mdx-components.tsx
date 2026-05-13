@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { MDXComponents } from 'mdx/types'
 import { mdxComponents as customMdxComponents } from '@/components/mdx/mdx-components'
 import { TechBadge } from '@/components/mdx/tech-badge'
@@ -19,12 +20,27 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     BlurFade,
     PhotoStack,
     GithubCalendar,
-    WorkSection,
-    EducationSection,
+    WorkSection: (props: any) => {
+      const { workData } = require("@/data/work");
+      // For now, default to 'en' in MDX if no data is provided
+      return <WorkSection data={props.data || workData.en} {...props} />;
+    },
+    EducationSection: (props: any) => {
+      const { educationData } = require("@/data/education");
+      return <EducationSection data={props.data || educationData.en} {...props} />;
+    },
+    ProjectsSection: (props: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const ProjectsSectionComponent = require("@/components/projects/projects-section").default;
+      // MDX components can't easily get the 'lang' from params here, so we default to 'en' 
+      // or we can potentially parse it from the URL in a client-side wrapper if needed.
+      // But ProjectsSection is a server component normally.
+      return <ProjectsSectionComponent lang="en" {...props} />;
+    },
     CodeComparison,
     Image,
     BackToProjects,
-    ImageViewer, // ImageViewer is now correctly provided from media-viewer.tsx
+    ImageViewer, 
     L: ({ en, fr }: { en: React.ReactNode, fr: React.ReactNode }) => {
       // Small client-side or server-side bridge for language
       return (
