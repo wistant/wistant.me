@@ -6,13 +6,15 @@ export async function generateMetadata(props) {
   const params = await props.params;
   const { lang } = params;
   return getPageMetadata(lang, {
-    title: "7 principles of rich web applications",
-    description: "Read 7 principles of rich web applications on Wistant Kode Blog.",
+    title: blogData.title,
+    description: blogData.description,
+    image: blogData.image,
   });
 }
 
 export const blogData = {
   title: "7 principles of rich web applications",
+  description: "",
   date: "November 4, 2014",
   image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070",
   slug: "7-principles-of-rich-web-applications",
