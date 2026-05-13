@@ -1,5 +1,4 @@
-<BackToProjects />
-
+import ProjectPostLayout from "@/components/projects/project-post-layout";
 import { getPageMetadata } from "@/config/metadata";
 
 export async function generateMetadata(props) {
@@ -71,3 +70,8 @@ We revolutionize the way you make payments, offering a secure, convenient, and c
 - Customized card with a unique design
 - Spend up to $100,000 per month
 - Access to all features
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <ProjectPostLayout project={projectData} lang={params.lang}>{props.children}</ProjectPostLayout>;
+}

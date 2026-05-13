@@ -1,5 +1,4 @@
-<BackToProjects />
-
+import ProjectPostLayout from "@/components/projects/project-post-layout";
 import { getPageMetadata } from "@/config/metadata";
 
 export async function generateMetadata(props) {
@@ -56,3 +55,8 @@ export const projectData = {
 - **<L en="Cross-platform Optimization" fr="Optimisation Cross-platform" />**
 - **<L en="Bilingual implementation" fr="Mise en œuvre bilingue" />**
 - **<L en="Theme Engine" fr="Moteur de Thèmes" />**
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <ProjectPostLayout project={projectData} lang={params.lang}>{props.children}</ProjectPostLayout>;
+}

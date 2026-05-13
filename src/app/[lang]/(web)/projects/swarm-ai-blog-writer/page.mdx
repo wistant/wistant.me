@@ -1,5 +1,4 @@
-<BackToProjects />
-
+import ProjectPostLayout from "@/components/projects/project-post-layout";
 import { getPageMetadata } from "@/config/metadata";
 
 export async function generateMetadata(props) {
@@ -54,3 +53,8 @@ export const projectData = {
 - **Framework**: <TechBadge name="Vue" /> 3 + <TechBadge name="Flask" />
 - **LLM Engine**: <TechBadge name="Groq" /> (Llama 3.3 70B)
 - **Validation**: <TechBadge name="Python" /> Pydantic v2
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <ProjectPostLayout project={projectData} lang={params.lang}>{props.children}</ProjectPostLayout>;
+}

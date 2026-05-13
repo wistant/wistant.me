@@ -1,6 +1,6 @@
-<BackToProjects />
-
+import ProjectPostLayout from "@/components/projects/project-post-layout";
 import { getPageMetadata } from "@/config/metadata";
+
 
 export async function generateMetadata(props) {
   const params = await props.params;
@@ -72,3 +72,8 @@ By open-sourcing Propellent, we aim to provide a production-ready boilerplate fo
 - **SEO Optimized**: Built-in metadata generation for high-conversion landing pages.
 
 Join the mission on [GitHub](https://github.com/wistant/propellent).
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <ProjectPostLayout project={projectData} lang={params.lang}>{props.children}</ProjectPostLayout>;
+}
