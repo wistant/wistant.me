@@ -58,6 +58,7 @@ export default async function Home({
           description={dict.hero.description}
         />
       </div>
+      <br/>
 
       <div className="flex flex-col gap-1 sm:gap-2 mt-4">
         <AboutSection
