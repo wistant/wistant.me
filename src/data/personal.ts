@@ -12,7 +12,7 @@ export const personalData: { en: PersonalData; fr: PersonalData; contact: Contac
       "I'm Wistant Kode, a Architect & Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop.",
     about:
       "I'm Wistant Kode, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop. My passion lies in creating seamless user experiences that are as robust under the hood as they are beautiful on the surface.",
-    avatarUrl: "/me/me.png",
+    avatarUrl: "/og.png",
     post: "Software Engineer • Distributed Systems • High-End Interfaces",
     navbar: [
       { href: "/", icon: "Home", label: "Home" },
@@ -32,7 +32,7 @@ export const personalData: { en: PersonalData; fr: PersonalData; contact: Contac
       "Je suis Wistant Kode, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop.",
     about:
       "Je suis Wistant Kode, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop. Ma passion réside dans la création d'expériences utilisateur fluides, aussi robustes sous le capot que belles en surface.",
-    avatarUrl: "/me/me.png",
+    avatarUrl: "/og.png",
     post: "Ingénieur Logiciel • Systèmes Distribués • Interfaces Haut de Gamme",
     navbar: [
       { href: "/", icon: "Home", label: "Accueil" },

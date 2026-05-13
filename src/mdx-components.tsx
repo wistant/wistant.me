@@ -8,6 +8,9 @@ import WorkSection from "@/components/home/work-section"
 import EducationSection from "@/components/home/education-section"
 import Image from "next/image"
 import { CodeComparison } from "@/components/ui/magicui/code-comparison"
+import { BackToProjects } from "@/components/projects/back-to-projects"
+import { ImageViewer } from '@/components/mdx/media-viewer'; // Correct import for ImageViewer
+import React from "react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -20,6 +23,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     EducationSection,
     CodeComparison,
     Image,
+    BackToProjects,
+    ImageViewer, // ImageViewer is now correctly provided from media-viewer.tsx
     L: ({ en, fr }: { en: React.ReactNode, fr: React.ReactNode }) => {
       // Small client-side or server-side bridge for language
       return (

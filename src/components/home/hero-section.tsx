@@ -2,32 +2,56 @@
 
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import BlurFadeText from "@/components/ui/magicui/blur-fade-text";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DATA } from "@/data/resume";
+import { siteConfig } from "@/config/site";
 import Link from "next/link";
-import { BadgeCheck, MapPin, Github, Twitter } from "lucide-react";
+import { LucideIcon, BadgeCheck, MapPin, Github, Twitter, Linkedin, MessageCircle, Globe } from "lucide-react";
 import { RealTimeClock } from "./real-time-clock";
+import { cn } from "@/lib/utils";
+import { skillsData } from "@/data/skills";
 
 const BLUR_FADE_DELAY = 0.04;
 
-interface HeroSectionProps {
-  title: string;
-  description: string;
-  blurFadeDelay: number;
-}
+// Colors for icons
+const BRAND_ICON_COLORS: Record<string, string> = {
+  GitHub: "text-[#24292e] dark:text-white",
+  LinkedIn: "text-[#0077b5]",
+  X: "text-black dark:text-white",
+  Twitter: "text-[#1da1f2]",
+  WhatsApp: "text-[#25d366]",
+  TypeScript: "text-[#3178c6]",
+  "Next.js": "text-black dark:text-white",
+  React: "text-[#61dafb]",
+  NestJS: "text-[#e0234e]",
+  PostgreSQL: "text-[#336791]",
+  Redis: "text-[#d82c20]",
+};
 
-export function HeroSection({ title, description, blurFadeDelay }: HeroSectionProps) {
+const SOCIAL_ICONS: Record<string, LucideIcon> = {
+  GitHub: Github,
+  Twitter: Twitter,
+  X: Twitter,
+  LinkedIn: Linkedin,
+  WhatsApp: MessageCircle,
+  Email: MessageCircle,
+};
+
+export function HeroSection({ title, description }: { title: string; description: string }) {
+  // Use all skills from data as requested
+  const allSkills = skillsData;
+
+  const sharedBadgeClasses = "flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/40 bg-muted/20 text-[10px] font-bold uppercase text-muted-foreground transition-all duration-300 hover:bg-muted/40 hover:border-border/60";
+
   return (
     <section id="hero" className="mb-0">
-      <div className="mx-auto w-full space-y-8">
-        <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between pt-0 md:pt-4">
+      <div className="mx-auto w-full max-w-2xl space-y-8">
+        <div className="flex flex-col items-start text-left space-y-6 pt-8 md:pt-12">
           {/* Text Content */}
-          <div className="gap-2 flex flex-col order-2 md:order-1">
+          <div className="flex flex-col items-start gap-1 w-full"> {/* Reduced gap-3 to gap-1 */}
             <BlurFade delay={BLUR_FADE_DELAY} yOffset={8}>
-              <h1 className="text-2xl font-semibold tracking-tighter sm:text-3xl lg:text-4xl leading-tight font-clash">
-                <span>{DATA.name}</span>
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl lg:text-6xl leading-tight font-clash">
+                <span>{siteConfig.name}</span>
                 <BadgeCheck
-                  className="inline-block ml-2 size-6 md:size-8 text-[#1DA1F2] -mt-1"
+                  className="inline-block ml-3 size-8 md:size-10 text-[#1DA1F2] -mt-1.5"
                   fill="currentColor"
                   stroke="white"
                 />
@@ -35,53 +59,69 @@ export function HeroSection({ title, description, blurFadeDelay }: HeroSectionPr
             </BlurFade>
             
             <BlurFadeText
-              className="text-muted-foreground max-w-[600px] text-sm md:text-base lg:text-lg font-medium leading-relaxed"
+              className="text-muted-foreground max-w-[650px] text-base md:text-lg lg:text-xl font-medium leading-relaxed"
               delay={BLUR_FADE_DELAY}
               text={description}
             />
             
             <BlurFade delay={BLUR_FADE_DELAY * 2}>
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-3 text-[10px] md:text-xs text-muted-foreground pt-3">
-                <div className="flex items-center gap-1">
-                  <div className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Available</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <MapPin className="size-3" />
-                  <span>{DATA.location}</span>
-                </div>
-                <div className="flex items-center gap-1 border-l pl-3 border-border ml-0.5">
-                  <span className="font-mono">
+              <div className="flex flex-wrap items-center gap-2 pt-2 w-full"> {/* Reduced pt-4 to pt-2 */}
+                
+                {/* Location & Time Group */}
+                <div className={sharedBadgeClasses}>
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="size-2.5 text-red-500" />
+                    <span>{siteConfig.location}</span>
+                  </div>
+                  <div className="w-px h-3 bg-border/60" />
+                  <div className="flex items-center gap-1.5 font-mono">
                     <RealTimeClock />
-                  </span>
+                  </div>
                 </div>
-                <Link 
-                   href={DATA.contact.social.GitHub.url} 
-                   target="_blank"
-                   className="flex items-center gap-1 hover:text-foreground transition-colors border-l pl-3 border-border ml-0.5"
-                >
-                  <Github className="size-3" />
-                  <span>github</span>
-                </Link>
-                <Link 
-                   href={DATA.contact.social.X.url} 
-                   target="_blank"
-                   className="flex items-center gap-1 hover:text-foreground transition-colors border-l pl-3 border-border ml-0.5"
-                >
-                  <Twitter className="size-3" />
-                  <span>iamwistant</span>
-                </Link>
+
+                {/* Socials */}
+                {Object.entries(siteConfig.contact.social).map(([key, social]) => {
+                  const Icon = SOCIAL_ICONS[key] || Globe;
+                  const iconColor = BRAND_ICON_COLORS[key] || "text-muted-foreground";
+                  return (
+                    <Link 
+                      key={key}
+                      href={social.url}
+                      target="_blank"
+                      className={cn(sharedBadgeClasses, "active:scale-95")}
+                    >
+                      <Icon className={cn("size-2.5", iconColor)} />
+                      <span>{social.name}</span>
+                    </Link>
+                  );
+                })}
+
+                {/* All Skills from skills.ts */}
+                {allSkills.map((skill) => {
+                  const iconColor = BRAND_ICON_COLORS[skill.name] || "";
+                  return (
+                    <div 
+                      key={skill.name}
+                      className={sharedBadgeClasses}
+                    >
+                      {skill.icon && (
+                        <img 
+                          src={skill.icon} 
+                          alt={skill.name} 
+                          className={cn(
+                            "size-2.5 object-contain", 
+                            skill.name === "Next.js" && "dark:invert",
+                            !iconColor && "grayscale brightness-125"
+                          )} 
+                        />
+                      )}
+                      <span>{skill.name}</span>
+                    </div>
+                  );
+                })}
               </div>
             </BlurFade>
           </div>
-
-          {/* Avatar Area */}
-          <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2 flex justify-start md:justify-end md:mt-9 -mb-4 md:mb-0">
-             <Avatar className="size-20 md:size-36 border rounded-full shadow-lg ring-2 ring-muted transform transition-transform duration-300">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} className="object-cover" />
-                <AvatarFallback className="text-xl font-bold">{DATA.initials}</AvatarFallback>
-              </Avatar>
-          </BlurFade>
         </div>
       </div>
     </section>

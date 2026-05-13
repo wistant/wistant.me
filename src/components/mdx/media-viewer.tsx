@@ -47,14 +47,13 @@ export function MediaViewer({
           className="group relative cursor-pointer"
           onClick={() => setIsOpen(true)}
         >
-          {isLocal && width && height ? (
+          {(isLocal && width && height) ? (
             <NextImage
               src={src}
               alt={alt}
               width={width}
               height={height}
               className={cn("max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01] rounded-xl border border-border/50 shadow-sm", className)}
-
               style={{ height: "auto" }}
             />
           ) : (
@@ -62,7 +61,6 @@ export function MediaViewer({
               src={src}
               alt={alt}
               className={cn("max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01] rounded-xl border border-border/50 shadow-sm", className)}
-
               loading="lazy"
             />
           )}
@@ -103,7 +101,7 @@ export function MediaViewer({
                     style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
                   />
                 ) : (
-                  <Image
+                  <img
                     src={src}
                     alt={alt || "Full preview"}
                     className="rounded-xl object-contain shadow-2xl max-w-full max-h-full"

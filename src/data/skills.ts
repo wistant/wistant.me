@@ -7,7 +7,6 @@ export const skillsData: Skill[] = [
   { name: "React", icon: "/icons/react.svg" },
   { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
   { name: "Prisma", icon: "/icons/prisma.svg" },
-  { name: "Redis", icon: "/icons/redis.svg" },
   { name: "Vercel", icon: "/icons/vercel.svg" },
   { name: "Linux", icon: "/icons/linux.svg" },
 ];

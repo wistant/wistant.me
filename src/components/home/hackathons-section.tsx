@@ -4,9 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Timeline, TimelineItem, TimelineConnectItem } from "@/components/timeline";
 import { Hackathon } from "@/types/resume";
-import { useParams } from "next/navigation";
-import { getResumeData } from "@/data/resume";
-import { Language } from "@/types/locale";
 
 export default function HackathonsSection({
   data,
@@ -19,11 +16,7 @@ export default function HackathonsSection({
   subtitle?: string;
   description?: string;
 }) {
-  const params = useParams();
-  const lang = (params?.lang as Language) || "en";
-  const resume = getResumeData(lang);
-  
-  const hackathons = data && data.length > 0 ? data : resume.hackathons;
+  const hackathons = data && data.length > 0 ? data : []; // Data must be passed now
 
   return (
     <section id="hackathons" className="overflow-hidden">

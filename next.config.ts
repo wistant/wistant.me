@@ -28,12 +28,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/x",
-        destination: "https://x.com/wistant",
+        destination: "https://x.com/iamwistant",
         permanent: true,
       },
       {
         source: "/twitter",
-        destination: "https://x.com/wistant",
+        destination: "https://x.com/iamwistant",
         permanent: true,
       },
       {

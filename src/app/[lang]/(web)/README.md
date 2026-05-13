@@ -13,4 +13,5 @@ All public-facing features and endpoints of `wistant.dev`.
 | `certifications/` | Verified Accreditations |
 
 ## Rendering Rules
+
 By default, all content handled inside `(web)` is compiled via **Static Site Generation (SSG)** to ensure maximum performance globally.

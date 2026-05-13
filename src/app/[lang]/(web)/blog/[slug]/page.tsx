@@ -72,7 +72,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
 
       {post.image && (
         <div className="w-full">
-          <div className="relative aspect-[2/1] w-full rounded-md overflow-hidden border border-border/50 bg-neutral-100 dark:bg-neutral-900">
+          <div className="relative aspect-2/1 w-full rounded-md overflow-hidden border border-border/50 bg-neutral-100 dark:bg-neutral-900">
              <Image 
                src={post.image} 
                alt={post.title} 
@@ -85,10 +85,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps) {
       )}
 
       <main className="prose prose-neutral dark:prose-invert font-sans max-w-none 
-        prose-p:leading-relaxed prose-p:mb-6
-        prose-headings:font-clash prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
-        prose-h2:mt-16 prose-h2:mb-6 prose-h2:text-2xl
-        prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-xl
+        prose-p:leading-relaxed prose-headings:font-clash prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
         prose-a:text-foreground prose-a:font-medium prose-a:underline prose-a:decoration-neutral-300 dark:prose-a:decoration-neutral-700 hover:prose-a:decoration-foreground transition-colors prose-a:underline-offset-[3px]
         prose-li:marker:text-neutral-400 dark:prose-li:marker:text-neutral-600
         prose-img:rounded-xl prose-img:border prose-img:border-border prose-img:shadow-sm">

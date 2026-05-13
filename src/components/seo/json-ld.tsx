@@ -1,4 +1,3 @@
-import { DATA } from "@/data/resume";
 import { siteConfig as SITE_CONFIG } from "@/config/site";
 
 export type JsonLdType = "Person" | "ProfessionalService" | "SoftwareSourceCode" | "Article";
@@ -23,9 +22,9 @@ export const JsonLd = ({
   authorName,
 }: JsonLdProps) => {
   const currentUrl = url ? `${SITE_CONFIG.url}${url}` : SITE_CONFIG.url;
-  const currentImage = image || `${SITE_CONFIG.url}${DATA.avatarUrl}`;
+  const currentImage = image || `${SITE_CONFIG.url}/wistant-logo.png`;
   const currentTitle = title || SITE_CONFIG.name;
-  const currentDescription = description || DATA.description;
+  const currentDescription = description || SITE_CONFIG.description;
 
   const baseSchema = {
     "@context": "https://schema.org",
@@ -37,7 +36,7 @@ export const JsonLd = ({
     case "Person":
       specificSchema = {
         "@type": "Person",
-        name: DATA.name,
+        name: SITE_CONFIG.name,
         url: SITE_CONFIG.url,
         image: currentImage,
         jobTitle: "Senior Software Engineer & Distributed Systems Architect",
@@ -76,7 +75,7 @@ export const JsonLd = ({
         programmingLanguage: ["TypeScript", "Next.js", "React", "Node.js"],
         author: {
           "@type": "Person",
-          name: DATA.name,
+          name: SITE_CONFIG.name,
         },
       };
       break;
@@ -88,7 +87,7 @@ export const JsonLd = ({
         image: currentImage,
         author: {
           "@type": "Person",
-          name: authorName || DATA.name,
+          name: authorName || SITE_CONFIG.name,
           url: SITE_CONFIG.url,
         },
         publisher: {
@@ -96,7 +95,7 @@ export const JsonLd = ({
           name: SITE_CONFIG.name,
           logo: {
             "@type": "ImageObject",
-            url: `${SITE_CONFIG.url}${DATA.avatarUrl}`,
+            url: `${SITE_CONFIG.url}/wistant-logo.png`,
           },
         },
         datePublished: publishDate ? new Date(publishDate).toISOString() : new Date().toISOString(),

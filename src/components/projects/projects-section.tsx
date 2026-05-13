@@ -1,6 +1,6 @@
 import BlurFade from "@/components/ui/magicui/blur-fade";
-import { ProjectCard } from "@/components/projects/project-card";
-import { getProjectsByLang } from "@/data/projects";
+import { allProjects } from "content-collections";
+import { ProjectCard } from "./project-card";
 import { Icons } from "@/components/ui/icons";
 import React from "react";
 
@@ -16,7 +16,20 @@ export default async function ProjectsSection({
   lang: Language;
 }) {
   const dict = await import("@/lib/dictionary").then((m) => m.getDictionary(lang));
-  const sortedProjects = getProjectsByLang(lang).sort((a, b) => (a.order || 99) - (b.order || 99));
+  
+  // Directly fetch and filter projects from content-collections
+  const projectsBySlug = new Map<string, typeof allProjects[0]>();
+  allProjects.forEach(p => {
+    if (p.active !== false) {
+      const existing = projectsBySlug.get(p.slug);
+      // We prefer the requested language, or the first one we find
+      if (!existing || p.lang === lang) {
+        projectsBySlug.set(p.slug, p);
+      }
+    }
+  });
+
+  const sortedProjects = Array.from(projectsBySlug.values()).sort((a, b) => (a.order || 99) - (b.order || 99));
 
   // Prefer featured projects, otherwise fallback to first N non-open-source
   const featured = sortedProjects.filter(p => p.featured);
@@ -50,8 +63,8 @@ export default async function ProjectsSection({
           </div>
         </div>
 
-        {/* Projects list — clean, no overflow clipping */}
-        <div className="flex flex-col w-full gap-y-16">
+        {/* Projects list — high-density grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
           {displayProjects.map((project, id) => {
             const projectLinks = project.links?.map((link) => ({
               ...link,
@@ -69,10 +82,10 @@ export default async function ProjectsSection({
                   dates={project.dates || ""}
                   tags={project.tags ?? []}
                   image={project.image}
-                  images={(project as Record<string, unknown>).images as string[]}
                   video={project.video}
                   links={projectLinks}
-                  className="w-full"
+                  // index={(id + 1).toString().padStart(2, "0")}
+                  className="h-full"
                 />
               </BlurFade>
             );
