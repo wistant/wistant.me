@@ -82,7 +82,7 @@ export default async function Home({
         />
       </div>
 
-      <section id="work">
+      {/* <section id="work">
         <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 6}>
             <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
@@ -103,7 +103,7 @@ export default async function Home({
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section id="projects">
         <ShowMore
