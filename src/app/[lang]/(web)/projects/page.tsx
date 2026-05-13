@@ -105,7 +105,7 @@ export default async function ProjectsPage({
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 mt-6">
                       {section.items.map((project, id) => {
-                        const projectLinks = project.links?.map((link) => ({
+                        const projectLinks = project.links?.map((link: { type: string; href: string }) => ({
                           ...link,
                           icon: link.type.toLowerCase() === "source" || link.type.toLowerCase() === "github" ? <Icons.github className="size-3" /> : <Icons.globe className="size-3" />,
                         })) || [];

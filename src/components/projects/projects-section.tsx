@@ -66,7 +66,7 @@ export default async function ProjectsSection({
         {/* Projects list — high-density grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
           {displayProjects.map((project, id) => {
-            const projectLinks = project.links?.map((link) => ({
+            const projectLinks = project.links?.map((link: { type: string; href: string }) => ({
               ...link,
               icon: (link.type?.toLowerCase() === "source" || link.type?.toLowerCase() === "github")
                 ? <Icons.github className="size-3" />
