@@ -1,5 +1,7 @@
 <BackToProjects />
 
+import { getPageMetadata } from "@/config/metadata";
+
 export async function generateMetadata(props) {
   const params = await props.params;
   const { lang } = params;

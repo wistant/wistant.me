@@ -20,16 +20,16 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     BlurFade,
     PhotoStack,
     GithubCalendar,
-    WorkSection: (props: any) => {
+    WorkSection: (props) => {
       const { workData } = require("@/data/work");
       // For now, default to 'en' in MDX if no data is provided
       return <WorkSection data={props.data || workData.en} {...props} />;
     },
-    EducationSection: (props: any) => {
+    EducationSection: (props) => {
       const { educationData } = require("@/data/education");
       return <EducationSection data={props.data || educationData.en} {...props} />;
     },
-    ProjectsSection: (props: any) => {
+    ProjectsSection: (props) => {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const ProjectsSectionComponent = require("@/components/projects/projects-section").default;
       // MDX components can't easily get the 'lang' from params here, so we default to 'en' 
@@ -45,8 +45,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // Small client-side or server-side bridge for language
       return (
         <span className="inline">
-          <span className="hidden [:lang(en)_&]:inline">{en}</span>
-          <span className="hidden [:lang(fr)_&]:inline">{fr}</span>
+          <span className="hidden in-[:lang(en)]:inline">{en}</span>
+          <span className="hidden in-[:lang(fr)]:inline">{fr}</span>
         </span>
       );
     },
@@ -57,7 +57,23 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     li: (props) => (
       <li className="relative pl-4 text-muted-foreground leading-relaxed before:content-['-'] before:absolute before:left-0 before:text-foreground" {...props} />
     ),
-    p: (props) => <p className="mb-5 last:mb-0 leading-relaxed text-muted-foreground" {...props} />,
+    p: ({ children, ...props }) => {
+      // MDX wraps standalone images in a <p> tag, but if we replace <img> with a block
+      // element like ImageViewer (a <div>), we get an invalid <div> inside <p>.
+      // Solution: if the only child is an image-like element, render as <div> instead.
+      const child = React.Children.toArray(children);
+      const isSoleBlockChild =
+        child.length === 1 &&
+        React.isValidElement(child[0]) &&
+        (
+          (child[0] as React.ReactElement<{ src?: string }>).type === 'img' ||
+          (child[0] as React.ReactElement).type === ImageViewer
+        );
+      if (isSoleBlockChild) {
+        return <div className="mb-5 last:mb-0" {...props}>{children}</div>;
+      }
+      return <p className="mb-5 last:mb-0 leading-relaxed text-muted-foreground" {...props}>{children}</p>;
+    },
     a: (props) => (
       <a
         className="text-foreground font-medium underline decoration-neutral-300 dark:decoration-neutral-700 hover:decoration-foreground transition-colors underline-offset-[3px]"
