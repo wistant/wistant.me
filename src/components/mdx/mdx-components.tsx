@@ -105,6 +105,7 @@ export const mdxComponents: MDXComponents = {
   YouTube,
   Figure,
   Snippet,
+  ImageViewer,
   FootNote,
   FootNotes,
   Ref,
@@ -113,6 +114,17 @@ export const mdxComponents: MDXComponents = {
       {children}
     </div>
   ),
+  Demos: ({ children }: { children?: React.ReactNode }) => <div className="space-y-4">{children}</div>,
+  Books: ({ children }: { children?: React.ReactNode }) => <div className="books-container">{children}</div>,
+  Button: ({ children }: { children?: React.ReactNode }) => <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md">{children}</button>,
+  AnimatePresence: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
+  CSSTransition: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
+  TransitionGroup: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
+  ThemeContext: {
+    Provider: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
+    Consumer: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
+  } as unknown as React.ComponentType<unknown>,
+  Head: () => null,
   Diagram: ({ children }: { children?: React.ReactNode }) => (
     <div className="my-8 p-6 rounded-xl border-2 border-dashed border-border/50 bg-muted/20 flex flex-col items-center justify-center text-muted-foreground italic text-sm text-center">
       <div className="mb-2 font-bold not-italic">📊 Diagram Placeholder</div>
