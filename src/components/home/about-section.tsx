@@ -9,7 +9,7 @@ interface AboutSectionProps {
   blurFadeDelay: number;
 }
 
-export function AboutSection({ title, content, blurFadeDelay }: AboutSectionProps) {
+export function AboutSection({ content, blurFadeDelay }: AboutSectionProps) {
   return (
     <section id="about">
       <div className="flex min-h-0 flex-col gap-y-1">
