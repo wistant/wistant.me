@@ -1,5 +1,4 @@
 import { type NextConfig } from "next";
-import { withContentCollections } from "@content-collections/next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
@@ -81,4 +80,4 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX();
 
-export default withContentCollections(withMDX(nextConfig));
+export default withMDX(nextConfig);
