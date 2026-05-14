@@ -51,7 +51,7 @@ export function HeroSection({ title, description }: { title: string; description
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl lg:text-6xl leading-tight font-clash">
                 <span>{siteConfig.name}</span>
                 <BadgeCheck
-                  className="inline-block ml-3 size-8 md:size-10 text-[#1DA1F2] -mt-1.5"
+                  className="inline-block ml-3 size-8 md:size-10 text-[#00ff22] -mt-1.5"
                   fill="currentColor"
                   stroke="white"
                 />
