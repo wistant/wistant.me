@@ -5,7 +5,7 @@ import { motion, useMotionValue } from "framer-motion";
 import React from "react";
 import { DockItem } from "./types";
 import { IconContainer } from "./icon-container";
-import { LanguageToggleContainer } from "./language-toggle-container";
+import { LanguageSwitcher } from "./language-switcher";
 import { ThemeToggleContainer } from "./theme-toggle-container";
 
 export function FloatingDockDesktop({
@@ -35,7 +35,7 @@ export function FloatingDockDesktop({
       {/* Separator */}
       <div className="mx-1 h-7 w-px bg-border/50 self-center" />
       {/* Language switcher */}
-      <LanguageToggleContainer mouseX={mouseX} />
+      <LanguageSwitcher />
       {/* Theme toggle */}
       <ThemeToggleContainer mouseX={mouseX} />
     </motion.div>
