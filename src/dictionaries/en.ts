@@ -79,8 +79,9 @@ export const en = {
   "blog": {
     "title": "Notes & Insights",
     "description": "Thoughts on software engineering, multi-platform development, and things I learn along the way.",
-    "latestTitle": "Latest Stories",
+    "latestTitle": "Blog",
     "latestSubtitle": "Insights & Reflections",
+    "latestDescription": "Deep dives into software architecture, cross-platform development, and modern engineering trends.",
     "seo": {
       "title": "Engineering Blog | Technical Notes & Insights",
       "description": "Deep dives into software architecture, cross-platform development, and modern engineering trends to help you build stable and scalable systems.",
