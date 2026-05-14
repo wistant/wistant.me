@@ -13,15 +13,24 @@ export default async function BlogHome() {
   if (posts.length === 0) return null;
 
   return (
-    <section id="blog-home" className="py-12 border-t border-border/40">
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-1">
-           <h2 className="text-2xl font-bold tracking-tighter sm:text-4xl font-cal">
-             {dict.blog.latestTitle || "Latest Stories"}
-           </h2>
-           <p className="text-muted-foreground text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em]">
-             {dict.blog.latestSubtitle || "Insights & Reflections"}
-           </p>
+    <section id="blog-home" className="py-20 border-t border-border/40">
+      <div className="flex flex-col gap-y-12 w-full">
+        <div className="flex flex-col gap-y-4 items-center justify-center">
+          <div className="flex items-center w-full">
+            <div className="flex-1 h-px bg-linear-to-r from-transparent from-5% via-border via-95% to-transparent" />
+            <div className="border border-border bg-black z-10 rounded-xl px-4 py-1 shadow-sm">
+              <span className="text-white text-sm font-medium">{dict.blog.latestTitle || "Latest Stories"}</span>
+            </div>
+            <div className="flex-1 h-px bg-linear-to-l from-transparent from-5% via-border via-95% to-transparent" />
+          </div>
+          <div className="flex flex-col gap-y-3 items-center justify-center">
+            <h2 className="text-3xl font-bold font-clash tracking-tighter italic sm:text-5xl">{dict.blog.latestSubtitle || "Insights & Reflections"}</h2>
+            {dict.blog.latestDescription && (
+              <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
+                {dict.blog.latestDescription}
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">
