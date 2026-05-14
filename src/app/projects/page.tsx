@@ -19,7 +19,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProjectsPage() {
-  const lang = await getCurrentLanguage();
   const dict = await getDictionary();
   const BLUR_FADE_DELAY = 0.04;
 
@@ -101,7 +100,7 @@ export default async function ProjectsPage() {
                         return (
                           <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 10 + id * 0.05} className="w-full">
                             <ProjectCard
-                              href="/projects/${project.slug}"
+                              href={`/projects/${project.slug}`}
                               title={project.title || ""}
                               description={project.description || ""}
                               dates={project.dates || ""}

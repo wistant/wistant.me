@@ -1,29 +1,15 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-interface ProjectData {
-    slug: string;
-    title: string;
-    description: string;
-    image?: string;
-    images: string[];
-    date?: string;
-    category?: string;
-}
-
 interface ProjectDetailClientProps {
-    project: ProjectData;
     dict: Record<string, unknown>;
-    lang: string;
     prevProject?: { slug: string; title: string };
     nextProject?: { slug: string; title: string };
     children: React.ReactNode;
 }
 
 export default function ProjectDetailClient({
-    project,
     dict,
-    lang,
     prevProject,
     nextProject,
     children,
@@ -64,8 +50,7 @@ export default function ProjectDetailClient({
                     <div className="min-w-0">
                         {prevProject ? (
                             <Link
-                                href="/projects/${prevProject.slug}"
-                                className="group flex flex-col gap-2 hover:opacity-70 transition-opacity h-full"
+                                href={`/projects/${prevProject.slug}`}                                className="group flex flex-col gap-2 hover:opacity-70 transition-opacity h-full"
                             >
                                 <div className="text-muted-foreground text-[10px] uppercase tracking-widest font-bold">
                                     {t.previous || "Previous"}
@@ -79,7 +64,7 @@ export default function ProjectDetailClient({
                     <div className="min-w-0 text-right">
                         {nextProject ? (
                             <Link
-                                href="/projects/${nextProject.slug}"
+                                href={`/projects/${nextProject.slug}`}
                                 className="group flex flex-col items-end gap-2 hover:opacity-70 transition-opacity h-full"
                             >
                                 <div className="text-muted-foreground text-[10px] uppercase tracking-widest font-bold">

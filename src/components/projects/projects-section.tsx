@@ -66,7 +66,7 @@ export default async function ProjectsSection({
             return (
               <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 12 + id * 0.05} className="w-full">
                 <ProjectCard
-                  href="/projects/${project.slug}"
+                  href={`/projects/${project.slug}`}
                   title={project.title || ""}
                   description={project.description || ""}
                   dates={project.dates || ""}

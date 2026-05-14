@@ -22,7 +22,6 @@ export async function generateMetadata() {
 }
 
 export default async function CertificationsPage() {
-  const lang = await getCurrentLanguage();
   const dict = await getDictionary();
   const certifications = getAllCertifications();
 
@@ -48,7 +47,7 @@ export default async function CertificationsPage() {
             {certifications.map((cert, idx) => (
               <BlurFade key={cert.slug} delay={BLUR_FADE_DELAY * 2 + idx * 0.05}>
                 <Link 
-                  href="/certifications/${cert.slug}"
+                  href={`/certifications/${cert.slug}`}
                   className="group relative flex flex-col sm:flex-row gap-6 p-6 bg-neutral-50/50 dark:bg-neutral-900/40 border border-border/50 hover:border-primary/40 transition-all duration-500 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
