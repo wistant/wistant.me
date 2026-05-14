@@ -6,8 +6,9 @@ export async function generateMetadata(props) {
   const params = await props.params;
   const { lang } = params;
   return getPageMetadata(lang, {
-    title: "Microsoft Certified: Azure Solutions Architect Expert",
-    description: "Certification: Microsoft Certified: Azure Solutions Architect Expert from Microsoft",
+    title: certData.title,
+    description: `Certification: ${certData.title} from ${certData.issuer}`,
+    image: certData.image,
   });
 }
 

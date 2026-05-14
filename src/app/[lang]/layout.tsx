@@ -70,7 +70,7 @@ export default async function RootLayout({
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="absolute inset-x-0 top-0 h-[100px] overflow-hidden pointer-events-none z-0">
             <FlickeringGrid
               className="h-full w-full opacity-80"

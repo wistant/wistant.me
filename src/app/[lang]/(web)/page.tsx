@@ -28,7 +28,10 @@ export async function generateMetadata({
   params: Promise<{ lang: Language }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  return getPageMetadata(lang);
+  return getPageMetadata(lang, {
+    image: "/og.png",
+    url: "/",
+  });
 }
 
 export default async function Home({
@@ -58,6 +61,7 @@ export default async function Home({
           description={dict.hero.description}
         />
       </div>
+      <br/>
 
       <div className="flex flex-col gap-1 sm:gap-2 mt-4">
         <AboutSection
@@ -81,7 +85,7 @@ export default async function Home({
         />
       </div>
 
-      <section id="work">
+      {/* <section id="work">
         <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 6}>
             <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
@@ -102,7 +106,7 @@ export default async function Home({
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section id="projects">
         <ShowMore

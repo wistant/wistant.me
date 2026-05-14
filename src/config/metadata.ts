@@ -3,16 +3,26 @@ import { Language } from "@/types/locale";
 import { siteConfig } from "@/config/site";
 import { getDictionary } from "@/lib/dictionary";
 
-export type CustomMetadata = Partial<Metadata> & { url?: string };
+export type CustomMetadata = Partial<Metadata> & { 
+  url?: string;
+  image?: string;
+};
 
 export async function getPageMetadata(lang: Language = "en", override?: CustomMetadata): Promise<Metadata> {
   const dict = await getDictionary(lang);
   const isEn = lang === "en";
   
-  const url = process.env.NEXT_PUBLIC_APP_URL || "https://wistant.me";
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://wistant.me";
+  const siteUrl = siteConfig.url || baseUrl;
   
+  // Resolve image URL
+  let ogImageUrl = override?.image || siteConfig.ogImage;
+  if (ogImageUrl.startsWith("/")) {
+    ogImageUrl = `${siteUrl}${ogImageUrl}`;
+  }
+
   const base: Metadata = {
-    metadataBase: new URL(url),
+    metadataBase: new URL(siteUrl),
     title: typeof override?.title === 'string'
       ? { absolute: override.title }
       : (override?.title ?? {
@@ -24,23 +34,23 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
     authors: [
       {
         name: siteConfig.name,
-        url: siteConfig.url,
+        url: siteUrl,
       },
     ],
     creator: siteConfig.name,
     openGraph: {
       type: "website",
       locale: isEn ? "en_US" : "fr_FR",
-      url: siteConfig.url,
+      url: siteUrl,
       title: override?.title?.toString() || dict.global.seo.title,
       description: override?.description || dict.global.seo.description,
       siteName: siteConfig.name,
       images: [
         {
-          url: siteConfig.ogImage,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: siteConfig.name,
+          alt: override?.title?.toString() || siteConfig.name,
         },
       ],
     },
@@ -48,7 +58,7 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
       card: "summary_large_image",
       title: override?.title?.toString() || dict.global.seo.title,
       description: override?.description || dict.global.seo.description,
-      images: [siteConfig.ogImage],
+      images: [ogImageUrl],
       creator: "@wistant",
     },
     icons: {
@@ -56,7 +66,7 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
       shortcut: "/favicon.ico",
       apple: "/wistant-logo.png",
     },
-    manifest: `${siteConfig.url}/site.webmanifest`,
+    manifest: `${siteUrl}/site.webmanifest`,
   };
 
   const finalOpenGraph: Metadata["openGraph"] = {
@@ -66,12 +76,11 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
 
   // If a generic URL is passed, map it to the OpenGraph block automatically
   if (override?.url) {
-    // We prepend the baseUrl if it's a relative path just in case
-    const path = override.url.startsWith("/") ? `${siteConfig.url}${override.url}` : override.url;
+    const path = override.url.startsWith("/") ? `${siteUrl}${override.url}` : override.url;
     if (finalOpenGraph) finalOpenGraph.url = path;
   }
 
-  // Purge the arbitrary url field from being placed at the root of the standard Metadata response
+  // Final assembly
   const { ...validOverride } = override || {};
 
   return {

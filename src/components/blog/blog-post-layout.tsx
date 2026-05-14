@@ -19,7 +19,7 @@ export default async function BlogPostLayout({
   const readingTime = 5; // Default reading time since we don't have raw string at layout level easily
 
   return (
-    <article className="max-w-2xl mx-auto px-6 py-16 min-h-screen flex flex-col gap-10">
+    <article className="max-w-2xl mx-auto py-16 min-h-screen flex flex-col gap-10">
       <Header 
         post={{ title: post.title, summary: post.description, date: post.date }}
         lang={lang}

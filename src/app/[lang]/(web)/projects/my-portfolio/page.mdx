@@ -1,8 +1,14 @@
-<BackToProjects />
+import ProjectPostLayout from "@/components/projects/project-post-layout";
+import { getPageMetadata } from "@/config/metadata";
 
-export const metadata = {
-  title: "My portfolio",
-  description: "Modern, high-performance engineering portfolio with 3D elements and industrial aesthetics.",
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: projectData.title,
+    description: projectData.description,
+    image: projectData.image,
+  });
 }
 
 export const projectData = {
@@ -49,3 +55,8 @@ export const projectData = {
 - **<L en="Cross-platform Optimization" fr="Optimisation Cross-platform" />**
 - **<L en="Bilingual implementation" fr="Mise en œuvre bilingue" />**
 - **<L en="Theme Engine" fr="Moteur de Thèmes" />**
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <ProjectPostLayout project={projectData} lang={params.lang}>{props.children}</ProjectPostLayout>;
+}

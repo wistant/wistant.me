@@ -3,7 +3,7 @@ export const siteConfig = {
   initials: "WK",
   url: "https://wistant.me",
   description: "Senior Full Stack Engineer & AI Architect specializing in high-end digital solutions.",
-  ogImage: "public/og.png",
+  ogImage: "/og.png",
   links: {
     github: "https://github.com/wistant",
     linkedin: "https://linkedin.com/in/wistantkode",

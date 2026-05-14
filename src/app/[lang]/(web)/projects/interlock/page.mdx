@@ -1,8 +1,14 @@
-<BackToProjects />
+import ProjectPostLayout from "@/components/projects/project-post-layout";
+import { getPageMetadata } from "@/config/metadata";
 
-export const metadata = {
-  title: "Interlock",
-  description: "Next-generation security for the decentralized web. Empowering finance through seamless harmony and state-of-the-art encryption.",
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: projectData.title,
+    description: projectData.description,
+    image: projectData.image,
+  });
 }
 
 export const projectData = {
@@ -64,3 +70,8 @@ We revolutionize the way you make payments, offering a secure, convenient, and c
 - Customized card with a unique design
 - Spend up to $100,000 per month
 - Access to all features
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <ProjectPostLayout project={projectData} lang={params.lang}>{props.children}</ProjectPostLayout>;
+}

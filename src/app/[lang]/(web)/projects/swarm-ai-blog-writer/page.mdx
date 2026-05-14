@@ -1,8 +1,14 @@
-<BackToProjects />
+import ProjectPostLayout from "@/components/projects/project-post-layout";
+import { getPageMetadata } from "@/config/metadata";
 
-export const metadata = {
-  title: "Swarm AI Orchestration | Wistant",
-  description: "Advanced multi-agent blog generation engine using Pydantic AI and Groq.",
+export async function generateMetadata(props) {
+  const params = await props.params;
+  const { lang } = params;
+  return getPageMetadata(lang, {
+    title: projectData.title,
+    description: projectData.description,
+    image: projectData.image,
+  });
 }
 
 export const projectData = {
@@ -47,3 +53,8 @@ export const projectData = {
 - **Framework**: <TechBadge name="Vue" /> 3 + <TechBadge name="Flask" />
 - **LLM Engine**: <TechBadge name="Groq" /> (Llama 3.3 70B)
 - **Validation**: <TechBadge name="Python" /> Pydantic v2
+
+export default async function Layout(props) {
+  const params = await props.params;
+  return <ProjectPostLayout project={projectData} lang={params.lang}>{props.children}</ProjectPostLayout>;
+}
