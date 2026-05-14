@@ -25,7 +25,7 @@ export default async function CertLayout({
           {/* Supreme Header */}
           <div className="space-y-8">
              <Link 
-                href={`/${lang}/certifications`}
+                href="/certifications"
                 className="flex items-center gap-2 group cursor-pointer w-fit text-muted-foreground hover:text-primary transition-colors text-xs font-mono tracking-[0.2em] uppercase"
              >
                 <Icons.chevronLeft className="h-3 w-3 group-hover:-translate-x-1 transition-transform" />

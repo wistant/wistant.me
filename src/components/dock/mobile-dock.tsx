@@ -73,7 +73,7 @@ export function FloatingDockMobile({
               <div className="h-px bg-border/40 my-1 px-2" />
               
               <div className="flex items-center justify-between gap-2 px-1">
-                <div className="flex-1 flex justify-center py-2 rounded-xl bg-muted/30 border border-border/30">
+                <div className="flex-1 flex justify-center py-1 rounded-xl bg-muted/30 border border-border/30">
                   <LanguageSwitcher />
                 </div>
                 <button

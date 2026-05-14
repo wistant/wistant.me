@@ -6,10 +6,9 @@ import { Language } from "@/types/locale";
 interface BlogPostItemProps {
   post: BlogPost;
   lang: Language;
-  views?: number;
 }
 
-export function BlogPostItem({ post, lang, views }: BlogPostItemProps) {
+export function BlogPostItem({ post, lang }: BlogPostItemProps) {
   const date = new Date(post.date);
   const formattedDate = date.toLocaleDateString(
     lang === "fr" ? "fr-FR" : "en-US",
@@ -19,7 +18,7 @@ export function BlogPostItem({ post, lang, views }: BlogPostItemProps) {
   const readingTime = 5;
 
   return (
-    <Link href={`/${lang}/blog/${post.slug}`} className="block group outline-none h-full">
+    <Link href="/blog/${post.slug}" className="block group outline-none h-full">
       <div className="flex flex-col h-full bg-card/40 hover:bg-card/60 border border-border/50 hover:border-primary/30 transition-all duration-500 overflow-hidden group/card relative">
         {/* Subtle Gradient Glow on Hover */}
         <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-700" />
@@ -70,13 +69,6 @@ export function BlogPostItem({ post, lang, views }: BlogPostItemProps) {
                    <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                    {readingTime} min
                 </span>
-                
-                {views !== undefined && (
-                  <span className="flex items-center gap-1.5 border-l border-border/30 pl-3">
-                    <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                    {views.toLocaleString()}
-                  </span>
-                )}
              </div>
              
              <div className="size-5 flex items-center justify-center rounded-full border border-border/40 group-hover/card:border-primary/50 transition-colors">

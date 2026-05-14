@@ -1,41 +1,43 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-
-import { LOCALES } from "@/types/locale";
-
-const defaultLocale = "en";
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-
-
-  // Check if pathname already starts with a supported locale
-  const pathnameHasLocale = LOCALES.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
-  );
-
-  if (pathnameHasLocale) {
-    // If it's a localized API call, redirect to global API to avoid 404
-    if (pathname.match(/^\/[a-z]{2}\/api\//)) {
-      const newPath = pathname.replace(/^\/[a-z]{2}\/api\//, "/api/");
-      request.nextUrl.pathname = newPath;
-      return NextResponse.redirect(request.nextUrl);
-    }
-    return NextResponse.next();
+  
+  // Intercept old /en and /fr routes
+  const match = pathname.match(/^\/(en|fr)(?:\/(.*))?$/);
+  
+  if (match) {
+    const lang = match[1];
+    const rest = match[2] || '';
+    
+    // Redirect to the pure route cleanly, removing the [lang]/ prefix
+    const url = request.nextUrl.clone();
+    url.pathname = `/${rest}`;
+    
+    // Create the response and set the locale hydration cookie immediately
+    const response = NextResponse.redirect(url);
+    response.cookies.set('NEXT_LOCALE', lang, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+    });
+    
+    return response;
   }
-
-  // Redirect if there is no locale
-  const acceptLang = request.headers.get("accept-language") || "";
-  const matchedLocale = LOCALES.find(locale => acceptLang.includes(locale)) || defaultLocale;
-
-  request.nextUrl.pathname = `/${matchedLocale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next)
-    "/((?!api|_next/static|_next/image|google5ac449b5ff3c8630.html|llm.txt|favicon.ico|wistant-logo.png|og.me|icons|me|fonts|gallery|certifications|opengraph|robots.txt|sitemap.xml|experiences|resume|portfolio|blog/thumbnails|blog/authors|education|hackatons|logos).*)",
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - images, icons, models, gallery, generic static assets, og.me
+     */
+     "/((?!api|_next/static|_next/image|google5ac449b5ff3c8630.html|llm.txt|favicon.ico|wistant-logo.png|og.me|icons|me|fonts|gallery|certifications|opengraph|robots.txt|sitemap.xml|experiences|resume|portfolio|blog/thumbnails|blog/authors|education|hackatons|logos).*)",
   ],
 };

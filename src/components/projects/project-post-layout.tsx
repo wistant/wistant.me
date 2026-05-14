@@ -32,7 +32,7 @@ export default async function ProjectPostLayout({
     <article className="max-w-[608px] mx-auto py-12 min-h-screen flex flex-col gap-10 pb-32">
       {/* ← Back Link */}
       <Link
-        href={`/${lang}/projects`}
+        href="/projects"
         className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm flex items-center gap-1.5 w-fit group -mb-4"
       >
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

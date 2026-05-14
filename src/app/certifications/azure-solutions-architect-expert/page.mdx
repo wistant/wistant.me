@@ -1,0 +1,36 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
+import CertLayout from "@/components/certifications/cert-layout";
+
+import { getPageMetadata } from "@/config/metadata";
+
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  return getPageMetadata(lang, {
+    title: certData.title,
+    description: `Certification: ${certData.title} from ${certData.issuer}`,
+    image: certData.image,
+  });
+}
+
+export const certData = {
+  title: "Microsoft Certified: Azure Solutions Architect Expert",
+  date: "2023-11-20",
+  image: "/certifications/azure-sae.png",
+  issuer: "Microsoft",
+  slug: "azure-solutions-architect-expert",
+};
+
+La certification **Microsoft Certified: Azure Solutions Architect Expert** confirme ma maîtrise de la conception de solutions d'infrastructure complexes sur Azure.
+
+### Domaines d'Expertise :
+- Conception d'infrastructures pour le cloud.
+- Stratégies de continuité d'activité et de reprise après sinistre.
+- Gouvernance, sécurité et gestion des identités.
+
+Cette certification valide ma capacité à diriger des transformations numériques à l'échelle de l'entreprise.
+
+
+export default async function Layout(props) {
+  const lang = await getCurrentLanguage();
+  return <CertLayout cert={certData} lang={lang}>{props.children}</CertLayout>;
+}

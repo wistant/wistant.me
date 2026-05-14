@@ -1,0 +1,41 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
+import CertLayout from "@/components/certifications/cert-layout";
+
+import { getPageMetadata } from "@/config/metadata";
+
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  return getPageMetadata(lang, {
+    title: certData.title,
+    description: `Certification: ${certData.title} from ${certData.issuer}`,
+    image: certData.image,
+  });
+}
+
+export const certData = {
+  title: "AWS Certified DevOps Engineer – Professional",
+  date: "2024-05-20",
+  image: "/certifications/aws-devops-professional.png",
+  issuer: "Amazon Web Services (AWS)",
+  slug: "aws-devops-professional",
+};
+
+Cette certification de niveau **Professional** atteste de ma maîtrise des méthodologies DevOps modernes à grande échelle et de l'automatisation des processus.
+
+<Callout type="warning">
+Considérée comme l'une des certifications les plus difficiles de l'écosystème AWS, elle exige une rigueur opérationnelle absolue.
+</Callout>
+
+### Compétences Avancées
+- **SDLC & Automatisation** : Mise en œuvre de pipelines CI/CD complexes avec AWS CodePipeline.
+- **Infrastructure as Code** : Maîtrise avancée de CloudFormation et AWS CDK.
+- **Monitoring & Logging** : Observabilité complète avec CloudWatch et X-Ray.
+- **Disaster Recovery** : Stratégies Multi-Régions et basculement automatique.
+
+<TechBadge name="Terraform" /> <TechBadge name="DevOps" /> <TechBadge name="CI/CD" />
+
+
+export default async function Layout(props) {
+  const lang = await getCurrentLanguage();
+  return <CertLayout cert={certData} lang={lang}>{props.children}</CertLayout>;
+}

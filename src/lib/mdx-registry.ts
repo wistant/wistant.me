@@ -77,7 +77,7 @@ function extractDataBlock(content: string, variableName: string): unknown {
 
 
 export function getAllBlogs(): BlogPost[] {
-  const blogDir = path.join(process.cwd(), 'src/app/[lang]/(web)/blog');
+  const blogDir = path.join(process.cwd(), 'src/app/blog');
   if (!fs.existsSync(blogDir)) return [];
 
   const entries = fs.readdirSync(blogDir, { withFileTypes: true });
@@ -104,7 +104,7 @@ export function getAllBlogs(): BlogPost[] {
 }
 
 export function getAllCertifications(): CertPost[] {
-  const certDir = path.join(process.cwd(), 'src/app/[lang]/(web)/certifications');
+  const certDir = path.join(process.cwd(), 'src/app/certifications');
   if (!fs.existsSync(certDir)) return [];
 
   const entries = fs.readdirSync(certDir, { withFileTypes: true });
@@ -131,7 +131,7 @@ export function getAllCertifications(): CertPost[] {
 }
 
 export function getAllProjects(): ProjectEntry[] {
-  const projectDir = path.join(process.cwd(), 'src/app/[lang]/(web)/projects');
+  const projectDir = path.join(process.cwd(), 'src/app/projects');
   if (!fs.existsSync(projectDir)) return [];
 
   const entries = fs.readdirSync(projectDir, { withFileTypes: true });

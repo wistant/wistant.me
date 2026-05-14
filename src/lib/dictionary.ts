@@ -1,17 +1,23 @@
+import { cookies } from "next/headers";
+import { en } from "../dictionaries/en";
+import { fr } from "../dictionaries/fr";
 import { Language } from "@/types/locale";
 
-const dictionaries = {
-  en: () => import("../dictionaries/en.json").then((module) => module.default),
-  fr: () => import("../dictionaries/fr.json").then((module) => module.default),
-  es: () => import("../dictionaries/es.json").then((module) => module.default),
-  ar: () => import("../dictionaries/ar.json").then((module) => module.default),
-  wo: () => import("../dictionaries/wo.json").then((module) => module.default),
+export type Dictionary = typeof en;
+
+export const getCurrentLanguage = async (): Promise<Language> => {
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
+  if (localeCookie === "fr" || localeCookie === "en") {
+    return localeCookie as Language;
+  }
+  
+  // Final fallback: Always English
+  return "en";
 };
 
-
-export type Dictionary = typeof import("../dictionaries/en.json");
-
-export const getDictionary = async (lang: Language): Promise<Dictionary> => {
-  return (dictionaries[lang as keyof typeof dictionaries]?.() ?? dictionaries.en()) as Promise<Dictionary>;
+export const getDictionary = async (forceLang?: Language): Promise<Dictionary> => {
+  // Option explicitly passed or automatic detection
+  const lang = forceLang || await getCurrentLanguage();
+  return lang === "fr" ? fr : en;
 };
-
