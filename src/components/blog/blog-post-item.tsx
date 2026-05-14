@@ -39,6 +39,9 @@ export function BlogPostItem({ post, lang, views }: BlogPostItemProps) {
               <span className="text-neutral-400 dark:text-neutral-600 font-mono text-[14px] uppercase tracking-widest">
                 {post.title.substring(0, 3)}
               </span>
+              <div>
+                {post.description}
+              </div>
             </div>
           )}
           
