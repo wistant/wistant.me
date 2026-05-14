@@ -1,3 +1,4 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import { getAllBlogs } from "@/lib/mdx-registry";
 import { getDictionary } from "@/lib/dictionary";
 import { getPageMetadata } from "@/config/metadata";
@@ -5,23 +6,15 @@ import { Language } from "@/types/locale";
 import { Metadata } from "next";
 import { BlogPostItem } from "@/components/blog/blog-post-item";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
   return getPageMetadata(lang, { ...dict.blog.seo, image: "/og.png", url: "/blog" });
 }
 
-export default async function BlogPage({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}) {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export default async function BlogPage() {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
   
   const posts = getAllBlogs();
 

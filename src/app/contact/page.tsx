@@ -1,3 +1,4 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { getDictionary } from "@/lib/dictionary";
@@ -9,26 +10,18 @@ import { Language } from "@/types/locale";
 import React from "react";
 import Image from "next/image";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
   return getPageMetadata(lang, {
     ...dict.contact.seo,
     url: "/contact",
   });
 }
 
-export default async function ContactPage({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}) {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export default async function ContactPage() {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
 
   return (
     <main className="min-h-dvh flex flex-col gap-6 relative px-4 sm:px-6 lg:px-0 py-12 sm:py-24 max-w-3xl mx-auto">

@@ -1,14 +1,11 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import { getDictionary } from "@/lib/dictionary";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
-  const { lang } = await params;
-  const dict = await getDictionary(lang as Language);
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
   
   return getPageMetadata(lang as Language, {
     title: dict.about.seo.title,

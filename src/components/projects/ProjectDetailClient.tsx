@@ -36,7 +36,7 @@ export default function ProjectDetailClient({
             {/* Minimal Navigation Header */}
             <div className="flex flex-col gap-6">
                 <Link
-                    href={`/${lang}/projects`}
+                    href="/projects"
                     className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm flex items-center gap-1.5 w-fit group"
                 >
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -64,7 +64,7 @@ export default function ProjectDetailClient({
                     <div className="min-w-0">
                         {prevProject ? (
                             <Link
-                                href={`/${lang}/projects/${prevProject.slug}`}
+                                href="/projects/${prevProject.slug}"
                                 className="group flex flex-col gap-2 hover:opacity-70 transition-opacity h-full"
                             >
                                 <div className="text-muted-foreground text-[10px] uppercase tracking-widest font-bold">
@@ -79,7 +79,7 @@ export default function ProjectDetailClient({
                     <div className="min-w-0 text-right">
                         {nextProject ? (
                             <Link
-                                href={`/${lang}/projects/${nextProject.slug}`}
+                                href="/projects/${nextProject.slug}"
                                 className="group flex flex-col items-end gap-2 hover:opacity-70 transition-opacity h-full"
                             >
                                 <div className="text-muted-foreground text-[10px] uppercase tracking-widest font-bold">

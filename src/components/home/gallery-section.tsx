@@ -51,7 +51,7 @@ export async function GallerySection({
         initialHeight={600}
         buttonTextShow={seeMoreText}
         buttonTextHide={showLessText}
-        href={`/${lang}/about`}
+        href="/about"
         linkText={aboutLinkText}
       >
         <Gallery images={galleryImages} />

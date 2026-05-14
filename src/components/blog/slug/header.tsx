@@ -30,7 +30,7 @@ export function Header({ post, lang, dict, readingTime, views }: HeaderProps) {
     <div className="flex flex-col gap-6">
       <Link
         title={dict.blog?.back || "Go back"}
-        href={`/${lang}/blog`}
+        href="/blog"
         className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm flex items-center gap-1.5 w-fit"
       >
         <ArrowLeft className="w-4 h-4" />

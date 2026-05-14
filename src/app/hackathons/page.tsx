@@ -1,3 +1,4 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { TextReveal } from "@/components/ui/magicui/text-reveal";
@@ -10,26 +11,18 @@ import HackathonsItem from "@/components/hackatons/hackatonsItem";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
   return getPageMetadata(lang, {
     ...dict.hackathons.seo,
     url: "/hackathons",
   });
 }
 
-export default async function HackathonsPage({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}) {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export default async function HackathonsPage() {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
 
   return (
     <main className="min-h-dvh flex flex-col gap-6 relative lg:px-0 py-24 max-w-2xl mx-auto">

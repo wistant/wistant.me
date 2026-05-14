@@ -1,3 +1,4 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { HeroSection } from "@/components/home/hero-section";
@@ -22,25 +23,17 @@ import { hackathonsData } from "@/data/hackathons";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getCurrentLanguage();
   return getPageMetadata(lang, {
     image: "/og.png",
     url: "/",
   });
 }
 
-export default async function Home({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}) {
-   const { lang } = await params;
-  const dict = await getDictionary(lang);
+export default async function Home() {
+   const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
 
 
   return (
@@ -94,7 +87,7 @@ export default async function Home({
             <WorkSection data={workData[lang] || workData.en} presentLabel={dict.work.present} />
           </BlurFade>
           <div className="flex justify-center mt-4">
-            <Link href={`/${lang}/about`}>
+            <Link href="/about">
               <Button
                 variant="secondary"
                 size="sm"
@@ -113,7 +106,7 @@ export default async function Home({
           initialHeight={1200}
           buttonTextShow={dict.ui.seeMore}
           buttonTextHide={dict.ui.showLess}
-          href={`/${lang}/projects`}
+          href="/projects"
           linkText={dict.projects.viewAll || "View All"}
         >
           <ProjectsSection lang={lang} />
@@ -125,7 +118,7 @@ export default async function Home({
           initialHeight={350}
           buttonTextShow={dict.ui.seeMore}
           buttonTextHide={dict.ui.showLess}
-          href={`/${lang}/hackathons`}
+          href="/hackathons"
           linkText={dict.navigation.hackathons || "All hackathons"}
         >
           <HackathonsSection

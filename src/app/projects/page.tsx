@@ -1,3 +1,4 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import { Icons } from "@/components/ui/icons";
 import { ProjectCard } from "@/components/projects/project-card";
 import { getAllProjects } from "@/lib/mdx-registry";
@@ -9,25 +10,17 @@ import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getCurrentLanguage();
   return getPageMetadata(lang, {
     image: "/og.png",
     url: "/projects",
   });
 }
 
-export default async function ProjectsPage({
-  params,
-}: {
-  params: Promise<{ lang: Language }>;
-}) {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export default async function ProjectsPage() {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
   const BLUR_FADE_DELAY = 0.04;
 
   // Directly fetch and filter projects from our new native registry
@@ -108,7 +101,7 @@ export default async function ProjectsPage({
                         return (
                           <BlurFade key={project.slug} delay={BLUR_FADE_DELAY * 10 + id * 0.05} className="w-full">
                             <ProjectCard
-                              href={`/${lang}/projects/${project.slug}`}
+                              href="/projects/${project.slug}"
                               title={project.title || ""}
                               description={project.description || ""}
                               dates={project.dates || ""}

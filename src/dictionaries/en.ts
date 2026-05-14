@@ -1,4 +1,4 @@
-{
+export const en = {
   "navigation": {
     "home": "Home",
     "blog": "Notes",
@@ -153,3 +153,4 @@
     }
   }
 }
+;

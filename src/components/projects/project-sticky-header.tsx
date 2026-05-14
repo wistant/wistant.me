@@ -42,7 +42,7 @@ export function ProjectStickyHeader({ title, lang }: ProjectStickyHeaderProps) {
           asChild
           className="gap-2 text-muted-foreground hover:text-foreground transition-colors -ml-2"
         >
-          <Link href={`/${lang}/projects`}>
+          <Link href="/projects">
             <ArrowLeft className="size-4" />
             <span className="hidden sm:inline">
               {lang === "fr" ? "Retour" : "Back"}

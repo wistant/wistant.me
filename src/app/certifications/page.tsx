@@ -1,3 +1,4 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import { getDictionary } from "@/lib/dictionary";
 import { Language } from "@/types/locale";
 import BlurFade from "@/components/ui/magicui/blur-fade";
@@ -9,9 +10,9 @@ import NextImage from "next/image";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: Language }> }) {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
   return getPageMetadata(lang, {
     title: dict.certifications.seo.title,
     description: dict.certifications.seo.description,
@@ -20,13 +21,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: Lan
   });
 }
 
-export default async function CertificationsPage({ 
-  params 
-}: { 
-  params: Promise<{ lang: Language }> 
-}) {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export default async function CertificationsPage() {
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
   const certifications = getAllCertifications();
 
   return (
@@ -51,7 +48,7 @@ export default async function CertificationsPage({
             {certifications.map((cert, idx) => (
               <BlurFade key={cert.slug} delay={BLUR_FADE_DELAY * 2 + idx * 0.05}>
                 <Link 
-                  href={`/${lang}/certifications/${cert.slug}`}
+                  href="/certifications/${cert.slug}"
                   className="group relative flex flex-col sm:flex-row gap-6 p-6 bg-neutral-50/50 dark:bg-neutral-900/40 border border-border/50 hover:border-primary/40 transition-all duration-500 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />

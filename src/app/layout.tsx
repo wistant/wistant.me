@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import { getPageMetadata } from "@/config/metadata";
-import { Language } from "@/types/locale";
 import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
 import Image from "next/image";
@@ -10,34 +9,33 @@ import { siteConfig } from "@/config/site";
 import { FloatingDock } from "@/components/dock/floating-dock";
 import { Analytics } from "@vercel/analytics/next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getDictionary } from "@/lib/dictionary";
+import { getDictionary, getCurrentLanguage } from "@/lib/dictionary";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 
-
 const calFont = localFont({
-  src: "../../fonts/cal.woff2",
+  src: "../fonts/cal.woff2",
   variable: "--font-cal",
 });
 
 const clashFont = localFont({
-  src: "../../fonts/ClashDisplay-Semibold.woff2",
+  src: "../fonts/ClashDisplay-Semibold.woff2",
   variable: "--font-clash",
 });
 
 const cabinetFont = localFont({
-  src: "../../fonts/CabinetGrotesk-Medium.woff2",
+  src: "../fonts/CabinetGrotesk-Medium.woff2",
   variable: "--font-cabinet",
 });
 
 const interFont = localFont({
   src: [
     {
-      path: "../../fonts/Inter-Regular.woff2",
+      path: "../fonts/Inter-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../fonts/Inter-Medium.woff2",
+      path: "../fonts/Inter-Medium.woff2",
       weight: "500",
       style: "normal",
     },
@@ -45,27 +43,21 @@ const interFont = localFont({
   variable: "--font-inter",
 });
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
-  const { lang } = await params;
-  return getPageMetadata(lang as Language);
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  return getPageMetadata(lang);
 }
 
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ lang: string }>;
 }>) {
-  const { lang } = await params;
-  const dict = await getDictionary(lang as Language);
+  const lang = await getCurrentLanguage();
+  const dict = await getDictionary();
 
   return (
-    <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} prefix="og: https://ogp.me/ns#" suppressHydrationWarning>
+    <html lang={lang} dir="ltr" prefix="og: https://ogp.me/ns#" suppressHydrationWarning>
       <body
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
         suppressHydrationWarning
@@ -89,14 +81,14 @@ export default async function RootLayout({
             <div className="pointer-events-auto w-fit max-w-full">
               <FloatingDock
                 items={[
-                  { title: dict.navigation.home || "Home", icon: <Image width={100} height={100} src="/icons/home.svg" alt="Home" className="h-full w-full object-contain dark:invert" />, href: `/${lang}` },
-                  { title: dict.navigation.about || "About", icon: <Image width={100} height={100} src="/icons/user.svg" alt="About" className="h-full w-full object-contain dark:invert" />, href: `/${lang}/about` },
-                  { title: dict.navigation.projects || "Projects", icon: <Image width={100} height={100} src="/icons/globe.svg" alt="Projects" className="h-full w-full object-contain dark:invert" />, href: `/${lang}/projects` },
-                  { title: dict.navigation.blog || "Blog", icon: <Image width={100} height={100} src="/icons/notebook.svg" alt="Blog" className="h-full w-full object-contain dark:invert" />, href: `/${lang}/blog` },
+                  { title: dict.navigation.home || "Home", icon: <Image width={100} height={100} src="/icons/home.svg" alt="Home" className="h-full w-full object-contain dark:invert" />, href: `/` },
+                  { title: dict.navigation.about || "About", icon: <Image width={100} height={100} src="/icons/user.svg" alt="About" className="h-full w-full object-contain dark:invert" />, href: `/about` },
+                  { title: dict.navigation.projects || "Projects", icon: <Image width={100} height={100} src="/icons/globe.svg" alt="Projects" className="h-full w-full object-contain dark:invert" />, href: `/projects` },
+                  { title: dict.navigation.blog || "Blog", icon: <Image width={100} height={100} src="/icons/notebook.svg" alt="Blog" className="h-full w-full object-contain dark:invert" />, href: `/blog` },
                   {
                     title: dict.navigation.certifications || "Certifications",
                     icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
-                    href: `/${lang}/certifications`,
+                    href: `/certifications`,
                   },
                   {
                     title: "WhatsApp",
@@ -113,32 +105,32 @@ export default async function RootLayout({
                         <AvatarFallback>{siteConfig.initials}</AvatarFallback>
                       </Avatar>
                     ),
-                    href: `/${lang}`,
+                    href: `/`,
                   },
                   {
                     title: dict.navigation.about || "About",
                     icon: <Image width={100} height={100} src="/icons/user.svg" alt="About" className="h-full w-full object-contain dark:invert" />,
-                    href: `/${lang}/about`,
+                    href: `/about`,
                   },
                   {
                     title: dict.navigation.projects || "Work",
                     icon: <Image width={100} height={100} src="/icons/globe.svg" alt="Projects" className="h-full w-full object-contain dark:invert" />,
-                    href: `/${lang}/projects`,
+                    href: `/projects`,
                   },
                   {
                     title: dict.navigation.blog || "Notes",
                     icon: <Image width={100} height={100} src="/icons/notebook.svg" alt="Blog" className="h-full w-full object-contain dark:invert" />,
-                    href: `/${lang}/blog`,
+                    href: `/blog`,
                   },
                   {
                     title: dict.navigation.certifications || "Certifications",
                     icon: <Image width={100} height={100} src="/icons/certifications.svg" alt="Certifications" className="h-full w-full object-contain dark:invert" />,
-                    href: `/${lang}/certifications`,
+                    href: `/certifications`,
                   },
                   {
                     title: dict.navigation.contact || "Contact",
                     icon: <Image width={100} height={100} src="/icons/mail.svg" alt="Contact" className="h-full w-full object-contain dark:invert" />,
-                    href: `/${lang}/contact`,
+                    href: `/contact`,
                   },
                   {
                     title: "WhatsApp",
@@ -149,7 +141,11 @@ export default async function RootLayout({
               />
             </div>
           </div>
-          {children}
+          
+          <div className="web-layout max-w-[608px] mx-auto px-6 lg:px-0 pt-12 pb-24">
+            {children}
+          </div>
+          
           <Analytics />
         </ThemeProvider>
       </body>

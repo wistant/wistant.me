@@ -1,22 +1,17 @@
-# App Directory (`app/`)
+# Web Route Layer (`(web)`)
 
-Core routing and layout structure leveraging Next.js App Router (v16+) with full Internationalization (i18n) support.
+All public-facing features and endpoints of `wistant.dev`.
 
-### 🖼️ Visual Preview
+## Web Structure
 
-| Home Page | About Page |
+| Endpoint / File | Purpose |
 |---|---|
-| ![Home Page Light](/readme/home.light.png) | ![About Page Light](/readme/about.light.png) |
-| *Home Page (Dark)*<br>![Home Page Dark](/readme/home.dark.png) | *About Page (Dark)*<br>![About Page Dark](/readme/about.dark.png) |
+| `layout.tsx` | Global Public Layout (Injects Header, Footer, Providers) |
+| `page.tsx` | Homepage (Hero, About, Timeline) |
+| `blog/` | Article listings and Tag filtering |
+| `projects/` | Interactive MDX Case Studies |
+| `certifications/` | Verified Accreditations |
 
-### 🛠️ Directory Breakdown
+## Rendering Rules
 
-| Path | Type | Role |
-|---|---|---|
-| `[lang]/` | Dynamic Segment | Handles multi-language routing (`en`, `fr`, `es`, etc.) |
-| `[lang]/(web)/` | Route Group | Contains main website pages with a shared visual identity |
-| `[lang]/(web)/blog/` | Route | Dynamic blog engine using `content-collections` and `MDX` |
-| `[lang]/(web)/projects/` | Route | Showcase of portfolio projects with rich descriptions |
-| `api/` | Directory | Serverless Route Handlers (e.g., OG Image generation) |
-| `layout.tsx` | Root Layout | Global providers, fonts, and theme management |
-| `robots.ts` / `sitemap.ts` | Config | Dynamic SEO generation for search engines |
+By default, all content handled inside `(web)` is compiled via **Static Site Generation (SSG)** to ensure maximum performance globally.
