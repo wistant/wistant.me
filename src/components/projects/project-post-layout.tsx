@@ -26,7 +26,7 @@ export default async function ProjectPostLayout({
   children: React.ReactNode;
 }) {
   const dict = await getDictionary(lang);
-  const projectDict = (dict.projects || {}) as Record<string, string>;
+  const projectDict = (dict.projects || {}) as unknown as Record<string, string>;
 
   return (
     <article className="max-w-[608px] mx-auto py-12 min-h-screen flex flex-col gap-10 pb-32">
