@@ -1,12 +1,12 @@
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
 import { TextReveal } from "@/components/ui/magicui/text-reveal";
-import HackathonsSection from "@/components/home/hackathons-section";
 import { getDictionary } from "@/lib/dictionary";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import { hackathonsData } from "@/data/hackathons";
+import HackathonsItem from "@/components/hackatons/hackatonsItem";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -32,7 +32,7 @@ export default async function HackathonsPage({
   const dict = await getDictionary(lang);
 
   return (
-    <main className="min-h-dvh flex flex-col gap-16 relative px-6 lg:px-0 py-24 max-w-2xl mx-auto">
+    <main className="min-h-dvh flex flex-col gap-6 relative lg:px-0 py-24 max-w-2xl mx-auto">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -60,7 +60,7 @@ export default async function HackathonsPage({
       </section>
 
       <BlurFade delay={BLUR_FADE_DELAY * 2}>
-        <HackathonsSection data={hackathonsData} />
+        <HackathonsItem data={hackathonsData} />
       </BlurFade>
     </main>
   );
