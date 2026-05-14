@@ -15,11 +15,11 @@ export default async function BlogHome() {
   return (
     <section id="blog-home" className="py-12 border-t border-border/40">
       <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-2">
-           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-cal">
+        <div className="flex flex-col gap-1">
+           <h2 className="text-2xl font-bold tracking-tighter sm:text-4xl font-cal">
              {dict.blog.latestTitle || "Latest Stories"}
            </h2>
-           <p className="text-muted-foreground text-sm font-medium uppercase tracking-[0.2em]">
+           <p className="text-muted-foreground text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em]">
              {dict.blog.latestSubtitle || "Insights & Reflections"}
            </p>
         </div>

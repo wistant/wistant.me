@@ -19,7 +19,7 @@ export function BlogPostItem({ post, lang }: BlogPostItemProps) {
   return (
     <Link 
       href={`/blog/${post.slug}`} 
-      className="group block w-full py-4 transition-all duration-300"
+      className="group block w-full py-3 transition-all duration-300"
     >
       <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
         {/* Horizontal Image */}

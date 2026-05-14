@@ -2,7 +2,6 @@ import { getCurrentLanguage } from "@/lib/dictionary";
 import { getAllBlogs } from "@/lib/mdx-registry";
 import { getDictionary } from "@/lib/dictionary";
 import { getPageMetadata } from "@/config/metadata";
-import { Language } from "@/types/locale";
 import { Metadata } from "next";
 import { BlogPostItem } from "@/components/blog/blog-post-item";
 
@@ -36,22 +35,23 @@ export default async function BlogPage() {
            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl font-cal leading-tight">{dict.blog.title || "Blog"}</h1>
         </div>
         
-        <ol className="flex flex-col gap-6 w-full">
+        <ol className="flex flex-col gap-10 w-full mt-6">
           {years.map((year) => (
-            <li className="block w-full" key={year}>
-              <section id={`posts-from-${year}`} aria-label={`Posts from ${year}`}>
-                <div className="flex items-end gap-3 mt-3 w-full">
-                  <h2 className="text-lg font-clash font-bold leading-none">{year}</h2>
-                  <hr className="w-full border-none m-0 -mt-0.5 h-px bg-neutral-200 dark:bg-neutral-800 flex-1" />
-                </div>
-                <ol className="flex flex-col gap-4 mt-6 mb-8 w-full">
+            <li className="grid grid-cols-1 md:grid-cols-[100px_1fr] gap-2 md:gap-6 w-full" key={year}>
+              <div className="sticky top-20 h-fit">
+                <h2 className="text-xl font-bold tracking-tighter sm:text-2xl font-cal opacity-50">
+                  {year}
+                </h2>
+              </div>
+              <div className="flex flex-col gap-2">
+                <ol className="flex flex-col divide-y divide-border/40 w-full">
                   {postsByYear[year].map((post) => (
-                    <li className="block w-full" key={post.slug}>
+                    <li key={post.slug} className="block w-full">
                       <BlogPostItem post={post} lang={lang} />
                     </li>
                   ))}
                 </ol>
-              </section>
+              </div>
             </li>
           ))}
         </ol>
