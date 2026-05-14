@@ -13,6 +13,7 @@ export async function generateMetadata({
   return getPageMetadata(lang as Language, {
     title: dict.about.seo.title,
     description: dict.about.seo.description,
+    image: "/og.png",
   });
 }
 

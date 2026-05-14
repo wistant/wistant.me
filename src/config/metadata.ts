@@ -15,11 +15,8 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://wistant.me";
   const siteUrl = siteConfig.url || baseUrl;
   
-  // Resolve image URL
-  let ogImageUrl = override?.image || siteConfig.ogImage;
-  if (ogImageUrl.startsWith("/")) {
-    ogImageUrl = `${siteUrl}${ogImageUrl}`;
-  }
+  // Use relative path — Next.js metadataBase will resolve to absolute URL automatically
+  const ogImagePath = override?.image || siteConfig.ogImage;
 
   const base: Metadata = {
     metadataBase: new URL(siteUrl),
@@ -47,7 +44,7 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
       siteName: siteConfig.name,
       images: [
         {
-          url: ogImageUrl,
+          url: ogImagePath,
           width: 1200,
           height: 630,
           alt: override?.title?.toString() || siteConfig.name,
@@ -58,7 +55,7 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
       card: "summary_large_image",
       title: override?.title?.toString() || dict.global.seo.title,
       description: override?.description || dict.global.seo.description,
-      images: [ogImageUrl],
+      images: [ogImagePath],
       creator: "@wistant",
     },
     icons: {
