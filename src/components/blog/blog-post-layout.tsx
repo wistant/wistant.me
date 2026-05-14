@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getDictionary } from "@/lib/dictionary";
 import { Header } from "@/components/blog/slug/header";
 import { Language } from "@/types/locale";
+import React from "react";
 
 export default async function BlogPostLayout({ 
   post, 

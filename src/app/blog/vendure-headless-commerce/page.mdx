@@ -2,6 +2,11 @@ import { getCurrentLanguage } from "@/lib/dictionary";
 import BlogPostLayout from "@/components/blog/blog-post-layout";
 import { getPageMetadata } from "@/config/metadata";
 
+export default async function Layout(props) {
+    const lang = await getCurrentLanguage();
+    return <BlogPostLayout className={'text-justify'} post={blogData} lang={lang}>{props.children}</BlogPostLayout>;
+}
+
 export async function generateMetadata() {
   const lang = await getCurrentLanguage();
   return getPageMetadata(lang, {
@@ -12,15 +17,18 @@ export async function generateMetadata() {
 }
 
 export const blogData = {
-  title: "Vendure: The Headless Commerce Engine for Modern Architects",
+  title: "Vendure : The Headless Commerce Engine for E-commerce",
   description: "Why I choose Vendure for scalable, high-performance commerce solutions.",
   date: "May 14, 2026",
   image: "/blog/vendure.jpg",
   slug: "vendure-headless-commerce",
-  tags: ["E-commerce", "Vendure", "Headless", "NestJS", "Architecture"],
+  tags: ["E-commerce", "Vendure", "Headless", "NestJS"],
 };
 
-Dans l'écosystème du e-commerce, on se retrouve souvent à choisir entre la facilité (Shopify) et le contrôle total (Custom Built). **Vendure** est la réponse à ce dilemme : un moteur de commerce headless, construit sur **NestJS** et **GraphQL**, conçu spécifiquement pour les développeurs qui refusent les compromis.
+Dans l'écosystème de l'e-commerce, on se retrouve souvent à choisir entre la rapidité/facilité (Shopify)
+et le contrôle total (Software development). [Vendure](https://github.com/vendurehq/vendure) est la réponse à ce
+dilemme : un moteur de commerce headless, construit sur **NestJS** et **GraphQL**, conçu spécifiquement
+pour les développeurs qui refusent les compromis.
 
 ## Pourquoi choisir Vendure en 2026 ?
 
@@ -35,7 +43,9 @@ Le choix d'une stack technique pour le e-commerce doit se baser sur trois pilier
 
 ## L'Avantage NestJS
 
-En tant que développeur orienté architecture, l'utilisation de NestJS comme socle est un avantage majeur. Cela signifie que Vendure hérite de tous les concepts de **Dependency Injection**, de **Modules** et de **Decorators** qui rendent une application backend robuste et testable.
+En tant que développeur orienté architecture, l'utilisation de [NestJS](https://nestjs.com) comme socle est un avantage majeur. 
+Cela signifie que Vendure hérite de tous les concepts de **Dependency Injection**, de **Modules** et de **Decorators**
+ qui rendent une application backend robuste et testable.
 
 ### Key Features que j'implémente :
 
@@ -46,8 +56,3 @@ En tant que développeur orienté architecture, l'utilisation de NestJS comme so
 ## Conclusion
 
 Pour mes projets e-commerce les plus ambitieux, Vendure n'est pas juste un choix, c'est une stratégie de croissance. C'est l'outil qui permet de passer d'une simple boutique en ligne à un véritable écosystème commercial global et performant.
-
-export default async function Layout(props) {
-  const lang = await getCurrentLanguage();
-  return <BlogPostLayout post={blogData} lang={lang}>{props.children}</BlogPostLayout>;
-}
