@@ -93,9 +93,9 @@ export default async function RootLayout({
                     href: `/certifications`,
                   },
                   {
-                    title: "Language",
-                    icon: <LanguageSwitcher currentLang={lang as Language} />,
-                    href: "#",
+                    title: dict.navigation.contact || "Contact",
+                    icon: <Image width={100} height={100} src="/icons/mail.svg" alt="Contact" className="h-full w-full object-contain dark:invert" />,
+                    href: `/contact`,
                   },
                   {
                     title: "WhatsApp",
@@ -138,11 +138,6 @@ export default async function RootLayout({
                     title: dict.navigation.contact || "Contact",
                     icon: <Image width={100} height={100} src="/icons/mail.svg" alt="Contact" className="h-full w-full object-contain dark:invert" />,
                     href: `/contact`,
-                  },
-                  {
-                    title: "Language",
-                    icon: <LanguageSwitcher currentLang={lang as Language} />,
-                    href: "#",
                   },
                   {
                     title: "WhatsApp",
