@@ -1,6 +1,18 @@
 # Changelog
 
-## [1.6.0] - 2026-05-07 - [Industrial Supreme Typography]
+## [1.7.0] - 2026-05-14 - [Neural Grid Stateless]
+
+### Fonctionnalités
+- **Routage Stateless i18n** : Migration complète vers une architecture sans préfixes d'URL (`/en`, `/fr`), utilisant exclusivement les cookies (`NEXT_LOCALE`) pour la résolution de la langue.
+- **Sélecteur de Langue Premium** : Implémentation d'un menu déroulant "Popup" de luxe (Shadcn UI) pour une sélection délibérée et élégante.
+- **Optimisation SEO Mondiale** : Enrichissement massif des dictionnaires avec des mots-clés stratégiques liés aux architectures de systèmes distribués et au cloud hybride.
+- **Navigation Dock** : Intégration directe d'un point d'accès de contact et unification du sélecteur de langue.
+
+### Corrections & Refactoring
+- **Dé-congestion Analytique** : Suppression totale de la dépendance Upstash Redis et des compteurs de vues pour une fluidité d'exécution accrue.
+- **Metadata Hardening** : Migration du système OpenGraph vers `metadataBase` pour une parité de preview absolue sur tous les canaux sociaux.
+- **Cleanup Architectural** : Suppression des payloads JSON obsolètes (ar, wo, es) et typage strict des dictionnaires TypeScript.
+
 
 ### Fonctionnalités
 - **Architecture "Industrial Supreme"** : refonte complète de la grille de présention des ProjectCards et Slideshows (100% de la largeur du WebLayout).
