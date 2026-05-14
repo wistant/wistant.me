@@ -4,7 +4,6 @@ import { getPageMetadata } from "@/config/metadata";
 import { Language } from "@/types/locale";
 import { Metadata } from "next";
 import { BlogPostItem } from "@/components/blog/blog-post-item";
-import { redis } from "@/lib/redis";
 
 export async function generateMetadata({
   params,
@@ -13,7 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-  return getPageMetadata(lang, dict.blog.seo);
+  return getPageMetadata(lang, { ...dict.blog.seo, image: "/og.png", url: "/blog" });
 }
 
 export default async function BlogPage({
@@ -24,7 +23,6 @@ export default async function BlogPage({
   const { lang } = await params;
   const dict = await getDictionary(lang);
   
-  // Get and sort posts directly from our custom pure MDX registry
   const posts = getAllBlogs();
 
   const postsByYear = posts.reduce((acc, post) => {
@@ -37,21 +35,6 @@ export default async function BlogPage({
   const years = Object.keys(postsByYear)
     .map(Number)
     .sort((a, b) => b - a);
-
-  const viewsMap: Record<string, number> = {};
-  if (redis && posts.length > 0) {
-    try {
-      const keys = posts.map(post => `blog:views:${post.slug}`);
-      const viewsData = await redis.mget<number[]>(...keys);
-      if (viewsData) {
-        posts.forEach((post, i) => {
-          viewsMap[post.slug] = viewsData[i] || 0;
-        });
-      }
-    } catch (error) {
-      console.warn("Redis fetch failed (views). Disabling view counters locally.");
-    }
-  }
 
   return (
     <main className="max-w-2xl mx-auto py-20 min-h-screen">
@@ -71,7 +54,7 @@ export default async function BlogPage({
                 <ol className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mt-6 mb-12 w-full">
                   {postsByYear[year].map((post) => (
                     <li className="block w-full h-full" key={post.slug}>
-                      <BlogPostItem post={post} lang={lang} views={viewsMap[post.slug] || 0} />
+                      <BlogPostItem post={post} lang={lang} />
                     </li>
                   ))}
                 </ol>
