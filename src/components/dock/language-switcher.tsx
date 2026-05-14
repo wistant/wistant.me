@@ -2,15 +2,20 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuRadioGroup, 
+  DropdownMenuRadioItem, 
+  DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu';
 import { Language } from '@/types/locale';
 
 /**
- * Enhanced Stateless Language Switcher
- * Uses cookies and window reload to sync with the server-side dictionary.
- * Supports legacy imports and manual placement.
+ * Premium Dropdown Language Switcher
+ * Uses Radix UI DropdownMenu for a professional selection experience.
  */
-export function LanguageSwitcher({ currentLang: propLang }: { currentLang?: Language }) {
-  // Detection if no prop is passed (legacy support)
+export function LanguageSwitcher() {
   const [currentLang, setCurrentLang] = React.useState<Language>('en');
 
   React.useEffect(() => {
@@ -24,16 +29,11 @@ export function LanguageSwitcher({ currentLang: propLang }: { currentLang?: Lang
     }
   }, []);
 
-  // Use prop if provided, otherwise internal state
-  const activeLang = propLang || currentLang;
-
-  const toggleLanguage = () => {
-    const nextLang = activeLang === 'en' ? 'fr' : 'en';
-    
+  const handleLanguageChange = (locale: string) => {
     // Set cookie
-    document.cookie = `NEXT_LOCALE=${nextLang}; path=/; max-age=31536000; SameSite=Lax`;
+    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
     
-    // Full reload to guarantee server-side detection of the new cookie
+    // Full reload to guarantee server-side detection
     window.location.reload();
   };
 
@@ -43,21 +43,44 @@ export function LanguageSwitcher({ currentLang: propLang }: { currentLang?: Lang
   };
 
   return (
-    <Button 
-      variant="ghost" 
-      size="icon" 
-      onClick={toggleLanguage}
-      className="h-10 w-10 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all active:scale-95 group border-none bg-transparent"
-      title={activeLang === 'en' ? 'Passer en Français' : 'Switch to English'}
-    >
-      <div className="flex flex-col items-center justify-center relative">
-        <span className="text-xl group-hover:scale-110 transition-transform">
-          {flags[activeLang]}
-        </span>
-        <span className="absolute -bottom-4 text-[9px] font-bold opacity-0 group-hover:opacity-100 transition-opacity uppercase font-mono">
-          {activeLang === 'en' ? 'FR' : 'EN'}
-        </span>
-      </div>
-    </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-10 w-10 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all active:scale-95 group border-none bg-transparent outline-hidden"
+          title={currentLang === 'en' ? 'Change Language' : 'Changer de langue'}
+        >
+          <div className="flex items-center justify-center pointer-events-none">
+            <span className="text-xl group-hover:scale-110 transition-transform">
+              {flags[currentLang]}
+            </span>
+          </div>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent 
+        align="center" 
+        side="top" 
+        className="min-w-[150px] bg-card/95 backdrop-blur-xl border-border/50 rounded-2xl p-1.5 shadow-2xl z-[1000]"
+        sideOffset={14}
+      >
+        <DropdownMenuRadioGroup value={currentLang} onValueChange={handleLanguageChange}>
+          <DropdownMenuRadioItem 
+            value="en" 
+            className="rounded-xl cursor-pointer focus:bg-accent/80 flex items-center gap-3 py-2.5 px-3"
+          >
+            <span className="text-xl">🇬🇧</span>
+            <span className="text-sm font-bold tracking-tight">English</span>
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem 
+            value="fr" 
+            className="rounded-xl cursor-pointer focus:bg-accent/80 flex items-center gap-3 py-2.5 px-3"
+          >
+            <span className="text-xl">🇫🇷</span>
+            <span className="text-sm font-bold tracking-tight">Français</span>
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
