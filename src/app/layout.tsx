@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import { getPageMetadata } from "@/config/metadata";
+import { Language } from "@/types/locale";
 import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
 import Image from "next/image";
@@ -11,6 +12,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getDictionary, getCurrentLanguage } from "@/lib/dictionary";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const calFont = localFont({
   src: "../fonts/cal.woff2",
@@ -91,6 +93,11 @@ export default async function RootLayout({
                     href: `/certifications`,
                   },
                   {
+                    title: "Language",
+                    icon: <LanguageSwitcher currentLang={lang as Language} />,
+                    href: "#",
+                  },
+                  {
                     title: "WhatsApp",
                     icon: <Image width={100} height={100} src="/icons/whatsapp.svg" alt="WhatsApp" className="h-full w-full object-contain" />,
                     href: siteConfig.links.whatsapp,
@@ -131,6 +138,11 @@ export default async function RootLayout({
                     title: dict.navigation.contact || "Contact",
                     icon: <Image width={100} height={100} src="/icons/mail.svg" alt="Contact" className="h-full w-full object-contain dark:invert" />,
                     href: `/contact`,
+                  },
+                  {
+                    title: "Language",
+                    icon: <LanguageSwitcher currentLang={lang as Language} />,
+                    href: "#",
                   },
                   {
                     title: "WhatsApp",

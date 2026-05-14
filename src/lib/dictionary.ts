@@ -1,4 +1,4 @@
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { en } from "../dictionaries/en";
 import { fr } from "../dictionaries/fr";
 import { Language } from "@/types/locale";
@@ -12,11 +12,7 @@ export const getCurrentLanguage = async (): Promise<Language> => {
     return localeCookie as Language;
   }
   
-  const headersList = await headers();
-  const acceptLang = headersList.get("accept-language");
-  if (acceptLang && acceptLang.toLowerCase().startsWith("fr")) {
-    return "fr";
-  }
+  // Final fallback: Always English
   return "en";
 };
 

@@ -1,10 +1,10 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import BlogPostLayout from "@/components/blog/blog-post-layout";
 
 import { getPageMetadata } from "@/config/metadata";
 
-export async function generateMetadata(props) {
-  const params = await props.params;
-  const { lang } = params;
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
   return getPageMetadata(lang, {
     title: blogData.title,
     description: blogData.description,
@@ -320,6 +320,6 @@ New unique opportunities have been enabled by JavaScript that, once universally 
 
 
 export default async function Layout(props) {
-  const params = await props.params;
-  return <BlogPostLayout post={blogData} lang={params.lang}>{props.children}</BlogPostLayout>;
+  const lang = await getCurrentLanguage();
+  return <BlogPostLayout post={blogData} lang={lang}>{props.children}</BlogPostLayout>;
 }

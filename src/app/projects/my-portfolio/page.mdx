@@ -1,9 +1,9 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
 import ProjectPostLayout from "@/components/projects/project-post-layout";
 import { getPageMetadata } from "@/config/metadata";
 
-export async function generateMetadata(props) {
-  const params = await props.params;
-  const { lang } = params;
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
   return getPageMetadata(lang, {
     title: projectData.title,
     description: projectData.description,
@@ -57,6 +57,6 @@ export const projectData = {
 - **<L en="Theme Engine" fr="Moteur de Thèmes" />**
 
 export default async function Layout(props) {
-  const params = await props.params;
-  return <ProjectPostLayout project={projectData} lang={params.lang}>{props.children}</ProjectPostLayout>;
+  const lang = await getCurrentLanguage();
+  return <ProjectPostLayout project={projectData} lang={lang}>{props.children}</ProjectPostLayout>;
 }
