@@ -29,9 +29,9 @@ export const fr = {
       "Auteur de plusieurs bibliothèques utilitaires populaires qui facilitent le prototypage rapide d'applications multiplateformes utilisant des stacks technologiques modernes."
     ],
     "seo": {
-      "title": "À Propos | Wistant Kode - Ingénieur Logiciel & Architecte Numérique",
-      "description": "Découvrez la philosophie d'ingénierie et le parcours de Wistant Kode, expert en architectures techniques résilientes et en expériences numériques haut de gamme.",
-      "keywords": "Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développement Mobile, TypeScript, Next.js, NestJS, Cameroun"
+      "title": "À Propos | Wistant Kode - Architecte Logiciel & Ingénieur Cloud",
+      "description": "Découvrez la philosophie d'ingénierie et le parcours de Wistant Kode, expert en architectures techniques résilientes, cloud hybride et expériences numériques de luxe.",
+      "keywords": "Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développement Mobile, TypeScript, Next.js, NestJS, Cameroun, Architecte Cloud, Expert React, Systèmes Distribués, Créateur SaaS"
     }
   },
   "work": {
@@ -53,7 +53,7 @@ export const fr = {
   },
   "projects": {
     "title": "Projets Phares",
-    "viewAll": "Explorer les archives",
+    "viewAll": "Explorer tous mes projets",
     "cta": "Voir le Projet",
     "stack": "Technologies",
     "aboutThisProject": "À propos de ce projet",
@@ -71,9 +71,9 @@ export const fr = {
     "inProgress": "En cours",
     "backToProjects": "Retour aux Projets",
     "seo": {
-      "title": "Projets & Réalisations | Solutions Digitales d'Élite",
-      "description": "Découvrez mes réalisations techniques : SaaS, applications mobiles et architectures distribuées conçues pour la performance et la scalabilité.",
-      "keywords": "Portfolio, Projets, TypeScript, Next.js, NestJS, Développement Web, Mobile Apps"
+      "title": "Projets & Réalisations | Architectures Digitales de Haute Performance",
+      "description": "Une sélection de mes réalisations techniques : SaaS, applications mobiles et systèmes distribués conçus pour la performance et la scalabilité mondiale.",
+      "keywords": "Portfolio, Projets, TypeScript, Next.js, NestJS, Développement Web, Mobile Apps, Architecture SaaS, Design API, Systèmes Scalables"
     }
   },
   "blog": {
@@ -147,9 +147,9 @@ export const fr = {
   },
   "global": {
     "seo": {
-      "title": "Wistant Kode | Ingénieur Logiciel Senior & Architecte de Systèmes",
-      "description": "Ingénieur logiciel expert au Cameroun spécialisé dans les solutions numériques haute performance (Web, Mobile, Systèmes Distribués). Bâtissons votre vision.",
-      "keywords": "Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développeur Mobile, TypeScript, Next.js, React Native, Cameroun, Freelance"
+      "title": "Wistant Kode | Ingénieur Logiciel & Architecte Cloud Native",
+      "description": "Ingénieur logiciel expert spécialisé dans les solutions numériques haute performance (Web, Mobile, Infrastructure Cloud). Bâtissons des sytèmes résilients et scalables.",
+      "keywords": "Wistant Kode, Ingénieur Logiciel, Développeur Full-Stack, Développeur Mobile, TypeScript, Next.js, React Native, Cameroun, SaaS, Microservices, Infrastructure Cloud, AWS, Azure, Optimisation Performance"
     }
   }
 }

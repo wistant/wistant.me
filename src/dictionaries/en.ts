@@ -29,9 +29,9 @@ export const en = {
       "Authored several popular utility libraries that facilitate rapid prototyping of cross-platform applications using modern tech stacks."
     ],
     "seo": {
-      "title": "About Wistant Kode | Digital Architect & Senior Software Engineer",
-      "description": "Explore the engineering philosophy and professional journey of Wistant Kode, a specialist in resilient technical architectures and high-end digital experiences.",
-      "keywords": "Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Development, TypeScript, Next.js, NestJS, Cameroon"
+      "title": "About Wistant Kode | Software Architect & Senior Engineer",
+      "description": "Explore the engineering philosophy and professional journey of Wistant Kode, a specialist in resilient technical architectures, hybrid cloud, and high-end digital experiences.",
+      "keywords": "Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Development, TypeScript, Next.js, NestJS, Cameroon, Software Architect, Cloud Native, React Expert, Distributed Systems, SaaS Builder"
     }
   },
   "work": {
@@ -71,9 +71,9 @@ export const en = {
     "inProgress": "In Progress",
     "backToProjects": "Back to Projects",
     "seo": {
-      "title": "Projects & Portfolio | High-Performance Digital Solutions",
-      "description": "A curated showcase of Open Source contributions, production-grade SaaS, mobile applications, and robust technical architectures built by Wistant.",
-      "keywords": "Open source contributions, OpenSource, Side projects,Personnals projects,Portfolio, Projects, TypeScript, Next.js, NestJS, Web Development, Mobile Apps"
+      "title": "Projects & Portfolio | High-Performance Digital Architectures",
+      "description": "A curated showcase of Open Source contributions, production-grade SaaS, mobile applications, and robust distributed systems designed for global scale.",
+      "keywords": "Open source contributions, OpenSource, Side projects, Personals projects, Portfolio, Projects, TypeScript, Next.js, NestJS, Web Development, Mobile Apps, SaaS Architecture, API Design, Scalable Systems"
     }
   },
   "blog": {
@@ -147,9 +147,9 @@ export const en = {
   },
   "global": {
     "seo": {
-      "title": "Wistant Kode | Fullstack Software Engineer/Architect",
-      "description": "Fullstack Software Engineer/Architect in Cameroon specializing in high-performance digital solutions across Web, Mobile, and Distributed Systems. Let's build your vision.",
-      "keywords": "Wistant, Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Developer, Desktop Apps, TypeScript, Next.js, React, NestJS, Cameroon"
+      "title": "Wistant | Software Engineer & Distributed Systems Architect",
+      "description": "Expert Software Architect specializing in high-performance digital solutions across Web, Mobile, and Cloud Infrastructure. Building resilient, scalable, and premium software.",
+      "keywords": "Wistant, Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Developer, Desktop Apps, TypeScript, Next.js, React, NestJS, Cameroon, SaaS, Microservices, Cloud Infrastructure, AWS, Azure, Performance Optimization"
     }
   }
 }
