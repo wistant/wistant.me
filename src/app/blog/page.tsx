@@ -35,15 +35,15 @@ export default async function BlogPage() {
            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl font-cal leading-tight">{dict.blog.title || "Blog"}</h1>
         </div>
         
-        <ol className="flex flex-col gap-10 w-full mt-6">
+        <ol className="flex flex-col gap-16 w-full mt-12">
           {years.map((year) => (
-            <li className="grid grid-cols-1 md:grid-cols-[100px_1fr] gap-2 md:gap-6 w-full" key={year}>
-              <div className="sticky top-20 h-fit">
+            <li className="flex flex-col gap-4 w-full mb-12" key={year}>
+              <div className="h-fit">
                 <h2 className="text-xl font-bold tracking-tighter sm:text-2xl font-cal opacity-50">
                   {year}
                 </h2>
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col">
                 <ol className="flex flex-col divide-y divide-border/40 w-full">
                   {postsByYear[year].map((post) => (
                     <li key={post.slug} className="block w-full">
