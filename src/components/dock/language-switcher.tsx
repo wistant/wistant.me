@@ -1,152 +1,63 @@
-"use client";
+'use client';
 
-import { usePathname, useRouter } from "next/navigation";
-import { Languages } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Language } from '@/types/locale';
 
-export function LanguageSwitcher() {
-  const pathname = usePathname();
-  const router = useRouter();
+/**
+ * Enhanced Stateless Language Switcher
+ * Uses cookies and window reload to sync with the server-side dictionary.
+ * Supports legacy imports and manual placement.
+ */
+export function LanguageSwitcher({ currentLang: propLang }: { currentLang?: Language }) {
+  // Detection if no prop is passed (legacy support)
+  const [currentLang, setCurrentLang] = React.useState<Language>('en');
 
-  const flags: Record<string, string> = {
+  React.useEffect(() => {
+    const locale = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('NEXT_LOCALE='))
+      ?.split('=')[1];
+    
+    if (locale === 'fr' || locale === 'en') {
+      setCurrentLang(locale as Language);
+    }
+  }, []);
+
+  // Use prop if provided, otherwise internal state
+  const activeLang = propLang || currentLang;
+
+  const toggleLanguage = () => {
+    const nextLang = activeLang === 'en' ? 'fr' : 'en';
+    
+    // Set cookie
+    document.cookie = `NEXT_LOCALE=${nextLang}; path=/; max-age=31536000; SameSite=Lax`;
+    
+    // Full reload to guarantee server-side detection of the new cookie
+    window.location.reload();
+  };
+
+  const flags = {
     en: "🇬🇧",
-    fr: "🇫🇷",
-    es: "🇪🇸",
-    ar: "🇸🇦",
-    wo: "🇸🇳"
+    fr: "🇫🇷"
   };
-
-  const handleLanguageChange = (locale: string) => {
-    const segments = pathname.split("/");
-    segments[1] = locale;
-    const newPathname = segments.join("/");
-    router.push(newPathname);
-  };
-
-  const currentLocale = pathname.split("/")[1] || "en";
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="cursor-pointer" asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="size-10 cursor-pointer rounded-full hover:bg-muted/50 transition-all duration-300 group relative border-none"
-        >
-          <Languages className="size-5 transition-all group-hover:scale-110 group-hover:rotate-12 text-foreground/70" />
-          <span className="absolute -bottom-1 -right-1 text-sm bg-background/80 px-0.5 rounded-sm border border-border/50">
-            {flags[currentLocale] || currentLocale}
-          </span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="center"
-        side="top"
-        className="min-w-40 bg-background/90 backdrop-blur-2xl border-border/40 shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-2xl p-1.5"
-        sideOffset={12}
-      >
-        <DropdownMenuRadioGroup
-          value={currentLocale}
-          onValueChange={handleLanguageChange}
-        >
-          {/*English */}
-          <DropdownMenuRadioItem
-            value="en"
-            className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
-          >
-            <div className="flex items-center gap-3 w-full">
-              <span className="text-xl">🇬🇧</span>
-              <div className="flex flex-col gap-1">
-                <span className="font-bold text-sm tracking-tight">
-                  English
-                </span>
-                <span className="text-[10px] text-muted-foreground/70 font-medium">
-                  Global Version
-                </span>
-              </div>
-            </div>
-          </DropdownMenuRadioItem>
-
-          {/*French*/}
-          <DropdownMenuRadioItem
-            value="fr"
-            className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
-          >
-            <div className="flex items-center gap-3 w-full">
-              <span className="text-xl">🇫🇷</span>
-              <div className="flex flex-col gap-0">
-                <span className="font-bold text-sm tracking-tight">
-                  Français
-                </span>
-                <span className="text-[10px] text-muted-foreground/70 font-medium">
-                  Version locale
-                </span>
-              </div>
-            </div>
-          </DropdownMenuRadioItem>
-
-          {/*Spanish*/}
-          <DropdownMenuRadioItem
-            value="es"
-            className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
-          >
-            <div className="flex items-center gap-3 w-full">
-              <span className="text-xl">🇪🇸</span>
-              <div className="flex flex-col gap-0">
-                <span className="font-bold text-sm tracking-tight">
-                  Español
-                </span>
-                <span className="text-[10px] text-muted-foreground/70 font-medium">
-                  Versión Global
-                </span>
-              </div>
-            </div>
-          </DropdownMenuRadioItem>
-
-          {/*Arabic*/}
-          <DropdownMenuRadioItem
-            value="ar"
-            className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
-          >
-            <div className="flex items-center gap-3 w-full">
-              <span className="text-xl">🇸🇦</span>
-              <div className="flex flex-col gap-0">
-                <span className="font-bold text-sm tracking-tight text-right w-full">
-                  العربية
-                </span>
-                <span className="text-[10px] text-muted-foreground/70 font-medium text-right w-full">
-                  النسخة العالمية
-                </span>
-              </div>
-            </div>
-          </DropdownMenuRadioItem>
-
-          {/*Wolof*/}
-          <DropdownMenuRadioItem
-            value="wo"
-            className="rounded-xl transition-all cursor-pointer focus:bg-accent/80 py-2.5 px-3 data-[state=checked]:bg-accent/40"
-          >
-            <div className="flex items-center gap-3 w-full">
-              <span className="text-xl">🇸🇳</span>
-              <div className="flex flex-col gap-0">
-                <span className="font-bold text-sm tracking-tight">
-                  Wolof
-                </span>
-                <span className="text-[10px] text-muted-foreground/70 font-medium">
-                  Senegal
-                </span>
-              </div>
-            </div>
-          </DropdownMenuRadioItem>
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button 
+      variant="ghost" 
+      size="icon" 
+      onClick={toggleLanguage}
+      className="h-10 w-10 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all active:scale-95 group border-none bg-transparent"
+      title={activeLang === 'en' ? 'Passer en Français' : 'Switch to English'}
+    >
+      <div className="flex flex-col items-center justify-center relative">
+        <span className="text-xl group-hover:scale-110 transition-transform">
+          {flags[activeLang]}
+        </span>
+        <span className="absolute -bottom-4 text-[9px] font-bold opacity-0 group-hover:opacity-100 transition-opacity uppercase font-mono">
+          {activeLang === 'en' ? 'FR' : 'EN'}
+        </span>
+      </div>
+    </Button>
   );
 }

@@ -12,7 +12,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getDictionary, getCurrentLanguage } from "@/lib/dictionary";
 import { FlickeringGrid } from "@/components/ui/magicui/flickering-grid";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { LanguageSwitcher } from "@/components/dock/language-switcher";
 
 const calFont = localFont({
   src: "../fonts/cal.woff2",

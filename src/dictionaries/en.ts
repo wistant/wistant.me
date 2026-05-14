@@ -147,8 +147,8 @@ export const en = {
   },
   "global": {
     "seo": {
-      "title": "Wistant Kode | Senior Software Engineer & Systems Architect",
-      "description": "Software Engineer/Architect in Cameroon specializing in high-performance digital solutions across Web, Mobile, and Distributed Systems. Let's build your vision.",
+      "title": "Wistant Kode | Fullstack Software Engineer/Architect",
+      "description": "Fullstack Software Engineer/Architect in Cameroon specializing in high-performance digital solutions across Web, Mobile, and Distributed Systems. Let's build your vision.",
       "keywords": "Wistant, Wistant Kode, Software Engineer, Full-Stack Developer, Mobile Developer, Desktop Apps, TypeScript, Next.js, React, NestJS, Cameroon"
     }
   }
