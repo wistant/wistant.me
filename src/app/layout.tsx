@@ -57,7 +57,7 @@ export default async function RootLayout({
   const dict = await getDictionary();
 
   return (
-    <html lang={lang} dir="ltr" prefix="og: https://ogp.me/ns#" suppressHydrationWarning>
+    <html lang={lang} dir="ltr" prefix="og: https://ogp.me/ns#" suppressHydrationWarning className="dark">
       <body
         className={`${interFont.variable} ${calFont.variable} ${clashFont.variable} ${cabinetFont.variable} antialiased font-sans relative transition-colors duration-300`}
         suppressHydrationWarning
