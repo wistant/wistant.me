@@ -15,66 +15,61 @@ export function BlogPostItem({ post, lang }: BlogPostItemProps) {
     { month: "short", day: "numeric", year: "numeric" }
   );
 
-  const readingTime = 5;
 
   return (
-    <Link href={`/blog/${post.slug}`} className="block group outline-none h-full">
-      <div className="flex flex-col h-full bg-card/40 hover:bg-card/60 border border-border/50 hover:border-primary/30 transition-all duration-500 overflow-hidden group/card relative">
-        {/* Subtle Gradient Glow on Hover */}
-        <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-700" />
-        
-        {/* Prominent Image Section */}
-        <div className="relative aspect-16/10 w-full overflow-hidden border-b border-border/30 bg-muted/20">
+    <Link 
+      href={`/blog/${post.slug}`} 
+      className="group block w-full py-4 transition-all duration-300"
+    >
+      <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
+        {/* Horizontal Image */}
+        <div className="relative w-full sm:w-48 aspect-video sm:h-28 overflow-hidden rounded-xl border border-border/40 shrink-0 bg-neutral-100 dark:bg-neutral-900 shadow-sm">
           {post.image ? (
             <Image
               src={post.image}
               alt={post.title}
               fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover object-center transition-transform duration-1000 group-hover/card:scale-105"
+              sizes="(max-width: 640px) 100vw, 192px"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-900">
-              <span className="text-neutral-400 dark:text-neutral-600 font-mono text-[14px] uppercase tracking-widest">
-                {post.title.substring(0, 3)}
-              </span>
-              <div>
-                {post.description}
-              </div>
-            </div>
+             <div className="w-full h-full flex items-center justify-center opacity-40">
+                <span className="font-mono text-xs uppercase tracking-tighter">{post.title.substring(0, 3)}</span>
+             </div>
           )}
-          
-          {/* Top Meta Badge */}
-          <div className="absolute top-3 left-3 px-2.5 py-1 bg-background/80 backdrop-blur-md border border-border/50 rounded-none shadow-sm z-10">
-             <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-muted-foreground">
-               {formattedDate}
-             </span>
-          </div>
         </div>
 
-        {/* Content Section */}
-        <div className="flex flex-col flex-1 p-5 gap-3 z-10">
-          <h3 className="font-clash font-bold text-lg sm:text-xl text-foreground group-hover/card:text-primary transition-colors leading-tight tracking-tight">
-            {post.title}
-          </h3>
-          
-          <p className="text-sm text-muted-foreground/90 line-clamp-2 font-serif italic leading-relaxed flex-1">
+        {/* Content Side */}
+        <div className="flex flex-col flex-1 gap-2">
+          <div className="flex flex-col gap-1">
+             <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+               {post.title}
+               <svg 
+                 className="size-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-primary" 
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"
+               >
+                 <path d="M7 17L17 7M17 7H7M17 7V17" />
+               </svg>
+             </h3>
+             <time className="text-xs font-mono text-muted-foreground/60 uppercase tracking-widest" dateTime={post.date}>
+               {formattedDate}
+             </time>
+          </div>
+
+          <p className="text-sm text-muted-foreground/80 line-clamp-2 max-w-2xl leading-relaxed">
             {post.description}
           </p>
-          
-          {/* Footer Meta */}
-          <div className="flex items-center justify-between pt-2 border-t border-border/20 mt-auto">
-             <div className="flex items-center gap-3 text-[10px] font-mono text-muted-foreground/60 uppercase tracking-tighter">
-                <span className="flex items-center gap-1.5">
-                   <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                   {readingTime} min
-                </span>
+
+          {/* Minimal Tags */}
+          {post.tags && (
+             <div className="flex flex-wrap gap-2 mt-1">
+                {post.tags.slice(0, 4).map(tag => (
+                   <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-border/50 text-muted-foreground font-medium uppercase tracking-tighter">
+                      {tag}
+                   </span>
+                ))}
              </div>
-             
-             <div className="size-5 flex items-center justify-center rounded-full border border-border/40 group-hover/card:border-primary/50 transition-colors">
-                <svg className="size-2.5 text-muted-foreground group-hover/card:text-primary transition-all group-hover/card:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 18 6-6-6-6"/></svg>
-             </div>
-          </div>
+          )}
         </div>
       </div>
     </Link>

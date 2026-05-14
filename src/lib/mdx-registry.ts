@@ -10,6 +10,7 @@ const BlogDataSchema = z.object({
   image: z.string().optional(),
   slug: z.string(),
   description: z.string().optional(),
+  tags: z.array(z.string()).default([]),
 });
 
 const CertDataSchema = z.object({

@@ -6,19 +6,13 @@ import { AboutSection } from "@/components/home/about-section";
 import ContactSection from "@/components/home/contact-section";
 import HackathonsSection from "@/components/home/hackathons-section";
 import ProjectsSection from "@/components/projects/projects-section";
-import WorkSection from "@/components/home/work-section";
-
-import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
-import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
 import { ShowMore } from "@/components/ui/show-more";
 import { Metadata } from "next";
 import { getPageMetadata } from "@/config/metadata";
-import { Language } from "@/types/locale";
 import { GallerySection } from "@/components/home/gallery-section";
+import BlogHome from "@/components/blog/blog-home";
 import { siteConfig } from "@/config/site";
-import { workData } from "@/data/work";
 import { hackathonsData } from "@/data/hackathons";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -76,6 +70,8 @@ export default async function Home() {
           aboutLinkText={dict.navigation.about || "About me"}
           blurFadeDelay={BLUR_FADE_DELAY}
         />
+
+        <BlogHome />
       </div>
 
       {/* <section id="work">

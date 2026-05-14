@@ -79,6 +79,8 @@ export const fr = {
   "blog": {
     "title": "Notes & Insights",
     "description": "Réflexions sur l'ingénierie logicielle, le développement multiplateforme et mes découvertes du moment.",
+    "latestTitle": "Derniers articles",
+    "latestSubtitle": "Réflexions & analyses",
     "seo": {
       "title": "Blog Technique | Architecture & Ingénierie Logicielle",
       "description": "Analyses approfondies sur l'architecture système, le développement multiplateforme et les meilleures pratiques pour bâtir des logiciels robustes.",
