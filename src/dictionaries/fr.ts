@@ -14,6 +14,10 @@ export const fr = {
     "title": "Hi Bienvenue 👋🏻",
     "description": "Je suis Wistant Kode, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop."
   },
+  "globalImpact": {
+    "title": "Construire pour le Monde",
+    "description": "Mon ambition est de créer un impact à l'échelle mondiale. Des fondations backend complexes jusqu'aux interfaces fluides, je bâtis des systèmes pensés pour dépasser les frontières."
+  },
   "about": {
     "title": "À propos de moi",
     "content": "Au début de ma carrière, je me suis plongé dans le **développement full-stack** avant d'évoluer vers **l'architecture logicielle**. Au cours des **2 dernières années**, j'ai conçu des **plateformes numériques scalables** (Web, Mobile et Desktop), contribué activement à **l'Open Source**, et participé à de multiples **hackathons** pour le plaisir de bâtir sous pression. Aujourd'hui, je me concentre sur la création de **systèmes résilients** qui font le pont entre une **ingénierie robuste** et une expérience utilisateur de premier plan.",
