@@ -33,7 +33,7 @@ export default async function Home() {
 
 
   return (
-    <main className="min-h-dvh flex flex-col gap-6 relative">
+    <main className="min-h-dvh flex flex-col gap-4 sm:gap-6 relative">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -44,7 +44,7 @@ export default async function Home() {
         />
       </div>
 
-      <section className="flex flex-col gap-1 sm:gap-2 mt-4">
+      <section className="flex flex-col gap-1 sm:gap-2 mt-1 md:mt-4">
         <HeroSection
           title={dict.hero.title}
           description={dict.hero.description}
@@ -53,7 +53,7 @@ export default async function Home() {
 
       <GlobalImpactSection />
 
-      <section className="flex flex-col gap-1 sm:gap-2 mt-4">
+      <section className="flex flex-col gap-1 sm:gap-2 mt-2 md:mt-4">
         <AboutSection
           title={dict.about.title}
           content={dict.about.content}
@@ -124,8 +124,6 @@ export default async function Home() {
           <ContactSection dict={dict} whatsappUrl={siteConfig.links.whatsapp} />
         </BlurFade>
       </section>
-
-      <TestimonialsSection />
     </main>
   );
 }

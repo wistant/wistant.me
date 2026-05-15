@@ -12,7 +12,7 @@ export const fr = {
   },
   "hero": {
     "title": "Hi Bienvenue 👋🏻",
-    "description": "Je suis Wistant Kode, Ingénieur Logiciel expert en conception de solutions numériques haut de gamme. Je bâtis des architectures distribuées et des interfaces ultra-rapides sur Web, Mobile et Desktop."
+    "description": "Je suis Wistant Kode, Ingénieur et Architecte Logiciel. Ma démarche commence par la vision produit, se solidifie par une architecture système implacable, pour aboutir à un code de très haute qualité. Fervent défenseur de l'Open Source, mon but est de bâtir des infrastructures distribuées et des expériences numériques conçues pour opérer à l'échelle mondiale."
   },
   "globalImpact": {
     "title": "Construire pour le Monde",
