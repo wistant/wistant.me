@@ -15,7 +15,7 @@ export default async function BlogPage() {
   const lang = await getCurrentLanguage();
   const dict = await getDictionary();
   
-  const posts = getAllBlogs();
+  const posts = getAllBlogs(lang);
 
   const postsByYear = posts.reduce((acc, post) => {
     const year = new Date(post.date).getFullYear();
@@ -31,8 +31,11 @@ export default async function BlogPage() {
   return (
     <main className="max-w-2xl mx-auto py-20 min-h-screen">
       <div className="flex flex-col gap-10">
-        <div className="flex flex-row gap-4 items-center justify-between">
+        <div className="flex flex-col gap-4">
            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl font-cal leading-tight">{dict.blog.title || "Blog"}</h1>
+           <p className="text-muted-foreground text-sm md:text-base font-light">
+             {dict.blog.seo.description}
+           </p>
         </div>
         
         <ol className="flex flex-col gap-16 w-full mt-12">

@@ -77,7 +77,7 @@ function extractDataBlock(content: string, variableName: string): unknown {
 }
 
 
-export function getAllBlogs(): BlogPost[] {
+export function getAllBlogs(lang?: string): BlogPost[] {
   const blogDir = path.join(process.cwd(), 'src/app/blog');
   if (!fs.existsSync(blogDir)) return [];
 
@@ -87,7 +87,11 @@ export function getAllBlogs(): BlogPost[] {
   for (const entry of entries) {
     if (entry.isDirectory() && !entry.name.startsWith('[')) {
       const slug = entry.name;
-      const mdxPath = path.join(blogDir, slug, 'page.mdx');
+      
+      // Try language-specific file first, then fallback to page.mdx
+      const langMdxPath = lang ? path.join(blogDir, slug, `page.${lang}.mdx`) : null;
+      const baseMdxPath = path.join(blogDir, slug, 'page.mdx');
+      const mdxPath = (langMdxPath && fs.existsSync(langMdxPath)) ? langMdxPath : baseMdxPath;
       
       if (fs.existsSync(mdxPath)) {
         const content = fs.readFileSync(mdxPath, 'utf8');
@@ -104,7 +108,7 @@ export function getAllBlogs(): BlogPost[] {
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export function getAllCertifications(): CertPost[] {
+export function getAllCertifications(lang?: string): CertPost[] {
   const certDir = path.join(process.cwd(), 'src/app/certifications');
   if (!fs.existsSync(certDir)) return [];
 
@@ -114,7 +118,11 @@ export function getAllCertifications(): CertPost[] {
   for (const entry of entries) {
     if (entry.isDirectory() && !entry.name.startsWith('[')) {
       const slug = entry.name;
-      const mdxPath = path.join(certDir, slug, 'page.mdx');
+      
+      // Support for localized certificates if needed
+      const langMdxPath = lang ? path.join(certDir, slug, `page.${lang}.mdx`) : null;
+      const baseMdxPath = path.join(certDir, slug, 'page.mdx');
+      const mdxPath = (langMdxPath && fs.existsSync(langMdxPath)) ? langMdxPath : baseMdxPath;
       
       if (fs.existsSync(mdxPath)) {
         const content = fs.readFileSync(mdxPath, 'utf8');
@@ -131,7 +139,7 @@ export function getAllCertifications(): CertPost[] {
   return certs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export function getAllProjects(): ProjectEntry[] {
+export function getAllProjects(lang?: string): ProjectEntry[] {
   const projectDir = path.join(process.cwd(), 'src/app/projects');
   if (!fs.existsSync(projectDir)) return [];
 
@@ -141,7 +149,11 @@ export function getAllProjects(): ProjectEntry[] {
   for (const entry of entries) {
     if (entry.isDirectory() && !entry.name.startsWith('[')) {
       const slug = entry.name;
-      const mdxPath = path.join(projectDir, slug, 'page.mdx');
+      
+      // Support for localized projects
+      const langMdxPath = lang ? path.join(projectDir, slug, `page.${lang}.mdx`) : null;
+      const baseMdxPath = path.join(projectDir, slug, 'page.mdx');
+      const mdxPath = (langMdxPath && fs.existsSync(langMdxPath)) ? langMdxPath : baseMdxPath;
       
       if (fs.existsSync(mdxPath)) {
         const content = fs.readFileSync(mdxPath, 'utf8');

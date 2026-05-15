@@ -70,6 +70,12 @@ export const fr = {
     "completed": "Terminé",
     "inProgress": "En cours",
     "backToProjects": "Retour aux Projets",
+    "categories": {
+      "personal": "Projets Personnels",
+      "opensource": "Open Source",
+      "freelance": "Projets Clients",
+      "other": "Autres Travaux"
+    },
     "seo": {
       "title": "Projets & Réalisations | Architectures Digitales de Haute Performance",
       "description": "Une sélection de mes réalisations techniques : SaaS, applications mobiles et systèmes distribués conçus pour la performance et la scalabilité mondiale.",
@@ -88,7 +94,8 @@ export const fr = {
       "keywords": "Blog, Développement Logiciel, Architecture Système, TypeScript, Ingénierie"
     },
     "back": "← blog",
-    "backToAll": "← Retour à tous les articles"
+    "backToAll": "← Retour à tous les articles",
+    "viewAll": "Voir tous les blogs"
   },
   "contact": {
     "title": "Collaborons",
