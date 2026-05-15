@@ -1,6 +1,6 @@
 'use client';
 
-import { TextType } from '@/components/ui/text-type';
+import { TextType } from '@/components/mvpblocks/text-type';
 
 export default function TextTypeDemo() {
   return (
