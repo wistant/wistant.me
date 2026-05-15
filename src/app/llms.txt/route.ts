@@ -5,12 +5,12 @@ export const runtime = "edge";
 
 export async function GET() {
   const content = `
-# ⚡ WISTANT KODE - PREMIUM PORTFOLIO & Personnal Hub
+# ⚡ WISTANT - PREMIUM PORTFOLIO & Personnal Hub
 
 > Full-Stack Software & Product Engineer | Specialized in High-End Web Experiences & AI Integrations.
 > Based in Douala, Cameroon (GMT+1).
 
-## 🌍 Multilingual Ecosystem
+## Multilingual Ecosystem
 - **Primary Language**: English (Technical, Professional)
 - **Secondary Language**: French (Native, Engineering)
 - **Status**: All key content (Blog, Projects, Certifications) is available in both languages.
