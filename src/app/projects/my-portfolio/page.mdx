@@ -11,6 +11,11 @@ export async function generateMetadata() {
   });
 }
 
+export default async function Layout(props) {
+    const lang = await getCurrentLanguage();
+    return <ProjectPostLayout project={projectData} lang={lang}>{props.children}</ProjectPostLayout>;
+}
+
 export const projectData = {
   title: "My POrtfolio",
   description: "High-performance production-grade portfolio with 3D elements and smooth transitions.",
@@ -55,8 +60,3 @@ export const projectData = {
 - **<L en="Cross-platform Optimization" fr="Optimisation Cross-platform" />**
 - **<L en="Bilingual implementation" fr="Mise en œuvre bilingue" />**
 - **<L en="Theme Engine" fr="Moteur de Thèmes" />**
-
-export default async function Layout(props) {
-  const lang = await getCurrentLanguage();
-  return <ProjectPostLayout project={projectData} lang={lang}>{props.children}</ProjectPostLayout>;
-}

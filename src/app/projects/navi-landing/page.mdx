@@ -1,0 +1,202 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
+import ProjectPostLayout from "@/components/projects/project-post-layout";
+import { getPageMetadata } from "@/config/metadata";
+
+export async function generateMetadata() {
+    const lang = await getCurrentLanguage();
+    return getPageMetadata(lang, {
+        title: projectData.title,
+        description: projectData.description,
+        image: projectData.image,
+    });
+}
+
+export default async function Layout(props) {
+    const lang = await getCurrentLanguage();
+    return <ProjectPostLayout project={projectData} lang={lang}>{props.children}</ProjectPostLayout>;
+}
+
+export const projectData = {
+    title: "Navi - Landing page",
+    description: "",
+    dates: "Feb 2026",
+    active: true,
+    order: 7,
+    status: "completed",
+    category: "personal",
+    image: "/portfolio/navi-landing/th.png",
+    tags: ["Next.js", "TypeScript", "Three.js", "Framer", "JavaScript"],
+    links: [
+        { type: "website", href: "https://wistant.vercel.app" },
+        { type: "github", href: "https://github.com/wistant/wistant.me" }
+    ],
+    images: ["/portfolio/navi-landing/th.png"],
+}
+
+Navi Logo
+Home
+Features
+Integrations
+FAQs
+Lain
+.̵̰̣̗̜͙̂̿̔͐̊̀̾̀́͘̕͘͝ͅ.̸̭̪̭̙̗̹͉̃.̶̗͍̻̊͗̒̉͑̊͑͆̚.̸̪͓̘͔̰͚̝̠͙̻̓ͅͅ.̴̧̞͙͈̩̖̤̻̭̰̘̙͇͇̪̓̑͆̒̚.̸̨̧̠̤̮̒̅͐́͊̂̄̏͛̌̍͝.̸̟̻͍͕͎̣͎̣̪̱̲̒͌́̄̓̓͌͒͌̓͌̓͝͠.̴̨̠̺̥̣͎̼̑̓͌̎̉̈́͘͝
+✨ 9.5M users connected
+Access The Wired, Through Navi
+
+Navi is your gateway to The Wired—intuitive, powerful, and designed to adapt to you.
+Market leaders that use Navi
+AmazonAppleCanonCoca-ColaDiscordPayPalSonyYouTubeAmazonAppleCanonCoca-ColaDiscordPayPalSonyYouTube
+✶Introducing Navi
+Your creative process deserves better. You're striving to connect seamlessly to The Wired, but traditional tools and devices hold you back with outdated interfaces and cumbersome setups.That's why we built Navi.
+✶Features
+Where power meets simplicity
+Avatar 1
+Avatar 2
+Avatar 3
+Avatar 4
+Collaborate in The Wired
+
+Connect and collaborate with others in real time within The Wired, ensuring seamless and synchronized interactions.
+
+Experience true connection
+Incredible GIF
+
+with technology.
+Seamless Wired Connectivity
+
+Navi bridges the gap between the physical and digital worlds, giving you instantaneous access to The Wired for communication, creation, and exploration.
+Navi GIF
+Listening...
+Voice-Activated Commands
+
+Control Navi and navigate The Wired using intuitive voice commands for a hands-free experience.
+✶Voice-Activated Interface
+✶Augmented Reality Overlays
+✶Biometric Security
+✶Neural Interface Compatibility
+✶Virtual Proxy Access
+✶Adaptive Interface
+✶Persona Manager
+✶Integrations
+Seamlessly Integrated with The Wired
+
+Navi is engineered to connect effortlessly with the digital tools that power your workflow, creating a unified presence within The Wired.
+Figma icon
+Figma
+
+Figma acts as your portal to seamless collaborative design, connecting creators in The Wired.
+Notion icon
+Notion
+
+Notion serves as a central hub in The Wired, organizing and managing your digital thoughts effortlessly.
+Slack icon
+Slack
+
+Slack enables synchronized communication within The Wired, making teamwork instantaneous and efficient.
+Relume icon
+Relume
+
+Relume simplifies web creation, providing the tools to craft your own presence in The Wired.
+Framer icon
+Framer
+
+Framer transforms concepts into reality, bridging creativity and functionality in The Wired.
+GitHub icon
+GitHub
+
+GitHub powers collaboration and innovation, bridging development and teamwork
+Figma icon
+Figma
+
+Figma acts as your portal to seamless collaborative design, connecting creators in The Wired.
+Notion icon
+Notion
+
+Notion serves as a central hub in The Wired, organizing and managing your digital thoughts effortlessly.
+Slack icon
+Slack
+
+Slack enables synchronized communication within The Wired, making teamwork instantaneous and efficient.
+Relume icon
+Relume
+
+Relume simplifies web creation, providing the tools to craft your own presence in The Wired.
+Framer icon
+Framer
+
+Framer transforms concepts into reality, bridging creativity and functionality in The Wired.
+GitHub icon
+GitHub
+
+GitHub powers collaboration and innovation, bridging development and teamwork
+GitHub icon
+GitHub
+
+GitHub powers collaboration and innovation, bridging development and teamwork
+Framer icon
+Framer
+
+Framer transforms concepts into reality, bridging creativity and functionality in The Wired.
+Relume icon
+Relume
+
+Relume simplifies web creation, providing the tools to craft your own presence in The Wired.
+Slack icon
+Slack
+
+Slack enables synchronized communication within The Wired, making teamwork instantaneous and efficient.
+Notion icon
+Notion
+
+Notion serves as a central hub in The Wired, organizing and managing your digital thoughts effortlessly.
+Figma icon
+Figma
+
+Figma acts as your portal to seamless collaborative design, connecting creators in The Wired.
+GitHub icon
+GitHub
+
+GitHub powers collaboration and innovation, bridging development and teamwork
+Framer icon
+Framer
+
+Framer transforms concepts into reality, bridging creativity and functionality in The Wired.
+Relume icon
+Relume
+
+Relume simplifies web creation, providing the tools to craft your own presence in The Wired.
+Slack icon
+Slack
+
+Slack enables synchronized communication within The Wired, making teamwork instantaneous and efficient.
+Notion icon
+Notion
+
+Notion serves as a central hub in The Wired, organizing and managing your digital thoughts effortlessly.
+Figma icon
+Figma
+
+Figma acts as your portal to seamless collaborative design, connecting creators in The Wired.
+✶FAQs
+Questions? We've got answers.
+How is Navi different from other tools?
+Is there a learning curve?
+How does Navi handle version control?
+Can I access The Wired offline?
+How does Navi enable collaboration?
+
+Navi redefines collaboration within The Wired. Invite others to your workspace, share live feedback, and co-create in real-time, no matter where you are in the network.
+✶Try it for free
+✶Try it for free
+✶Try it for free
+✶Try it for free
+✶Try it for free
+✶Try it for free
+✶Try it for free
+✶Try it for free
+✶Try it for free
+✶Try it for free
+Navi Logo
+Contact
+Privacy Policy
+Terms & Conditions

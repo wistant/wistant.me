@@ -44,7 +44,7 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
       siteName: siteConfig.name,
       images: [
         {
-          url: ogImagePath,
+          url: ogImagePath.startsWith("http") ? ogImagePath : `${siteUrl}${ogImagePath}`,
           width: 1200,
           height: 630,
           alt: override?.title?.toString() || siteConfig.name,
@@ -55,7 +55,7 @@ export async function getPageMetadata(lang: Language = "en", override?: CustomMe
       card: "summary_large_image",
       title: override?.title?.toString() || dict.global.seo.title,
       description: override?.description || dict.global.seo.description,
-      images: [ogImagePath],
+      images: [ogImagePath.startsWith("http") ? ogImagePath : `${siteUrl}${ogImagePath}`],
       creator: "@wistant",
     },
     icons: {

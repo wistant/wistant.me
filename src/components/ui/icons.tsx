@@ -6,7 +6,9 @@ import {
   Building2Icon, 
   ChevronLeftIcon, 
   CalendarIcon, 
-  ExternalLinkIcon 
+  ExternalLinkIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon
 } from "lucide-react";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
@@ -20,6 +22,8 @@ export const Icons = {
   chevronLeft: (props: IconProps) => <ChevronLeftIcon {...props} />,
   calendar: (props: IconProps) => <CalendarIcon {...props} />,
   externalLink: (props: IconProps) => <ExternalLinkIcon {...props} />,
+  arrowLeft: (props: IconProps) => <ArrowLeftIcon {...props} />,
+  arrowRight: (props: IconProps) => <ArrowRightIcon {...props} />,
   linkedin: (props: IconProps) => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>LinkedIn</title>

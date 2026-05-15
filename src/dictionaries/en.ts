@@ -70,6 +70,12 @@ export const en = {
     "completed": "Completed",
     "inProgress": "In Progress",
     "backToProjects": "Back to Projects",
+    "categories": {
+      "personal": "Personal Projects",
+      "opensource": "Open Source",
+      "freelance": "Client Work",
+      "other": "Other Work"
+    },
     "seo": {
       "title": "Projects & Portfolio | High-Performance Digital Architectures",
       "description": "A curated showcase of Open Source contributions, production-grade SaaS, mobile applications, and robust distributed systems designed for global scale.",
@@ -79,13 +85,17 @@ export const en = {
   "blog": {
     "title": "Notes & Insights",
     "description": "Thoughts on software engineering, multi-platform development, and things I learn along the way.",
+    "latestTitle": "Blog",
+    "latestSubtitle": "Insights & Reflections",
+    "latestDescription": "Deep dives into software architecture, cross-platform development, and modern engineering trends.",
     "seo": {
-      "title": "Engineering Blog | Technical Notes & Insights",
+      "title": "Blog | Technical Notes & Insights",
       "description": "Deep dives into software architecture, cross-platform development, and modern engineering trends to help you build stable and scalable systems.",
       "keywords": "Blog, Software Development, System Architecture, TypeScript, Engineering"
     },
     "back": "Blog",
-    "backToAll": "Back to all posts"
+    "backToAll": "Back to all posts",
+    "viewAll": "View all stories"
   },
   "contact": {
     "title": "Let's collaborate",
@@ -94,7 +104,7 @@ export const en = {
     "button": "Get in touch",
     "social": "Connect with me",
     "seo": {
-      "title": "Contact Wistant Kode | Let's Build Your Vision",
+      "title": "Contact | Let's Build Your Vision",
       "description": "Need a software engineer? Get in touch with Wistant Kode for freelance, consulting, or innovative technical collaborations.",
       "keywords": "Contact, Wistant Kode, Hire Developer, Freelance, Software Consultant"
     }
@@ -117,21 +127,12 @@ export const en = {
     "issuedBy": "Issued by",
     "date": "Issue Date",
     "seo": {
-      "title": "Professional Certifications | Technical Expertise",
+      "title": "Certifications | Technical & Professional Expertise certificates",
       "description": "Verified professional certifications in cloud architecture, software engineering, and security, demonstrating a commitment to technical excellence.",
       "keywords": "Certifications, Degrees, Expertise, Cloud, Security, TypeScript"
     }
   },
-  "posts": {
-    "title": "Social Wall",
-    "description": "Quick thoughts, technical shares, and updates from X and LinkedIn.",
-    "seo": {
-      "title": "Social Wall & Technical Feed | Wistant",
-      "description": "Follow my technical updates and social media shares (X, LinkedIn). Quick insights and tech watch.",
-      "keywords": "Social Media, X, Twitter, LinkedIn, Tech Watch, Wistant"
-    }
-  },
-  "og": {
+    "og": {
     "headline": "Software Engineer",
     "description": "Engineering high-end digital solutions for Web, Mobile, and Desktop.",
     "cta": "View Portfolio"

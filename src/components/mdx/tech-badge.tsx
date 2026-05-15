@@ -24,7 +24,7 @@ export const TECH_MAP: Record<string, { icon: string; color: string; label: stri
   TailwindCSS: { icon: "/icons/tailwindcss.svg", color: "#06B6D4", label: "Tailwind" },
   "Framer Motion": { icon: "/icons/framer.svg", color: "#0055FF", label: "Framer" },
   Framer:     { icon: "/icons/framer.svg",     color: "#000000", label: "Framer" },
-  GSAP:       { icon: "/icons/javascript.svg", color: "#88CE02", label: "GSAP" },
+  GSAP:       { icon: "/icons/javascript.svg", color: "#92a470", label: "GSAP" },
   Three:      { icon: "/icons/threejs.svg",    color: "#000000", label: "Three.js" },
   "Three.js": { icon: "/icons/threejs.svg",    color: "#000000", label: "Three.js" },
   Redux:      { icon: "/icons/redux.svg",      color: "#764ABC", label: "Redux" },

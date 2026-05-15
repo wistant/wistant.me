@@ -70,6 +70,12 @@ export const fr = {
     "completed": "Terminé",
     "inProgress": "En cours",
     "backToProjects": "Retour aux Projets",
+    "categories": {
+      "personal": "Projets Personnels",
+      "opensource": "Open Source",
+      "freelance": "Projets Clients",
+      "other": "Autres Travaux"
+    },
     "seo": {
       "title": "Projets & Réalisations | Architectures Digitales de Haute Performance",
       "description": "Une sélection de mes réalisations techniques : SaaS, applications mobiles et systèmes distribués conçus pour la performance et la scalabilité mondiale.",
@@ -79,13 +85,17 @@ export const fr = {
   "blog": {
     "title": "Notes & Insights",
     "description": "Réflexions sur l'ingénierie logicielle, le développement multiplateforme et mes découvertes du moment.",
+    "latestTitle": "Blog",
+    "latestSubtitle": "Notes & Réflexions",
+    "latestDescription": "Exploration approfondie de l'architecture logicielle, du développement multiplateforme et des tendances technologiques modernes.",
     "seo": {
       "title": "Blog Technique | Architecture & Ingénierie Logicielle",
       "description": "Analyses approfondies sur l'architecture système, le développement multiplateforme et les meilleures pratiques pour bâtir des logiciels robustes.",
       "keywords": "Blog, Développement Logiciel, Architecture Système, TypeScript, Ingénierie"
     },
     "back": "← blog",
-    "backToAll": "← Retour à tous les articles"
+    "backToAll": "← Retour à tous les articles",
+    "viewAll": "Voir tous les blogs"
   },
   "contact": {
     "title": "Collaborons",

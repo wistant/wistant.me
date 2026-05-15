@@ -1,0 +1,58 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
+import BlogPostLayout from "@/components/blog/blog-post-layout";
+import { getPageMetadata } from "@/config/metadata";
+
+export default async function Layout(props) {
+    const lang = await getCurrentLanguage();
+    return <BlogPostLayout className={'text-justify'} post={blogData} lang={lang}>{props.children}</BlogPostLayout>;
+}
+
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  return getPageMetadata(lang, {
+    title: blogData.title,
+    description: blogData.description,
+    image: blogData.image,
+  });
+}
+
+export const blogData = {
+  title: "Vendure : The Headless Commerce Engine for E-commerce",
+  description: "Why I choose Vendure for scalable, high-performance commerce solutions.",
+  date: "May 14, 2026",
+  image: "/blog/vendure.jpg",
+  slug: "vendure-headless-commerce",
+  tags: ["E-commerce", "Vendure", "Headless", "NestJS"],
+};
+
+Dans l'écosystème de l'e-commerce, on se retrouve souvent à choisir entre la rapidité/facilité (Shopify)
+et le contrôle total (Software development). [Vendure](https://github.com/vendurehq/vendure) est la réponse à ce
+dilemme : un moteur de commerce headless, construit sur **NestJS** et **GraphQL**, conçu spécifiquement
+pour les développeurs qui refusent les compromis.
+
+## Pourquoi choisir Vendure en 2026 ?
+
+Le choix d'une stack technique pour le e-commerce doit se baser sur trois piliers : la **flexibilité**, la **performance** et la **maintenabilité**. Voici comment Vendure se positionne face aux géants du secteur :
+
+| Caractéristique | Shopify | MedusaJS | Vendure |
+| :--- | :--- | :--- | :--- |
+| **Logiciel** | SaaS (Propriétaire) | Node.js (Open Source) | NestJS (Type-Safe/Pro) |
+| **API** | REST / GraphQL | REST | GraphQL Only (First-class) |
+|i **Base de données** | Géré par Shopify | PostgreSQL | PostgreSQL / CockroachDB |
+| **Extensibilité** | Apps / Webhooks | Plugins | Plugins NestJS Natifs |
+
+## L'Avantage NestJS
+
+En tant que développeur orienté architecture, l'utilisation de [NestJS](https://nestjs.com) comme socle est un avantage majeur. 
+Cela signifie que Vendure hérite de tous les concepts de **Dependency Injection**, de **Modules** et de **Decorators**
+ qui rendent une application backend robuste et testable.
+
+### Key Features que j'implémente :
+
+1.  **Multi-Channel Strategy** : Gérer plusieurs boutiques (Web, Mobile, POS) à partir d'un seul inventaire unifié.
+2.  **Custom Product Models** : Contrairement aux champs limités des plateformes traditionnelles, Vendure permet de définir des types de données complexes pour chaque produit sans toucher à la structure de la BDD.
+3.  **Real-time Stock Management** : Grâce à sa gestion granulaire des processus de commande (Order Workflow), j'assure une synchronisation parfaite des stocks en temps réel.
+
+## Conclusion
+
+Pour mes projets e-commerce les plus ambitieux, Vendure n'est pas juste un choix, c'est une stratégie de croissance. C'est l'outil qui permet de passer d'une simple boutique en ligne à un véritable écosystème commercial global et performant.

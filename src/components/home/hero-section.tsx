@@ -3,8 +3,7 @@
 import BlurFade from "@/components/ui/magicui/blur-fade";
 import BlurFadeText from "@/components/ui/magicui/blur-fade-text";
 import { siteConfig } from "@/config/site";
-import Link from "next/link";
-import { LucideIcon, BadgeCheck, MapPin, Github, Twitter, Linkedin, MessageCircle, Globe } from "lucide-react";
+import { BadgeCheck, MapPin,} from "lucide-react";
 import { RealTimeClock } from "./real-time-clock";
 import { cn } from "@/lib/utils";
 import { skillsData } from "@/data/skills";
@@ -26,16 +25,7 @@ const BRAND_ICON_COLORS: Record<string, string> = {
   Redis: "text-[#d82c20]",
 };
 
-const SOCIAL_ICONS: Record<string, LucideIcon> = {
-  GitHub: Github,
-  Twitter: Twitter,
-  X: Twitter,
-  LinkedIn: Linkedin,
-  WhatsApp: MessageCircle,
-  Email: MessageCircle,
-};
-
-export function HeroSection({ title, description }: { title: string; description: string }) {
+export function HeroSection({ description }: { title: string; description: string }) {
   // Use all skills from data as requested
   const allSkills = skillsData;
 
@@ -78,23 +68,6 @@ export function HeroSection({ title, description }: { title: string; description
                     <RealTimeClock />
                   </div>
                 </div>
-
-                {/* Socials */}
-                {Object.entries(siteConfig.contact.social).map(([key, social]) => {
-                  const Icon = SOCIAL_ICONS[key] || Globe;
-                  const iconColor = BRAND_ICON_COLORS[key] || "text-muted-foreground";
-                  return (
-                    <Link 
-                      key={key}
-                      href={social.url}
-                      target="_blank"
-                      className={cn(sharedBadgeClasses, "active:scale-95")}
-                    >
-                      <Icon className={cn("size-2.5", iconColor)} />
-                      <span>{social.name}</span>
-                    </Link>
-                  );
-                })}
 
                 {/* All Skills from skills.ts */}
                 {allSkills.map((skill) => {

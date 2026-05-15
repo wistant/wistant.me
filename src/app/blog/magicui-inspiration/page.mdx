@@ -1,0 +1,52 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
+import BlogPostLayout from "@/components/blog/blog-post-layout";
+import { getPageMetadata } from "@/config/metadata";
+
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  return getPageMetadata(lang, {
+    title: blogData.title,
+    description: blogData.description,
+    image: blogData.image,
+  });
+}
+export default async function Layout(props) {
+    const lang = await getCurrentLanguage();
+    return <BlogPostLayout post={blogData} lang={lang}>{props.children}</BlogPostLayout>;
+}
+
+export const blogData = {
+  title: "Crafting a Premium web app: The MagicUI Inspiration",
+  description: "How modern UI libraries like MagicUI shaped the engineering of my personal portfolio.",
+  date: "April 14, 2026",
+  image: "/blog/magicui.jpg",
+  slug: "magicui-inspiration",
+  tags: ["UI", "MagicUI", "Portfolio", "Frontend"],
+};
+
+Le design de mon portfolio n'est pas le fruit du hasard. C'est une quête d'équilibre entre **performance technique** et **impact visuel**. Pour atteindre cet objectif, je me suis largement inspiré de **MagicUI**, une bibliothèque qui repousse les limites de ce qu'on attend d'une interface web moderne.
+
+## Pourquoi MagicUI ?
+
+Dans le monde du développement web, on oppose souvent la sobriété (minimalisme) à l'interactivité (animations). MagicUI prouve qu'on peut avoir les deux. Voici les composants clés qui ont servi de fondation à ma réflexion :
+
+| Composant | Utilisation dans mon Portfolio | Impact UX |
+| :--- | :--- | :--- |
+| **Retro Grid** | Background de la Hero Section | Profondeur visuelle sans surcharge cognitive. |
+| **Border Beam** | Cartes de projets et Certifications | Focus utilisateur lors du survol (Hover). |
+| **Blur Fade** | Chargement progressif des sections | Fluidité et sensation de "haut de gamme". |
+| **Magic Card** | Système de cartes interactives | Micro-interactions qui engagent l'utilisateur. |
+
+## De l'Inspiration à l'Implémentation
+
+S'inspirer ne veut pas dire copier. J'ai ré-architecturé ces composants pour qu'ils s'intègrent dans mon système de design **Cyber-Premium**. Voici comment :
+
+-**Variable-First Mapping** : Chaque animation est liée à mes tokens CSS pour garantir une cohérence totale entre les couleurs et les mouvements.
+
+-**Performance Optimization** : Utilisation intensive de `framer-motion` et `tailwind-merge` pour minimiser le poids du bundle tout en gardant une fluidité à 60 FPS.
+
+-**Responsive Engineering** : Les effets les plus gourmands (comme les grilles animées) sont intelligemment désactivés ou simplifiés sur mobile pour préserver la batterie et la fluidité.
+
+> "L'interface est le pont entre le code et l'humain. Si le code est parfait mais que le pont tremble, l'utilisateur fera demi-tour."
+
+Ce portfolio est un hommage à cette philosophie : une ingénierie invisible au service d'une expérience mémorable.
