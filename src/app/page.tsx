@@ -14,6 +14,8 @@ import { GallerySection } from "@/components/home/gallery-section";
 import BlogHome from "@/components/blog/blog-home";
 import { siteConfig } from "@/config/site";
 import { hackathonsData } from "@/data/hackathons";
+import { GlobalImpactSection } from "@/components/home/global-impact-section";
+import { TestimonialsSection } from "@/components/home/testimonials-section";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -48,6 +50,9 @@ export default async function Home() {
           description={dict.hero.description}
         />
       </section>
+      <br/>
+
+      <GlobalImpactSection />
       <br/>
 
       <section className="flex flex-col gap-1 sm:gap-2 mt-4">
@@ -114,11 +119,15 @@ export default async function Home() {
         </ShowMore>
       </section>
 
+
+      
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
           <ContactSection dict={dict} whatsappUrl={siteConfig.links.whatsapp} />
         </BlurFade>
       </section>
+
+      <TestimonialsSection />
     </main>
   );
 }
