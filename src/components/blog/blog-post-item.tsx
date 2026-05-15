@@ -23,7 +23,7 @@ export function BlogPostItem({ post, lang }: BlogPostItemProps) {
     >
       <div className="flex flex-col sm:flex-row gap-8 sm:items-start h-full min-h-32">
         {/* Horizontal Image - Fixed aspect to avoid stretching */}
-        <div className="relative w-full sm:w-64 aspect-video sm:aspect-[16/10] overflow-hidden rounded-xl border border-border/40 shrink-0 bg-neutral-100 dark:bg-neutral-900 shadow-sm">
+        <div className="relative w-full sm:w-64 aspect-video sm:aspect-16/10 overflow-hidden rounded-xl border border-border/40 shrink-0 bg-neutral-100 dark:bg-neutral-900 shadow-sm">
           {post.image ? (
             <Image
               src={post.image}
@@ -41,8 +41,8 @@ export function BlogPostItem({ post, lang }: BlogPostItemProps) {
 
         {/* Content Side */}
         <div className="flex flex-col flex-1 gap-2">
-          <div className="flex flex-col gap-1">
-             <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+          <div className="flex flex-col gap-0.5">
+             <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors flex items-center gap-1">
                {post.title}
                <svg 
                  className="size-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-primary" 
@@ -60,11 +60,11 @@ export function BlogPostItem({ post, lang }: BlogPostItemProps) {
             {post.description}
           </p>
 
-          {/* MODIFIER ICI: Les topics (tags) s'affichent ici en bas de la description */}
+          {/* tags */}
           {post.tags && post.tags.length > 0 && (
-             <div className="flex flex-wrap gap-2 mt-2">
+             <div className="flex items-justify flex-wrap gap-1 mt-2">
                 {post.tags.slice(0, 6).map(tag => (
-                   <span key={tag} className="text-[10px] px-2 py-0.5 rounded-md bg-primary/5 dark:bg-primary/10 border border-primary/20 text-primary font-bold uppercase tracking-widest">
+                   <span key={tag} className="text-[8px] px-2 py-0.5 rounded-md bg-primary/5 dark:bg-primary/10 border border-primary/20 text-primary font-bold uppercase tracking-widest">
                       {tag}
                    </span>
                 ))}
