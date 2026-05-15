@@ -50,10 +50,8 @@ export default async function Home() {
           description={dict.hero.description}
         />
       </section>
-      <br/>
 
       <GlobalImpactSection />
-      <br/>
 
       <section className="flex flex-col gap-1 sm:gap-2 mt-4">
         <AboutSection

@@ -63,10 +63,13 @@ const Earth: React.FC<EarthProps> = ({
         // `state` will be an empty object, return updated params.\
         state.phi = phi;
         phi += 0.003;
+        state.width = width * 2;
+        state.height = width * 2;
       },
     });
 
     return () => {
+      window.removeEventListener('resize', onResize);
       globe.destroy();
     };
   }, [dark]);
@@ -74,7 +77,7 @@ const Earth: React.FC<EarthProps> = ({
   return (
     <div
       className={cn(
-        'z-[10] mx-auto flex w-full max-w-[350px] items-center justify-center',
+        'z-[10] mx-auto flex w-full items-center justify-center',
         className,
       )}
     >
