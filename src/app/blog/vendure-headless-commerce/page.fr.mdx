@@ -8,28 +8,30 @@ export default async function Layout(props) {
 }
 
 export async function generateMetadata() {
-  const lang = await getCurrentLanguage();
-  return getPageMetadata(lang, {
-    title: blogData.title,
-    description: blogData.description,
-    image: blogData.image,
-  });
+    const lang = await getCurrentLanguage();
+    return getPageMetadata(lang, {
+        title: blogData.title,
+        description: blogData.description,
+        image: blogData.image,
+    });
 }
 
 export const blogData = {
-  title: "Vendure : The Headless Commerce Engine for E-commerce",
-  description: "Why I choose Vendure for scalable, high-performance commerce solutions.",
-  date: "May 14, 2026",
-  image: "/blog/vendure.jpg",
-  slug: "vendure-headless-commerce",
-  tags: ["E-commerce", "Vendure", "Headless", "NestJS"],
+    title: "Vendure : The framework Commerce Engine for E-commerce",
+    description: "Why I choose Vendure for scalable, high-performance commerce solutions.",
+    date: "May 14, 2026",
+    image: "/blog/vendure.jpg",
+    slug: "vendure-headless-commerce",
+    tags: ["E-commerce", "Vendure", "Headless", "NestJS"],
 };
 
-### I. The Illusion of "Easy" E-commerce
+## I. The Illusion of "Easy" E-commerce
 
 In the rapidly evolving digital landscape, the promise of "easy" e-commerce solutions often leads businesses down a path of unforeseen complexity. While monolithic platforms like Shopify or WooCommerce offer quick setup, studies show that **75% of businesses outgrow their monolithic e-commerce platforms within 3-5 years** due to scaling and customization limitations.
 
 Building a robust e-commerce infrastructure from scratch is a technical nightmare. Managing intricate order states, countless product variants, dynamic tax calculations across regions, and integrating diverse payment gateways demands an engineering effort that can quickly derail a project. This is where Vendure steps in, offering a foundational shift.
+
+---
 
 ## II. Vendure's Architecture: The Foundation of Solidity
 
@@ -42,13 +44,13 @@ Vendure leverages **NestJS** for its backend framework and **GraphQL** for its A
 *   **NestJS**: Provides an enterprise-grade, modular, and scalable architecture, deeply integrated with TypeScript for enhanced developer experience and fewer runtime errors.
 *   **GraphQL**: Offers a flexible and efficient API, allowing clients to request exactly the data they need, reducing over-fetching and under-fetching. This is crucial for performance across diverse frontends.
 
-When comparing e-commerce platforms, key distinctions emerge:
-
-*   **Frontend Control**: Monolithic platforms offer limited templates, whereas Headless (Vendure) provides full customizability.
-*   **Scalability**: Monolithic platforms are often vertically scaled (costly), while Headless (Vendure) scales horizontally (API-driven).
-*   **Flexibility**: Monolithic platforms have vendor-locked features, but Headless (Vendure) is extensible via APIs/Plugins.
-*   **Channel Support**: Monolithic platforms are web-centric, while Headless (Vendure) is omnichannel by design.
-*   **Development Speed**: Monolithic platforms are fast for basic stores, but Headless (Vendure) is faster for complex, custom needs.
+| Feature               | Monolithic (e.g., Shopify) | Headless (e.g., Vendure)         |
+|:----------------------|:---------------------------|:---------------------------------|
+| **Frontend Control**  | Limited templates          | Full customizability             |
+| **Scalability**       | Vertical (often costly)    | Horizontal (API-driven)          |
+| **Flexibility**       | Vendor-locked features     | Extensible via APIs/Plugins      |
+| **Channel Support**   | Web-centric                | Omnichannel by design            |
+| **Development Speed** | Fast for basic stores      | Faster for complex, custom needs |
 
 ### Headless by Design
 
@@ -85,13 +87,13 @@ Imagine implementing a complex loyalty program or a unique shipping calculation 
 
 This plugin-first approach can **reduce time-to-market for complex features by up to 40%** compared to traditional monolithic systems.
 
-Vendure's extensibility points offer unparalleled flexibility:
-
-*   **Plugins**: Modular units for new features & integrations. *Example Use Case*: Custom payment gateways, loyalty programs.
-*   **Custom Fields**: Add data to any entity (products, orders, users). *Example Use Case*: Product specifications, customer preferences.
-*   **API Extensions**: Extend GraphQL API with custom queries/mutations. *Example Use Case*: Third-party service integrations, custom reports.
-*   **Event Handlers**: React to system events (e.g., order placed). *Example Use Case*: Send custom notifications, update external CRM.
-*   **Job Queues**: Asynchronous task processing. *Example Use Case*: Bulk data imports, complex calculations.
+| Extensibility Point | Description                                     | Example Use Case                               |
+| :------------------ | :---------------------------------------------- | :--------------------------------------------- |
+| **Plugins**         | Modular units for new features & integrations   | Custom payment gateways, loyalty programs      |
+| **Custom Fields**   | Add data to any entity (products, orders, users)| Product specifications, customer preferences   |
+| **API Extensions**  | Extend GraphQL API with custom queries/mutations| Third-party service integrations, custom reports |
+| **Event Handlers**  | React to system events (e.g., order placed)     | Send custom notifications, update external CRM |
+| **Job Queues**      | Asynchronous task processing                    | Bulk data imports, complex calculations        |
 
 ---
 
