@@ -10,6 +10,7 @@ import Link from "next/link";
 interface ShowMoreProps {
   children: React.ReactNode;
   initialHeight?: number;
+  initialHeightMobile?: number;
   className?: string;
   buttonTextShow?: string;
   buttonTextHide?: string;
@@ -21,6 +22,7 @@ interface ShowMoreProps {
 export function ShowMore({
   children,
   initialHeight = 400,
+  initialHeightMobile,
   className,
   buttonTextShow = "Show More",
   buttonTextHide = "Show Less",
@@ -30,20 +32,30 @@ export function ShowMore({
 }: ShowMoreProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [needsToggle, setNeedsToggle] = useState(false);
+  const [currentHeight, setCurrentHeight] = useState(initialHeight);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (contentRef.current) {
-      // Only show the toggle button if content is actually taller than the initial height
-      setNeedsToggle(contentRef.current.scrollHeight > initialHeight);
-    }
-  }, [initialHeight]);
+    const updateHeight = () => {
+      const isMobile = window.innerWidth < 640;
+      const height = (isMobile && initialHeightMobile) ? initialHeightMobile : initialHeight;
+      setCurrentHeight(height);
+      
+      if (contentRef.current) {
+        setNeedsToggle(contentRef.current.scrollHeight > height);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, [initialHeight, initialHeightMobile]);
 
   return (
     <div className={cn("relative w-full", className)}>
       <motion.div
-        animate={{ height: isExpanded ? "auto" : (needsToggle ? initialHeight : "auto") }}
-        initial={{ height: needsToggle ? initialHeight : "auto" }}
+        animate={{ height: isExpanded ? "auto" : (needsToggle ? currentHeight : "auto") }}
+        initial={{ height: needsToggle ? currentHeight : "auto" }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="overflow-y-clip overflow-x-visible relative"
       >
