@@ -2,8 +2,6 @@ import { siteConfig } from "@/config/site";
 import { getAllBlogs, getAllProjects } from "@/lib/mdx-registry";
 import { NextResponse } from "next/server";
 
-export const runtime = "edge";
-
 export async function GET() {
   const blogs = getAllBlogs();
   const projects = getAllProjects();
