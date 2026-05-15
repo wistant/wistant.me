@@ -15,7 +15,7 @@ export async function generateMetadata() {
 export const blogData = {
   title: "7 principles of rich web applications",
   description: "7 actionable principles for building fast, resilient, and delightful web experiences with JavaScript.",
-  date: "November 4, 2014",
+  date: "January 16, 2026",
   image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070",
   slug: "7-principles-of-rich-web-applications",
   tags: ["UX", "Performance", "Architecture"],
@@ -47,8 +47,6 @@ What follows is my attempt to answer these. My approach is to examine the usage 
 1. [Predict behavior](#predict-behavior)
 
 ## 1. Pre rendered pages are not optional [#pre-rendered-pages-are-not-optional]
-
-<Callout emoji="⚡️" text="Pre-rendering is not (just) about SEO, it’s about performance. Consider the additional roundtrips to get scripts, styles, and subsequent API requests. In the future, consider HTTP 2.0 “pushing” of resources." />
 
 _Note: this title used to be "server-rendered". However, "pre-rendered" also encapsulates [static site generation](/2020/2019-in-review#static-is-the-new-dynamic), so it was edited accordingly._
 
@@ -115,8 +113,6 @@ It's helpful to refer to some of the initial discussions around the design of th
 > "If a document has to be pieced together on the fly, it could get arbitrarily complex, and even if that were limited we'd certainly start experiencing major hits on performance for documents structured in this way. This essentially throws the** single-hop principle of WWW **out the door (well, IMG does that too but for a very specific reason and in a very limited sense) --- are we sure we want to do that?"
 
 ## 2. Act immediately on user input [#act-immediately-on-user-input]
-
-<Callout emoji="⚡️" text="JavaScript allows us to mask network latency altogether. Applying this as a design principle should even remove most spinners or “loading” messages from your applications. PJAX or TurboLinks miss out on opportunities to improve the perception of speed." />
 
 The first principle builds heavily on the idea of minimizing latency as the user interacts with your website.
 
