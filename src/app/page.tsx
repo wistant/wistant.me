@@ -42,27 +42,20 @@ export default async function Home() {
         />
       </div>
 
-      <div className="flex flex-col gap-1 sm:gap-2 mt-4">
+      <section className="flex flex-col gap-1 sm:gap-2 mt-4">
         <HeroSection
           title={dict.hero.title}
           description={dict.hero.description}
         />
-      </div>
+      </section>
       <br/>
 
-      <div className="flex flex-col gap-1 sm:gap-2 mt-4">
+      <section className="flex flex-col gap-1 sm:gap-2 mt-4">
         <AboutSection
           title={dict.about.title}
           content={dict.about.content}
           blurFadeDelay={BLUR_FADE_DELAY}
         />
-
-        {/* <section id="skills">
-          <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <SkillsSection title={dict.skills.title} />
-          </BlurFade>
-        </section> */}
-
         <GallerySection
           lang={lang}
           seeMoreText={dict.ui.seeMore}
@@ -70,32 +63,27 @@ export default async function Home() {
           aboutLinkText={dict.navigation.about || "About me"}
           blurFadeDelay={BLUR_FADE_DELAY}
         />
+      </section>
 
-        <BlogHome />
-      </div>
-
-      {/* <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 6}>
-            <h2 className="text-xl font-bold font-clash">{dict.work.title}</h2>
+      {/* <section id="skills">
+          <BlurFade delay={BLUR_FADE_DELAY * 5}>
+            <SkillsSection title={dict.skills.title} />
           </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <WorkSection data={workData[lang] || workData.en} presentLabel={dict.work.present} />
-          </BlurFade>
-          <div className="flex justify-center mt-4">
-            <Link href="/about">
-              <Button
-                variant="secondary"
-                size="sm"
-                className="rounded-full transition-all group px-5 h-9 text-sm font-medium text-muted-foreground bg-muted/30 border border-border/40 hover:bg-muted/70 hover:text-foreground shadow-none"
-              >
-                {dict.work.viewMore || "View full journey"}
-                <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </div>
-        </div>
       </section> */}
+
+      <section className="flex flex-col gap-1 sm:gap-2">
+        <ShowMore
+          initialHeight={850}
+          initialHeightMobile={1500}
+          buttonTextShow={dict.ui.seeMore}
+          buttonTextHide={dict.ui.showLess}
+          href="/blog"
+          linkText={dict.blog.viewAll || "View All Stories"}
+        >
+          <BlogHome />
+        </ShowMore>
+      </section>
+      <br/>
 
       <section id="projects">
         <ShowMore

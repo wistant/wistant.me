@@ -13,7 +13,7 @@ export default async function BlogHome() {
   if (posts.length === 0) return null;
 
   return (
-    <section id="blog-home" className="py-20 border-t border-border/40">
+    <section id="blog-home" className="py-12 border-t border-border/40">
       <div className="flex flex-col gap-y-12 w-full">
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">

@@ -31,7 +31,7 @@ export default async function ProjectsSection({
 
   return (
     <section id="projects">
-      <div className="flex min-h-0 flex-col gap-y-20 w-full">
+      <div className="flex min-h-0 flex-col pt-10 gap-y-20 w-full">
         {/* Header */}
         <div className="flex flex-col gap-y-4 items-center justify-center">
           <div className="flex items-center w-full">
