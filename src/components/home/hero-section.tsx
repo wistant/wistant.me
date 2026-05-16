@@ -34,7 +34,7 @@ export function HeroSection({ description }: { title: string; description: strin
   return (
     <section id="hero" className="mb-0">
       <div className="mx-auto w-full max-w-2xl space-y-8">
-        <div className="flex flex-col items-start text-left space-y-6 pt-8 md:pt-12">
+        <div className="flex flex-col items-start text-justify space-y-6 pt-8 md:pt-12">
           {/* Text Content */}
           <div className="flex flex-col items-start gap-1 w-full"> {/* Reduced gap-3 to gap-1 */}
             <BlurFade delay={BLUR_FADE_DELAY} yOffset={8}>

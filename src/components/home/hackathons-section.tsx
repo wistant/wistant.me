@@ -31,7 +31,7 @@ export default function HackathonsSection({
           </div>
           <div className="flex flex-col gap-y-3 items-center justify-center">
             <h2 className="text-3xl font-bold font-clash tracking-tighter italic sm:text-5xl">{subtitle}</h2>
-            <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
+            <p className="text-muted-foreground text-justify md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance">
               {description}
             </p>
           </div>
