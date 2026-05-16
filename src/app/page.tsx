@@ -44,7 +44,7 @@ export default async function Home() {
         />
       </div>
 
-      <section className="flex flex-col gap-1 sm:gap-2 mt-1 md:mt-4">
+      <section className="flex text-justify flex-col gap-1 sm:gap-2 mt-1 md:mt-4">
         <HeroSection
           title={dict.hero.title}
           description={dict.hero.description}
@@ -101,20 +101,12 @@ export default async function Home() {
       </section>
 
       <section id="hackathons">
-        <ShowMore
-          initialHeight={350}
-          buttonTextShow={dict.ui.seeMore}
-          buttonTextHide={dict.ui.showLess}
-          href="/hackathons"
-          linkText={dict.navigation.hackathons || "All hackathons"}
-        >
           <HackathonsSection
             data={hackathonsData}
             title={dict.hackathons.title}
             subtitle={dict.hackathons.subtitle}
             description={dict.hackathons.description}
           />
-        </ShowMore>
       </section>
 
 
