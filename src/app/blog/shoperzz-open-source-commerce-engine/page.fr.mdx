@@ -45,6 +45,7 @@ simplement parce que l'architecture n'a jamais été pensée pour plier sans rom
 
 <br/>
 
+
 ### Qu'est-ce que Shoperzz ?
 
 **[Shoperzz](https://github.com/shoperzz/shoperzz)** est un commerce engine headless open source construit sur **NestJS et GraphQL**.
@@ -73,7 +74,6 @@ Afrique, la réalité commerciale est radicalement différente :
 
 **[Shoperzz](https://github.com/shoperzz/shoperzz)** intègre cette réalité directement dans son écosystème. Pas sous forme de fonctionnalités imposées et lourdes greffées sur le code central, mais grâce à un système de **plugins** implacable.
 
-<br/>
 
 ### L'Art de la Modularité Absolue
 
@@ -96,7 +96,6 @@ L’objectif n’est pas de t’enfermer dans un monolithe. L’objectif est de 
 
 Tu choisis tes modules. Tu contrôles ton infra. Tu bâtis ton système.
 
-<br/>
 
 ### Fonctionnalités Clés (Sans la Surcharge)
 
@@ -108,22 +107,24 @@ Plutôt de longs tableaux rigides, voici comment la structure architecturale de 
 - **Scalabilité Entreprise :** Bâti entièrement sur Node.js, TypeScript, NestJS et TypeORM pour digérer sans latence n'importe quel calcul complexe et asynchrone.
 - **Souveraineté Totale :** Refusez les monolithes opaques. Démarrez sur un noyau microscopique et construisez vers le haut, uniquement avec les briques dont vous avez explicitement besoin.
 
-<br/>
 
 ### L'Écosystème : Une Plateforme, Pas une Black Box
 
 Et là certains vont se demander :
-> *“Attends… les paiements locaux, WhatsApp, les notifications, tout ça directement dans un framework backend ? Ça ressemble plus à une application toute faite qu’à un outil professionnel de développement, non ?”*
+*“Attends… les paiements locaux, WhatsApp, les notifications, tout ça directement 
+dans un framework backend ? Ça ressemble plus à une application toute faite qu’à un 
+outil professionnel de développement, non ?”*
 
-C’est une préoccupation de puriste excellente. Et la réponse est ancrée précisément dans l'architecture de plugins.
-
-Dans **[Shoperzz](https://github.com/shoperzz/shoperzz)**, un plugin est un package NPM entièrement neutre qui étend la fonctionnalité sans violer l'intégrité du système de base.
-
-Un plugin peut ajouter un canal de paiement, intercepter des évènements asynchrones, générer des routes API, accrocher des requêtes GraphQL, ou instancier des processus en tâche de fond (Workers). Et le plus critique : **il existe indépendamment**.
+C’est une préoccupation de puriste excellente. Et la réponse est ancrée précisément 
+dans l'architecture de plugins. Dans [Shoperzz](https://github.com/shoperzz/shoperzz), 
+un plugin est un package NPM entièrement neutre qui étend la fonctionnalité sans violer 
+l'intégrité du système de base. Un plugin peut ajouter un canal de paiement, intercepter 
+des évènements asynchrones, générer des routes API, accrocher des requêtes GraphQL, ou instancier 
+des processus en tâche de fond (Workers). Et le plus critique : **il existe indépendamment**.
 
 Tu peux l’installer, le mettre à jour, le désactiver ou le tuer sans endommager ton application. C’est la vision de NestJS exécutée jusqu'à la perfection : des blocs découplés communiquant proprement, garantissant que ton projet ne mutera jamais en un monolithe illisible.
 
-```bash
+```code
 # Exemple : Connecter son instance aux paiements locaux africains
 npm install @shoperzz/plugin-orange-money
 ```
