@@ -97,8 +97,8 @@ export const fr = {
       "description": "Analyses approfondies sur l'architecture système, le développement multiplateforme et les meilleures pratiques pour bâtir des logiciels robustes.",
       "keywords": "Blog, Développement Logiciel, Architecture Système, TypeScript, Ingénierie"
     },
-    "back": "← blog",
-    "backToAll": "← Retour à tous les articles",
+    "back": "blog",
+    "backToAll": "Retour à tous les articles",
     "viewAll": "Voir tous les blogs"
   },
   "contact": {
