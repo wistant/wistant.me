@@ -39,7 +39,7 @@ export default async function BlogPostLayout({
         </div>
       )}
 
-      <main className="prose text-justify prose-neutral dark:prose-invert font-sans max-w-none
+      <main className="prose prose-neutral dark:prose-invert font-sans max-w-none
         prose-p:leading-relaxed prose-headings:font-clash prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
         prose-a:text-foreground prose-a:font-medium prose-a:underline prose-a:decoration-neutral-300 dark:prose-a:decoration-neutral-700 hover:prose-a:decoration-foreground transition-colors prose-a:underline-offset-[3px]
         prose-li:marker:text-neutral-400 dark:prose-li:marker:text-neutral-600

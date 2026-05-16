@@ -38,6 +38,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - images, icons, models, gallery, generic static assets, og.me
      */
-     "/((?!api|_next/static|_next/image|google5ac449b5ff3c8630.html|llm.txt|favicon.ico|wistant-logo.png|og.me|icons|me|fonts|gallery|certifications|opengraph|robots.txt|sitemap.xml|experiences|resume|portfolio|blog/thumbnails|blog/authors|education|hackatons|logos).*)",
+     "/((?!api|_next/static|_next/image|google5ac449b5ff3c8630.html|llm.txt|favicon.ico|wistant-logo.png|og.me|icons|me|fonts|gallery|certifications|opengraph|robots.txt|sitemap.xml|experiences|resume|portfolio|blog|projects|thumbnails|authors|education|hackatons|logos).*)",
   ],
 };

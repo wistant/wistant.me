@@ -142,8 +142,8 @@ export const mdxComponents: MDXComponents = {
   AccordionContent,
 
   // Shiki code coloring is handled by rehype-pretty-code, 
-  // but we ensure the pre/code tags are clean.
-  pre: (props: ComponentPropsWithoutRef<"pre">) => <pre className="bg-transparent p-0" {...props} />,
+  // but if the user disabled it, we hook up our own client-side CodeBlock.
+  pre: (props: ComponentPropsWithoutRef<"pre">) => <CodeBlock {...props} />,
   code: (props: ComponentPropsWithoutRef<"code">) => {
     const isInline = !props["data-language" as keyof typeof props];
     if (isInline) {

@@ -14,6 +14,8 @@ import { GallerySection } from "@/components/home/gallery-section";
 import BlogHome from "@/components/blog/blog-home";
 import { siteConfig } from "@/config/site";
 import { hackathonsData } from "@/data/hackathons";
+import { GlobalImpactSection } from "@/components/home/global-impact-section";
+import { TestimonialsSection } from "@/components/home/testimonials-section";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -31,7 +33,7 @@ export default async function Home() {
 
 
   return (
-    <main className="min-h-dvh flex flex-col gap-6 relative">
+    <main className="min-h-dvh flex flex-col gap-4 sm:gap-6 relative">
       <div className="fixed inset-0 z-[-1] pointer-events-none opacity-20">
         <FlickeringGrid
           squareSize={4}
@@ -42,15 +44,16 @@ export default async function Home() {
         />
       </div>
 
-      <section className="flex flex-col gap-1 sm:gap-2 mt-4">
+      <section className="flex text-justify flex-col gap-1 sm:gap-2 mt-1 md:mt-4">
         <HeroSection
           title={dict.hero.title}
           description={dict.hero.description}
         />
       </section>
-      <br/>
 
-      <section className="flex flex-col gap-1 sm:gap-2 mt-4">
+      <GlobalImpactSection />
+
+      <section className="flex flex-col gap-1 sm:gap-2 mt-2 md:mt-4">
         <AboutSection
           title={dict.about.title}
           content={dict.about.content}
@@ -98,22 +101,16 @@ export default async function Home() {
       </section>
 
       <section id="hackathons">
-        <ShowMore
-          initialHeight={350}
-          buttonTextShow={dict.ui.seeMore}
-          buttonTextHide={dict.ui.showLess}
-          href="/hackathons"
-          linkText={dict.navigation.hackathons || "All hackathons"}
-        >
           <HackathonsSection
             data={hackathonsData}
             title={dict.hackathons.title}
             subtitle={dict.hackathons.subtitle}
             description={dict.hackathons.description}
           />
-        </ShowMore>
       </section>
 
+
+      
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
           <ContactSection dict={dict} whatsappUrl={siteConfig.links.whatsapp} />

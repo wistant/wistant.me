@@ -1,0 +1,496 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
+import BlogPostLayout from "@/components/blog/blog-post-layout";
+import { getPageMetadata } from "@/config/metadata";
+
+export default async function Layout(props) {
+    const lang = await getCurrentLanguage();
+    return <BlogPostLayout className={'text-justify'} post={blogData} lang={lang}>{props.children}</BlogPostLayout>;
+}
+
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  return getPageMetadata(lang, {
+    title: blogData.title,
+    description: blogData.description,
+    image: blogData.image,
+  });
+}
+
+export const blogData = {
+  title: "E-commerce Enterprise : L'Architecture Infaillible de Vendure",
+  description: "Analyse architecturale approfondie de Vendure, le framework headless modulaire piloté par NestJS et GraphQL.",
+  date: "2026-05-14",
+  image: "/blog/vendure.jpg",
+  slug: "vendure-headless-commerce",
+  tags: ["Architecture", "Vendure", "NestJS", "TypeScript", "E-commerce"],
+};
+
+---
+
+Quand j'ai commencé à construire une infrastructure e-commerce sérieuse pour les marchés africains, j'ai réalisé quelque chose d'évident en retrospective : les outils disponibles n'étaient pas conçus pour moi.
+
+Shopify te donne une plateforme  clé en main — mais tu es prisonnier de leur écosystème, de leurs APIs limitées, de leurs tarifs en dollars, et surtout de leur vision du commerce. Une vision qui suppose que tes clients paient par carte bancaire, lisent leurs emails, et vivent dans un marché sur lequel Stripe fonctionne.
+
+WooCommerce te donne plus de liberté, mais c'est du PHP de 2010 sur WordPress. Pas une base sur laquelle je veux construire quelque chose qui scale.
+
+Medusa est intéressant, mais il impose son propre ORM (MikroORM), son propre système de workflow, son propre paradigme. Tu entres dans leur univers.
+
+Puis j'ai découvert [Vendure](https://github.com/vendurehq/vendure). Et j'ai compris pourquoi les développeurs TypeScript sérieux finissent tous par y arriver.
+
+Cet article est ce que j'aurais voulu lire avant de passer des semaines à comprendre comment Vendure fonctionne vraiment — pas juste la surface, mais l'architecture, les patterns, les décisions de design qui le rendent aussi puissant.
+
+---
+
+## 1. Ce qu'est vraiment Vendure — pas un CMS, pas un SaaS
+
+Vendure n'est pas une boutique en ligne. Ce n'est pas non plus un CMS avec des fonctionnalités e-commerce collées dessus. C'est un **commerce engine headless** — une infrastructure backend qui gère toute la logique commerce et expose une API GraphQL que tu consommes depuis n'importe quel frontend.
+
+La différence conceptuelle est importante. Un SaaS comme Shopify t'impose une interface, un processus de checkout, des fonctionnalités figées. Vendure t'impose rien. Il te donne les briques : catalogue produits, gestion des commandes, système de paiement, gestion des clients, système de promotions. Comment tu les assembles, comment tu les présentes, ce que tu ajoutes par-dessus — c'est entièrement toi.
+
+**Les chiffres qui comptent :** 8 200+ étoiles sur GitHub. Écrit en TypeScript natif. Construit sur NestJS et TypeORM. En production dans des dizaines de projets e-commerce dans le monde. Maintenu activement depuis 2019.
+
+La stack technique de Vendure dit beaucoup sur ses créateurs. Ils ont choisi NestJS — le framework Node.js qui apporte la structure, l'injection de dépendances, et la modularité que des projets de cette complexité nécessitent. Ils ont choisi TypeORM — la solution ORM la plus mature pour TypeScript. Ils ont choisi GraphQL — parce que l'API commerce est par nature relationnelle et les clients GraphQL ont besoin de flexibilité dans ce qu'ils fetchen.
+
+Ces choix ne sont pas accidentels. Ils reflètent une opinion sur comment construire un logiciel qui tient dans la durée.
+
+---
+
+## 2. L'architecture qui change tout — le système de plugins
+
+La première chose que tu dois comprendre sur Vendure, c'est que **tout est plugin**.
+
+Ce n'est pas un slogan marketing. C'est une vérité architecturale. Le core de Vendure gère le strict minimum — les types de données fondamentaux, le pipeline de requêtes, la connexion à la base de données. Tout le reste — les méthodes de paiement, les stratégies de livraison, les calculs de taxes, les promotions — est implémenté via des plugins.
+
+Et tu peux en écrire les tiens.
+
+```typescript
+import { VendurePlugin, PluginCommonModule } from '@vendure/core'
+import { MonPlugin } from './mon-plugin.service'
+
+@VendurePlugin({
+  imports:   [PluginCommonModule],
+  providers: [MonPlugin],
+  entities:  [MonEntite],
+  shopApiExtensions: {
+    schema:    monSchemaGql,
+    resolvers: [MonResolver],
+  },
+  configuration: config => {
+    // Modifier la config Vendure au démarrage
+    return config
+  },
+})
+export class MonPlugin {}
+```
+
+Ce décorateur `@VendurePlugin()` fait plusieurs choses en même temps. Il enregistre tes entités TypeORM dans la connexion globale à la base de données. Il ajoute tes resolvers GraphQL au schéma existant. Il enregistre tes services NestJS pour l'injection de dépendances. Il te permet de modifier la configuration de Vendure au démarrage.
+
+Un plugin Vendure est une unité autonome. Il peut être activé ou désactivé dans la configuration principale. Il peut être publié sur npm et réutilisé dans n'importe quel projet Vendure. Il peut avoir ses propres migrations de base de données, ses propres endpoints GraphQL, ses propres event handlers.
+
+C'est cette architecture qui rend Vendure extensible sans limite. Tu ne patches jamais le code source. Tu étends via des plugins.
+
+---
+
+## 3. Le moteur commerce — ce que Vendure gère pour toi
+
+Avant de parler de ce que tu peux ajouter, parlons de ce que Vendure te donne dès l'installation. C'est considérable.
+
+### La machine à états des commandes
+
+C'est probablement la fonctionnalité la plus sous-estimée de Vendure. Gérer les états d'une commande e-commerce correctement est beaucoup plus complexe qu'il n'y paraît.
+
+Une commande peut être en cours d'ajout d'articles. Elle peut attendre un paiement. Le paiement peut être autorisé mais pas encore capturé. La commande peut être partiellement expédiée. Elle peut être livrée. Elle peut être annulée à n'importe quelle étape.
+
+Vendure modélise tout ça comme une machine à états avec des transitions explicites :
+
+```
+AddingItems
+    ↓
+ArrangingPayment
+    ↓
+PaymentAuthorized
+    ↓
+PaymentSettled
+    ↓
+PartiallyShipped
+    ↓
+Shipped
+    ↓
+Delivered
+```
+
+Et `Cancelled` est accessible depuis presque n'importe quel état.
+
+La beauté c'est que chaque transition est explicite, auditée, et personnalisable. Tu peux ajouter tes propres états si ton use case le nécessite — un état `AwaitingWhatsAppConfirmation` par exemple, pour les marchés où le client confirme sa commande via WhatsApp avant de payer.
+
+### Les services prêts à l'emploi
+
+Vendure expose des services NestJS que tu injectes dans tes propres services et plugins :
+
+```typescript
+@Injectable()
+export class MonService {
+  constructor(
+    private orderService:       OrderService,
+    private customerService:    CustomerService,
+    private productService:     ProductVariantService,
+    private transactionService: TransactionalConnection,
+  ) {}
+
+  async getOrderWithCustomer(ctx: RequestContext, orderId: ID) {
+    const order    = await this.orderService.findOne(ctx, orderId)
+    const customer = await this.customerService.findOne(ctx, order.customerId)
+    return { order, customer }
+  }
+}
+```
+
+Tu ne réécris jamais la logique de récupération d'une commande. Tu ne réécris jamais la gestion des variantes de produits. Tu ne réécris jamais le système de prix. Tout ça existe. Tu l'utilises.
+
+### Le système de channels — multi-boutiques natif
+
+Un channel dans Vendure c'est une boutique logique. Tu peux avoir plusieurs channels dans une seule installation — chacun avec sa propre devise, ses propres langues, son propre catalogue (ou une portion du catalogue global), ses propres méthodes de paiement.
+
+C'est la fondation idéale pour une marketplace multi-vendeurs, ou pour une boutique qui opère dans plusieurs pays avec des devises différentes.
+
+---
+
+## 4. L'API GraphQL — deux endpoints, un schéma vivant
+
+Vendure expose deux endpoints GraphQL distincts, et cette décision architecturale est plus importante qu'elle n'y paraît.
+
+**Shop API** (`/shop`) — l'API publique pour les clients. Elle expose les produits, le panier, le checkout, les commandes des clients. Elle est conçue pour être consommée depuis un frontend public.
+
+**Admin API** (`/admin`) — l'API privée pour la gestion. Elle expose tout le backoffice : gestion des produits, des commandes, des clients, des promotions, des méthodes de paiement.
+
+Séparer ces deux APIs permet de donner des permissions très différentes. Une application frontend client n'a jamais accès aux fonctionnalités d'administration. Un bot interne peut avoir accès à l'Admin API sans exposer le Shop API.
+
+### RequestContext — le pattern qui structure tout
+
+Chaque opération dans Vendure commence par un `RequestContext`. Ce contexte porte :
+- Le channel actif (quelle boutique)
+- La langue demandée
+- L'utilisateur authentifié (client ou admin)
+- La transaction de base de données en cours
+
+```typescript
+@Resolver()
+export class MonResolver {
+  constructor(private monService: MonService) {}
+
+  @Query()
+  async maQuery(
+    @Ctx() ctx: RequestContext,
+    @Args('id') id: string,
+  ) {
+    // ctx est toujours le premier argument
+    return this.monService.trouverQuelqueChose(ctx, id)
+  }
+}
+```
+
+Passer `ctx` à chaque appel de service peut sembler verbeux. Mais c'est ce qui garantit que chaque opération s'exécute dans le bon contexte de channel, de langue, et de transaction. C'est la décision de design qui rend Vendure correct dans les cas complexes — multi-tenant, multi-langue, multi-devise.
+
+### Étendre le schéma depuis un plugin
+
+Quand tu enregistres des extensions de schéma dans ton plugin, elles sont automatiquement fusionnées dans le schéma global au démarrage. Le frontend voit un schéma unifié — il ne sait pas combien de plugins contribuent.
+
+```typescript
+import gql from 'graphql-tag'
+
+const EXTENSION_SCHEMA = gql`
+  type MonType {
+    id:        ID!
+    reference: String!
+    status:    String!
+  }
+
+  extend type Mutation {
+    initiateMonOperation(orderId: ID!, data: String!): MonType!
+  }
+
+  extend type Query {
+    monOperation(id: ID!): MonType
+  }
+`
+```
+
+L'utilisation de `extend type` est la clé. Tu n'écases pas les types existants — tu les enrichis. `extend type Mutation` ajoute ta mutation aux mutations existantes de Vendure. Si dix plugins font ça, le schéma final expose les mutations de tous les dix, sans conflit.
+
+---
+
+## 5. Le système de paiement `PaymentMethodHandler`
+
+C'est l'interface la plus importante si tu construis des intégrations de paiement. Et c'est probablement la mieux conçue de toute l'API Vendure.
+
+```typescript
+import {
+  PaymentMethodHandler,
+  CreatePaymentResult,
+  SettlePaymentResult,
+  CancelPaymentResult,
+  LanguageCode,
+} from '@vendure/core'
+
+export const monPaymentHandler = new PaymentMethodHandler({
+  code: 'mon-provider',
+  description: [{ languageCode: LanguageCode.fr, value: 'Mon Provider de Paiement' }],
+
+  // Ces args sont configurables depuis le dashboard admin
+  // Ils sont stockés de façon sécurisée et passés à chaque appel
+  args: {
+    apiKey:      { type: 'string', label: [{ languageCode: LanguageCode.fr, value: 'Clé API' }] },
+    environment: { type: 'string', label: [{ languageCode: LanguageCode.fr, value: 'Environnement' }] },
+  },
+
+  // Étape 1 — initier la transaction
+  // Appelé quand le client choisit ce mode de paiement
+  async createPayment(ctx, order, amount, args, metadata): Promise<CreatePaymentResult> {
+    try {
+      const response = await monApi.initiate({
+        amount:    amount,
+        reference: order.code,
+        apiKey:    args.apiKey,
+      })
+
+      return {
+        amount,
+        state:         'Authorized' as const,
+        transactionId: response.transactionId,
+        metadata:      { providerRef: response.ref },
+      }
+    } catch (error) {
+      return {
+        amount,
+        state:        'Declined' as const,
+        errorMessage: error.message,
+      }
+    }
+  },
+
+  // Étape 2 — confirmer la capture
+  // Appelé quand tu veux capturer le paiement (après webhook ou manuellement)
+  async settlePayment(ctx, order, payment, args): Promise<SettlePaymentResult> {
+    const verified = await monApi.verify(payment.transactionId, args.apiKey)
+
+    return {
+      success:      verified.status === 'SUCCESS',
+      errorMessage: verified.status !== 'SUCCESS' ? verified.reason : undefined,
+    }
+  },
+
+  // Optionnel — rembourser
+  async createRefund(ctx, input, amount, order, payment, args) {
+    await monApi.refund(payment.transactionId, amount)
+    return { state: 'Settled' as const }
+  },
+})
+```
+
+Ce qui est élégant dans ce design, c'est la séparation entre `createPayment` et `settlePayment`.
+
+`createPayment` est appelé immédiatement — c'est l'initiation. Tu génères la transaction côté provider, tu retournes un état `Authorized`. La commande sait qu'un paiement a été initié.
+
+`settlePayment` est appelé quand tu veux confirmer la capture. Pour les paiements synchrones (carte bancaire), ça peut être immédiatement. Pour les paiements asynchrones — comme Orange Money où le client doit confirmer sur son téléphone — tu appelles `settlePayment` depuis ton webhook handler, quand le provider te confirme que le paiement est réel.
+
+Cette séparation reflète la réalité des paiements mobiles africains parfaitement. Et elle vient de Vendure out of the box.
+
+---
+
+## 6. L'Event System — la communication propre
+
+Vendure expose un `EventBus` NestJS basé sur RxJS. Chaque action significative dans le système émet un event — tu peux t'abonner à ces events depuis n'importe quel plugin sans modifier le code qui les émet.
+
+```typescript
+import { Injectable, OnApplicationBootstrap } from '@nestjs/common'
+import {
+  EventBus,
+  OrderStateTransitionEvent,
+  PaymentStateTransitionEvent,
+  CustomerRegistrationEvent,
+} from '@vendure/core'
+
+@Injectable()
+export class MonEventHandler implements OnApplicationBootstrap {
+
+  constructor(private eventBus: EventBus) {}
+
+  onApplicationBootstrap() {
+    // Écouter les transitions de paiement
+    this.eventBus
+      .ofType(PaymentStateTransitionEvent)
+      .subscribe(async event => {
+        if (event.toState === 'Settled') {
+          const order    = event.order
+          const payment  = event.payment
+          const customer = order.customer
+
+          // Déclencher une notification, mettre à jour un cache,
+          // appeler un service externe — tout ce que tu veux
+          console.log(`Paiement confirmé pour commande ${order.code}`)
+        }
+      })
+
+    // Écouter les inscriptions clients
+    this.eventBus
+      .ofType(CustomerRegistrationEvent)
+      .subscribe(async event => {
+        const { customer } = event
+        // Envoyer un message de bienvenue, créer un profil dans un CRM, etc.
+      })
+  }
+}
+```
+
+Les events les plus utiles en pratique :
+
+`OrderStateTransitionEvent` | Une commande change d'état |
+
+`PaymentStateTransitionEvent` | Un paiement change d'état |
+
+`OrderPlacedEvent` | Client soumet sa commande |
+
+`CustomerRegistrationEvent` | Nouvel inscrit |
+
+`ProductEvent` | Produit créé ou modifié |
+
+`StockMovementEvent` | Mouvement de stock |
+
+Ce pattern est puissant parce qu'il découple complètement les effets de bord de la logique principale. Ton service de paiement ne sait pas que tu envoies une notification WhatsApp après un paiement. Il émet un event. Ton plugin de notification écoute cet event. Ils ne se connaissent pas.
+
+---
+
+## 7. La base de données : TypeORM sans friction
+
+Vendure utilise TypeORM pour toute la persistance. Quand tu crées un plugin avec ses propres entités, tu les déclares dans `@VendurePlugin({ entities: [...] })` et Vendure les intègre automatiquement dans la connexion globale.
+
+```typescript
+import { Entity, Column, ManyToOne } from 'typeorm'
+import { VendureEntity, Order, ID } from '@vendure/core'
+import { DeepPartial } from '@vendure/common/lib/shared-types'
+
+@Entity()
+export class MonEntite extends VendureEntity {
+
+  constructor(input?: DeepPartial<MonEntite>) {
+    super(input)
+  }
+
+  // Référence à une entité Vendure via ID — pas de FK physique complexe
+  @Column()
+  orderId: ID
+
+  @Column()
+  reference: string
+
+  @Column({ default: 'pending' })
+  status: string
+
+  @Column({ type: 'jsonb', nullable: true })
+  metadata: Record<string, unknown>
+}
+```
+
+Quelques points importants sur le design des entités Vendure :
+
+**`VendureEntity`** est la classe de base (équivalent de `ShoperzzBaseEntity` dans notre projet). Elle fournit l'ID, les timestamps, et la cohérence avec le reste du système.
+
+**`@Column({ type: 'jsonb' })`** pour les données non structurées. Les providers de paiement changent leurs payloads — stocker le raw response en JSONB te protège contre ces changements.
+
+**Les relations vers les entités Vendure** se font via des IDs plutôt que des `@ManyToOne` directs quand possible — ça évite des problèmes de chargement et de migrations.
+
+Les migrations sont générées depuis les entités :
+
+```bash
+npx vendure migration:generate MonNomDeMigration
+npx vendure migration:run
+```
+
+---
+
+## 8. Vendure en production — ce qu'il faut savoir
+
+### Self-hosted — tu contrôles tout
+
+Vendure tourne sur n'importe quel serveur Node.js. VPS, conteneur Docker, Kubernetes, serverless (avec quelques adaptations). Tu décides où tes données vivent. Tu décides de ton infrastructure. Pas de vendor lock-in.
+
+### Les custom fields — étendre sans migrer manuellement
+
+Une des fonctionnalités les plus pratiques : ajouter des champs à n'importe quelle entité Vendure via la configuration, sans écrire une migration :
+
+```typescript
+const config: VendureConfig = {
+  customFields: {
+    Customer: [
+      { name: 'phoneNumber',  type: 'string',  nullable: true },
+      { name: 'preferredLang', type: 'string', defaultValue: 'fr' },
+    ],
+    Order: [
+      { name: 'deliveryZone', type: 'string', nullable: true },
+      { name: 'whatsappSent', type: 'boolean', defaultValue: false },
+    ],
+  },
+}
+```
+
+Vendure génère automatiquement les colonnes en base de données et les expose dans l'API GraphQL. Accès dans les queries :
+
+```graphql
+query {
+  order(id: "123") {
+    id
+    customFields {
+      whatsappSent
+      deliveryZone
+    }
+  }
+}
+```
+
+### Les channels pour scaler multi-marchés
+
+Un seul déploiement Vendure peut alimenter plusieurs boutiques avec des configurations complètement différentes. Channel Sénégal en XOF + WhatsApp. Channel Nigeria en NGN + Flutterwave. Channel Cameroun en XAF + MTN MoMo. Une seule API, une seule base de données, une seule infrastructure.
+
+---
+
+## 9. Pourquoi Vendure est la fondation idéale pour les marchés africains
+
+Vendure résout le problème difficile — la logique commerce core. Mais il laisse ouvert exactement ce qui manque pour les marchés africains.
+
+**Ce que Vendure ne fait pas nativement :**
+- Intégration Orange Money, Wave, MTN MoMo
+- Notifications WhatsApp transactionnelles
+- Workflows pensés pour les paiements mobiles asynchrones
+- Configuration pour les marchés francophones d'Afrique
+
+**Ce que son architecture permet d'ajouter proprement :**
+
+L'interface `PaymentMethodHandler` est exactement le bon abstraction pour intégrer les paiements mobiles money. Tu implémentes deux méthodes — `createPayment` pour initier, `settlePayment` pour confirmer depuis le webhook. Le reste est géré par Vendure.
+
+L'`EventBus` est exactement le bon mécanisme pour déclencher des notifications WhatsApp quand un paiement est confirmé, sans coupler le code de paiement au code de notification.
+
+Le système de channels est exactement la bonne structure pour une marketplace qui opère dans plusieurs pays africains avec des devises et des providers de paiement différents.
+
+C'est cette complémentarité qui m'a convaincu de construire Shoperzz sur Vendure — pas à côté, ni à la place.
+
+---
+
+## Conclusion : Quand utiliser Vendure ?
+
+Vendure est le bon choix quand tu coches ces cases :
+
+✓ Tu builds en TypeScript/Node.js et tu veux rester dans cet écosystème
+
+✓ Tu as besoin d'un backend commerce qui scale et qui tient en production
+
+✓ Tu veux contrôler ton infrastructure sans dépendre d'un SaaS.
+
+✓ Tu as des besoins spécifiques que les solutions standard ne couvrent pas.
+
+✓ Tu veux une base sur laquelle construire sans la réécrire dans 18 mois
+
+Vendure n'est pas la solution la plus rapide pour lancer une boutique en ligne basique. Si tu veux juste vendre des t-shirts en ligne, Shopify est probablement le bon choix.
+
+Mais si tu construis quelque chose de sérieux — une marketplace, une infrastructure e-commerce pour un marché spécifique, un backend commerce qui va évoluer pendant des années — Vendure est l'une des meilleures fondations disponibles aujourd'hui.
+
+Et pour les développeurs africains qui veulent construire l'infrastructure commerce de leur marché, Vendure est le point de départ logique. Pas parce qu'il fait tout — mais parce qu'il fait parfaitement ce qu'il faut, et laisse exactement l'espace pour ajouter ce qui manque.

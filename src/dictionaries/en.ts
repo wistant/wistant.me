@@ -12,7 +12,11 @@ export const en = {
   },
   "hero": {
     "title": "Hi Welcome 👋🏻",
-    "description": "I'm Wistant Kode, a Software Engineer specialized in forging high-end digital solutions. I build distributed architectures and blazingly fast interfaces across Web, Mobile, and Desktop."
+    "description": "I am Wistant Kode, a Software Engineer and Architect. My methodology begins with product vision, scales through rigorous system architecture, and culminates in elite code quality. Deeply rooted in Open Source, my goal is to forge distributed infrastructures and high-end digital experiences designed for global impact."
+  },
+  "globalImpact": {
+    "title": "Building for the World",
+    "description": "My ambition is to create a global impact. From complex backend foundations to fluid interfaces, I build systems engineered to transcend borders."
   },
   "about": {
     "title": "About me",

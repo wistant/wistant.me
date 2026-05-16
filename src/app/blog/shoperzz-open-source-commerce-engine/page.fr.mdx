@@ -1,0 +1,154 @@
+import { getCurrentLanguage } from "@/lib/dictionary";
+import BlogPostLayout from "@/components/blog/blog-post-layout";
+import { getPageMetadata } from "@/config/metadata";
+import { TechBadge } from "@/components/mdx/tech-badge";
+
+export default async function Layout(props) {
+    const lang = await getCurrentLanguage();
+    return <BlogPostLayout className={'text-justify'} post={blogData} lang={lang}>{props.children}</BlogPostLayout>;
+}
+
+export async function generateMetadata() {
+  const lang = await getCurrentLanguage();
+  return getPageMetadata(lang, {
+    title: blogData.title,
+    description: blogData.description,
+    image: blogData.image,
+  });
+}
+
+export const blogData = {
+  title: "Shoperzz : L'Architecture Headless pour les Bâtisseurs Sérieux",
+  description: "Pourquoi j'ai construit Shoperzz au-dessus de NestJS et Vendure.io pour conquérir les réalités du marché de demain.",
+  date: "2026-05-15",
+  image: "/blog/shoperzz-dark.png",
+  slug: "shoperzz-open-source-commerce-engine",
+  tags: ["Architecture", "Shoperzz", "Headless", "NestJS"],
+};
+
+---
+
+Quand un développeur TypeScript veut construire une application e-commerce - une marketplace, une plateforme B2B, un système de vente complexe - 
+il sait généralement quoi utiliser : Node.js, NestJS, GraphQL, PostgreSQL, Redis, REST, queues, events. Le problème n'est pas la compétence. 
+Et, contrairement à ce que l'on pense, **le problème fondamental n'est pas seulement le temps.**
+
+Oui, construire une infrastructure commerce sérieuse *from scratch* prend des mois. Mais le véritable 
+danger réside dans **la Dette et la Rigidité Architecturale**. Lorsque vous développez vite pour tenir des délais 
+courts, vous prenez des décisions architecturales initiales qui se transforment inévitablement en pièges mortels. 
+À mesure que le modèle d'affaires évolue, s'adapte ou pivote, votre base de code autrefois "simple" devient un goulot d'étranglement monolithique.
+
+Ajouter une passerelle de paiement mobile africaine oblige à pirater le moteur de cycle de vie des commandes. 
+Essayer d'envoyer des notifications WhatsApp demande de réécrire le worker d'envoi d'emails. Beaucoup d'ingénieurs 
+se retrouvent avec une fondation si fragile qu'ils sont contraints de tout réécrire au bout de quelques mois, 
+simplement parce que l'architecture n'a jamais été pensée pour plier sans rompre. C’est exactement ce que 
+**[Shoperzz](https://github.com/shoperzz/shoperzz)** veut résoudre.
+
+<br/>
+
+
+### Qu'est-ce que Shoperzz ?
+
+**[Shoperzz](https://github.com/shoperzz/shoperzz)** est un commerce engine headless open source construit sur **NestJS et GraphQL**.
+Une infrastructure backend moderne pensée pour permettre aux développeurs de construire des plateformes e-commerce massives sans hériter d'une dette technique létale ni repartir de zéro à chaque projet.
+
+- Ce n’est pas un site builder.
+- Ce n’est pas une application “clé en main” opaque.
+- C’est un **framework extensible et modulaire** qui vous donne le contrôle total de votre architecture.
+
+Tu utilises uniquement ce dont tu as besoin. Tu étends ce que tu veux. Tu gardes la maîtrise complète de ton code, de tes modules et de ton infrastructure.
+
+**[Shoperzz](https://github.com/shoperzz/shoperzz)** s’appuie sur [Vendure.io](https://vendure.io) comme fondation technique — aujourd’hui l’une des références absolues du headless commerce en TypeScript — mais pousse le concept beaucoup plus loin avec une architecture pensée pour les réalités féroces des marchés à forte croissance.
+
+<br/>
+
+### Oubliez le "Standard Occidental"
+
+Le e-commerce ne fonctionne pas partout de la même manière. La majorité des solutions e-commerce ont été conçues 
+pour des environnements où Stripe est la norme, où les emails transactionnels sont centraux et où les comportements d’achat 
+suivent des scénarios occidentaux standardisés et prévisibles. Mais dans beaucoup de marchés, notamment en
+Afrique, la réalité commerciale est radicalement différente :
+
+- Les paiements contournent souvent les banques traditionnelles pour passer par **Orange Money, MTN MoMo, Wave, Airtel Money** ou d’autres passerelles locales portées par les télécoms.
+- La communication client se fait majoritairement via **WhatsApp**, et non par email.
+- Les automatisations, confirmations et interactions doivent être pensées pour la manière dont les gens achètent *réellement*, c'est-à-dire de manière hyper-conversationnelle et prioritairement sur mobile.
+
+**[Shoperzz](https://github.com/shoperzz/shoperzz)** intègre cette réalité directement dans son écosystème. Pas sous forme de fonctionnalités imposées et lourdes greffées sur le code central, mais grâce à un système de **plugins** implacable.
+
+
+### L'Art de la Modularité Absolue
+
+Tout dans **[Shoperzz](https://github.com/shoperzz/shoperzz)** est modulaire.
+
+- Tu veux intégrer Orange Money ? Tu installes le plugin.
+- Tu veux Wave, MTN MoMo ou Stripe ? Même logique.
+- Tu veux WhatsApp pour les notifications, confirmations de commandes ou le support client ? Plugin.
+- Tu n’en as pas besoin ? Le module n’existe même pas dans ton projet ni dans la mémoire du serveur.
+
+Le core reste extrêmement léger, propre et universel. 
+Chaque plugin est indépendant, découplé et extensible. Il opère sa propre logique, émet ses propres événements et gère ses propres handlers, tout en s’intégrant naturellement dans l'architecture d'injection de dépendances (DI) globale de NestJS.
+
+L’objectif n’est pas de t’enfermer dans un monolithe. L’objectif est de te donner une base industrielle moderne que tu peux plier à ton produit :
+- Marketplace.
+- Réseaux B2B.
+- Quick commerce.
+- Social commerce.
+- Infrastructures Multi-vendeurs.
+
+Tu choisis tes modules. Tu contrôles ton infra. Tu bâtis ton système.
+
+
+### Fonctionnalités Clés (Sans la Surcharge)
+
+Plutôt de longs tableaux rigides, voici comment la structure architecturale de **[Shoperzz](https://github.com/shoperzz/shoperzz)** se déploie en modules spécialisés :
+
+- **Philosophie Orientée Plugin :** Rien n'est écrit "en dur" (hard-coded) dans le noyau. Des passerelles de paiement aux automatisations d'affaires, tout opère comme des plugins asynchrones.
+- **Autonomie Indépendante :** Chaque composant fonctionne comme une unité autonome. **[Shoperzz](https://github.com/shoperzz/shoperzz)** évolue pour s'adapter à votre projet, au lieu de forcer votre modèle d'affaires à se tordre pour le framework.
+- **Le Focus Afrique-Natif :** En rendant native l'intégration du Mobile Money (Orange Money, Wave, MTN) et la conversation via WhatsApp, cet outil comble une fracture béante sur le marché technologique mondial.
+- **Scalabilité Entreprise :** Bâti entièrement sur Node.js, TypeScript, NestJS et TypeORM pour digérer sans latence n'importe quel calcul complexe et asynchrone.
+- **Souveraineté Totale :** Refusez les monolithes opaques. Démarrez sur un noyau microscopique et construisez vers le haut, uniquement avec les briques dont vous avez explicitement besoin.
+
+
+### L'Écosystème : Une Plateforme, Pas une Black Box
+
+Et là certains vont se demander :
+*“Attends… les paiements locaux, WhatsApp, les notifications, tout ça directement 
+dans un framework backend ? Ça ressemble plus à une application toute faite qu’à un 
+outil professionnel de développement, non ?”*
+
+C’est une préoccupation de puriste excellente. Et la réponse est ancrée précisément 
+dans l'architecture de plugins. Dans [Shoperzz](https://github.com/shoperzz/shoperzz), 
+un plugin est un package NPM entièrement neutre qui étend la fonctionnalité sans violer 
+l'intégrité du système de base. Un plugin peut ajouter un canal de paiement, intercepter 
+des évènements asynchrones, générer des routes API, accrocher des requêtes GraphQL, ou instancier 
+des processus en tâche de fond (Workers). Et le plus critique : **il existe indépendamment**.
+
+Tu peux l’installer, le mettre à jour, le désactiver ou le tuer sans endommager ton application. C’est la vision de NestJS exécutée jusqu'à la perfection : des blocs découplés communiquant proprement, garantissant que ton projet ne mutera jamais en un monolithe illisible.
+
+```code
+# Exemple : Connecter son instance aux paiements locaux africains
+npm install @shoperzz/plugin-orange-money
+```
+
+C'est acté. Tu dois lancer une marque B2B en Europe le lendemain ? Installe le plugin Stripe, et la logique Mobile Money n'existera jamais sur ta branche. Ton architecture reste propre, ta compilation reste maîtrisée.
+
+C’est exactement de cette façon que les vrais outils modernes montent en charge (scale) : non pas comme des boîtes noires, mais comme des plateformes souveraines.
+
+Une application préconçue, tu la subis. **Un système de plugins, tu le pilotes.**
+
+C’est la différence fondamentale entre survivre à son infrastructure et en devenir le maître incontesté. Et c'est la véritable signification de notre crédo : **Built for serious builders.**
+
+Tu n’es pas prisonnier de l'outil. C'est toi l'architecte qui trace les frontières.
+
+---
+#### Structures & Répertoires
+
+- `apps/` - Les applications Web Frontends (Plateforme, Documentation, Dashboard métier).
+- `assets/` - Les assets média du projet, encodages et diagrammes d'architecture.
+- `packages/` - Les moteurs d'abstraction internes (`/core`, `/cli`, `/common`, `/testing`).
+- `plugins/` - Les modules d'extension officiels du projet.
+- `demos/` - Boutiques et API nodes de démonstration prêts à déployer.
+- `docs/` - Documentation technique ultra-complète du système **[Shoperzz](https://github.com/shoperzz/shoperzz)**.
+
+------
+
+Built with love for serious builders.
